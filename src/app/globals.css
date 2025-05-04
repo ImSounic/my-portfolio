@@ -1,0 +1,100 @@
+
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased;
+  }
+}
+
+@layer components {
+  .grid-background {
+    background-image:
+      linear-gradient(to right, rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 2px white;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-stroke-thin {
+    -webkit-text-stroke: 1px white;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Spin animation for radar */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Star rotation animation */
+@keyframes star-rotation {
+  0%, 100% {
+    transform: translate(50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(50%, -50%) rotate(360deg);
+  }
+  50% {
+    transform: translate(50%, -50%) rotate(360deg);
+  }
+  75% {
+    transform: translate(50%, -50%) rotate(0deg);
+  }
+}
+
+.animate-star-rotation {
+  animation: star-rotation 4s ease-in-out infinite;
+}
+
+/* Bubble animation */
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.bubble-animation {
+  animation: bubble-rise 1.5s linear forwards;
+}

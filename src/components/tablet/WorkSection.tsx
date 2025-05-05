@@ -4,8 +4,6 @@
 import Image from 'next/image'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
-import glassCardSvg from '@/assets/images/glass-card.svg'
-import circleSvg from '@/assets/icons/circle.svg'
 import arrowSvg from '@/assets/icons/arrow.svg'
 
 const satoshi = localFont({

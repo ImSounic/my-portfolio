@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
-import arrowSvg from '@/assets/icons/arrow.svg'
 
 const satoshi = localFont({
   src: [

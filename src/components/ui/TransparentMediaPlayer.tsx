@@ -1,6 +1,5 @@
 // src/components/ui/TransparentMediaPlayer.tsx
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useAppleDeviceDetection } from '@/utils/deviceDetection';
 
 interface MediaPlayerProps {

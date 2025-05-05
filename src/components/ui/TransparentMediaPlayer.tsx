@@ -1,10 +1,10 @@
 // src/components/ui/TransparentMediaPlayer.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useAppleDeviceDetection } from '@/utils/deviceDetection';
 
 interface MediaPlayerProps {
-  webmSrc: string;    // WebM for non-Apple devices
-  gifSrc: string;     // GIF for Apple devices
+  webmSrc: string;
+  gifSrc: string;
   altText: string;
   width?: number;
   height?: number;
@@ -19,36 +19,31 @@ export default function TransparentMediaPlayer({
 }: MediaPlayerProps) {
   const isApple = useAppleDeviceDetection();
   const [isLoaded, setIsLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   // Handle loading state
   useEffect(() => {
-    if (isApple) {
-      // Preload the GIF to avoid flickering
-      const img = new window.Image();
-      img.onload = () => setIsLoaded(true);
-      img.src = gifSrc;
-    } else {
-      setIsLoaded(true);
-    }
-  }, [isApple, gifSrc]);
+    // Preload the image regardless of device type to ensure it's in cache
+    const img = new Image();
+    img.onload = () => setIsLoaded(true);
+    img.src = gifSrc;
+  }, [gifSrc]);
 
   return (
     <div className="relative" style={{ width, height }}>
       {isApple ? (
-        // For Apple devices - use GIF with transparency and CSS styling
-        <div 
-          className="absolute inset-0 bg-transparent"
+        // For Apple devices - use a direct img tag instead of background-image
+        <img
+          ref={imgRef}
+          src={gifSrc}
+          alt={altText}
           style={{
-            opacity: isLoaded ? 1 : 0,
-            transition: 'opacity 0.3s ease-in-out',
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${gifSrc})`,
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
+            objectFit: 'contain',
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out',
           }}
-          aria-label={altText}
         />
       ) : (
         // For non-Apple devices - use WebM with transparency
@@ -60,6 +55,12 @@ export default function TransparentMediaPlayer({
           className="absolute inset-0 w-full h-full object-contain"
         >
           <source src={webmSrc} type="video/webm" />
+          {/* Fallback to GIF if WebM fails */}
+          <img 
+            src={gifSrc} 
+            alt={altText} 
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+          />
         </video>
       )}
     </div>

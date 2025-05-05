@@ -43,7 +43,7 @@ const projects = [
   {
     id: 3,
     title: 'INTERNSHIP',
-    description: 'Built A Chatbot For Inclusions Municipal Corporation And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
+    description: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
     image: '/projects/internship.png',
     company: 'CO2TECH LABS',
     duration: 'JUN-AUG 2023'
@@ -51,7 +51,7 @@ const projects = [
   {
     id: 4,
     title: 'CLEANSLATE',
-    description: 'It is chore splitting app for uni students to keep their households, flats clean',
+    description: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
     image: '/projects/cleanslate.png',
     github: '#'
   }

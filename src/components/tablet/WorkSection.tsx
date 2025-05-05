@@ -61,7 +61,7 @@ export default function WorkSection() {
   return (
     <>
       {/* First viewport: Title + First Project */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-black relative snap-start flex flex-col items-center justify-center px-6`}>
+      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-black relative snap-start flex flex-col items-center justify-center px-6`}>
         {/* Title - Positioned higher */}
         <div className="mb-16">
           <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white">

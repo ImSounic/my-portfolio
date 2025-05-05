@@ -32,14 +32,14 @@ const sections = [
     title: 'CRITICAL THINKER',
     description: 'I Excel At Analyzing Complex Problems And Developing Innovative Solutions. In A Recent Project, I Combined Unsupervised Algorithms With Aerial Sensing To Algorithms Significantly Improving Efficiency. My Proactive Problem-Solving Extends Beyond Traditional Challenges.',
     gif: thinkingGif,
-    subtitle: '"A CRITICAL THINKER NEVER SLEEPS. JUST CHASING AI ALGORITHMS."'
+    subtitle: '"A CRITICAL THINKER NEVER SLEEPS, JUST DREAMS IN ALGORITHMS."'
   },
   {
     id: 'adaptable-innovator',
     title: 'ADAPTIVE INNOVATOR',
     description: 'In The Fast-Paced World Of Technology, Adaptability Is Key. I Thrive In Dynamic Environments, Frameworks, And Languages. Learning That I Stay Ahead Of The Curve, Whether It\'s Mastering A New Programming Language Or Adapting The Latest AI Techniques. My Ability To Automatically Integrate New Technologies Makes Me A Valuable Asset In Any Dynamic Environment.',
     gif: adaptGif,
-    subtitle: '"AN ADAPTIVE GUY CHANGING GEARS AND MASTERING THE NEW."'
+    subtitle: '"AN ADAPTIVE GUY: CHANGING GEARS AND MASTERING THE NEW."'
   },
   {
     id: 'code-craftsman',
@@ -54,7 +54,7 @@ export default function WhyHireMeSection() {
   return (
     <>
       {/* First viewport: Title + Critical Thinker */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen relative snap-start bg-black`}>
+      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} h-screen relative snap-start bg-black`}>
         {/* Title Section with background grid */}
         <div className="h-1/3 relative flex items-center justify-center">
           {/* Background Grid - positioned behind the title */}

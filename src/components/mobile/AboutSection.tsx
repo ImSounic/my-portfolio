@@ -95,9 +95,9 @@ export default function AboutSection() {
 
         {/* Main Content Container */}
         <div className="relative">
-          {/* Glassmorphism Card */}
-          <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-4 relative">
-            {/* Mini Radar - Top left corner */}
+          {/* Glassmorphism Container with Radar inside */}
+          <div className="relative">
+            {/* Radar Animation - Now outside the card like in tablet */}
             <div className="absolute -top-8 -left-2 z-0">
               <div className="relative w-16 h-16">
                 <Image
@@ -110,44 +110,47 @@ export default function AboutSection() {
                 <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-red-500 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
               </div>
             </div>
-            
-            {/* Title */}
-            <div className="flex items-center gap-1 mb-3 mt-2">
-              <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white">
-                {activeSlide.title.normal}
-              </h3>
-              <span 
-                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold"
-                style={{
-                  WebkitTextStroke: '1px white',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >
-                {activeSlide.title.outline}
-              </span>
-            </div>
-            
-            {/* Image */}
-            <div className="mb-4">
-              <div className="relative w-full h-48 rounded-lg overflow-hidden">
-                <Image
-                  src={activeSlide.image}
-                  alt={activeSlide.imageAlt}
-                  fill
-                  className="object-cover"
-                />
-                {/* Overlay text */}
-                <div className="absolute bottom-2 right-2 z-10 bg-black/50 px-2 py-1 rounded text-white font-[family-name:var(--font-montserrat)] text-xs">
-                  {activeSlide.overlayText}
+
+            {/* Glassmorphism Card - Separate from radar */}
+            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-4 relative">
+              {/* Title */}
+              <div className="flex items-center gap-1 mb-3">
+                <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white">
+                  {activeSlide.title.normal}
+                </h3>
+                <span 
+                  className="font-[family-name:var(--font-satoshi)] text-2xl font-bold"
+                  style={{
+                    WebkitTextStroke: '1px white',
+                    WebkitTextFillColor: 'transparent'
+                  }}
+                >
+                  {activeSlide.title.outline}
+                </span>
+              </div>
+              
+              {/* Image */}
+              <div className="mb-4">
+                <div className="relative w-full h-48 rounded-lg overflow-hidden">
+                  <Image
+                    src={activeSlide.image}
+                    alt={activeSlide.imageAlt}
+                    fill
+                    className="object-cover"
+                  />
+                  {/* Overlay text */}
+                  <div className="absolute bottom-2 right-2 z-10 bg-black/50 px-2 py-1 rounded text-white font-[family-name:var(--font-montserrat)] text-xs">
+                    {activeSlide.overlayText}
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Content */}
-            <div className="mb-4">
-              <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">
-                {activeSlide.content}
-              </p>
+              
+              {/* Content */}
+              <div className="mb-4">
+                <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">
+                  {activeSlide.content}
+                </p>
+              </div>
             </div>
           </div>
           

@@ -1,7 +1,7 @@
 // src/app/page.tsx
 'use client'
-
 import { useDeviceDetection } from '@/utils/deviceDetection';
+import { useEffect, useState } from 'react';
 
 // Desktop components
 import DesktopHero from '@/components/desktop/Hero';
@@ -29,7 +29,54 @@ import MobileContactSection from '@/components/mobile/ContactSection';
 
 export default function Home() {
   const deviceType = useDeviceDetection();
+  const [isClient, setIsClient] = useState(false);
 
+  // Use effect to mark when client-side JS is running
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // If not yet client-side, render all versions with CSS display control
+  if (!isClient) {
+    return (
+      <>
+        <div className="mobile-view">
+          <main>
+            <MobileHero />
+            <MobileAboutSection />
+            <MobileWhyHireMeSection />
+            <MobileSkillsSection />
+            <MobileWorkSection />
+            <MobileContactSection />
+          </main>
+        </div>
+        
+        <div className="tablet-view">
+          <main>
+            <TabletHero />
+            <TabletAboutSection />
+            <TabletWhyHireMeSection />
+            <TabletSkillsSection />
+            <TabletWorkSection />
+            <TabletContactSection />
+          </main>
+        </div>
+        
+        <div className="desktop-view">
+          <main>
+            <DesktopHero />
+            <DesktopAboutSection />
+            <DesktopWhyHireMeSection />
+            <DesktopSkillsSection />
+            <DesktopWorkSection />
+            <DesktopContactSection />
+          </main>
+        </div>
+      </>
+    );
+  }
+
+  // After client-side JS runs, use the device detection logic
   if (deviceType === 'mobile') {
     return (
       <main>

@@ -98,3 +98,22 @@ section {
 .bubble-animation {
   animation: bubble-rise 1.5s linear forwards;
 }
+
+Add this to your globals.css file
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mobile-only, .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-only, .tablet-only {
+    display: none !important;
+  }
+}

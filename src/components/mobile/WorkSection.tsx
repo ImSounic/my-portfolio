@@ -43,8 +43,8 @@ const projects = [
     title: 'INTERNSHIP',
     description: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
     image: '/projects/internship.png',
-    company: 'CO2TECH LABS',
-    duration: 'JUN-AUG 2023'
+    company: 'CORETEK LABS',
+    duration: 'JUN-SEP 2023'
   },
   {
     id: 4,

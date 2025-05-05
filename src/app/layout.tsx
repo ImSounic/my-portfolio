@@ -19,6 +19,41 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload critical images */}
+        <link rel="preload" href="/profile.png" as="image" />
+        <link rel="preload" href="/assets/images/about-profile.png" as="image" />
+        <link rel="preload" href="/assets/images/grid.svg" as="image" />
+        <link rel="preload" href="/assets/images/bottom-grid.svg" as="image" />
+        <link rel="preload" href="/assets/images/hire-grid.svg" as="image" />
+        <link rel="preload" href="/assets/images/skills-grid.svg" as="image" />
+        <link rel="preload" href="/assets/images/contact-grid.svg" as="image" />
+        
+        {/* Preload icons */}
+        <link rel="preload" href="/assets/icons/star.svg" as="image" />
+        <link rel="preload" href="/assets/icons/location.svg" as="image" />
+        <link rel="preload" href="/assets/icons/hand.svg" as="image" />
+        <link rel="preload" href="/assets/icons/radar.svg" as="image" />
+        <link rel="preload" href="/assets/icons/arrow.svg" as="image" />
+        <link rel="preload" href="/assets/icons/contact.svg" as="image" />
+        <link rel="preload" href="/assets/icons/linkedin.svg" as="image" />
+        <link rel="preload" href="/assets/icons/mail.svg" as="image" />
+        
+        {/* Preload project images */}
+        <link rel="preload" href="/projects/ai-project.png" as="image" />
+        <link rel="preload" href="/projects/house-of-games.png" as="image" />
+        <link rel="preload" href="/projects/internship.png" as="image" />
+        <link rel="preload" href="/projects/cleanslate.png" as="image" />
+        
+        {/* Preload WebM videos */}
+        <link rel="preload" href="/assets/videos/thinking.webm" as="video" type="video/webm" />
+        <link rel="preload" href="/assets/videos/adapt.webm" as="video" type="video/webm" />
+        <link rel="preload" href="/assets/videos/code.webm" as="video" type="video/webm" />
+        
+        {/* Preload fonts */}
+        <link rel="preload" href="/fonts/Satoshi-Black.otf" as="font" type="font/otf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/pixel_font-7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+      </head>
       <body className={inter.className}>
         <div className="min-h-screen bg-black text-white">
           <Navbar />

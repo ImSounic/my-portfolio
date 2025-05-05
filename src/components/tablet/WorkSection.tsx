@@ -43,8 +43,8 @@ const projects = [
     title: 'INTERNSHIP',
     description: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
     image: '/projects/internship.png',
-    company: 'CO2TECH LABS',
-    duration: 'JUN-AUG 2023'
+    company: 'CORETEK LABS',
+    duration: 'JUN-SEP 2023'
   },
   {
     id: 4,
@@ -219,21 +219,21 @@ export default function WorkSection() {
                   <span className="text-gray-500">Project Image</span>
                 </div>
               )}
-            </div>
-
-            {/* Project Description in Glass Card */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-4 relative">
-              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed">
-                {projects[2].description}
-              </p>
               
-              {/* Internship Badge */}
+              {/* Internship Badge - Now at bottom left of the image, just like the Coming Soon badge */}
               {projects[2].company && (
-                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-4 py-2 rounded-lg z-10">
+                <div className="absolute bottom-4 left-4 bg-black/80 text-white px-4 py-2 rounded-lg z-30">
                   <p className="text-sm font-medium">{projects[2].company}</p>
                   <p className="text-xs">{projects[2].duration}</p>
                 </div>
               )}
+            </div>
+
+            {/* Project Description in Glass Card */}
+            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-4">
+              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed">
+                {projects[2].description}
+              </p>
             </div>
           </div>
         </div>

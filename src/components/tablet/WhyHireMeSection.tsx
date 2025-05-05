@@ -31,6 +31,7 @@ const sections = [
     description: 'I Excel At Analyzing Complex Problems And Developing Innovative Solutions. In A Recent Project, I Combined Unsupervised Algorithms With Aerial Sensing To Algorithms Significantly Improving Efficiency. My Proactive Problem-Solving Extends Beyond Traditional Challenges.',
     videoSrc: '/assets/videos/thinking.webm',
     gifSrc: '/assets/videos/thinking.gif',
+    apngSrc: '/assets/videos/thinking.png', // APNG path with .png extension
     subtitle: '"A CRITICAL THINKER NEVER SLEEPS, JUST DREAMS IN ALGORITHMS."'
   },
   {
@@ -39,6 +40,7 @@ const sections = [
     description: 'In The Fast-Paced World Of Technology, Adaptability Is Key. I Thrive In Dynamic Environments, Frameworks, And Languages. Learning That I Stay Ahead Of The Curve, Whether It\'s Mastering A New Programming Language Or Adapting The Latest AI Techniques. My Ability To Automatically Integrate New Technologies Makes Me A Valuable Asset In Any Dynamic Environment.',
     videoSrc: '/assets/videos/adapt.webm',
     gifSrc: '/assets/videos/adapt.gif',
+    apngSrc: '/assets/videos/adapt.png', // APNG path with .png extension
     subtitle: '"AN ADAPTIVE GUY: CHANGING GEARS AND MASTERING THE NEW."'
   },
   {
@@ -47,6 +49,7 @@ const sections = [
     description: 'As A Code Craftsman, I Pride Myself On Writing Clean, Efficient, And Secure Code. My Dedication To The Art Of Programming Ensures That Each Project I Undertake Is Robust. With A Precision And Attention To Detail From Developing Robust Algorithms To Crafting Seamless User Experiences. My Craftsmanship In Code Turns Ideas Into Reality.',
     videoSrc: '/assets/videos/code.webm',
     gifSrc: '/assets/videos/code.gif',
+    apngSrc: '/assets/videos/code.png', // APNG path with .png extension
     subtitle: '"CRAFTING CODE LIKE AN ARTIST PAINTS A MASTERPIECE."'
   }
 ]
@@ -87,11 +90,11 @@ export default function WhyHireMeSection() {
 
         {/* Critical Thinker Section - Center aligned for tablet */}
         <div className="h-2/3 relative flex flex-col items-center justify-center">
-          {/* Video/GIF - Top */}
+          {/* Video/APNG - Top */}
           <div className="mb-6">
             <TransparentMediaPlayer
               webmSrc={sections[0].videoSrc}
-              gifSrc={sections[0].gifSrc}
+              apngSrc={sections[0].apngSrc}
               altText={sections[0].title}
               width={320}
               height={192}
@@ -124,11 +127,11 @@ export default function WhyHireMeSection() {
           <div className="w-0.5 h-full bg-white/20" />
         </div>
 
-        {/* Video/GIF - Top */}
+        {/* Video/APNG - Top */}
         <div className="mb-6">
           <TransparentMediaPlayer
             webmSrc={sections[1].videoSrc}
-            gifSrc={sections[1].gifSrc}
+            apngSrc={sections[1].apngSrc}
             altText={sections[1].title}
             width={320}
             height={192}
@@ -160,11 +163,11 @@ export default function WhyHireMeSection() {
           <div className="w-0.5 h-full bg-white/20" />
         </div>
 
-        {/* Video/GIF - Top */}
+        {/* Video/APNG - Top */}
         <div className="mb-6">
           <TransparentMediaPlayer
             webmSrc={sections[2].videoSrc}
-            gifSrc={sections[2].gifSrc}
+            apngSrc={sections[2].apngSrc}
             altText={sections[2].title}
             width={320}
             height={192}

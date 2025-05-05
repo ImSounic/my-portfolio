@@ -160,8 +160,7 @@ export default function Hero() {
           </h1>
           
           <p className="font-[family-name:var(--font-montserrat)] text-lg max-w-2xl mb-10 leading-relaxed">
-            Enthusiastic Computer Science And AI Student At University Of
-            Leeds, Graduating Next Semester. Eager To Apply My Software
+            Enthusiastic Computer Science And AI Student Graduating Next Semester. Eager To Apply My Software
             Engineering And AI/ML Skills In A Professional Setting.
           </p>
           
@@ -214,7 +213,7 @@ export default function Hero() {
       <div className="absolute bottom-6 right-6 flex items-center gap-3">
         <div className="text-right">
           <p className="text-gray-300 text-base italic">
-            Currently Based in Leeds, UK
+            Currently Based in United Kingdom
           </p>
           {timeWeatherDisplay}
         </div>

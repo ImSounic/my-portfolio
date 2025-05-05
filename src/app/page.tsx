@@ -1,7 +1,6 @@
 // src/app/page.tsx
 'use client'
 
-import { useDeviceDetection } from '@/utils/deviceDetection';
 import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/LoadingScreen';
 

@@ -22,7 +22,7 @@ export default function Navbar() {
     e.preventDefault()
     const target = document.querySelector(href)
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
+      target.scrollIntoView()
     }
     setIsMenuOpen(false)
   }

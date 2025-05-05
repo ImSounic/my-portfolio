@@ -170,7 +170,7 @@ export default function Hero() {
               onClick={() => {
                 const contactSection = document.querySelector('#contact');
                 if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                  contactSection.scrollIntoView();
                 }
               }}
               className="px-12 py-5 bg-[#E9F5DB] text-black font-medium text-lg rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-3"

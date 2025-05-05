@@ -125,7 +125,7 @@ export default function Hero() {
             onClick={() => {
               const contactSection = document.querySelector('#contact');
               if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
+                contactSection.scrollIntoView();
               }
             }}
             className="w-full py-3 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] flex items-center justify-center gap-2"

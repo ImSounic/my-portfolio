@@ -28,7 +28,7 @@ const montserrat = Montserrat({
 const projects = [
   {
     id: 1,
-    title: 'AI MAJOR PROJECT',
+    title: 'DEEP LEARNING',
     description: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet. This project showcases my ability to work with complex data and implement advanced machine learning techniques.',
     image: '/projects/ai-project.png',
     github: '#'
@@ -73,7 +73,7 @@ export default function WorkSection() {
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
-            <div className="absolute -bottom-20 -right-[-60px] w-40 h-40 z-0">
+            <div className="absolute -bottom-20 -right-[-80px] w-40 h-40 z-0">
               <Image
                 src={circleSvg}
                 alt="Circle decoration"
@@ -152,7 +152,7 @@ export default function WorkSection() {
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)'
+                  transform: 'rotate(360deg)'
                 }}
               >
                 {projects[0].title}
@@ -167,7 +167,7 @@ export default function WorkSection() {
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
-            <div className="absolute -bottom-20 -right-[-60px] w-40 h-40 z-0">
+            <div className="absolute -bottom-20 -right-[-80px] w-40 h-40 z-0">
               <Image
                 src={circleSvg}
                 alt="Circle decoration"
@@ -246,7 +246,7 @@ export default function WorkSection() {
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)'
+                  transform: 'rotate(360deg)'
                 }}
               >
                 {projects[1].title}
@@ -261,7 +261,7 @@ export default function WorkSection() {
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
-            <div className="absolute -bottom-20 -right-[-60px] w-40 h-40 z-0">
+            <div className="absolute -bottom-20 -right-[-80px] w-40 h-40 z-0">
               <Image
                 src={circleSvg}
                 alt="Circle decoration"
@@ -347,7 +347,7 @@ export default function WorkSection() {
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)'
+                  transform: 'rotate(360deg)'
                 }}
               >
                 {projects[2].title}
@@ -362,7 +362,7 @@ export default function WorkSection() {
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
-            <div className="absolute -bottom-20 -right-[-60px] w-40 h-40 z-0">
+            <div className="absolute -bottom-20 -right-[-80px] w-40 h-40 z-0">
               <Image
                 src={circleSvg}
                 alt="Circle decoration"
@@ -418,7 +418,7 @@ export default function WorkSection() {
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(180deg)'
+                  transform: 'rotate(360deg)'
                 }}
               >
                 {projects[3].title}

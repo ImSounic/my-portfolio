@@ -38,16 +38,6 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Scroll behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-}
-
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
 
 /* Spin animation for radar */
 @keyframes spin-slow {

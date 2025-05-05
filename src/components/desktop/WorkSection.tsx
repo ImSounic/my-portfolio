@@ -60,7 +60,7 @@ export default function WorkSection() {
   return (
     <>
       {/* First viewport: Title + First Project */}
-      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative snap-start flex flex-col items-center justify-center`}>
+      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative  flex flex-col items-center justify-center`}>
         {/* Title - Positioned higher */}
         <div className="mb-24">
           <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white">
@@ -161,7 +161,7 @@ export default function WorkSection() {
       </section>
 
       {/* Second viewport: House of Games */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex items-center justify-center snap-start`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex items-center justify-center `}>
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
@@ -254,7 +254,7 @@ export default function WorkSection() {
       </section>
 
       {/* Third viewport: Internship */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex items-center justify-center snap-start`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex items-center justify-center `}>
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
@@ -325,7 +325,7 @@ export default function WorkSection() {
       </section>
 
       {/* Fourth viewport: Cleanslate */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex items-center justify-center snap-start`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex items-center justify-center `}>
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}

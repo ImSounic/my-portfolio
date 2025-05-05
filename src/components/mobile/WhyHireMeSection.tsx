@@ -55,7 +55,7 @@ export default function WhyHireMeSection() {
   return (
     <>
       {/* First section: Title + Critical Thinker */}
-      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-[#0c0c0c] px-4 py-16 flex flex-col`}>
+      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative  bg-[#0c0c0c] px-4 py-16 flex flex-col`}>
         {/* Title Section with reduced background grid */}
         <div className="pt-8 pb-6 relative flex items-center justify-center">
           {/* Background Grid */}
@@ -121,7 +121,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* Second section: Adaptive Innovator */}
-      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative  bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center`}>
         {/* Title */}
         <h3 className="font-[family-name:var(--font-satoshi)] text-xl font-bold text-white text-center mb-4">
           {sections[1].title}
@@ -155,7 +155,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* Third section: Code Craftsman */}
-      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative  bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center`}>
         {/* Title */}
         <h3 className="font-[family-name:var(--font-satoshi)] text-xl font-bold text-white text-center mb-4">
           {sections[2].title}

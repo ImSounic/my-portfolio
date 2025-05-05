@@ -58,7 +58,7 @@ export default function WhyHireMeSection() {
   return (
     <>
       {/* First viewport: Title + Critical Thinker */}
-      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} h-screen relative snap-start bg-[#0c0c0c]`}>
+      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} h-screen relative  bg-[#0c0c0c]`}>
         {/* Title Section with background grid */}
         <div className="h-1/3 relative flex items-center justify-center">
           {/* Background Grid - positioned behind the title */}
@@ -121,7 +121,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* Second viewport: Adaptive Innovator */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen relative snap-start bg-[#0c0c0c] flex items-center justify-center`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen relative  bg-[#0c0c0c] flex items-center justify-center`}>
         {/* Continue vertical line */}
         <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
           <div className="w-0.5 h-full bg-white/20" />
@@ -157,7 +157,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* Third viewport: Code Craftsman */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen relative snap-start bg-[#0c0c0c] flex items-center justify-center`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen relative  bg-[#0c0c0c] flex items-center justify-center`}>
         {/* Continue vertical line */}
         <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
           <div className="w-0.5 h-1/2 bg-white/20" />

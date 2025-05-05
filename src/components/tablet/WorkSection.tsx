@@ -59,7 +59,7 @@ export default function WorkSection() {
   return (
     <>
       {/* First viewport: Title + First Project */}
-      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative snap-start flex flex-col items-center justify-center px-6`}>
+      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative  flex flex-col items-center justify-center px-6`}>
         {/* Title - Positioned higher */}
         <div className="mb-16">
           <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white">
@@ -132,7 +132,7 @@ export default function WorkSection() {
       </section>
 
       {/* Second viewport: House of Games */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center snap-start px-6`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center  px-6`}>
         <div className="w-full max-w-lg mx-auto">
           <div className="relative flex flex-col">
             {/* Project Title */}
@@ -197,7 +197,7 @@ export default function WorkSection() {
       </section>
 
       {/* Third viewport: Internship */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center snap-start px-6`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center  px-6`}>
         <div className="w-full max-w-lg mx-auto">
           <div className="relative flex flex-col">
             {/* Project Title */}
@@ -240,7 +240,7 @@ export default function WorkSection() {
       </section>
 
       {/* Fourth viewport: Cleanslate */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center snap-start px-6`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center  px-6`}>
         <div className="w-full max-w-lg mx-auto">
           <div className="relative flex flex-col">
             {/* Project Title */}

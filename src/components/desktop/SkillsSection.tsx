@@ -40,7 +40,7 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills"
-      className={`${satoshi.variable} min-h-screen bg-[#0c0c0c] relative flex items-center snap-start`}
+      className={`${satoshi.variable} min-h-screen bg-[#0c0c0c] relative flex items-center `}
     >
       {/* Background Grid */}
       <div className="absolute inset-0 w-full h-full">

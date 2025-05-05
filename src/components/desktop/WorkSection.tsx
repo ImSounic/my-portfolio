@@ -4,7 +4,6 @@
 import Image from 'next/image'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
-import glassCardSvg from '@/assets/images/glass-card.svg'
 import circleSvg from '@/assets/icons/circle.svg'
 import arrowSvg from '@/assets/icons/arrow.svg'
 
@@ -51,7 +50,7 @@ const projects = [
   {
     id: 4,
     title: 'CLEANSLATE',
-    description: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
+    description: 'A chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
     image: '/projects/cleanslate.png',
     github: '#'
   }
@@ -82,10 +81,10 @@ export default function WorkSection() {
               />
             </div>
 
-            {/* Glass Card Background */}
+            {/* Glass Card Background - Now using PNG instead of SVG */}
             <div className="relative w-full h-[500px] z-10">
               <Image
-                src={glassCardSvg}
+                src="/assets/images/glass-card.png" 
                 alt="Glass card background"
                 fill
                 className="object-contain"
@@ -93,7 +92,7 @@ export default function WorkSection() {
               
               {/* Project Description */}
               <div className="absolute top-[-8px] left-36 right-12 p-8">
-                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-3xl">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-[700px]">
                   {projects[0].description}
                 </p>
               </div>
@@ -146,7 +145,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side */}
-            <div className="absolute right-20 top-64 -translate-y-1/2 -translate-x-36 z-20">
+            <div className="absolute right-24 top-64 -translate-y-1/2 -translate-x-36 z-20">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
@@ -175,10 +174,10 @@ export default function WorkSection() {
               />
             </div>
 
-            {/* Glass Card Background */}
+            {/* Glass Card Background - Using PNG */}
             <div className="relative w-full h-[500px] z-10">
               <Image
-                src={glassCardSvg}
+                src="/assets/images/glass-card.png"
                 alt="Glass card background"
                 fill
                 className="object-contain"
@@ -186,7 +185,7 @@ export default function WorkSection() {
               
               {/* Project Description */}
               <div className="absolute top-[-8px] left-36 right-12 p-8">
-                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-3xl">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-[700px]">
                   {projects[1].description}
                 </p>
               </div>
@@ -239,7 +238,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side */}
-            <div className="absolute right-20 top-64 -translate-y-1/2 -translate-x-36 z-20">
+            <div className="absolute right-24 top-64 -translate-y-1/2 -translate-x-36 z-20">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
@@ -268,10 +267,10 @@ export default function WorkSection() {
               />
             </div>
 
-            {/* Glass Card Background */}
+            {/* Glass Card Background - Using PNG */}
             <div className="relative w-full h-[500px] z-10">
               <Image
-                src={glassCardSvg}
+                src="/assets/images/glass-card.png"
                 alt="Glass card background"
                 fill
                 className="object-contain"
@@ -279,7 +278,7 @@ export default function WorkSection() {
               
               {/* Project Description */}
               <div className="absolute top-[-8px] left-36 right-12 p-8">
-                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-3xl">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-[700px]">
                   {projects[2].description}
                 </p>
               </div>
@@ -310,7 +309,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side */}
-            <div className="absolute right-20 top-64 -translate-y-1/2 -translate-x-36 z-20">
+            <div className="absolute right-24 top-64 -translate-y-1/2 -translate-x-36 z-20">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 
@@ -339,10 +338,10 @@ export default function WorkSection() {
               />
             </div>
 
-            {/* Glass Card Background */}
+            {/* Glass Card Background - Using PNG */}
             <div className="relative w-full h-[500px] z-10">
               <Image
-                src={glassCardSvg}
+                src="/assets/images/glass-card.png"
                 alt="Glass card background"
                 fill
                 className="object-contain"
@@ -350,7 +349,7 @@ export default function WorkSection() {
               
               {/* Project Description */}
               <div className="absolute top-[-8px] left-36 right-12 p-8">
-                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-3xl">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-l leading-relaxed max-w-[700px]">
                   {projects[3].description}
                 </p>
               </div>
@@ -381,7 +380,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side */}
-            <div className="absolute right-20 top-64 -translate-y-1/2 -translate-x-36 z-20">
+            <div className="absolute right-24 top-64 -translate-y-1/2 -translate-x-36 z-20">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-4xl font-bold text-white"
                 style={{ 

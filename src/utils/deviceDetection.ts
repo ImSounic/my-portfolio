@@ -17,7 +17,7 @@ export const useDeviceDetection = (): DeviceType => {
         setDeviceType('desktop');
       }
     };
-
+    
     // Initial check
     handleResize();
     
@@ -27,6 +27,51 @@ export const useDeviceDetection = (): DeviceType => {
     // Cleanup
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
+  
   return deviceType;
 };
+
+// New hook to detect Apple devices
+export const useAppleDeviceDetection = (): boolean => {
+  const [isApple, setIsApple] = useState(false);
+  
+  useEffect(() => {
+    const checkAppleDevice = () => {
+      // Check if it's an Apple platform
+      const isApplePlatform = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+      
+      // Additional check for newer iOS devices that return "MacIntel" platform
+      const isMacIntelIOS = 
+        navigator.platform === "MacIntel" && 
+        navigator.maxTouchPoints > 1;
+                           
+      // Check for Mac in userAgent (catches some edge cases)
+      const isMacUserAgent = navigator.userAgent.includes("Mac") && "ontouchend" in document;
+      
+      setIsApple(isApplePlatform || isMacIntelIOS || isMacUserAgent);
+    };
+    
+    // Execute check
+    checkAppleDevice();
+  }, []);
+  
+  return isApple;
+};
+
+// Helper function that can be used outside of React components
+export function isAppleDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  // Check if it's an Apple platform
+  const isApplePlatform = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+  
+  // Additional check for newer iOS devices that return "MacIntel" platform
+  const isMacIntelIOS = 
+    navigator.platform === "MacIntel" && 
+    navigator.maxTouchPoints > 1;
+                       
+  // Check for Mac in userAgent (catches some edge cases)
+  const isMacUserAgent = navigator.userAgent.includes("Mac") && "ontouchend" in document;
+  
+  return isApplePlatform || isMacIntelIOS || isMacUserAgent;
+}

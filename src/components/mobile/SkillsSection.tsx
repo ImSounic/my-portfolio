@@ -39,7 +39,7 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills"
-      className={`${satoshi.variable} min-h-screen bg-black relative flex flex-col items-center snap-start px-4 py-16`}
+      className={`${satoshi.variable} min-h-screen bg-[#0c0c0c] relative flex flex-col items-center snap-start px-4 py-16`}
     >
       {/* Background Grid */}
       <div className="absolute inset-0 w-full h-full">

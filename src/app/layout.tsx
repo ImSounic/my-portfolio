@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Sounic - Portfolio',
-  description: 'Enthusiastic Computer Science And AI Student At University Of Leeds',
+  description: 'Enthusiastic AI/ML Engineer with a passion for building innovative solutions. Explore my portfolio to see my projects and skills.',
 }
 
 export default function RootLayout({
@@ -55,7 +55,7 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/pixel_font-7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
-        <div className="min-h-screen bg-black text-white">
+        <div className="min-h-screen bg-[#0c0c0c] text-white">
           <Navbar />
           <main>{children}</main>
         </div>

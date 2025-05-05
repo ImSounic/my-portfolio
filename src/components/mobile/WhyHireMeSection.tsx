@@ -5,7 +5,7 @@ import Image from 'next/image'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import hireGridSvg from '@/assets/images/hire-grid.svg'
-import { useAppleDeviceDetection } from '@/utils/deviceDetection'
+import TransparentMediaPlayer from '@/components/ui/TransparentMediaPlayer'
 
 const satoshi = localFont({
   src: [
@@ -52,13 +52,10 @@ const sections = [
 ]
 
 export default function WhyHireMeSection() {
-  // Use the custom hook to detect Apple devices
-  const isApple = useAppleDeviceDetection();
-
   return (
     <>
       {/* First section: Title + Critical Thinker */}
-      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-black px-4 py-16 flex flex-col`}>
+      <section id="why-hire-me" className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-[#0c0c0c] px-4 py-16 flex flex-col`}>
         {/* Title Section with reduced background grid */}
         <div className="pt-8 pb-6 relative flex items-center justify-center">
           {/* Background Grid */}
@@ -97,27 +94,13 @@ export default function WhyHireMeSection() {
           
           {/* Video or GIF */}
           <div className="mb-4">
-            <div className="relative w-60 h-36">
-              {isApple ? (
-                <Image
-                  src={sections[0].gifSrc}
-                  alt={sections[0].title}
-                  fill
-                  className="object-contain"
-                />
-              ) : (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-contain"
-                >
-                  <source src={sections[0].videoSrc} type="video/webm" />
-                  Your browser does not support WebM videos.
-                </video>
-              )}
-            </div>
+            <TransparentMediaPlayer
+              webmSrc={sections[0].videoSrc}
+              gifSrc={sections[0].gifSrc}
+              altText={sections[0].title}
+              width={240}
+              height={144}
+            />
           </div>
           
           {/* Description */}
@@ -138,7 +121,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* Second section: Adaptive Innovator */}
-      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-black px-4 py-16 flex flex-col items-center justify-center`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center`}>
         {/* Title */}
         <h3 className="font-[family-name:var(--font-satoshi)] text-xl font-bold text-white text-center mb-4">
           {sections[1].title}
@@ -146,27 +129,13 @@ export default function WhyHireMeSection() {
         
         {/* Video or GIF */}
         <div className="mb-4">
-          <div className="relative w-60 h-36">
-            {isApple ? (
-              <Image
-                src={sections[1].gifSrc}
-                alt={sections[1].title}
-                fill
-                className="object-contain"
-              />
-            ) : (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-contain"
-              >
-                <source src={sections[1].videoSrc} type="video/webm" />
-                Your browser does not support WebM videos.
-              </video>
-            )}
-          </div>
+          <TransparentMediaPlayer
+            webmSrc={sections[1].videoSrc}
+            gifSrc={sections[1].gifSrc}
+            altText={sections[1].title}
+            width={240}
+            height={144}
+          />
         </div>
         
         {/* Description */}
@@ -186,7 +155,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* Third section: Code Craftsman */}
-      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-black px-4 py-16 flex flex-col items-center justify-center`}>
+      <section className={`${satoshi.variable} ${montserrat.variable} min-h-screen relative snap-start bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center`}>
         {/* Title */}
         <h3 className="font-[family-name:var(--font-satoshi)] text-xl font-bold text-white text-center mb-4">
           {sections[2].title}
@@ -194,27 +163,13 @@ export default function WhyHireMeSection() {
         
         {/* Video or GIF */}
         <div className="mb-4">
-          <div className="relative w-60 h-36">
-            {isApple ? (
-              <Image
-                src={sections[2].gifSrc}
-                alt={sections[2].title}
-                fill
-                className="object-contain"
-              />
-            ) : (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-contain"
-              >
-                <source src={sections[2].videoSrc} type="video/webm" />
-                Your browser does not support WebM videos.
-              </video>
-            )}
-          </div>
+          <TransparentMediaPlayer
+            webmSrc={sections[2].videoSrc}
+            gifSrc={sections[2].gifSrc}
+            altText={sections[2].title}
+            width={240}
+            height={144}
+          />
         </div>
         
         {/* Description */}

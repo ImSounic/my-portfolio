@@ -71,7 +71,7 @@ export default function AboutSection() {
   return (
     <section 
       id="about"
-      className={`${satoshi.variable} ${montserrat.variable} min-h-screen bg-black relative flex items-center justify-center`}
+      className={`${satoshi.variable} ${montserrat.variable} min-h-screen bg-[#0c0c0c] relative flex items-center justify-center`}
     >
       {/* Custom Grid SVG Background at bottom center */}
       <div className="absolute bottom-0 left-0 right-0 w-full flex justify-center">

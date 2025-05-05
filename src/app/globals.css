@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-black text-white antialiased;
+    @apply bg-[#0c0c0c] text-white antialiased;
   }
 }
 

@@ -70,7 +70,7 @@ export default function WorkSection() {
   const project = projects[activeProject];
 
   return (
-    <section id="work" className={`${satoshi.variable} ${montserrat.variable} min-h-screen bg-black relative snap-start flex flex-col items-center py-16 px-4`}>
+    <section id="work" className={`${satoshi.variable} ${montserrat.variable} min-h-screen bg-[#0c0c0c] relative snap-start flex flex-col items-center py-16 px-4`}>
       {/* Title */}
       <h2 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-6 mt-8">
         PROJECTS

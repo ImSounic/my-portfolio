@@ -32,7 +32,7 @@ const slides = [
   {
     id: 'about',
     title: { normal: 'ABOUT', outline: 'SOUNIC' },
-    content: 'I am a soon-to-be graduate with a Bachelor\'s degree in Computer Science and Artificial Intelligence from University of Leeds. Throughout my academic journey, I have developed a strong proficiency in Python, Java, JavaScript, Django Framework, SQL, HTML, CSS, and XML. My passion for technology and problem-solving drives me to continuously learn and innovate. I am particularly interested in roles such as Software Engineer and AI/ML Engineer, where I can leverage my skills to contribute to cutting-edge projects and solutions.',
+    content: 'I am a soon-to-be graduate with a Bachelor\'s degree in Computer Science and Artificial Intelligence. Throughout my academic journey, I have developed a strong proficiency in Python, Java, JavaScript, Django Framework, SQL, HTML, CSS, and XML. My passion for technology and problem-solving drives me to continuously learn and innovate. I am particularly interested in roles such as Software Engineer and AI/ML Engineer, where I can leverage my skills to contribute to cutting-edge projects and solutions.',
     image: profileImg,
     imageAlt: 'Sounic in snow mountains',
     overlayText: 'ABOUT'
@@ -40,7 +40,7 @@ const slides = [
   {
     id: 'editing',
     title: { normal: 'EDITING', outline: 'ESCAPADES' },
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    content: 'Beyond coding, I immerse myself in digital storytelling through video editing. I transform raw footage into captivating visual narratives using After Effects and Premiere Pro. From short films to creative montages, I blend technical precision with artistic vision. This creative outlet allows me to exercise problem-solving in a different dimension, enhancing my ability to translate complex ideas into engaging experiences.',
     image: editingImg,
     imageAlt: 'Video editing setup',
     overlayText: 'EDITING'
@@ -48,7 +48,7 @@ const slides = [
   {
     id: 'gaming',
     title: { normal: 'GAMING', outline: 'ESCAPADES' },
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    content: "When I'm not coding or editing, I explore interactive worlds through gaming. My passion for strategic gameplay and immersive experiences gives me valuable insights into user engagement and interface design. Gaming has taught me the importance of perseverance, team collaboration, and thinking several steps ahead—skills that directly translate to my approach to software development and problem-solving.",
     image: gamingImg,
     imageAlt: 'Gaming setup',
     overlayText: 'GAMING'

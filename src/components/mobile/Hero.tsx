@@ -79,21 +79,21 @@ export default function Hero() {
           </div>
         </div>
 
-        <h1 className="flex flex-col gap-2 mb-6 hero-fade opacity-0 translate-y-[50px]">
+        <h1 className="flex flex-row flex-wrap items-center justify-center gap-2 mb-6 hero-fade opacity-0 translate-y-[50px]">
           <span className="font-[family-name:var(--font-satoshi)] text-white text-3xl font-bold">
             HELLO! I&apos;M
           </span>
           <span
-            className="font-[family-name:var(--font-satoshi)] text-4xl font-bold relative"
+            className="font-[family-name:var(--font-satoshi)] text-3xl font-bold relative"
             style={{ WebkitTextStroke: '1px white', WebkitTextFillColor: 'transparent' }}
           >
             SOUNIC
             <Image
               src={starSvg}
               alt="Star decoration"
-              width={40}
-              height={40}
-              className="absolute -top-2 -right-2 w-10 h-10 animate-star-rotation"
+              width={45}
+              height={45}
+              className="absolute -top-3 -right-2 w-12 h-12 animate-star-rotation"
               style={{ transform: 'translate(50%, -50%)' }}
             />
           </span>
@@ -123,14 +123,6 @@ export default function Hero() {
           >
             View my Resume
           </Link>
-        </div>
-
-        <div className="flex items-center gap-2 mt-4 hero-fade opacity-0 translate-y-[50px]">
-          <Image src={locationSvg} alt="Location" width={24} height={24} className="opacity-80" />
-          <div>
-            <p className="text-gray-300 text-xs italic">Currently Based in United Kingdom</p>
-            <p className="text-gray-400 text-xs">{mounted ? time : 'Loading...'}</p>
-          </div>
         </div>
       </div>
 

@@ -1,6 +1,8 @@
+// src/components/ui/TransparentMediaPlayer.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 interface MediaPlayerProps {
   webmSrc: string
@@ -32,7 +34,7 @@ export default function TransparentMediaPlayer({
 
   useEffect(() => {
     if (useApng) {
-      const img = new Image()
+      const img = new window.Image()
       img.onload = () => setIsLoaded(true)
       img.src = apngSrc
     }
@@ -41,9 +43,12 @@ export default function TransparentMediaPlayer({
   return (
     <div className="relative" style={{ width, height }}>
       {useApng ? (
-        <img
+        <Image
           src={apngSrc}
           alt={altText}
+          unoptimized
+          width={width}
+          height={height}
           style={{
             width: '100%',
             height: '100%',

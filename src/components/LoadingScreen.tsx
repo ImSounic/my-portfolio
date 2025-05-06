@@ -12,7 +12,6 @@ interface LoadingScreenProps {
 export default function LoadingScreen({ onLoaded, assets }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-  const textRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
   const blobRef = useRef<HTMLDivElement>(null)
 

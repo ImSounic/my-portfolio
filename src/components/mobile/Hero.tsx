@@ -3,7 +3,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import gridSvg from '@/assets/images/grid.svg'
 import starSvg from '@/assets/icons/star.svg'
 import locationSvg from '@/assets/icons/location.svg'
@@ -12,24 +13,12 @@ import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 
 const satoshi = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/Satoshi-Black.otf',
-      weight: '900',
-      style: 'normal'
-    }
-  ],
+  src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
   variable: '--font-satoshi',
 })
 
 const pixelFont = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/pixel_font-7.ttf',
-      weight: '400',
-      style: 'normal'
-    }
-  ],
+  src: [{ path: '../../../public/fonts/pixel_font-7.ttf', weight: '400', style: 'normal' }],
   variable: '--font-pixel',
 })
 
@@ -42,11 +31,11 @@ const montserrat = Montserrat({
 export default function Hero() {
   const [time, setTime] = useState('');
   const [mounted, setMounted] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    
-    // Update time every minute
+
     const updateTime = () => {
       const now = new Date();
       const timeString = now.toLocaleTimeString('en-US', {
@@ -59,50 +48,46 @@ export default function Hero() {
 
     updateTime();
     const interval = setInterval(updateTime, 60000);
-
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to('.hero-fade', {
+        y: 0,
+        autoAlpha: 1,
+        stagger: 0.1,
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.5,
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative min-h-screen flex flex-col items-center justify-center px-4 py-16`}>
-      {/* Grid SVG Background */}
+    <section ref={heroRef} id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative min-h-screen flex flex-col items-center justify-center px-4 py-16`}>
       <div className="absolute inset-0 w-full h-full">
-        <Image
-          src={gridSvg}
-          alt="Grid background"
-          fill
-          className="object-cover opacity-75"
-        />
+        <Image src={gridSvg} alt="Grid background" fill className="object-cover opacity-75" />
       </div>
-      
+
       <div className="relative z-10 flex flex-col items-center text-center w-full">
-        {/* Profile Image */}
-        <div className="mb-8">
+        <div className="mb-8 hero-fade opacity-0 translate-y-[50px]">
           <div className="w-36 h-36 rounded-full overflow-hidden">
-            <Image
-              src="/profile.png"
-              alt="Sounic"
-              width={144}
-              height={144}
-              className="object-cover"
-            />
+            <Image src="/profile.png" alt="Sounic" width={144} height={144} className="object-cover" />
           </div>
         </div>
-        
-        {/* Hero Text */}
-        <h1 className="flex flex-col gap-2 mb-6">
+
+        <h1 className="flex flex-col gap-2 mb-6 hero-fade opacity-0 translate-y-[50px]">
           <span className="font-[family-name:var(--font-satoshi)] text-white text-3xl font-bold">
             HELLO! I&apos;M
           </span>
           <span
             className="font-[family-name:var(--font-satoshi)] text-4xl font-bold relative"
-            style={{
-              WebkitTextStroke: '1px white',
-              WebkitTextFillColor: 'transparent'
-            }}
+            style={{ WebkitTextStroke: '1px white', WebkitTextFillColor: 'transparent' }}
           >
             SOUNIC
-            {/* Star - smaller for mobile */}
             <Image
               src={starSvg}
               alt="Star decoration"
@@ -113,14 +98,13 @@ export default function Hero() {
             />
           </span>
         </h1>
-        
-        <p className="font-[family-name:var(--font-montserrat)] text-sm text-gray-300 mb-8 leading-relaxed">
+
+        <p className="font-[family-name:var(--font-montserrat)] text-sm text-gray-300 mb-8 leading-relaxed hero-fade opacity-0 translate-y-[50px]">
           Enthusiastic Computer Science And AI Graduating Next Semester. Eager To Apply My Software
           Engineering And AI/ML Skills In A Professional Setting.
         </p>
-        
-        {/* CTA Buttons - Full width on mobile */}
-        <div className="flex flex-col gap-3 w-full mb-8">
+
+        <div className="flex flex-col gap-3 w-full mb-8 hero-fade opacity-0 translate-y-[50px]">
           <button
             onClick={() => {
               const contactSection = document.querySelector('#contact');
@@ -131,12 +115,7 @@ export default function Hero() {
             className="w-full py-3 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] flex items-center justify-center gap-2"
           >
             Let&apos;s Talk
-            <Image
-              src={handSvg}
-              alt="Hand icon"
-              width={18}
-              height={18}
-            />
+            <Image src={handSvg} alt="Hand icon" width={18} height={18} />
           </button>
           <Link
             href="/Resume.pdf"
@@ -145,29 +124,17 @@ export default function Hero() {
             View my Resume
           </Link>
         </div>
-        
-        {/* Location Info - Bottom of content rather than absolute */}
-        <div className="flex items-center gap-2 mt-4">
-          <Image
-            src={locationSvg}
-            alt="Location"
-            width={24}
-            height={24}
-            className="opacity-80"
-          />
+
+        <div className="flex items-center gap-2 mt-4 hero-fade opacity-0 translate-y-[50px]">
+          <Image src={locationSvg} alt="Location" width={24} height={24} className="opacity-80" />
           <div>
-            <p className="text-gray-300 text-xs italic">
-              Currently Based in United Kingdom
-            </p>
-            <p className="text-gray-400 text-xs">
-              {mounted ? time : 'Loading...'}
-            </p>
+            <p className="text-gray-300 text-xs italic">Currently Based in United Kingdom</p>
+            <p className="text-gray-400 text-xs">{mounted ? time : 'Loading...'}</p>
           </div>
         </div>
       </div>
 
-      {/* Simplified scroll indicator */}
-      <div className="absolute left-4 bottom-8">
+      <div className="absolute left-4 bottom-8 hero-fade opacity-0 translate-y-[50px]">
         <div className="flex items-center gap-1">
           <div className="w-[1px] h-16 bg-white/50"></div>
           <p className="font-[family-name:var(--font-pixel)] text-white/70 text-[10px] tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
@@ -176,5 +143,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

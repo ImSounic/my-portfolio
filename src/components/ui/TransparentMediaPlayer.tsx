@@ -1,48 +1,53 @@
 // src/components/ui/TransparentMediaPlayer.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 
 interface MediaPlayerProps {
-  webmSrc: string
-  apngSrc: string
+  mp4Src: string
+  webmSrc?: string
+  apngSrc?: string
   altText: string
   width?: number
   height?: number
 }
 
 export default function TransparentMediaPlayer({
+  mp4Src,
   webmSrc,
   apngSrc,
   altText,
   width = 320,
   height = 240,
 }: MediaPlayerProps) {
-  const [useApng, setUseApng] = useState(false)
+  const [useStaticImage, setUseStaticImage] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase()
-    const isApple = /macintosh|iphone|ipad|ipod/.test(userAgent)
-    const isIphone = /iphone/.test(userAgent)
-
-    if (isApple && !isIphone) {
-      setUseApng(true)
+    // Check if video can be played
+    const video = document.createElement('video')
+    const canPlayMp4 = video.canPlayType('video/mp4')
+    
+    // If MP4 can't be played or device is known to have issues with transparent videos
+    // fallback to APNG
+    if (canPlayMp4 === '' || /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) {
+      setUseStaticImage(true)
     }
   }, [])
 
   useEffect(() => {
-    if (useApng) {
+    if (useStaticImage && apngSrc) {
       const img = new window.Image()
       img.onload = () => setIsLoaded(true)
       img.src = apngSrc
     }
-  }, [useApng, apngSrc])
+  }, [useStaticImage, apngSrc])
 
   return (
     <div className="relative" style={{ width, height }}>
-      {useApng ? (
+      {useStaticImage && apngSrc ? (
         <Image
           src={apngSrc}
           alt={altText}
@@ -59,13 +64,16 @@ export default function TransparentMediaPlayer({
         />
       ) : (
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-contain"
         >
-          <source src={webmSrc} type="video/webm" />
+          <source src={mp4Src} type="video/mp4" />
+          {webmSrc && <source src={webmSrc} type="video/webm" />}
+          {altText}
         </video>
       )}
     </div>

@@ -32,7 +32,7 @@ const slides = [
   {
     id: 'about',
     title: { normal: 'ABOUT', outline: 'SOUNIC' },
-    content: 'I am a soon-to-be graduate with a Bachelor\'s degree in Computer Science and Artificial Intelligence. Throughout my academic journey, I have developed a strong proficiency in Python, Java, JavaScript, Django Framework, SQL, HTML, CSS, and XML. My passion for technology and problem-solving drives me to continuously learn and innovate. I am particularly interested in roles such as Software Engineer and AI/ML Engineer, where I can leverage my skills to contribute to cutting-edge projects and solutions.',
+    content: 'I am a soon-to-be graduate with a Bachelor\'s degree in Computer Science and Artificial Intelligence. Throughout my academic journey, I have developed a strong proficiency in Python, Java, JavaScript (NextJS, React), Django Framework, SQL, HTML, CSS, and XML. My passion for technology and problem-solving drives me to continuously learn and innovate. I am particularly interested in roles such as Software Engineer and AI/ML Engineer, where I can leverage my skills to contribute to cutting-edge projects and solutions.',
     image: profileImg,
     imageAlt: 'Sounic in snow mountains',
     overlayText: 'ABOUT'

@@ -3,11 +3,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useRef } from 'react'
+import {useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import gridSvg from '@/assets/images/grid.svg'
 import starSvg from '@/assets/icons/star.svg'
-import locationSvg from '@/assets/icons/location.svg'
 import handSvg from '@/assets/icons/hand.svg'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
@@ -29,27 +28,7 @@ const montserrat = Montserrat({
 })
 
 export default function Hero() {
-  const [time, setTime] = useState('');
-  const [mounted, setMounted] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-
-    const updateTime = () => {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      });
-      setTime(timeString);
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {

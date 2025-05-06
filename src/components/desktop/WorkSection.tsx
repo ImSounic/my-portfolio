@@ -6,6 +6,7 @@ import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import circleSvg from '@/assets/icons/circle.svg'
 import arrowSvg from '@/assets/icons/arrow.svg'
+import iStarSvg from '@/assets/icons/i_star.svg'
 
 const satoshi = localFont({
   src: [
@@ -258,19 +259,19 @@ export default function WorkSection() {
         <div className="w-full max-w-7xl mx-auto px-8">
           <div className="relative">
             {/* Circle Icon - Bottom Right (Behind) */}
-            <div className="absolute -bottom-20 -right-[-80px] w-40 h-40 z-0">
+            <div className="absolute -bottom-28 -right-[-50px] w-60 h-60 z-0">
               <Image
-                src={circleSvg}
-                alt="Circle decoration"
-                width={140}
-                height={140}
+                src={iStarSvg}
+                alt="Star decoration"
+                width={260}
+                height={260}
               />
             </div>
 
             {/* Glass Card Background - Using PNG */}
             <div className="relative w-full h-[500px] z-10">
               <Image
-                src="/assets/images/glass-card.png"
+                src="/assets/images/glass-card-i.png"
                 alt="Glass card background"
                 fill
                 className="object-contain"

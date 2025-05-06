@@ -1,36 +1,46 @@
-// src/components/ui/TransparentMediaPlayer.tsx
-import React, { useEffect, useState } from 'react';
-import { useAppleDeviceDetection } from '@/utils/deviceDetection';
+'use client'
+
+import { useEffect, useState } from 'react'
 
 interface MediaPlayerProps {
-  webmSrc: string;   // WebM for non-Apple devices
-  apngSrc: string;   // APNG for Apple devices
-  altText: string;
-  width?: number;
-  height?: number;
+  webmSrc: string
+  apngSrc: string
+  altText: string
+  width?: number
+  height?: number
 }
 
-export default function TransparentMediaPlayer({ 
-  webmSrc, 
+export default function TransparentMediaPlayer({
+  webmSrc,
   apngSrc,
   altText,
   width = 320,
-  height = 240
+  height = 240,
 }: MediaPlayerProps) {
-  const isApple = useAppleDeviceDetection();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [useApng, setUseApng] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    // Preload the image
-    const img = new Image();
-    img.onload = () => setIsLoaded(true);
-    img.src = apngSrc;
-  }, [apngSrc]);
+    const userAgent = navigator.userAgent.toLowerCase()
+    const isApple = /macintosh|iphone|ipad|ipod/.test(userAgent)
+    const isIphone = /iphone/.test(userAgent)
+
+    if (isApple && !isIphone) {
+      setUseApng(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (useApng) {
+      const img = new Image()
+      img.onload = () => setIsLoaded(true)
+      img.src = apngSrc
+    }
+  }, [useApng, apngSrc])
 
   return (
     <div className="relative" style={{ width, height }}>
-      {isApple ? (
-        // For Apple devices - use APNG with standard img tag
+      {useApng ? (
         <img
           src={apngSrc}
           alt={altText}
@@ -43,7 +53,6 @@ export default function TransparentMediaPlayer({
           }}
         />
       ) : (
-        // For non-Apple devices - use WebM with transparency
         <video
           autoPlay
           loop
@@ -55,5 +64,5 @@ export default function TransparentMediaPlayer({
         </video>
       )}
     </div>
-  );
+  )
 }

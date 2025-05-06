@@ -90,8 +90,8 @@ export default function WhyHireMeSection() {
 
         {/* Critical Thinker Section */}
         <div className="h-2/3 relative flex items-center justify-center">
-          {/* Left side - Title and Description */}
-          <div className="absolute left-24 top-1/2 -translate-y-1/2 max-w-md">
+          {/* Left side - Title and Description - Made responsive */}
+          <div className="absolute 2xl:left-24 xl:left-28 lg:left-16 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm lg:max-w-xs">
             <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-6">
               {sections[0].title}
             </h3>
@@ -112,8 +112,8 @@ export default function WhyHireMeSection() {
             />
           </div>
 
-          {/* Right side - Subtitle */}
-          <div className="absolute right-24 top-1/2 -translate-y-1/2 max-w-sm">
+          {/* Right side - Subtitle - Made responsive */}
+          <div className="absolute 2xl:right-24 xl:right-28 lg:right-16 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm lg:max-w-xs">
             <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-sm italic">
               {sections[0].subtitle}
             </p>
@@ -128,8 +128,8 @@ export default function WhyHireMeSection() {
           <div className="w-0.5 h-full bg-white/20" />
         </div>
 
-        {/* Left side - Subtitle (SWAPPED) */}
-        <div className="absolute left-24 top-1/2 -translate-y-1/2 max-w-sm">
+        {/* Left side - Subtitle (SWAPPED) - Made responsive */}
+        <div className="absolute 2xl:left-24 xl:left-28 lg:left-16 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm lg:max-w-xs">
           <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-sm italic">
             {sections[1].subtitle}
           </p>
@@ -147,8 +147,8 @@ export default function WhyHireMeSection() {
           />
         </div>
 
-        {/* Right side - Title and Description (SWAPPED) */}
-        <div className="absolute right-24 top-1/2 -translate-y-1/2 max-w-md">
+        {/* Right side - Title and Description (SWAPPED) - Made responsive */}
+        <div className="absolute 2xl:right-36 xl:right-28 lg:right-16 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm lg:max-w-xs">
           <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-6">
             {sections[1].title}
           </h3>
@@ -165,8 +165,8 @@ export default function WhyHireMeSection() {
           <div className="w-0.5 h-1/2 bg-white/20" />
         </div>
 
-        {/* Left side - Title and Description */}
-        <div className="absolute left-24 top-1/2 -translate-y-1/2 max-w-md">
+        {/* Left side - Title and Description - Made responsive */}
+        <div className="absolute 2xl:left-24 xl:left-28 lg:left-16 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm lg:max-w-xs">
           <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-6">
             {sections[2].title}
           </h3>
@@ -187,8 +187,8 @@ export default function WhyHireMeSection() {
           />
         </div>
 
-        {/* Right side - Subtitle */}
-        <div className="absolute right-24 top-1/2 -translate-y-1/2 max-w-sm">
+        {/* Right side - Subtitle - Made responsive */}
+        <div className="absolute 2xl:right-24 xl:right-28 lg:right-16 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm lg:max-w-xs">
           <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-sm italic">
             {sections[2].subtitle}
           </p>

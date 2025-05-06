@@ -1,4 +1,4 @@
-// src/components/about/AboutSection.tsx
+// src/components/desktop/AboutSection.tsx
 'use client'
 
 import Image from 'next/image'
@@ -98,8 +98,8 @@ export default function AboutSection() {
 
         {/* Main Content Container */}
         <div className="relative">
-          {/* Navigation Arrows - Left side of glassmorphism box */}
-          <div className="absolute -left-24 top-1/2 -translate-y-1/2 flex flex-col gap-8 z-20">
+          {/* Navigation Arrows - Made responsive */}
+          <div className="absolute 2xl:-left-24 xl:-left-16 lg:-left-12 top-1/2 -translate-y-1/2 flex flex-col gap-8 z-20">
             <button 
               onClick={nextSlide}
               className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"

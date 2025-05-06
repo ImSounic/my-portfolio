@@ -24,8 +24,8 @@ const sections = [
     title: 'CRITICAL THINKER',
     description:
       'I Excel At Analyzing Complex Problems And Developing Innovative Solutions. In A Recent Project, I Combined Unsupervised Algorithms With Aerial Sensing To Algorithms Significantly Improving Efficiency. My Proactive Problem-Solving Extends Beyond Traditional Challenges.',
-    videoSrc: '/assets/videos/thinking.webm',
-    gifSrc: '/assets/videos/thinking.gif',
+    mp4Src: '/assets/videos/thinking.mp4',
+    webmSrc: '/assets/videos/thinking.webm',
     apngSrc: '/assets/videos/thinking.png',
     subtitle: '"A CRITICAL THINKER NEVER SLEEPS, JUST DREAMS IN ALGORITHMS."',
   },
@@ -34,8 +34,8 @@ const sections = [
     title: 'ADAPTIVE INNOVATOR',
     description:
       "In The Fast-Paced World Of Technology, Adaptability Is Key. I Thrive In Dynamic Environments, Frameworks, And Languages. Learning That I Stay Ahead Of The Curve, Whether It's Mastering A New Programming Language Or Adapting The Latest AI Techniques. My Ability To Automatically Integrate New Technologies Makes Me A Valuable Asset In Any Dynamic Environment.",
-    videoSrc: '/assets/videos/adapt.webm',
-    gifSrc: '/assets/videos/adapt.gif',
+    mp4Src: '/assets/videos/adapt.mp4',
+    webmSrc: '/assets/videos/adapt.webm',
     apngSrc: '/assets/videos/adapt.png',
     subtitle: '"AN ADAPTIVE GUY: CHANGING GEARS AND MASTERING THE NEW."',
   },
@@ -44,8 +44,8 @@ const sections = [
     title: 'CODE CRAFTSMAN',
     description:
       'As A Code Craftsman, I Pride Myself On Writing Clean, Efficient, And Secure Code. My Dedication To The Art Of Programming Ensures That Each Project I Undertake Is Robust. With A Precision And Attention To Detail From Developing Robust Algorithms To Crafting Seamless User Experiences. My Craftsmanship In Code Turns Ideas Into Reality.',
-    videoSrc: '/assets/videos/code.webm',
-    gifSrc: '/assets/videos/code.gif',
+    mp4Src: '/assets/videos/code.mp4',
+    webmSrc: '/assets/videos/code.webm',
     apngSrc: '/assets/videos/code.png',
     subtitle: '"CRAFTING CODE LIKE AN ARTIST PAINTS A MASTERPIECE."',
   },
@@ -83,7 +83,8 @@ export default function WhyHireMeSection() {
         <div className="h-2/3 relative flex flex-col items-center justify-center z-10">
           <div className="mb-6">
             <TransparentMediaPlayer
-              webmSrc={sections[0].videoSrc}
+              mp4Src={sections[0].mp4Src}
+              webmSrc={sections[0].webmSrc}
               apngSrc={sections[0].apngSrc}
               altText={sections[0].title}
               width={320}
@@ -118,7 +119,8 @@ export default function WhyHireMeSection() {
 
         <div className="mb-6 z-10">
           <TransparentMediaPlayer
-            webmSrc={sections[1].videoSrc}
+            mp4Src={sections[1].mp4Src}
+            webmSrc={sections[1].webmSrc}
             apngSrc={sections[1].apngSrc}
             altText={sections[1].title}
             width={320}
@@ -151,7 +153,8 @@ export default function WhyHireMeSection() {
 
         <div className="mb-6">
           <TransparentMediaPlayer
-            webmSrc={sections[2].videoSrc}
+            mp4Src={sections[2].mp4Src}
+            webmSrc={sections[2].webmSrc}
             apngSrc={sections[2].apngSrc}
             altText={sections[2].title}
             width={320}

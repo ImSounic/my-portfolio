@@ -45,7 +45,12 @@ export default function RootLayout({
         <link rel="preload" href="/projects/internship.png" as="image" />
         <link rel="preload" href="/projects/cleanslate.png" as="image" />
         
-        {/* Preload WebM videos */}
+        {/* Preload MP4 videos instead of WebM */}
+        <link rel="preload" href="/assets/videos/thinking.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/assets/videos/adapt.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/assets/videos/code.mp4" as="video" type="video/mp4" />
+        
+        {/* Keep WebM as fallback for better compatibility */}
         <link rel="preload" href="/assets/videos/thinking.webm" as="video" type="video/webm" />
         <link rel="preload" href="/assets/videos/adapt.webm" as="video" type="video/webm" />
         <link rel="preload" href="/assets/videos/code.webm" as="video" type="video/webm" />

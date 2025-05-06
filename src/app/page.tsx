@@ -30,9 +30,15 @@ import MobileContactSection from '@/components/mobile/ContactSection';
 
 // Assets to preload
 const assetsToPreload = [
-  '/assets/videos/thinking.png',
-  '/assets/videos/adapt.png',
-  '/assets/videos/code.png',
+  // MP4 videos instead of large PNGs
+  '/assets/videos/thinking.mp4',
+  '/assets/videos/adapt.mp4',
+  '/assets/videos/code.mp4',
+  // Keep WebM as fallback for browsers that don't support MP4 with transparency
+  '/assets/videos/thinking.webm',
+  '/assets/videos/adapt.webm',
+  '/assets/videos/code.webm',
+  // Keep important images
   '/profile.png',
   '/assets/images/about-profile.png',
   '/assets/images/grid.svg',

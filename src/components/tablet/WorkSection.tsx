@@ -157,7 +157,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side - FIXED and moved left */}
-            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
@@ -263,7 +263,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side - FIXED and moved left */}
-            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
@@ -337,7 +337,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side - FIXED and moved left */}
-            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
@@ -420,7 +420,7 @@ export default function WorkSection() {
             </div>
 
             {/* Vertical Title - Right Side - FIXED and moved left */}
-            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30">
               <h3 
                 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 

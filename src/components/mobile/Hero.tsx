@@ -98,7 +98,7 @@ export default function Hero() {
           </button>
           <Link
             href="/Resume.pdf"
-            className="w-full py-3 border-2 border-[#E9F5DB] border-dashed text-white font-medium text-base rounded-[10px] transition-all hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
+            className="w-full py-3 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
           >
             View my Resume
           </Link>
@@ -108,7 +108,7 @@ export default function Hero() {
       <div className="absolute left-4 bottom-8 hero-fade opacity-0 translate-y-[50px]">
         <div className="flex items-center gap-1">
           <div className="w-[1px] h-16 bg-white/50"></div>
-          <p className="font-[family-name:var(--font-pixel)] text-white/70 text-[10px] tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+          <p className="font-[family-name:var(--font-pixel)] text-[#E9F5DB]/70 text-[10px] tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
             SCROLL
           </p>
         </div>

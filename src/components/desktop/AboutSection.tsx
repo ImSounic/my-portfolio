@@ -102,13 +102,13 @@ export default function AboutSection() {
           <div className="absolute 2xl:-left-24 xl:-left-16 lg:-left-12 top-1/2 -translate-y-1/2 flex flex-col gap-8 z-20">
             <button 
               onClick={nextSlide}
-              className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"
+              className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
             >
               &gt;
             </button>
             <button 
               onClick={prevSlide}
-              className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"
+              className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
             >
               &lt;
             </button>

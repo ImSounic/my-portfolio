@@ -153,7 +153,7 @@ export default function Hero() {
               href="/Resume.pdf"
               className="px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-white font-medium text-lg rounded-[10px] transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black relative overflow-hidden group"
             >
-              <span className="relative z-10">View my Resume</span>
+              <span className="relative text-[#E9F5DB] z-10">View my Resume</span>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {bubblePositions.map((position, i) => (
                   <div

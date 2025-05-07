@@ -98,7 +98,7 @@ export default function Hero() {
           </button>
           <Link
             href="/Resume.pdf"
-            className="w-full py-3 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
+            className="w-full py-3 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all hover:bg-[#E9F5DB] hover:text-black hover:border-solid"
           >
             View my Resume
           </Link>

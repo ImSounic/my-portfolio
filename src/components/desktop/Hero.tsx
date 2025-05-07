@@ -151,23 +151,9 @@ export default function Hero() {
             </button>
             <Link
               href="/Resume.pdf"
-              className="px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-white font-medium text-lg rounded-[10px] transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black relative overflow-hidden group"
+              className="px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-lg rounded-[10px] transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
             >
-              <span className="relative text-[#E9F5DB] z-10">View my Resume</span>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {bubblePositions.map((position, i) => (
-                  <div
-                    key={i}
-                    className="bubble-animation absolute w-3 h-3 bg-[#E9F5DB] rounded-full"
-                    style={{
-                      left: position.left,
-                      bottom: '-20px',
-                      animationDelay: position.delay,
-                      animationDuration: position.duration,
-                    }}
-                  />
-                ))}
-              </div>
+              View my Resume
             </Link>
           </div>
         </div>

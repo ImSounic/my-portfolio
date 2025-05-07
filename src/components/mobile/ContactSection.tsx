@@ -58,7 +58,7 @@ export default function ContactSection() {
         {/* Buttons - Full width in mobile */}
         <div className="flex flex-col gap-3 mb-12">
           <button 
-            onClick={() => window.open('https://linkedin.com/in/yourprofile', '_blank')}
+            onClick={() => window.open('https://www.linkedin.com/in/imsounic/', '_blank')}
             className="w-full bg-[#E9F5DB] text-black px-4 py-3 rounded-md font-medium flex items-center justify-center gap-2 hover:bg-[#E9F5DB]/90 transition-colors"
           >
             Let&apos;s Talk
@@ -71,7 +71,7 @@ export default function ContactSection() {
           </button>
           
           <button 
-            onClick={() => window.open('/resume.pdf', '_blank')}
+            onClick={() => window.open('/Resume.pdf', '_blank')}
             className="w-full border border-dashed border-[#E9F5DB] text-[#E9F5DB] px-4 py-3 rounded-md font-medium hover:bg-[#E9F5DB] hover:text-black transition-colors"
           >
             View my Resume

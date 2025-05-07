@@ -58,7 +58,7 @@ export default function ContactSection() {
         {/* Buttons */}
         <div className="flex gap-6 justify-center mb-16">
           <button 
-            onClick={() => window.open('https://linkedin.com/in/yourprofile', '_blank')}
+            onClick={() => window.open('https://www.linkedin.com/in/imsounic/', '_blank')}
             className="bg-[#E9F5DB] text-black px-8 py-3 rounded-md font-medium flex items-center gap-2 hover:bg-[#E9F5DB]/90 transition-colors"
           >
             Let&apos;s Talk

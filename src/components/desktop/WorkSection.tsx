@@ -31,14 +31,14 @@ const projects = [
     title: 'DEEP LEARNING',
     description: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet. This project showcases my ability to work with complex data and implement advanced machine learning techniques.',
     image: '/projects/ai-project.png',
-    github: '#'
+    github: 'https://github.com/ImSounic/Miscarriage-Prediction-Using-Ensemble-Deep-Learning-Model.git'
   },
   {
     id: 2,
     title: 'HOUSE OF GAMES',
     description: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms. This Project Highlights My Creativity And Ability To Develop Entertaining Applications.',
     image: '/projects/house-of-games.png',
-    github: '#'
+    github: 'https://github.com/ImSounic/House-Of-Games.git'
   },
   {
     id: 3,

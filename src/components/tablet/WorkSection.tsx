@@ -156,13 +156,15 @@ export default function WorkSection() {
               )}
             </div>
 
-            {/* Vertical Title - Right Side */}
-            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+            {/* Vertical Title - Right Side - FIXED and moved left */}
+            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
               <h3 
-                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(360deg)'
+                  transform: 'rotate(360deg) translateZ(0)',
+                  willChange: 'transform',
+                  backfaceVisibility: 'hidden'
                 }}
               >
                 {projects[0].title}
@@ -260,13 +262,15 @@ export default function WorkSection() {
               )}
             </div>
 
-            {/* Vertical Title - Right Side */}
-            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+            {/* Vertical Title - Right Side - FIXED and moved left */}
+            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
               <h3 
-                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(360deg)'
+                  transform: 'rotate(360deg) translateZ(0)',
+                  willChange: 'transform',
+                  backfaceVisibility: 'hidden'
                 }}
               >
                 {projects[1].title}
@@ -332,13 +336,15 @@ export default function WorkSection() {
               )}
             </div>
 
-            {/* Vertical Title - Right Side */}
-            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+            {/* Vertical Title - Right Side - FIXED and moved left */}
+            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
               <h3 
-                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(360deg)'
+                  transform: 'rotate(360deg) translateZ(0)',
+                  willChange: 'transform',
+                  backfaceVisibility: 'hidden'
                 }}
               >
                 {projects[2].title}
@@ -413,13 +419,15 @@ export default function WorkSection() {
               </div>
             </div>
 
-            {/* Vertical Title - Right Side */}
-            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+            {/* Vertical Title - Right Side - FIXED and moved left */}
+            <div className="absolute right-16 top-1/2 -translate-y-1/2 z-30">
               <h3 
-                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title"
                 style={{ 
                   writingMode: 'vertical-rl',
-                  transform: 'rotate(360deg)'
+                  transform: 'rotate(360deg) translateZ(0)',
+                  willChange: 'transform',
+                  backfaceVisibility: 'hidden'
                 }}
               >
                 {projects[3].title}

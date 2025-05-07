@@ -107,3 +107,10 @@ Add this to your globals.css file
     display: none !important;
   }
 }
+
+.tablet-project-title {
+  position: relative;
+  z-index: 30;
+  transform: translateZ(0);
+  will-change: transform;
+}

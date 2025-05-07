@@ -51,7 +51,7 @@ const projects = [
     title: 'CLEANSLATE',
     description: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
     image: '/projects/cleanslate.png',
-    github: '#'
+    comingSoon: true
   }
 ]
 
@@ -92,8 +92,8 @@ export default function WorkSection() {
             className="object-cover"
           />
           
-          {/* GitHub button or internship badge */}
-          {project.github ? (
+          {/* Show GitHub button, internship badge, or coming soon badge as appropriate */}
+          {project.github && !project.comingSoon ? (
             <div className="absolute bottom-2 left-2 z-10">
               <a 
                 href={project.github}
@@ -115,13 +115,11 @@ export default function WorkSection() {
             <div className="absolute bottom-2 left-2 bg-black/80 text-white px-2 py-1 rounded text-xs z-10">
               {project.company} | {project.duration}
             </div>
-          ) : (
-            project.id === 4 && (
-              <div className="absolute bottom-2 left-2 bg-white text-black px-2 py-1 rounded text-xs font-medium z-10">
-                Coming Soon...
-              </div>
-            )
-          )}
+          ) : project.comingSoon ? (
+            <div className="absolute bottom-2 left-2 bg-white text-black px-2 py-1 rounded text-xs font-medium z-10">
+              Coming Soon...
+            </div>
+          ) : null}
         </div>
         
         {/* Description */}

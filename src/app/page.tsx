@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/LoadingScreen';
+import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 
 // Desktop components
 import DesktopHero from '@/components/desktop/Hero';
@@ -82,40 +83,47 @@ export default function Home() {
     return <LoadingScreen onLoaded={handleAssetsLoaded} assets={assetsToPreload} />;
   }
 
+  // Wrap all content with FirefoxFixProvider
   if (deviceType === 'mobile') {
     return (
-      <main className="fade-in">
-        <MobileHero />
-        <MobileAboutSection />
-        <MobileWhyHireMeSection />
-        <MobileSkillsSection />
-        <MobileWorkSection />
-        <MobileContactSection />
-      </main>
+      <FirefoxFixProvider>
+        <main className="fade-in">
+          <MobileHero />
+          <MobileAboutSection />
+          <MobileWhyHireMeSection />
+          <MobileSkillsSection />
+          <MobileWorkSection />
+          <MobileContactSection />
+        </main>
+      </FirefoxFixProvider>
     );
   }
 
   if (deviceType === 'tablet') {
     return (
-      <main className="fade-in">
-        <TabletHero />
-        <TabletAboutSection />
-        <TabletWhyHireMeSection />
-        <TabletSkillsSection />
-        <TabletWorkSection />
-        <TabletContactSection />
-      </main>
+      <FirefoxFixProvider>
+        <main className="fade-in">
+          <TabletHero />
+          <TabletAboutSection />
+          <TabletWhyHireMeSection />
+          <TabletSkillsSection />
+          <TabletWorkSection />
+          <TabletContactSection />
+        </main>
+      </FirefoxFixProvider>
     );
   }
 
   return (
-    <main className="fade-in">
-      <DesktopHero />
-      <DesktopAboutSection />
-      <DesktopWhyHireMeSection />
-      <DesktopSkillsSection />
-      <DesktopWorkSection />
-      <DesktopContactSection />
-    </main>
+    <FirefoxFixProvider>
+      <main className="fade-in">
+        <DesktopHero />
+        <DesktopAboutSection />
+        <DesktopWhyHireMeSection />
+        <DesktopSkillsSection />
+        <DesktopWorkSection />
+        <DesktopContactSection />
+      </main>
+    </FirefoxFixProvider>
   );
 }

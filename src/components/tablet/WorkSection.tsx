@@ -4,7 +4,9 @@
 import Image from 'next/image'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
+import circleSvg from '@/assets/icons/circle.svg'
 import arrowSvg from '@/assets/icons/arrow.svg'
+import iStarSvg from '@/assets/icons/i_star.svg'
 
 const satoshi = localFont({
   src: [
@@ -27,14 +29,14 @@ const projects = [
   {
     id: 1,
     title: 'DEEP LEARNING',
-    description: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet. This project showcases my ability to work with complex data and implement advanced machine learning techniques.',
+    description: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet.',
     image: '/projects/ai-project.png',
     github: '#'
   },
   {
     id: 2,
     title: 'HOUSE OF GAMES',
-    description: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms. This Project Highlights My Creativity And Ability To Develop Entertaining Applications.',
+    description: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms.',
     image: '/projects/house-of-games.png',
     github: '#'
   },
@@ -59,7 +61,7 @@ export default function WorkSection() {
   return (
     <>
       {/* First viewport: Title + First Project */}
-      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative  flex flex-col items-center justify-center px-6`}>
+      <section id="work" className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center px-6`}>
         {/* Title - Positioned higher */}
         <div className="mb-16">
           <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white">
@@ -67,16 +69,49 @@ export default function WorkSection() {
           </h2>
         </div>
 
-        {/* First Project - Centered Container */}
-        <div className="w-full max-w-lg mx-auto">
-          <div className="relative flex flex-col">
-            {/* Project Title */}
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-4">
-              {projects[0].title}
-            </h3>
+        {/* First Project - Modified to use glass card like desktop */}
+        <div className="w-full max-w-xl mx-auto">
+          <div className="relative">
+            {/* Circle Icon - Bottom Right (Behind) - Smaller for tablet */}
+            <div className="absolute -bottom-[-158px] -right-12 w-35 h-35 z-0">
+              <Image
+                src={circleSvg}
+                alt="Circle decoration"
+                width={100}
+                height={100}
+              />
+              
+              {/* Text Wrapped in Circle - Added with increased size and rotation */}
+              <div className="absolute top-[-20px] left-[-20px] right-[-20px] bottom-[-20px] flex items-center justify-center">
+                <Image
+                  src="/project-2.png"
+                  alt="Project 2 text circle"
+                  width={200}
+                  height={200}
+                  className="object-contain animate-spin-slow"
+                />
+              </div>
+            </div>
 
-            {/* Project Image */}
-            <div className="relative w-full h-56 rounded-2xl overflow-hidden shadow-2xl mb-6">
+            {/* Glass Card Background */}
+            <div className="relative w-full h-[720px] z-10">
+              <Image
+                src="/assets/images/glass-card.png" 
+                alt="Glass card background"
+                fill
+                className="object-contain"
+              />
+              
+              {/* Project Description */}
+              <div className="absolute top-48 left-[0px] right-24 p-4">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed max-w-[450px] mx-auto">
+                  {projects[0].description}
+                </p>
+              </div>
+            </div>
+
+            {/* Project Image - Positioned at bottom left */}
+            <div className="absolute -bottom-[-132px] -left-12 w-[550px] h-[300px] rounded-2xl overflow-hidden shadow-2xl z-20">
               {projects[0].image ? (
                 <Image
                   src={projects[0].image}
@@ -121,27 +156,66 @@ export default function WorkSection() {
               )}
             </div>
 
-            {/* Project Description in Glass Card */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-4">
-              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed">
-                {projects[0].description}
-              </p>
+            {/* Vertical Title - Right Side */}
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+              <h3 
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                style={{ 
+                  writingMode: 'vertical-rl',
+                  transform: 'rotate(360deg)'
+                }}
+              >
+                {projects[0].title}
+              </h3>
             </div>
           </div>
         </div>
       </section>
 
       {/* Second viewport: House of Games */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center  px-6`}>
-        <div className="w-full max-w-lg mx-auto">
-          <div className="relative flex flex-col">
-            {/* Project Title */}
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-4">
-              {projects[1].title}
-            </h3>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center px-6`}>
+        <div className="w-full max-w-xl mx-auto">
+          <div className="relative">
+            {/* Circle Icon - Bottom Right (Behind) */}
+            <div className="absolute -bottom-[-158px] -right-12 w-30 h-30 z-0">
+              <Image
+                src={circleSvg}
+                alt="Circle decoration"
+                width={100}
+                height={100}
+              />
+              
+              {/* Text Wrapped in Circle - Added with increased size and rotation */}
+              <div className="absolute top-[-20px] left-[-20px] right-[-20px] bottom-[-20px] flex items-center justify-center">
+                <Image
+                  src="/project-4.png"
+                  alt="Project 1 text circle"
+                  width={180}
+                  height={180}
+                  className="object-contain animate-spin-slow"
+                />
+              </div>
+            </div>
 
-            {/* Project Image */}
-            <div className="relative w-full h-56 rounded-2xl overflow-hidden shadow-2xl mb-6">
+            {/* Glass Card Background */}
+            <div className="relative w-full h-[720px] z-10">
+              <Image
+                src="/assets/images/glass-card.png" 
+                alt="Glass card background"
+                fill
+                className="object-contain"
+              />
+              
+              {/* Project Description */}
+              <div className="absolute top-48 left-[0px] right-24 p-4">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed max-w-[450px] mx-auto">
+                  {projects[1].description}
+                </p>
+              </div>
+            </div>
+
+            {/* Project Image - Positioned at bottom left */}
+            <div className="absolute -bottom-[-132px] -left-12 w-[550px] h-[300px] rounded-2xl overflow-hidden shadow-2xl z-20">
               {projects[1].image ? (
                 <Image
                   src={projects[1].image}
@@ -186,27 +260,56 @@ export default function WorkSection() {
               )}
             </div>
 
-            {/* Project Description in Glass Card */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-4">
-              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed">
-                {projects[1].description}
-              </p>
+            {/* Vertical Title - Right Side */}
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+              <h3 
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                style={{ 
+                  writingMode: 'vertical-rl',
+                  transform: 'rotate(360deg)'
+                }}
+              >
+                {projects[1].title}
+              </h3>
             </div>
           </div>
         </div>
       </section>
 
       {/* Third viewport: Internship */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center  px-6`}>
-        <div className="w-full max-w-lg mx-auto">
-          <div className="relative flex flex-col">
-            {/* Project Title */}
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-4">
-              {projects[2].title}
-            </h3>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center px-6`}>
+        <div className="w-full max-w-xl mx-auto">
+          <div className="relative">
+            {/* Star Icon - Bottom Right (Behind) */}
+            <div className="absolute -bottom-[-118px] -right-20 w-40 h-40 z-0">
+              <Image
+                src={iStarSvg}
+                alt="Star decoration"
+                width={160}
+                height={160}
+              />
+              {/* No circular text for this project as requested */}
+            </div>
 
-            {/* Project Image */}
-            <div className="relative w-full h-56 rounded-2xl overflow-hidden shadow-2xl mb-6">
+            {/* Glass Card Background */}
+            <div className="relative w-full h-[720px] z-10">
+              <Image
+                src="/assets/images/glass-card-i.png" 
+                alt="Glass card background"
+                fill
+                className="object-contain"
+              />
+              
+              {/* Project Description */}
+              <div className="absolute top-48 left-[0px] right-24 p-4">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-[12px] leading-relaxed max-w-[450px] mx-auto">
+                  {projects[2].description}
+                </p>
+              </div>
+            </div>
+
+            {/* Project Image - Positioned at bottom left */}
+            <div className="absolute -bottom-[-132px] -left-12 w-[550px] h-[300px] rounded-2xl overflow-hidden shadow-2xl z-20">
               {projects[2].image ? (
                 <Image
                   src={projects[2].image}
@@ -220,7 +323,7 @@ export default function WorkSection() {
                 </div>
               )}
               
-              {/* Internship Badge - Now at bottom left of the image, just like the Coming Soon badge */}
+              {/* Internship Badge */}
               {projects[2].company && (
                 <div className="absolute bottom-4 left-4 bg-black/80 text-white px-4 py-2 rounded-lg z-30">
                   <p className="text-sm font-medium">{projects[2].company}</p>
@@ -229,27 +332,66 @@ export default function WorkSection() {
               )}
             </div>
 
-            {/* Project Description in Glass Card */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-4">
-              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed">
-                {projects[2].description}
-              </p>
+            {/* Vertical Title - Right Side */}
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+              <h3 
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                style={{ 
+                  writingMode: 'vertical-rl',
+                  transform: 'rotate(360deg)'
+                }}
+              >
+                {projects[2].title}
+              </h3>
             </div>
           </div>
         </div>
       </section>
 
       {/* Fourth viewport: Cleanslate */}
-      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center  px-6`}>
-        <div className="w-full max-w-lg mx-auto">
-          <div className="relative flex flex-col">
-            {/* Project Title */}
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-4">
-              {projects[3].title}
-            </h3>
+      <section className={`${satoshi.variable} ${montserrat.variable} h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center px-6`}>
+        <div className="w-full max-w-xl mx-auto">
+          <div className="relative">
+            {/* Circle Icon - Bottom Right (Behind) */}
+            <div className="absolute -bottom-[-158px] -right-12 w-30 h-30 z-0">
+              <Image
+                src={circleSvg}
+                alt="Circle decoration"
+                width={100}
+                height={100}
+              />
+              
+              {/* Text Wrapped in Circle - Added with increased size and rotation */}
+              <div className="absolute top-[-20px] left-[-20px] right-[-20px] bottom-[-20px] flex items-center justify-center">
+                <Image
+                  src="/project-3.png"
+                  alt="CleanSlate Text circle"
+                  width={180}
+                  height={180}
+                  className="object-contain animate-spin-slow"
+                />
+              </div>
+            </div>
 
-            {/* Project Image */}
-            <div className="relative w-full h-56 rounded-2xl overflow-hidden shadow-2xl mb-6">
+            {/* Glass Card Background */}
+            <div className="relative w-full h-[720px] z-10">
+              <Image
+                src="/assets/images/glass-card.png" 
+                alt="Glass card background"
+                fill
+                className="object-contain"
+              />
+              
+              {/* Project Description */}
+              <div className="absolute top-48 left-[0px] right-24 p-4">
+                <p className="font-[family-name:var(--font-montserrat)] text-white text-[12px] leading-relaxed max-w-[450px] mx-auto">
+                  {projects[3].description}
+                </p>
+              </div>
+            </div>
+
+            {/* Project Image - Positioned at bottom left */}
+            <div className="absolute -bottom-[-132px] -left-12 w-[550px] h-[300px] rounded-2xl overflow-hidden shadow-2xl z-20">
               {projects[3].image ? (
                 <Image
                   src={projects[3].image}
@@ -263,7 +405,7 @@ export default function WorkSection() {
                 </div>
               )}
               
-              {/* Coming Soon */}
+              {/* Coming Soon Badge */}
               <div className="absolute bottom-4 left-4 z-30">
                 <div className="bg-white text-black font-[family-name:var(--font-montserrat)] font-semibold px-4 py-2 rounded-lg">
                   Coming Soon...
@@ -271,11 +413,17 @@ export default function WorkSection() {
               </div>
             </div>
 
-            {/* Project Description in Glass Card */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-4">
-              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed">
-                {projects[3].description}
-              </p>
+            {/* Vertical Title - Right Side */}
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+              <h3 
+                className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white"
+                style={{ 
+                  writingMode: 'vertical-rl',
+                  transform: 'rotate(360deg)'
+                }}
+              >
+                {projects[3].title}
+              </h3>
             </div>
           </div>
         </div>

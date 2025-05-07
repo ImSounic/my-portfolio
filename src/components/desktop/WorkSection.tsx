@@ -80,6 +80,17 @@ export default function WorkSection() {
                 width={140}
                 height={140}
               />
+              
+              {/* Text Wrapped in Circle - Added with increased size and rotation */}
+              <div className="absolute inset-0  flex items-center justify-center">
+                <Image
+                  src="/project-2.png"
+                  alt="Project 2 text circle"
+                  width={280}
+                  height={280}
+                  className="object-contain animate-spin-slow mr-4 mb-4"
+                />
+              </div>
             </div>
 
             {/* Glass Card Background - Now using PNG instead of SVG */}
@@ -173,6 +184,17 @@ export default function WorkSection() {
                 width={140}
                 height={140}
               />
+              
+              {/* Text Wrapped in Circle - Added with increased size and rotation */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Image
+                  src="/project-4.png"
+                  alt="Project text circle"
+                  width={280}
+                  height={280}
+                  className="object-contain animate-spin-slow mr-4 mb-4"
+                />
+              </div>
             </div>
 
             {/* Glass Card Background - Using PNG */}
@@ -266,6 +288,7 @@ export default function WorkSection() {
                 width={260}
                 height={260}
               />
+              {/* No circular text for this project as requested */}
             </div>
 
             {/* Glass Card Background - Using PNG */}
@@ -337,6 +360,17 @@ export default function WorkSection() {
                 width={140}
                 height={140}
               />
+              
+              {/* Text Wrapped in Circle - Added with increased size and rotation */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Image
+                  src="/project-3.png"
+                  alt="Project text circle"
+                  width={280}
+                  height={280}
+                  className="object-contain animate-spin-slow mr-4 mb-4"
+                />
+              </div>
             </div>
 
             {/* Glass Card Background - Using PNG */}

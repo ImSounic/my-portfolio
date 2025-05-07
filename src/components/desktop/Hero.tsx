@@ -3,7 +3,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import gridSvg from '@/assets/images/grid.svg'
 import starSvg from '@/assets/icons/star.svg'
@@ -34,14 +34,6 @@ export default function Hero() {
   const [weather, setWeather] = useState('');
   const [mounted, setMounted] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
-
-  const bubblePositions = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
-      left: `${(i * 5) % 100}%`,
-      delay: `${(i * 0.1) % 0.8}s`,
-      duration: `${0.8 + (i * 0.02) % 0.4}s`,
-    }));
-  }, []);
 
   useEffect(() => {
     setMounted(true);

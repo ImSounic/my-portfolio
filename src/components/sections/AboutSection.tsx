@@ -8,7 +8,7 @@ import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import radarSvg from '@/assets/icons/radar.svg'
 import profileImg from '@/assets/images/about-profile.png'
-import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
+import CircleFillOverlaySmall from '@/components/ui/CircleFillOverlaySmall'
 import bottomGridSvg from '@/assets/images/bottom-grid.svg'
 import editingImg from '@/assets/images/editing.png'
 import gamingImg from '@/assets/images/gaming.png'
@@ -150,16 +150,16 @@ export default function AboutSection() {
           <div className="hidden xl:flex absolute 2xl:-left-24 xl:-left-16 top-1/2 -translate-y-1/2 flex-col gap-8 z-20">
             <button 
               onClick={nextSlide}
-              className="btn-circle-fill w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300"
+              className="btn-circle-fill w-12 h-20 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300"
             >
-              <CircleFillOverlay />
+              <CircleFillOverlaySmall />
               <span className="relative z-10">&gt;</span>
             </button>
             <button 
               onClick={prevSlide}
-              className="btn-circle-fill w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300"
+              className="btn-circle-fill w-12 h-20 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300"
             >
-              <CircleFillOverlay />
+              <CircleFillOverlaySmall />
               <span className="relative z-10">&lt;</span>
             </button>
           </div>
@@ -168,16 +168,16 @@ export default function AboutSection() {
           <div className="hidden md:flex xl:hidden justify-center gap-4 mb-6">
             <button 
               onClick={prevSlide}
-              className="btn-circle-fill w-10 h-12 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
+              className="btn-circle-fill w-10 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
-              <CircleFillOverlay />
+              <CircleFillOverlaySmall />
               <span className="relative z-10">&lt;</span>
             </button>
             <button 
               onClick={nextSlide}
-              className="btn-circle-fill w-10 h-12 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
+              className="btn-circle-fill w-10 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
-              <CircleFillOverlay />
+              <CircleFillOverlaySmall />
               <span className="relative z-10">&gt;</span>
             </button>
           </div>
@@ -302,16 +302,16 @@ export default function AboutSection() {
           <div className="flex md:hidden justify-center gap-6 mt-6">
             <button 
               onClick={prevSlide}
-              className="btn-circle-fill w-10 h-10 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
+              className="btn-circle-fill w-10 h-14 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
-              <CircleFillOverlay />
+              <CircleFillOverlaySmall />
               <span className="relative z-10">&lt;</span>
             </button>
             <button 
               onClick={nextSlide}
-              className="btn-circle-fill w-10 h-10 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
+              className="btn-circle-fill w-10 h-14 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
-              <CircleFillOverlay />
+              <CircleFillOverlaySmall />
               <span className="relative z-10">&gt;</span>
             </button>
           </div>

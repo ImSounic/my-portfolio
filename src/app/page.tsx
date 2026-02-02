@@ -12,24 +12,22 @@ const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>)
 
 // Desktop components
 const DesktopHero = withClientDynamic(() => import('@/components/desktop/Hero'));
-const DesktopWhyHireMeSection = withClientDynamic(() => import('@/components/desktop/WhyHireMeSection'));
 const DesktopSkillsSection = withClientDynamic(() => import('@/components/desktop/SkillsSection'));
 const DesktopWorkSection = withClientDynamic(() => import('@/components/desktop/WorkSection'));
 
 // Tablet components
 const TabletHero = withClientDynamic(() => import('@/components/tablet/Hero'));
-const TabletWhyHireMeSection = withClientDynamic(() => import('@/components/tablet/WhyHireMeSection'));
 const TabletSkillsSection = withClientDynamic(() => import('@/components/tablet/SkillsSection'));
 const TabletWorkSection = withClientDynamic(() => import('@/components/tablet/WorkSection'));
 
 // Mobile components
 const MobileHero = withClientDynamic(() => import('@/components/mobile/Hero'));
-const MobileWhyHireMeSection = withClientDynamic(() => import('@/components/mobile/WhyHireMeSection'));
 const MobileSkillsSection = withClientDynamic(() => import('@/components/mobile/SkillsSection'));
 const MobileWorkSection = withClientDynamic(() => import('@/components/mobile/WorkSection'));
 
 // Consolidated responsive components
 const AboutSection = withClientDynamic(() => import('@/components/sections/AboutSection'));
+const WhyHireMeSection = withClientDynamic(() => import('@/components/sections/WhyHireMeSection'));
 const ContactSection = withClientDynamic(() => import('@/components/sections/ContactSection'));
 
 // Assets to preload (only above-the-fold imagery)
@@ -76,7 +74,7 @@ export default function Home() {
         <main className="fade-in">
           <MobileHero />
           <AboutSection />
-          <MobileWhyHireMeSection />
+          <WhyHireMeSection />
           <MobileSkillsSection />
           <MobileWorkSection />
           <ContactSection />
@@ -91,7 +89,7 @@ export default function Home() {
         <main className="fade-in">
           <TabletHero />
           <AboutSection />
-          <TabletWhyHireMeSection />
+          <WhyHireMeSection />
           <TabletSkillsSection />
           <TabletWorkSection />
           <ContactSection />
@@ -105,7 +103,7 @@ export default function Home() {
       <main className="fade-in">
         <DesktopHero />
         <AboutSection />
-        <DesktopWhyHireMeSection />
+        <WhyHireMeSection />
         <DesktopSkillsSection />
         <DesktopWorkSection />
         <ContactSection />

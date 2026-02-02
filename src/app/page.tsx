@@ -12,22 +12,20 @@ const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>)
 
 // Desktop components
 const DesktopHero = withClientDynamic(() => import('@/components/desktop/Hero'));
-const DesktopSkillsSection = withClientDynamic(() => import('@/components/desktop/SkillsSection'));
 const DesktopWorkSection = withClientDynamic(() => import('@/components/desktop/WorkSection'));
 
 // Tablet components
 const TabletHero = withClientDynamic(() => import('@/components/tablet/Hero'));
-const TabletSkillsSection = withClientDynamic(() => import('@/components/tablet/SkillsSection'));
 const TabletWorkSection = withClientDynamic(() => import('@/components/tablet/WorkSection'));
 
 // Mobile components
 const MobileHero = withClientDynamic(() => import('@/components/mobile/Hero'));
-const MobileSkillsSection = withClientDynamic(() => import('@/components/mobile/SkillsSection'));
 const MobileWorkSection = withClientDynamic(() => import('@/components/mobile/WorkSection'));
 
 // Consolidated responsive components
 const AboutSection = withClientDynamic(() => import('@/components/sections/AboutSection'));
 const WhyHireMeSection = withClientDynamic(() => import('@/components/sections/WhyHireMeSection'));
+const SkillsSection = withClientDynamic(() => import('@/components/sections/SkillsSection'));
 const ContactSection = withClientDynamic(() => import('@/components/sections/ContactSection'));
 
 // Assets to preload (only above-the-fold imagery)
@@ -75,7 +73,7 @@ export default function Home() {
           <MobileHero />
           <AboutSection />
           <WhyHireMeSection />
-          <MobileSkillsSection />
+          <SkillsSection />
           <MobileWorkSection />
           <ContactSection />
         </main>
@@ -90,7 +88,7 @@ export default function Home() {
           <TabletHero />
           <AboutSection />
           <WhyHireMeSection />
-          <TabletSkillsSection />
+          <SkillsSection />
           <TabletWorkSection />
           <ContactSection />
         </main>
@@ -104,7 +102,7 @@ export default function Home() {
         <DesktopHero />
         <AboutSection />
         <WhyHireMeSection />
-        <DesktopSkillsSection />
+        <SkillsSection />
         <DesktopWorkSection />
         <ContactSection />
       </main>

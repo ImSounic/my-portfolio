@@ -2,7 +2,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
+import gsap from 'gsap'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import radarSvg from '@/assets/icons/radar.svg'
@@ -57,13 +58,43 @@ const slides = [
 
 export default function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const animateSlide = useCallback((direction: 'left' | 'right', newIndex: number) => {
+    if (isAnimating || !contentRef.current) return
+    setIsAnimating(true)
+
+    const exitX = direction === 'left' ? -60 : 60
+    const enterX = direction === 'left' ? 60 : -60
+
+    gsap.to(contentRef.current, {
+      x: exitX,
+      opacity: 0,
+      duration: 0.2,
+      ease: 'power2.in',
+      onComplete: () => {
+        setCurrentSlide(newIndex)
+        gsap.set(contentRef.current, { x: enterX, opacity: 0 })
+        gsap.to(contentRef.current, {
+          x: 0,
+          opacity: 1,
+          duration: 0.25,
+          ease: 'power2.out',
+          onComplete: () => setIsAnimating(false),
+        })
+      },
+    })
+  }, [isAnimating])
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    const newIndex = (currentSlide + 1) % slides.length
+    animateSlide('left', newIndex)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    const newIndex = (currentSlide - 1 + slides.length) % slides.length
+    animateSlide('right', newIndex)
   }
 
   const activeSlide = slides[currentSlide]
@@ -168,8 +199,8 @@ export default function AboutSection() {
             </div>
 
             {/* Glassmorphism Card */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-4 relative md:rounded-2xl md:p-6 xl:p-20">
-              
+            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-4 relative md:rounded-2xl md:p-6 xl:p-20 overflow-hidden">
+              <div ref={contentRef}>
               {/* Mobile layout: title → image → text */}
               <div className="md:hidden">
                 {/* Title */}
@@ -257,6 +288,7 @@ export default function AboutSection() {
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>

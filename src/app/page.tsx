@@ -1,7 +1,7 @@
 // src/app/page.tsx
 'use client'
 
-import { useEffect, useState, type ComponentType } from 'react';
+import { useState, type ComponentType } from 'react';
 import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';

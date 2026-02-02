@@ -111,7 +111,7 @@ function MobileWork() {
 }
 
 // ============ TABLET PROJECT VIEWPORT ============
-function TabletProjectViewport({ project, index, isFirst }: { project: typeof projects[0], index: number, isFirst?: boolean }) {
+function TabletProjectViewport({ project, isFirst }: { project: typeof projects[0], index: number, isFirst?: boolean }) {
   const isInternship = project.decorationType === 'star'
   
   return (
@@ -180,7 +180,7 @@ function TabletProjectViewport({ project, index, isFirst }: { project: typeof pr
 }
 
 // ============ DESKTOP PROJECT VIEWPORT ============
-function DesktopProjectViewport({ project, index, isFirst }: { project: typeof projects[0], index: number, isFirst?: boolean }) {
+function DesktopProjectViewport({ project, isFirst }: { project: typeof projects[0], index: number, isFirst?: boolean }) {
   const isInternship = project.decorationType === 'star'
   
   return (

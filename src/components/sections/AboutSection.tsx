@@ -149,13 +149,13 @@ export default function AboutSection() {
           <div className="hidden xl:flex absolute 2xl:-left-24 xl:-left-16 top-1/2 -translate-y-1/2 flex-col gap-8 z-20">
             <button 
               onClick={nextSlide}
-              className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
+              className="btn-circle-fill w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300"
             >
               &gt;
             </button>
             <button 
               onClick={prevSlide}
-              className="w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black"
+              className="btn-circle-fill w-12 h-16 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all duration-300"
             >
               &lt;
             </button>
@@ -165,13 +165,13 @@ export default function AboutSection() {
           <div className="hidden md:flex xl:hidden justify-center gap-4 mb-6">
             <button 
               onClick={prevSlide}
-              className="w-10 h-12 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"
+              className="btn-circle-fill w-10 h-12 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
               &lt;
             </button>
             <button 
               onClick={nextSlide}
-              className="w-10 h-12 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"
+              className="btn-circle-fill w-10 h-12 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
               &gt;
             </button>
@@ -297,13 +297,13 @@ export default function AboutSection() {
           <div className="flex md:hidden justify-center gap-6 mt-6">
             <button 
               onClick={prevSlide}
-              className="w-10 h-10 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"
+              className="btn-circle-fill w-10 h-10 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
               &lt;
             </button>
             <button 
               onClick={nextSlide}
-              className="w-10 h-10 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-all"
+              className="btn-circle-fill w-10 h-10 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center text-white/50 transition-all"
             >
               &gt;
             </button>

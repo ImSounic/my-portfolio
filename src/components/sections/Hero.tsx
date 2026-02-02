@@ -3,7 +3,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import gridSvg from '@/assets/images/grid.svg'
 import starSvg from '@/assets/icons/star.svg'
@@ -36,14 +36,6 @@ export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Bubble positions for tablet resume button animation
-  const bubblePositions = useMemo(() => {
-    return Array.from({ length: 12 }, (_, i) => ({
-      left: `${(i * 5) % 100}%`,
-      delay: `${(i * 0.1) % 0.8}s`,
-      duration: `${0.8 + (i * 0.02) % 0.4}s`,
-    }));
-  }, []);
-
   useEffect(() => {
     setMounted(true);
 
@@ -169,7 +161,7 @@ export default function Hero() {
             Let&apos;s Talk
             <Image src={handSvg} alt="Hand icon" width={18} height={18} />
           </button>
-          <Link href="/Resume.pdf" className="w-full py-3 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all hover:bg-[#E9F5DB] hover:text-black hover:border-solid text-center">
+          <Link href="/Resume.pdf" className="btn-circle-fill w-full py-3 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all text-center">
             View my Resume
           </Link>
         </div>
@@ -180,13 +172,8 @@ export default function Hero() {
             Let&apos;s Talk
             <Image src={handSvg} alt="Hand icon" width={20} height={20} />
           </button>
-          <Link href="/Resume.pdf" className="px-8 py-4 border-2 border-[#E9F5DB] border-dashed text-white font-medium text-base rounded-[10px] transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black relative overflow-hidden group">
-            <span className="relative text-[#E9F5DB] z-10">View my Resume</span>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {bubblePositions.map((position, i) => (
-                <div key={i} className="bubble-animation absolute w-2 h-2 bg-[#E9F5DB] rounded-full" style={{ left: position.left, bottom: '-20px', animationDelay: position.delay, animationDuration: position.duration }} />
-              ))}
-            </div>
+          <Link href="/Resume.pdf" className="btn-circle-fill px-8 py-4 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all duration-300">
+            <span className="relative z-10">View my Resume</span>
           </Link>
         </div>
 
@@ -196,7 +183,7 @@ export default function Hero() {
             Let&apos;s Talk
             <Image src={handSvg} alt="Hand icon" width={24} height={24} />
           </button>
-          <Link href="/Resume.pdf" className="px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-lg rounded-[10px] transition-all duration-300 hover:border-solid hover:bg-[#E9F5DB] hover:text-black">
+          <Link href="/Resume.pdf" className="btn-circle-fill px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-lg rounded-[10px] transition-all duration-300">
             View my Resume
           </Link>
         </div>

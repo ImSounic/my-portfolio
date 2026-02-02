@@ -107,7 +107,7 @@ export default function ContactSection() {
           
           <button 
             onClick={() => window.open('/Resume.pdf', '_blank')}
-            className="w-full border border-dashed border-[#E9F5DB] text-[#E9F5DB] px-4 py-3 rounded-md font-medium hover:bg-[#E9F5DB] hover:text-black transition-colors md:w-auto md:px-6 xl:px-8"
+            className="btn-circle-fill w-full border border-dashed border-[#E9F5DB] text-[#E9F5DB] px-4 py-3 rounded-md font-medium transition-colors md:w-auto md:px-6 xl:px-8"
           >
             View my Resume
           </button>

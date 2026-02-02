@@ -52,33 +52,30 @@ export default function Hero() {
       const timeString = now.toLocaleTimeString('en-US', {
         hour: 'numeric',
         minute: '2-digit',
-        hour12: true
+        hour12: true,
+        timeZone: 'Europe/Amsterdam'
       });
-      const offset = now.getTimezoneOffset();
-      const offsetHours = -offset / 60;
-      const offsetString = `GMT${offsetHours >= 0 ? '+' : ''}${offsetHours}`;
-      setTime(`${timeString} ${offsetString}`);
+      // Determine current CET/CEST offset
+      const offsetLabel = new Date().toLocaleString('en-US', { timeZone: 'Europe/Amsterdam', timeZoneName: 'short' }).split(' ').pop();
+      setTime(`${timeString} ${offsetLabel}`);
     };
 
     updateTime();
     const interval = setInterval(updateTime, 60000);
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        try {
-          const response = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&current_weather=true`
-          );
-          const data = await response.json();
-          setWeather(`${data.current_weather.temperature}°C`);
-        } catch (error) {
-          console.error('Weather fetch failed:', error);
-          setWeather('--°C');
-        }
-      }, () => {
+    // Fetch Enschede, Netherlands weather (hardcoded coords)
+    (async () => {
+      try {
+        const response = await fetch(
+          'https://api.open-meteo.com/v1/forecast?latitude=52.2215&longitude=6.8937&current_weather=true'
+        );
+        const data = await response.json();
+        setWeather(`${data.current_weather.temperature}°C`);
+      } catch (error) {
+        console.error('Weather fetch failed:', error);
         setWeather('--°C');
-      });
-    }
+      }
+    })();
 
     return () => clearInterval(interval);
   }, []);
@@ -208,7 +205,7 @@ export default function Hero() {
       {/* Location info — Tablet */}
       <div className="hidden md:flex xl:hidden absolute bottom-6 right-6 items-center gap-3 hero-fade opacity-0 translate-y-[50px]">
         <div className="text-right">
-          <p className="text-gray-300 text-base italic">Currently Based in United Kingdom</p>
+          <p className="text-gray-300 text-base italic">Currently Based in Netherlands</p>
           {timeWeatherDisplay}
         </div>
         <Image src={locationSvg} alt="Location" width={40} height={40} className="opacity-80" />
@@ -217,7 +214,7 @@ export default function Hero() {
       {/* Location info — Desktop */}
       <div className="hidden xl:flex absolute bottom-8 right-8 items-center gap-4 hero-fade opacity-0 translate-y-[50px]">
         <div className="text-right">
-          <p className="text-gray-300 text-lg italic">Currently Based in United Kingdom</p>
+          <p className="text-gray-300 text-lg italic">Currently Based in Netherlands</p>
           {timeWeatherDisplay}
         </div>
         <Image src={locationSvg} alt="Location" width={60} height={60} className="opacity-80" />

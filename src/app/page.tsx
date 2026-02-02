@@ -10,46 +10,19 @@ type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
   dynamic(loader, { loading: () => null, ssr: false });
 
-// Device-specific components (remaining)
-const DesktopWorkSection = withClientDynamic(() => import('@/components/desktop/WorkSection'));
-const TabletWorkSection = withClientDynamic(() => import('@/components/tablet/WorkSection'));
-const MobileWorkSection = withClientDynamic(() => import('@/components/mobile/WorkSection'));
-
-// Consolidated responsive components
+// All consolidated responsive components
 const Hero = withClientDynamic(() => import('@/components/sections/Hero'));
 const AboutSection = withClientDynamic(() => import('@/components/sections/AboutSection'));
 const WhyHireMeSection = withClientDynamic(() => import('@/components/sections/WhyHireMeSection'));
 const SkillsSection = withClientDynamic(() => import('@/components/sections/SkillsSection'));
+const WorkSection = withClientDynamic(() => import('@/components/sections/WorkSection'));
 const ContactSection = withClientDynamic(() => import('@/components/sections/ContactSection'));
 
 // Assets to preload (only above-the-fold imagery)
 const assetsToPreload = ['/profile.png', '/assets/images/grid.svg', '/assets/images/about-profile.png'];
 
 export default function Home() {
-  const [deviceType, setDeviceType] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [assetsLoaded, setAssetsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!assetsLoaded) {
-      return;
-    }
-
-    const detectDevice = () => {
-      const width = window.innerWidth;
-      if (width < 768) {
-        setDeviceType('mobile');
-      } else if (width < 1280) {
-        setDeviceType('tablet');
-      } else {
-        setDeviceType('desktop');
-      }
-    };
-
-    detectDevice();
-    window.addEventListener('resize', detectDevice);
-
-    return () => window.removeEventListener('resize', detectDevice);
-  }, [assetsLoaded]);
 
   const handleAssetsLoaded = () => {
     setAssetsLoaded(true);
@@ -59,37 +32,6 @@ export default function Home() {
     return <LoadingScreen onLoaded={handleAssetsLoaded} assets={assetsToPreload} />;
   }
 
-  // Wrap all content with FirefoxFixProvider
-  if (deviceType === 'mobile') {
-    return (
-      <FirefoxFixProvider>
-        <main className="fade-in">
-          <Hero />
-          <AboutSection />
-          <WhyHireMeSection />
-          <SkillsSection />
-          <MobileWorkSection />
-          <ContactSection />
-        </main>
-      </FirefoxFixProvider>
-    );
-  }
-
-  if (deviceType === 'tablet') {
-    return (
-      <FirefoxFixProvider>
-        <main className="fade-in">
-          <Hero />
-          <AboutSection />
-          <WhyHireMeSection />
-          <SkillsSection />
-          <TabletWorkSection />
-          <ContactSection />
-        </main>
-      </FirefoxFixProvider>
-    );
-  }
-
   return (
     <FirefoxFixProvider>
       <main className="fade-in">
@@ -97,7 +39,7 @@ export default function Home() {
         <AboutSection />
         <WhyHireMeSection />
         <SkillsSection />
-        <DesktopWorkSection />
+        <WorkSection />
         <ContactSection />
       </main>
     </FirefoxFixProvider>

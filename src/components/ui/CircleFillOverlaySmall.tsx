@@ -6,32 +6,16 @@
  */
 
 const CIRCLE_POSITIONS = [
-  // Top edge
+  // Corners
   { top: '0%', left: '0%' },
-  { top: '0%', left: '33%' },
-  { top: '0%', left: '66%' },
   { top: '0%', left: '100%' },
-  // Bottom edge
   { top: '100%', left: '0%' },
-  { top: '100%', left: '33%' },
-  { top: '100%', left: '66%' },
   { top: '100%', left: '100%' },
-  // Left edge
-  { top: '20%', left: '0%' },
-  { top: '40%', left: '0%' },
-  { top: '60%', left: '0%' },
-  { top: '80%', left: '0%' },
-  // Right edge
-  { top: '20%', left: '100%' },
-  { top: '40%', left: '100%' },
-  { top: '60%', left: '100%' },
-  { top: '80%', left: '100%' },
-  // Interior
-  { top: '30%', left: '33%' },
-  { top: '30%', left: '66%' },
-  { top: '50%', left: '50%' },
-  { top: '70%', left: '33%' },
-  { top: '70%', left: '66%' },
+  // Edge midpoints
+  { top: '0%', left: '50%' },
+  { top: '100%', left: '50%' },
+  { top: '50%', left: '0%' },
+  { top: '50%', left: '100%' },
 ]
 
 export default function CircleFillOverlaySmall() {

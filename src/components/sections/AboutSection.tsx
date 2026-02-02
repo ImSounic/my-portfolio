@@ -102,7 +102,7 @@ export default function AboutSection() {
   return (
     <section 
       id="about"
-      className={`${satoshi.variable} ${montserrat.variable} min-h-screen bg-[#0c0c0c] relative flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-6 md:py-0 xl:px-0`}
+      className={`${satoshi.variable} ${montserrat.variable} h-screen overflow-hidden bg-[#0c0c0c] relative flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-6 md:py-0 xl:px-0`}
     >
       {/* Custom Grid SVG Background at bottom center */}
       <div className="absolute bottom-0 left-0 right-0 w-full md:flex md:justify-center">

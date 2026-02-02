@@ -54,7 +54,7 @@ export default function WhyHireMeSection() {
   return (
     <>
       {/* ====== VIEWPORT 1: Title + Critical Thinker ====== */}
-      <section id="why-hire-me" className={`${fontClasses} min-h-screen xl:h-screen relative bg-[#0c0c0c] px-4 py-16 flex flex-col md:px-6 md:py-0 md:h-screen xl:px-0 xl:block`}>
+      <section id="why-hire-me" className={`${fontClasses} h-screen overflow-hidden relative bg-[#0c0c0c] px-4 py-16 flex flex-col md:px-6 md:py-0 xl:px-0 xl:block`}>
         
         {/* Title area with background grid */}
         <div className="pt-8 pb-6 relative flex items-center justify-center md:h-1/3 md:pt-0 md:pb-0 xl:h-1/3">
@@ -153,7 +153,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* ====== VIEWPORT 2: Adaptive Innovator ====== */}
-      <section className={`${fontClasses} min-h-screen xl:h-screen relative bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 md:h-screen xl:px-0`}>
+      <section className={`${fontClasses} h-screen overflow-hidden relative bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 xl:px-0`}>
         
         {/* Vertical line — Tablet */}
         <div className="hidden md:block xl:hidden absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-0">
@@ -216,7 +216,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* ====== VIEWPORT 3: Code Craftsman ====== */}
-      <section className={`${fontClasses} min-h-screen xl:h-screen relative bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 md:h-screen xl:px-0`}>
+      <section className={`${fontClasses} h-screen overflow-hidden relative bg-[#0c0c0c] px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 xl:px-0`}>
         
         {/* Vertical line — Tablet (half height) */}
         <div className="hidden md:block xl:hidden absolute left-1/2 top-0 bottom-1/2 -translate-x-1/2">

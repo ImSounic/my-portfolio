@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scroll snap container */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Each section snaps to viewport */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 @layer base {
   body {
     @apply bg-[#0c0c0c] text-white antialiased;

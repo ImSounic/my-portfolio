@@ -32,7 +32,7 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills"
-      className={`${satoshi.variable} min-h-screen bg-[#0c0c0c] relative flex flex-col items-center px-4 py-16 md:flex-row md:items-center md:px-6 md:py-0 xl:px-8`}
+      className={`${satoshi.variable} h-screen overflow-hidden bg-[#0c0c0c] relative flex flex-col items-center px-4 py-16 md:flex-row md:items-center md:px-6 md:py-0 xl:px-8`}
     >
       {/* Background Grid */}
       <div className="absolute inset-0 w-full h-full">

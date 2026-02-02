@@ -16,7 +16,6 @@ const DesktopAboutSection = withClientDynamic(() => import('@/components/desktop
 const DesktopWhyHireMeSection = withClientDynamic(() => import('@/components/desktop/WhyHireMeSection'));
 const DesktopSkillsSection = withClientDynamic(() => import('@/components/desktop/SkillsSection'));
 const DesktopWorkSection = withClientDynamic(() => import('@/components/desktop/WorkSection'));
-const DesktopContactSection = withClientDynamic(() => import('@/components/desktop/ContactSection'));
 
 // Tablet components
 const TabletHero = withClientDynamic(() => import('@/components/tablet/Hero'));
@@ -24,7 +23,6 @@ const TabletAboutSection = withClientDynamic(() => import('@/components/tablet/A
 const TabletWhyHireMeSection = withClientDynamic(() => import('@/components/tablet/WhyHireMeSection'));
 const TabletSkillsSection = withClientDynamic(() => import('@/components/tablet/SkillsSection'));
 const TabletWorkSection = withClientDynamic(() => import('@/components/tablet/WorkSection'));
-const TabletContactSection = withClientDynamic(() => import('@/components/tablet/ContactSection'));
 
 // Mobile components
 const MobileHero = withClientDynamic(() => import('@/components/mobile/Hero'));
@@ -32,7 +30,9 @@ const MobileAboutSection = withClientDynamic(() => import('@/components/mobile/A
 const MobileWhyHireMeSection = withClientDynamic(() => import('@/components/mobile/WhyHireMeSection'));
 const MobileSkillsSection = withClientDynamic(() => import('@/components/mobile/SkillsSection'));
 const MobileWorkSection = withClientDynamic(() => import('@/components/mobile/WorkSection'));
-const MobileContactSection = withClientDynamic(() => import('@/components/mobile/ContactSection'));
+
+// Consolidated responsive components
+const ContactSection = withClientDynamic(() => import('@/components/sections/ContactSection'));
 
 // Assets to preload (only above-the-fold imagery)
 const assetsToPreload = ['/profile.png', '/assets/images/grid.svg', '/assets/images/about-profile.png'];
@@ -81,7 +81,7 @@ export default function Home() {
           <MobileWhyHireMeSection />
           <MobileSkillsSection />
           <MobileWorkSection />
-          <MobileContactSection />
+          <ContactSection />
         </main>
       </FirefoxFixProvider>
     );
@@ -96,7 +96,7 @@ export default function Home() {
           <TabletWhyHireMeSection />
           <TabletSkillsSection />
           <TabletWorkSection />
-          <TabletContactSection />
+          <ContactSection />
         </main>
       </FirefoxFixProvider>
     );
@@ -110,7 +110,7 @@ export default function Home() {
         <DesktopWhyHireMeSection />
         <DesktopSkillsSection />
         <DesktopWorkSection />
-        <DesktopContactSection />
+        <ContactSection />
       </main>
     </FirefoxFixProvider>
   );

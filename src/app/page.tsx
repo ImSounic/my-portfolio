@@ -10,19 +10,13 @@ type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
   dynamic(loader, { loading: () => null, ssr: false });
 
-// Desktop components
-const DesktopHero = withClientDynamic(() => import('@/components/desktop/Hero'));
+// Device-specific components (remaining)
 const DesktopWorkSection = withClientDynamic(() => import('@/components/desktop/WorkSection'));
-
-// Tablet components
-const TabletHero = withClientDynamic(() => import('@/components/tablet/Hero'));
 const TabletWorkSection = withClientDynamic(() => import('@/components/tablet/WorkSection'));
-
-// Mobile components
-const MobileHero = withClientDynamic(() => import('@/components/mobile/Hero'));
 const MobileWorkSection = withClientDynamic(() => import('@/components/mobile/WorkSection'));
 
 // Consolidated responsive components
+const Hero = withClientDynamic(() => import('@/components/sections/Hero'));
 const AboutSection = withClientDynamic(() => import('@/components/sections/AboutSection'));
 const WhyHireMeSection = withClientDynamic(() => import('@/components/sections/WhyHireMeSection'));
 const SkillsSection = withClientDynamic(() => import('@/components/sections/SkillsSection'));
@@ -70,7 +64,7 @@ export default function Home() {
     return (
       <FirefoxFixProvider>
         <main className="fade-in">
-          <MobileHero />
+          <Hero />
           <AboutSection />
           <WhyHireMeSection />
           <SkillsSection />
@@ -85,7 +79,7 @@ export default function Home() {
     return (
       <FirefoxFixProvider>
         <main className="fade-in">
-          <TabletHero />
+          <Hero />
           <AboutSection />
           <WhyHireMeSection />
           <SkillsSection />
@@ -99,7 +93,7 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <main className="fade-in">
-        <DesktopHero />
+        <Hero />
         <AboutSection />
         <WhyHireMeSection />
         <SkillsSection />

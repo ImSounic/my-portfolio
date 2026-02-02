@@ -8,6 +8,7 @@ import contactSvg from '@/assets/icons/contact.svg'
 import linkedinSvg from '@/assets/icons/linkedin.svg'
 import mailSvg from '@/assets/icons/mail.svg'
 import arrowSvg from '@/assets/icons/arrow.svg'
+import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
 import handSvg from '@/assets/icons/hand.svg'
 
 const satoshi = localFont({
@@ -109,7 +110,8 @@ export default function ContactSection() {
             onClick={() => window.open('/Resume.pdf', '_blank')}
             className="btn-circle-fill w-full border border-dashed border-[#E9F5DB] text-[#E9F5DB] px-4 py-3 rounded-md font-medium transition-colors md:w-auto md:px-6 xl:px-8"
           >
-            View my Resume
+            <CircleFillOverlay />
+            <span className="relative z-10">View my Resume</span>
           </button>
         </div>
       </div>

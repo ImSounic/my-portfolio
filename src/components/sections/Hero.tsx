@@ -12,6 +12,7 @@ import handSvg from '@/assets/icons/hand.svg'
 import greenBoxSvg from '@/assets/icons/green-box.svg'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
+import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
 
 const satoshi = localFont({
   src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
@@ -162,7 +163,8 @@ export default function Hero() {
             <Image src={handSvg} alt="Hand icon" width={18} height={18} />
           </button>
           <Link href="/Resume.pdf" className="btn-circle-fill w-full py-3 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all text-center">
-            View my Resume
+            <CircleFillOverlay />
+            <span className="relative z-10">View my Resume</span>
           </Link>
         </div>
 
@@ -173,6 +175,7 @@ export default function Hero() {
             <Image src={handSvg} alt="Hand icon" width={20} height={20} />
           </button>
           <Link href="/Resume.pdf" className="btn-circle-fill px-8 py-4 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all duration-300">
+            <CircleFillOverlay />
             <span className="relative z-10">View my Resume</span>
           </Link>
         </div>
@@ -184,7 +187,8 @@ export default function Hero() {
             <Image src={handSvg} alt="Hand icon" width={24} height={24} />
           </button>
           <Link href="/Resume.pdf" className="btn-circle-fill px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-lg rounded-[10px] transition-all duration-300">
-            View my Resume
+            <CircleFillOverlay />
+            <span className="relative z-10">View my Resume</span>
           </Link>
         </div>
       </div>

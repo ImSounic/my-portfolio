@@ -48,47 +48,10 @@
 .btn-circle-fill {
   position: relative;
   overflow: hidden;
-  z-index: 1;
 }
 
-.btn-circle-fill::before,
-.btn-circle-fill::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  background: #E9F5DB;
-  transform: scale(0);
-  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: -1;
-}
-
-.btn-circle-fill::before {
-  width: 120%;
-  height: 300%;
-  top: 50%;
-  left: -10%;
-  transform-origin: center;
-  transform: translateY(-50%) scale(0);
-}
-
-.btn-circle-fill::after {
-  width: 120%;
-  height: 300%;
-  top: 50%;
-  right: -10%;
-  left: auto;
-  transform-origin: center;
-  transform: translateY(-50%) scale(0);
-}
-
-.btn-circle-fill:hover::before {
-  transform: translateY(-50%) scale(1);
-  transition-delay: 0s;
-}
-
-.btn-circle-fill:hover::after {
-  transform: translateY(-50%) scale(1);
-  transition-delay: 0.05s;
+.btn-circle-fill:hover .circle-dot {
+  transform: translate(-50%, -50%) scale(6) !important;
 }
 
 .btn-circle-fill:hover {
@@ -97,8 +60,13 @@
   border-style: solid !important;
 }
 
-/* For buttons with inner text spans */
-.btn-circle-fill:hover span {
+/* For buttons with inner text/icon spans */
+.btn-circle-fill > *:not(.circle-dot) {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-circle-fill:hover > *:not(.circle-dot) {
   color: #0c0c0c !important;
 }
 

@@ -162,8 +162,8 @@ export default function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="font-[family-name:var(--font-montserrat)] text-sm text-gray-300 mb-8 leading-relaxed hero-fade opacity-0 translate-y-[50px] md:text-lg md:max-w-2xl md:mb-10 xl:text-lg xl:max-w-4xl xl:mb-12">
-          Enthusiastic Computer Science And AI Graduating Next Semester. Eager To Apply My Software Engineering And AI/ML Skills In A Professional Setting.
+        <p className="font-[family-name:var(--font-montserrat)] text-base text-gray-300 mb-8 leading-relaxed hero-fade opacity-0 translate-y-[50px] md:text-xl md:max-w-2xl md:mb-10 xl:text-xl xl:max-w-4xl xl:mb-12">
+          First-year Master&apos;s student in Data Science &amp; Technologies, graduating 2027. Seeking software engineering or AI/ML internships starting September 2026.
         </p>
 
         {/* Buttons — Mobile (stacked) */}

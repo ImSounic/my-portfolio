@@ -12,26 +12,24 @@ const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>)
 
 // Desktop components
 const DesktopHero = withClientDynamic(() => import('@/components/desktop/Hero'));
-const DesktopAboutSection = withClientDynamic(() => import('@/components/desktop/AboutSection'));
 const DesktopWhyHireMeSection = withClientDynamic(() => import('@/components/desktop/WhyHireMeSection'));
 const DesktopSkillsSection = withClientDynamic(() => import('@/components/desktop/SkillsSection'));
 const DesktopWorkSection = withClientDynamic(() => import('@/components/desktop/WorkSection'));
 
 // Tablet components
 const TabletHero = withClientDynamic(() => import('@/components/tablet/Hero'));
-const TabletAboutSection = withClientDynamic(() => import('@/components/tablet/AboutSection'));
 const TabletWhyHireMeSection = withClientDynamic(() => import('@/components/tablet/WhyHireMeSection'));
 const TabletSkillsSection = withClientDynamic(() => import('@/components/tablet/SkillsSection'));
 const TabletWorkSection = withClientDynamic(() => import('@/components/tablet/WorkSection'));
 
 // Mobile components
 const MobileHero = withClientDynamic(() => import('@/components/mobile/Hero'));
-const MobileAboutSection = withClientDynamic(() => import('@/components/mobile/AboutSection'));
 const MobileWhyHireMeSection = withClientDynamic(() => import('@/components/mobile/WhyHireMeSection'));
 const MobileSkillsSection = withClientDynamic(() => import('@/components/mobile/SkillsSection'));
 const MobileWorkSection = withClientDynamic(() => import('@/components/mobile/WorkSection'));
 
 // Consolidated responsive components
+const AboutSection = withClientDynamic(() => import('@/components/sections/AboutSection'));
 const ContactSection = withClientDynamic(() => import('@/components/sections/ContactSection'));
 
 // Assets to preload (only above-the-fold imagery)
@@ -77,7 +75,7 @@ export default function Home() {
       <FirefoxFixProvider>
         <main className="fade-in">
           <MobileHero />
-          <MobileAboutSection />
+          <AboutSection />
           <MobileWhyHireMeSection />
           <MobileSkillsSection />
           <MobileWorkSection />
@@ -92,7 +90,7 @@ export default function Home() {
       <FirefoxFixProvider>
         <main className="fade-in">
           <TabletHero />
-          <TabletAboutSection />
+          <AboutSection />
           <TabletWhyHireMeSection />
           <TabletSkillsSection />
           <TabletWorkSection />
@@ -106,7 +104,7 @@ export default function Home() {
     <FirefoxFixProvider>
       <main className="fade-in">
         <DesktopHero />
-        <DesktopAboutSection />
+        <AboutSection />
         <DesktopWhyHireMeSection />
         <DesktopSkillsSection />
         <DesktopWorkSection />

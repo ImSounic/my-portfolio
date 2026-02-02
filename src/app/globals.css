@@ -51,7 +51,7 @@
 }
 
 .btn-circle-fill:hover .circle-dot {
-  transform: translate(-50%, -50%) scale(3) !important;
+  transform: translate(-50%, -50%) scale(8) !important;
 }
 
 .btn-circle-fill:hover {

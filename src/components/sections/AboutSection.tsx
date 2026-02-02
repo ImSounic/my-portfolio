@@ -33,7 +33,7 @@ const slides = [
   {
     id: 'about',
     title: { normal: 'ABOUT', outline: 'SOUNIC' },
-    content: 'I am a Master\'s student in Computer Science with a specialization in Data Science and Technologies at the University of Twente. I hold a Bachelor\'s degree in Computer Science and Artificial Intelligence. Throughout my academic journey, I have developed a strong proficiency in Python, Java, JavaScript (NextJS, React), Django Framework, SQL, HTML, CSS, and XML. My passion for technology and problem-solving drives me to continuously learn and innovate. I am particularly interested in roles such as Software Engineer and AI/ML Engineer, where I can leverage my skills to contribute to cutting-edge projects and solutions.',
+    content: "Master's student in Data Science & Technologies at University of Twente, with a foundation in AI and Machine Learning from my CS degree at Aberystwyth. I build end-to-end ML pipelines and full-stack applications — from ensemble deep learning models for healthcare prediction to cross-platform mobile apps. Currently seeking software engineering or AI/ML internships starting September 2026.",
     image: profileImg,
     imageAlt: 'Sounic in snow mountains',
     overlayText: 'ABOUT'

@@ -4,16 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Scroll snap container */
-html {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
+/* Scroll snap - desktop/laptop only (non-touch devices) */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
 
-/* Each section snaps to viewport */
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
 }
 
 @layer base {

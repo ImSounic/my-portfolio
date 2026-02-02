@@ -224,24 +224,39 @@ export default function Hero() {
       {/* Scroll indicator — Mobile */}
       <div className="absolute left-4 bottom-8 hero-fade opacity-0 translate-y-[50px] md:hidden">
         <div className="flex items-center gap-1">
-          <div className="w-[1px] h-16 bg-white/50"></div>
-          <p className="font-[family-name:var(--font-pixel)] text-[#E9F5DB]/70 text-[10px] tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>SCROLL</p>
+          <div className="relative w-[1px] h-16 bg-white/20 overflow-hidden">
+            <div className="scroll-line-pulse" />
+          </div>
+          <div className="flex flex-col items-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+            <span className="font-[family-name:var(--font-pixel)] text-[#38bdf8] text-[10px] tracking-wider">{"//"}</span>
+            <p className="font-[family-name:var(--font-pixel)] text-[#E9F5DB]/70 text-[10px] tracking-wider">SCROLL</p>
+          </div>
         </div>
       </div>
 
       {/* Scroll indicator — Tablet */}
       <div className="hidden md:flex xl:hidden absolute left-24 bottom-0 items-center hero-fade opacity-0 translate-y-[50px]">
         <div className="flex items-center gap-2">
-          <div className="w-[2px] h-36 bg-white/50"></div>
-          <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>SCROLL TO EXPLORE</p>
+          <div className="relative w-[2px] h-36 bg-white/20 overflow-hidden">
+            <div className="scroll-line-pulse" />
+          </div>
+          <div className="flex flex-col items-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+            <span className="font-[family-name:var(--font-pixel)] text-[#38bdf8] text-xs tracking-wider">{"//"}</span>
+            <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider">SCROLL TO EXPLORE</p>
+          </div>
         </div>
       </div>
 
       {/* Scroll indicator — Desktop */}
       <div className="hidden xl:flex absolute left-36 bottom-0 items-center hero-fade opacity-0 translate-y-[50px]">
         <div className="flex items-center gap-2">
-          <div className="w-[2px] h-48 bg-white/50"></div>
-          <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>SCROLL TO EXPLORE</p>
+          <div className="relative w-[2px] h-48 bg-white/20 overflow-hidden">
+            <div className="scroll-line-pulse" />
+          </div>
+          <div className="flex flex-col items-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+            <span className="font-[family-name:var(--font-pixel)] text-[#38bdf8] text-xs tracking-wider">{"//"}</span>
+            <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider">SCROLL TO EXPLORE</p>
+          </div>
         </div>
       </div>
     </section>

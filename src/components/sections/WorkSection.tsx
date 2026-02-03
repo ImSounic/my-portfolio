@@ -115,7 +115,7 @@ function TabletProjectViewport({ project, isFirst }: { project: typeof projects[
   const isInternship = project.decorationType === 'star'
   
   return (
-    <section id={isFirst ? 'work' : undefined} className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative flex flex-col items-center justify-center px-6`}>
+    <section id={isFirst ? 'work' : undefined} className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative hidden md:flex xl:hidden flex-col items-center justify-center px-6`}>
       {isFirst && (
         <div className="mb-16">
           <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white">PROJECTS</h2>
@@ -184,7 +184,7 @@ function DesktopProjectViewport({ project, isFirst }: { project: typeof projects
   const isInternship = project.decorationType === 'star'
   
   return (
-    <section id={isFirst ? 'work' : undefined} className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative flex ${isFirst ? 'flex-col' : ''} items-center justify-center`}>
+    <section id={isFirst ? 'work' : undefined} className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative hidden xl:flex ${isFirst ? 'flex-col' : ''} items-center justify-center`}>
       {isFirst && (
         <div className="mb-24">
           <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white">PROJECTS</h2>
@@ -256,18 +256,14 @@ export default function WorkSection() {
       <MobileWork />
 
       {/* Tablet */}
-      <div className="hidden md:block xl:hidden">
-        {projects.map((project, i) => (
-          <TabletProjectViewport key={project.id} project={project} index={i} isFirst={i === 0} />
-        ))}
-      </div>
+      {projects.map((project, i) => (
+        <TabletProjectViewport key={`tablet-${project.id}`} project={project} index={i} isFirst={i === 0} />
+      ))}
 
       {/* Desktop */}
-      <div className="hidden xl:block">
-        {projects.map((project, i) => (
-          <DesktopProjectViewport key={project.id} project={project} index={i} isFirst={i === 0} />
-        ))}
-      </div>
+      {projects.map((project, i) => (
+        <DesktopProjectViewport key={`desktop-${project.id}`} project={project} index={i} isFirst={i === 0} />
+      ))}
     </>
   )
 }

@@ -34,11 +34,9 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/Satoshi-Black.otf" as="font" type="font/otf" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/pixel_font-7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>
-        <div className="min-h-screen bg-[#0c0c0c] text-white">
-          <Navbar />
-          <main>{children}</main>
-        </div>
+      <body className={`${inter.className} bg-[#0c0c0c] text-white`}>
+        <Navbar />
+        {children}
         <Analytics />
       </body>
     </html>

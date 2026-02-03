@@ -4,15 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling globally */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Scroll snap - desktop/laptop only (non-touch devices) */
 @media (hover: hover) and (pointer: fine) {
   html {
-    scroll-snap-type: y proximity;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
   }
 
   section {

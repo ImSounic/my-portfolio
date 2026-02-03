@@ -2,7 +2,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
+import gsap from 'gsap'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import circleSvg from '@/assets/icons/circle.svg'
@@ -45,7 +46,7 @@ const projects = [
     id: 3,
     title: 'INTERNSHIP',
     description: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
-    shortDesc: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
+    shortDesc: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python.',
     image: '/projects/internship.jpg',
     company: 'CORETEK LABS',
     duration: 'JUN-SEP 2023',
@@ -56,7 +57,7 @@ const projects = [
     id: 4,
     title: 'CLEANSLATE',
     description: 'A chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
-    shortDesc: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
+    shortDesc: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution and real-time notifications.',
     image: '/projects/cleanslate.jpg',
     comingSoon: true,
     github: '#',
@@ -73,15 +74,81 @@ const GitHubIcon = ({ size = 28 }: { size?: number }) => (
 
 const fontClasses = `${satoshi.variable} ${montserrat.variable}`
 
-// ============ MOBILE COMPONENT ============
-function MobileWork() {
+// ============ DOT INDICATORS ============
+function DotIndicators({ total, active, onDotClick }: { total: number; active: number; onDotClick: (index: number) => void }) {
+  return (
+    <div className="flex items-center justify-center gap-3 mt-8">
+      {Array.from({ length: total }).map((_, i) => (
+        <button
+          key={i}
+          onClick={() => onDotClick(i)}
+          className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            i === active 
+              ? 'bg-[#E9F5DB] scale-125' 
+              : 'bg-white/30 hover:bg-white/50'
+          }`}
+          aria-label={`Go to project ${i + 1}`}
+        />
+      ))}
+    </div>
+  )
+}
+
+// ============ MOBILE CAROUSEL ============
+function MobileCarousel() {
   const [activeProject, setActiveProject] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const animateSlide = useCallback((newIndex: number, direction: 'left' | 'right') => {
+    if (isAnimating || !contentRef.current) return
+    setIsAnimating(true)
+
+    const exitX = direction === 'left' ? -100 : 100
+    const enterX = direction === 'left' ? 100 : -100
+
+    gsap.to(contentRef.current, {
+      x: exitX,
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.in',
+      onComplete: () => {
+        setActiveProject(newIndex)
+        gsap.set(contentRef.current, { x: enterX })
+        gsap.to(contentRef.current, {
+          x: 0,
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out',
+          onComplete: () => setIsAnimating(false),
+        })
+      },
+    })
+  }, [isAnimating])
+
+  const goToProject = (index: number) => {
+    if (index === activeProject || isAnimating) return
+    const direction = index > activeProject ? 'left' : 'right'
+    animateSlide(index, direction)
+  }
+
+  const nextProject = () => {
+    const newIndex = (activeProject + 1) % projects.length
+    animateSlide(newIndex, 'left')
+  }
+
+  const prevProject = () => {
+    const newIndex = (activeProject - 1 + projects.length) % projects.length
+    animateSlide(newIndex, 'right')
+  }
+
   const project = projects[activeProject]
 
   return (
     <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative flex flex-col items-center py-16 px-4 md:hidden`}>
       <h2 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-6 mt-8">PROJECTS</h2>
-      <div className="w-full max-w-sm mx-auto">
+      
+      <div ref={contentRef} className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white text-center mb-4">{project.title}</h3>
         <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
           <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
@@ -97,31 +164,80 @@ function MobileWork() {
             <div className="absolute bottom-2 left-2 bg-white text-black px-2 py-1 rounded text-xs font-medium z-10">Coming Soon...</div>
           ) : null}
         </div>
-        <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-3 mb-6">
-          <p className="font-[family-name:var(--font-montserrat)] text-white text-xs leading-relaxed">{project.description}</p>
-        </div>
-        <div className="flex justify-between items-center">
-          <button onClick={() => setActiveProject((prev) => (prev - 1 + projects.length) % projects.length)} className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center text-white">&lt;</button>
-          <div className="text-white/50 text-sm">{activeProject + 1} / {projects.length}</div>
-          <button onClick={() => setActiveProject((prev) => (prev + 1) % projects.length)} className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center text-white">&gt;</button>
+        <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-lg p-3 mb-4">
+          <p className="font-[family-name:var(--font-montserrat)] text-white text-xs leading-relaxed">{project.shortDesc || project.description}</p>
         </div>
       </div>
+
+      {/* Navigation */}
+      <div className="flex items-center gap-6 mb-4">
+        <button onClick={prevProject} disabled={isAnimating} className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors disabled:opacity-50">&lt;</button>
+        <button onClick={nextProject} disabled={isAnimating} className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors disabled:opacity-50">&gt;</button>
+      </div>
+
+      <DotIndicators total={projects.length} active={activeProject} onDotClick={goToProject} />
     </section>
   )
 }
 
-// ============ TABLET PROJECT VIEWPORT ============
-function TabletProjectViewport({ project, isFirst }: { project: typeof projects[0], index: number, isFirst?: boolean }) {
+// ============ TABLET CAROUSEL ============
+function TabletCarousel() {
+  const [activeProject, setActiveProject] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const animateSlide = useCallback((newIndex: number, direction: 'left' | 'right') => {
+    if (isAnimating || !contentRef.current) return
+    setIsAnimating(true)
+
+    const exitX = direction === 'left' ? -80 : 80
+    const enterX = direction === 'left' ? 80 : -80
+
+    gsap.to(contentRef.current, {
+      x: exitX,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.4,
+      ease: 'power2.in',
+      onComplete: () => {
+        setActiveProject(newIndex)
+        gsap.set(contentRef.current, { x: enterX, scale: 0.95 })
+        gsap.to(contentRef.current, {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          ease: 'power2.out',
+          onComplete: () => setIsAnimating(false),
+        })
+      },
+    })
+  }, [isAnimating])
+
+  const goToProject = (index: number) => {
+    if (index === activeProject || isAnimating) return
+    const direction = index > activeProject ? 'left' : 'right'
+    animateSlide(index, direction)
+  }
+
+  const nextProject = () => {
+    const newIndex = (activeProject + 1) % projects.length
+    animateSlide(newIndex, 'left')
+  }
+
+  const prevProject = () => {
+    const newIndex = (activeProject - 1 + projects.length) % projects.length
+    animateSlide(newIndex, 'right')
+  }
+
+  const project = projects[activeProject]
   const isInternship = project.decorationType === 'star'
-  
+
   return (
     <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden md:flex xl:hidden flex-col items-center justify-center px-6`}>
-      {isFirst && (
-        <div className="mb-16">
-          <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white">PROJECTS</h2>
-        </div>
-      )}
-      <div className="w-full max-w-xl mx-auto">
+      <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white mb-8">PROJECTS</h2>
+
+      <div ref={contentRef} className="w-full max-w-xl mx-auto">
         <div className="relative">
           {/* Decoration */}
           {isInternship ? (
@@ -140,15 +256,15 @@ function TabletProjectViewport({ project, isFirst }: { project: typeof projects[
           )}
 
           {/* Glass Card */}
-          <div className="relative w-full h-[720px] z-10">
+          <div className="relative w-full h-[500px] z-10">
             <Image src={project.glassCard} alt="Glass card background" fill className="object-contain" />
-            <div className="absolute top-48 left-[0px] right-24 p-4">
-              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed max-w-[450px] mx-auto">{project.shortDesc || project.description}</p>
+            <div className="absolute top-32 left-4 right-20 p-4">
+              <p className="font-[family-name:var(--font-montserrat)] text-white text-sm leading-relaxed max-w-[400px]">{project.shortDesc || project.description}</p>
             </div>
           </div>
 
           {/* Project Image */}
-          <div className="absolute -bottom-[-132px] -left-12 w-[550px] h-[300px] rounded-2xl overflow-hidden shadow-2xl z-20">
+          <div className="absolute -bottom-[-80px] -left-8 w-[450px] h-[250px] rounded-2xl overflow-hidden shadow-2xl z-20">
             <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-4 left-4 flex items-center gap-3 z-30">
@@ -168,29 +284,92 @@ function TabletProjectViewport({ project, isFirst }: { project: typeof projects[
           </div>
 
           {/* Vertical Title */}
-          <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30">
-            <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white tablet-project-title" style={{ writingMode: 'vertical-rl', transform: 'rotate(360deg) translateZ(0)', willChange: 'transform', backfaceVisibility: 'hidden' }}>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30">
+            <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white" style={{ writingMode: 'vertical-rl' }}>
               {project.title}
             </h3>
           </div>
         </div>
       </div>
+
+      {/* Navigation Arrows */}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 z-40">
+        <button onClick={prevProject} disabled={isAnimating} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors disabled:opacity-50">
+          &lt;
+        </button>
+      </div>
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-40">
+        <button onClick={nextProject} disabled={isAnimating} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors disabled:opacity-50">
+          &gt;
+        </button>
+      </div>
+
+      {/* Dot Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40">
+        <DotIndicators total={projects.length} active={activeProject} onDotClick={goToProject} />
+      </div>
     </section>
   )
 }
 
-// ============ DESKTOP PROJECT VIEWPORT ============
-function DesktopProjectViewport({ project, isFirst }: { project: typeof projects[0], index: number, isFirst?: boolean }) {
+// ============ DESKTOP CAROUSEL ============
+function DesktopCarousel() {
+  const [activeProject, setActiveProject] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const animateSlide = useCallback((newIndex: number, direction: 'left' | 'right') => {
+    if (isAnimating || !contentRef.current) return
+    setIsAnimating(true)
+
+    const exitX = direction === 'left' ? -100 : 100
+    const enterX = direction === 'left' ? 100 : -100
+
+    gsap.to(contentRef.current, {
+      x: exitX,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.5,
+      ease: 'power3.in',
+      onComplete: () => {
+        setActiveProject(newIndex)
+        gsap.set(contentRef.current, { x: enterX, scale: 0.95 })
+        gsap.to(contentRef.current, {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+          onComplete: () => setIsAnimating(false),
+        })
+      },
+    })
+  }, [isAnimating])
+
+  const goToProject = (index: number) => {
+    if (index === activeProject || isAnimating) return
+    const direction = index > activeProject ? 'left' : 'right'
+    animateSlide(index, direction)
+  }
+
+  const nextProject = () => {
+    const newIndex = (activeProject + 1) % projects.length
+    animateSlide(newIndex, 'left')
+  }
+
+  const prevProject = () => {
+    const newIndex = (activeProject - 1 + projects.length) % projects.length
+    animateSlide(newIndex, 'right')
+  }
+
+  const project = projects[activeProject]
   const isInternship = project.decorationType === 'star'
-  
+
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden xl:flex ${isFirst ? 'flex-col' : ''} items-center justify-center`}>
-      {isFirst && (
-        <div className="mb-24">
-          <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white">PROJECTS</h2>
-        </div>
-      )}
-      <div className="w-full max-w-7xl mx-auto px-8">
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden xl:flex flex-col items-center justify-center`}>
+      <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white mb-16">PROJECTS</h2>
+
+      <div ref={contentRef} className="w-full max-w-7xl mx-auto px-8">
         <div className="relative">
           {/* Decoration */}
           {isInternship ? (
@@ -244,6 +423,23 @@ function DesktopProjectViewport({ project, isFirst }: { project: typeof projects
           </div>
         </div>
       </div>
+
+      {/* Navigation Arrows */}
+      <div className="absolute left-8 top-1/2 -translate-y-1/2 z-40">
+        <button onClick={prevProject} disabled={isAnimating} className="w-14 h-14 border-2 border-white/30 rounded-full flex items-center justify-center text-white text-xl hover:bg-white/10 hover:border-white/50 transition-all disabled:opacity-50">
+          &lt;
+        </button>
+      </div>
+      <div className="absolute right-8 top-1/2 -translate-y-1/2 z-40">
+        <button onClick={nextProject} disabled={isAnimating} className="w-14 h-14 border-2 border-white/30 rounded-full flex items-center justify-center text-white text-xl hover:bg-white/10 hover:border-white/50 transition-all disabled:opacity-50">
+          &gt;
+        </button>
+      </div>
+
+      {/* Dot Indicators */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-40">
+        <DotIndicators total={projects.length} active={activeProject} onDotClick={goToProject} />
+      </div>
     </section>
   )
 }
@@ -252,18 +448,9 @@ function DesktopProjectViewport({ project, isFirst }: { project: typeof projects
 export default function WorkSection() {
   return (
     <div id="work">
-      {/* Mobile */}
-      <MobileWork />
-
-      {/* Tablet */}
-      {projects.map((project, i) => (
-        <TabletProjectViewport key={`tablet-${project.id}`} project={project} index={i} isFirst={i === 0} />
-      ))}
-
-      {/* Desktop */}
-      {projects.map((project, i) => (
-        <DesktopProjectViewport key={`desktop-${project.id}`} project={project} index={i} isFirst={i === 0} />
-      ))}
+      <MobileCarousel />
+      <TabletCarousel />
+      <DesktopCarousel />
     </div>
   )
 }

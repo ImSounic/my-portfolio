@@ -4,18 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Scroll snap - desktop/laptop only (non-touch devices) */
-@media (hover: hover) and (pointer: fine) {
-  html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-  }
-
-  section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
+/* Smooth base for GSAP scroll */
+html {
+  scroll-behavior: auto;
 }
 
 @layer base {
@@ -188,16 +179,5 @@ Add this to your globals.css file
   html, body {
     height: 100%;
     overflow-x: hidden;
-  }
-  
-  html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-  }
-  
-  section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 }

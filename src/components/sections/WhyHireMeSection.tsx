@@ -61,7 +61,7 @@ export default function WhyHireMeSection() {
   return (
     <>
       {/* ====== VIEWPORT 1: Title + Critical Thinker ====== */}
-      <section id="why-hire-me" className={`${fontClasses} h-screen overflow-hidden relative bg-transparent px-4 py-16 flex flex-col md:px-6 md:py-0 xl:px-0 xl:block`}>
+      <section id="why-hire-me" className={`${fontClasses} h-screen overflow-hidden relative bg-[#0c0c0c]/15 px-4 py-16 flex flex-col md:px-6 md:py-0 xl:px-0 xl:block`}>
         
         {/* Title area with background grid */}
         <div className="pt-8 pb-6 relative flex items-center justify-center md:h-1/3 md:pt-0 md:pb-0 xl:h-1/3">
@@ -133,7 +133,7 @@ export default function WhyHireMeSection() {
           <div className="mb-6">
             <TransparentMediaPlayer mp4Src={sections[0].mp4Src} webmSrc={sections[0].webmSrc} apngSrc={sections[0].apngSrc} altText={sections[0].title} width={320} height={192} />
           </div>
-          <div className="w-full bg-transparent px-4 text-center">
+          <div className="w-full bg-[#0c0c0c]/15 px-4 text-center">
             <div className="max-w-md mx-auto mb-10">
               <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white mb-4">{sections[0].title}</h3>
               <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[0].description}</p>
@@ -163,7 +163,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* ====== VIEWPORT 2: Adaptive Innovator ====== */}
-      <section className={`${fontClasses} h-screen overflow-hidden relative bg-transparent px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 xl:px-0`}>
+      <section className={`${fontClasses} h-screen overflow-hidden relative bg-[#0c0c0c]/15 px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 xl:px-0`}>
         
         {/* Vertical line — Tablet */}
         <div className="hidden md:block xl:hidden absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-0">
@@ -199,7 +199,7 @@ export default function WhyHireMeSection() {
           <div className="mb-6">
             <TransparentMediaPlayer mp4Src={sections[1].mp4Src} webmSrc={sections[1].webmSrc} apngSrc={sections[1].apngSrc} altText={sections[1].title} width={320} height={192} />
           </div>
-          <div className="w-full bg-transparent px-4 text-center">
+          <div className="w-full bg-[#0c0c0c]/15 px-4 text-center">
             <div className="max-w-md mx-auto mb-10">
               <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white mb-4">{sections[1].title}</h3>
               <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[1].description}</p>
@@ -231,7 +231,7 @@ export default function WhyHireMeSection() {
       </section>
 
       {/* ====== VIEWPORT 3: Code Craftsman ====== */}
-      <section className={`${fontClasses} h-screen overflow-hidden relative bg-transparent px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 xl:px-0`}>
+      <section className={`${fontClasses} h-screen overflow-hidden relative bg-[#0c0c0c]/15 px-4 py-16 flex flex-col items-center justify-center md:px-6 md:py-0 xl:px-0`}>
         
         {/* Vertical line — Tablet (half height) */}
         <div className="hidden md:block xl:hidden absolute left-1/2 top-0 bottom-1/2 -translate-x-1/2">
@@ -264,7 +264,7 @@ export default function WhyHireMeSection() {
           <div className="mb-6">
             <TransparentMediaPlayer mp4Src={sections[2].mp4Src} webmSrc={sections[2].webmSrc} apngSrc={sections[2].apngSrc} altText={sections[2].title} width={320} height={192} />
           </div>
-          <div className="w-full px-4 text-center bg-transparent z-10">
+          <div className="w-full px-4 text-center bg-[#0c0c0c]/15 z-10">
             <div className="max-w-md mx-auto mb-10">
               <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white mb-4">{sections[2].title}</h3>
               <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[2].description}</p>

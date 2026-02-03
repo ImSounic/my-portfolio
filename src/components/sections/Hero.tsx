@@ -13,7 +13,7 @@ import greenBoxSvg from '@/assets/icons/green-box.svg'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
-import { BlurText, ShinyText, Magnet } from '@/components/ui/reactbits'
+import { BlurText, ShinyText } from '@/components/ui/reactbits'
 
 const satoshi = localFont({
   src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
@@ -204,34 +204,26 @@ export default function Hero() {
 
         {/* Buttons — Tablet (row with bubble animation) */}
         <div className="hidden md:flex xl:hidden gap-4 mb-10 hero-fade opacity-0 translate-y-[50px]">
-          <Magnet padding={40} magnetStrength={4}>
-            <button onClick={scrollToContact} className="px-8 py-4 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-2">
-              Let&apos;s Talk
-              <Image src={handSvg} alt="Hand icon" width={20} height={20} />
-            </button>
-          </Magnet>
-          <Magnet padding={40} magnetStrength={4}>
-            <Link href="/Resume.pdf" className="btn-circle-fill px-8 py-4 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all duration-300">
-              <CircleFillOverlay />
-              <span className="relative z-10">View my Resume</span>
-            </Link>
-          </Magnet>
+          <button onClick={scrollToContact} className="px-8 py-4 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-2">
+            Let&apos;s Talk
+            <Image src={handSvg} alt="Hand icon" width={20} height={20} />
+          </button>
+          <Link href="/Resume.pdf" className="btn-circle-fill px-8 py-4 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-base rounded-[10px] transition-all duration-300">
+            <CircleFillOverlay />
+            <span className="relative z-10">View my Resume</span>
+          </Link>
         </div>
 
         {/* Buttons — Desktop (row, larger) */}
         <div className="hidden xl:flex gap-6 mb-12 hero-fade opacity-0 translate-y-[50px]">
-          <Magnet padding={50} magnetStrength={3}>
-            <button onClick={scrollToContact} className="px-12 py-5 bg-[#E9F5DB] text-black font-medium text-lg rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-3">
-              Let&apos;s Talk
-              <Image src={handSvg} alt="Hand icon" width={24} height={24} />
-            </button>
-          </Magnet>
-          <Magnet padding={50} magnetStrength={3}>
-            <Link href="/Resume.pdf" className="btn-circle-fill px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-lg rounded-[10px] transition-all duration-300">
-              <CircleFillOverlay />
-              <span className="relative z-10">View my Resume</span>
-            </Link>
-          </Magnet>
+          <button onClick={scrollToContact} className="px-12 py-5 bg-[#E9F5DB] text-black font-medium text-lg rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-3">
+            Let&apos;s Talk
+            <Image src={handSvg} alt="Hand icon" width={24} height={24} />
+          </button>
+          <Link href="/Resume.pdf" className="btn-circle-fill px-12 py-5 border-2 border-[#E9F5DB] border-dashed text-[#E9F5DB] font-medium text-lg rounded-[10px] transition-all duration-300">
+            <CircleFillOverlay />
+            <span className="relative z-10">View my Resume</span>
+          </Link>
         </div>
       </div>
 

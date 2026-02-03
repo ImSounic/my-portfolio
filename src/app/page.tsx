@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 import ScrollSnap from '@/components/layout/ScrollSnap';
+import CursorGlow from '@/components/ui/CursorGlow';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -50,6 +51,7 @@ export default function Home() {
         <WorkSection />
         <ContactSection />
       </main>
+      <CursorGlow color="#38bdf8" size={350} opacity={0.12} blur={80} />
     </FirefoxFixProvider>
   );
 }

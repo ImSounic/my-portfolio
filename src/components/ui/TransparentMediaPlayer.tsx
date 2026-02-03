@@ -24,10 +24,25 @@ export default function TransparentMediaPlayer({
 
   useEffect(() => {
     const video = videoRef.current
-    if (video) {
-      const handleLoaded = () => setIsLoaded(true)
-      video.addEventListener('loadeddata', handleLoaded)
-      return () => video.removeEventListener('loadeddata', handleLoaded)
+    if (!video) return
+
+    const handleLoaded = () => setIsLoaded(true)
+    
+    // Check if already loaded (cached)
+    if (video.readyState >= 3) {
+      setIsLoaded(true)
+      return
+    }
+
+    video.addEventListener('loadeddata', handleLoaded)
+    video.addEventListener('canplay', handleLoaded)
+    
+    // Force load
+    video.load()
+
+    return () => {
+      video.removeEventListener('loadeddata', handleLoaded)
+      video.removeEventListener('canplay', handleLoaded)
     }
   }, [])
 

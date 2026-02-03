@@ -24,6 +24,16 @@ const montserrat = Montserrat({
 const projects = [
   {
     id: 1,
+    title: 'BIG DATA',
+    description: 'Built distributed PySpark data pipeline on university HDFS cluster processing Binance trading history across 1000+ crypto pairs. Engineered minute-level liquidity and volatility features, developed analytical jobs for stress comparison and BTC/ETH shock propagation analysis, with scalable Parquet storage for cluster deployment.',
+    shortDesc: 'Distributed PySpark pipeline on HDFS analyzing Binance crypto data for 1000+ pairs. Built liquidity/volatility features and shock propagation analysis.',
+    image: '/projects/big-data.png',
+    github: 'https://github.com/ImSounic/mbd-project-binance',
+    circleImg: '/project-2.png',
+    glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 2,
     title: 'DEEP LEARNING',
     description: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet. This project showcases my ability to work with complex data and implement advanced machine learning techniques.',
     shortDesc: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet.',
@@ -33,7 +43,7 @@ const projects = [
     glassCard: '/assets/images/glass-card.png',
   },
   {
-    id: 2,
+    id: 3,
     title: 'HOUSE OF GAMES',
     description: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms. This Project Highlights My Creativity And Ability To Develop Entertaining Applications.',
     shortDesc: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms.',
@@ -43,7 +53,7 @@ const projects = [
     glassCard: '/assets/images/glass-card.png',
   },
   {
-    id: 3,
+    id: 4,
     title: 'INTERNSHIP',
     description: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
     shortDesc: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python.',
@@ -54,7 +64,7 @@ const projects = [
     glassCard: '/assets/images/glass-card-i.png',
   },
   {
-    id: 4,
+    id: 5,
     title: 'CLEANSLATE',
     description: 'A chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
     shortDesc: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution and real-time notifications.',

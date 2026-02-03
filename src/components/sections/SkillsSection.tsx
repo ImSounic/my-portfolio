@@ -41,7 +41,7 @@ export default function SkillsSection() {
 
       {/* ====== MOBILE LAYOUT ====== */}
       <div className="relative z-10 w-full pt-12 md:hidden">
-        <h1 className="text-white text-3xl font-bold text-center mb-8">MY TECH STACK</h1>
+        <h1 className="text-white text-3xl font-bold text-center mb-8"><span className="gradient-underline">MY TECH STACK</span></h1>
         <div className="space-y-4">
           {/* Programming Languages */}
           <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-4">
@@ -95,7 +95,7 @@ export default function SkillsSection() {
 
       {/* ====== TABLET LAYOUT ====== */}
       <div className="relative z-10 w-full hidden md:block xl:hidden">
-        <h1 className="text-white text-4xl font-bold text-center mb-10 mt-24">MY TECH STACK</h1>
+        <h1 className="text-white text-4xl font-bold text-center mb-10 mt-24"><span className="gradient-underline">MY TECH STACK</span></h1>
         <div className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             {/* Database */}
@@ -160,7 +160,7 @@ export default function SkillsSection() {
 
       {/* ====== DESKTOP LAYOUT ====== */}
       <div className="relative z-10 w-full hidden xl:block px-8">
-        <h1 className="text-white text-6xl font-bold text-center mb-12 mt-24">MY TECH STACK</h1>
+        <h1 className="text-white text-6xl font-bold text-center mb-12 mt-24"><span className="gradient-underline">MY TECH STACK</span></h1>
         <div className="space-y-8">
           {/* Top Row - 3 Cards */}
           <div className="grid grid-cols-3 gap-8">

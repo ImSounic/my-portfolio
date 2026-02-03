@@ -75,7 +75,7 @@ export default function WhyHireMeSection() {
             />
           </div>
           <h2 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white relative z-10 md:text-5xl xl:text-6xl">
-            WHY HIRE ME ?
+            <span className="gradient-underline">WHY HIRE ME ?</span>
           </h2>
         </div>
 

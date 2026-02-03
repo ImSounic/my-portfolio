@@ -141,7 +141,7 @@ export default function AboutSection() {
       <div className="relative z-10 w-full md:max-w-4xl md:mx-auto xl:max-w-7xl xl:px-8">
         {/* Section Title */}
         <h2 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-8 md:text-4xl md:mb-10 xl:text-5xl xl:mb-12">
-          ABOUT ME
+          <span className="gradient-underline">ABOUT ME</span>
         </h2>
 
         {/* Main Content Container */}

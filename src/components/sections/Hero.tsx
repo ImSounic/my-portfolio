@@ -109,22 +109,6 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center w-full md:justify-center">
-        {/* Profile Image */}
-        <div className="mb-8 hero-fade opacity-0 translate-y-[50px] md:mb-16 xl:mb-20">
-          {/* Mobile */}
-          <div className="w-36 h-36 rounded-full overflow-hidden md:hidden">
-            <Image src="/profile.png" alt="Sounic" width={144} height={144} className="object-cover" />
-          </div>
-          {/* Tablet */}
-          <div className="w-40 h-40 rounded-full overflow-hidden hidden md:block xl:hidden">
-            <Image src="/profile.png" alt="Sounic" width={180} height={180} className="object-cover" />
-          </div>
-          {/* Desktop */}
-          <div className="w-50 h-50 rounded-full overflow-hidden hidden xl:block">
-            <Image src="/profile.png" alt="Sounic" width={220} height={220} className="object-cover" />
-          </div>
-        </div>
-
         {/* Title — Mobile */}
         <div className="flex flex-row flex-wrap items-center justify-center gap-2 mb-6 hero-fade opacity-0 translate-y-[50px] md:hidden">
           <BlurText 

@@ -227,10 +227,7 @@ export default function Hero() {
           <div className="relative w-[1px] h-16 bg-white/20 overflow-hidden">
             <div className="scroll-line-pulse" />
           </div>
-          <div className="flex flex-col items-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-            <span className="font-[family-name:var(--font-pixel)] text-[#38bdf8] text-[10px] tracking-wider">{"//"}</span>
-            <p className="font-[family-name:var(--font-pixel)] text-[#E9F5DB]/70 text-[10px] tracking-wider">SCROLL</p>
-          </div>
+          <p className="font-[family-name:var(--font-pixel)] text-[#E9F5DB]/70 text-[10px] tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}><span className="text-[#38bdf8]">{"// "}</span>SCROLL</p>
         </div>
       </div>
 
@@ -240,10 +237,7 @@ export default function Hero() {
           <div className="relative w-[2px] h-36 bg-white/20 overflow-hidden">
             <div className="scroll-line-pulse" />
           </div>
-          <div className="flex flex-col items-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-            <span className="font-[family-name:var(--font-pixel)] text-[#38bdf8] text-xs tracking-wider">{"//"}</span>
-            <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider">SCROLL TO EXPLORE</p>
-          </div>
+          <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}><span className="text-[#38bdf8]">{"// "}</span>SCROLL TO EXPLORE</p>
         </div>
       </div>
 
@@ -253,10 +247,7 @@ export default function Hero() {
           <div className="relative w-[2px] h-48 bg-white/20 overflow-hidden">
             <div className="scroll-line-pulse" />
           </div>
-          <div className="flex flex-col items-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-            <span className="font-[family-name:var(--font-pixel)] text-[#38bdf8] text-xs tracking-wider">{"//"}</span>
-            <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider">SCROLL TO EXPLORE</p>
-          </div>
+          <p className="font-[family-name:var(--font-pixel)] text-white/70 text-xs tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}><span className="text-[#38bdf8]">{"// "}</span>SCROLL TO EXPLORE</p>
         </div>
       </div>
     </section>

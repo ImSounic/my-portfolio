@@ -5,8 +5,8 @@ import Image from 'next/image'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import hireGridSvg from '@/assets/images/hire-grid.svg'
+import titleLineSvg from '@/assets/icons/title-line.svg'
 import TransparentMediaPlayer from '@/components/ui/TransparentMediaPlayer'
-import TitleLine from '@/components/ui/TitleLine'
 
 const satoshi = localFont({
   src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
@@ -146,13 +146,11 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex h-2/3 relative items-center justify-center">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2">
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-1 whitespace-nowrap">{sections[0].title}</h3>
-            <div className="relative">
-              <TitleLine />
-              <div className="absolute top-[10px] left-0 max-w-[200px]">
-                <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[0].description}</p>
-              </div>
+            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white whitespace-nowrap">{sections[0].title}</h3>
+            <div className="relative h-[80px]">
+              <Image src={titleLineSvg} alt="" width={380} height={150} className="absolute -top-2 -left-1" />
             </div>
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[200px]">{sections[0].description}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[0].mp4Src} webmSrc={sections[0].webmSrc} apngSrc={sections[0].apngSrc} altText={sections[0].title} width={500} height={300} />
@@ -221,13 +219,11 @@ export default function WhyHireMeSection() {
           </div>
           <div className="absolute 2xl:right-24 xl:right-16 top-1/2 -translate-y-1/2">
             <div className="flex flex-col items-end">
-              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-1 whitespace-nowrap">{sections[1].title}</h3>
-              <div className="relative">
-                <TitleLine flipped />
-                <div className="absolute top-[10px] right-0 max-w-[200px] text-right">
-                  <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[1].description}</p>
-                </div>
+              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white whitespace-nowrap">{sections[1].title}</h3>
+              <div className="relative h-[80px]">
+                <Image src={titleLineSvg} alt="" width={380} height={150} className="absolute -top-2 -right-1 scale-x-[-1]" />
               </div>
+              <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[200px] text-right">{sections[1].description}</p>
             </div>
           </div>
         </div>
@@ -281,13 +277,11 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex relative items-center justify-center w-full h-full">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2">
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-1 whitespace-nowrap">{sections[2].title}</h3>
-            <div className="relative">
-              <TitleLine />
-              <div className="absolute top-[10px] left-0 max-w-[200px]">
-                <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[2].description}</p>
-              </div>
+            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white whitespace-nowrap">{sections[2].title}</h3>
+            <div className="relative h-[80px]">
+              <Image src={titleLineSvg} alt="" width={380} height={150} className="absolute -top-2 -left-1" />
             </div>
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[200px]">{sections[2].description}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[2].mp4Src} webmSrc={sections[2].webmSrc} apngSrc={sections[2].apngSrc} altText={sections[2].title} width={500} height={300} />

@@ -39,7 +39,7 @@ const projects = [
     shortDesc: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet.',
     image: '/projects/ai-project.jpg',
     github: 'https://github.com/ImSounic/Miscarriage-Prediction-Using-Ensemble-Deep-Learning-Model.git',
-    circleImg: '/project-deeplearning.png',
+    circleImg: '/project-2.png',
     glassCard: '/assets/images/glass-card.png',
   },
   {
@@ -49,7 +49,7 @@ const projects = [
     shortDesc: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms.',
     image: '/projects/house-of-games.jpg',
     github: 'https://github.com/ImSounic/House-Of-Games.git',
-    circleImg: '/project-houseofgames.png',
+    circleImg: '/project-4.png',
     glassCard: '/assets/images/glass-card.png',
   },
   {
@@ -71,7 +71,7 @@ const projects = [
     image: '/projects/cleanslate.jpg',
     comingSoon: true,
     github: '#',
-    circleImg: '/project-cleanslate.png',
+    circleImg: '/project-3.png',
     glassCard: '/assets/images/glass-card.png',
   }
 ]
@@ -258,8 +258,8 @@ function TabletCarousel() {
             <div className="absolute -bottom-[-158px] -right-12 w-35 h-35 z-0">
               <Image src={circleSvg} alt="Circle decoration" width={100} height={100} />
               {project.circleImg && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Image src={project.circleImg} alt="Project text circle" width={250} height={250} className="object-contain animate-spin-slow" />
+                <div className="absolute top-[-20px] left-[-20px] right-[-20px] bottom-[-20px] flex items-center justify-center">
+                  <Image src={project.circleImg} alt="Project text circle" width={200} height={200} className="object-contain animate-spin-slow" />
                 </div>
               )}
             </div>
@@ -391,7 +391,7 @@ function DesktopCarousel() {
               <Image src={circleSvg} alt="Circle decoration" width={140} height={140} />
               {project.circleImg && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Image src={project.circleImg} alt="Project text circle" width={350} height={350} className="object-contain animate-spin-slow" />
+                  <Image src={project.circleImg} alt="Project text circle" width={280} height={280} className="object-contain animate-spin-slow mr-4 mb-4" />
                 </div>
               )}
             </div>

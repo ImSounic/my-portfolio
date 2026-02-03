@@ -5,6 +5,7 @@ import { useState, type ComponentType } from 'react';
 import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
+import SmoothScroll from '@/components/layout/SmoothScroll';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -34,6 +35,7 @@ export default function Home() {
 
   return (
     <FirefoxFixProvider>
+      <SmoothScroll />
       <main className="fade-in">
         <Hero />
         <AboutSection />

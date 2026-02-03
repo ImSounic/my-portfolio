@@ -53,7 +53,7 @@ export default function Home() {
           autoIntensity={1}
         />
       </div>
-      <main className="fade-in">
+      <main className="fade-in relative z-10">
         <Hero />
         <AboutSection />
         <WhyHireMeSection />

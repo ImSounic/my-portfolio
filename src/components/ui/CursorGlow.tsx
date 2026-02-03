@@ -52,7 +52,7 @@ export default function CursorGlow({
   }, [size, opacity])
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div
         ref={glowRef}
         className="absolute top-0 left-0 rounded-full transition-opacity duration-300"

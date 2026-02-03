@@ -9,6 +9,12 @@ html {
   scroll-behavior: auto;
 }
 
+/* Ensure navbar stays fixed in all browsers */
+nav {
+  position: fixed !important;
+  isolation: isolate;
+}
+
 @layer base {
   body {
     @apply bg-[#0c0c0c] text-white antialiased;

@@ -7,11 +7,11 @@ export default function useFirefoxFix() {
     
     if (!isFirefox) return;
     
-    // Force GPU acceleration for smoother rendering
-    document.body.style.transform = 'translateZ(0)';
+    // Firefox-specific optimizations that don't break fixed positioning
+    document.documentElement.style.scrollBehavior = 'auto';
     
     return () => {
-      document.body.style.transform = '';
+      document.documentElement.style.scrollBehavior = '';
     };
   }, []);
 }

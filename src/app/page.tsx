@@ -19,8 +19,14 @@ const SkillsSection = withClientDynamic(() => import('@/components/sections/Skil
 const WorkSection = withClientDynamic(() => import('@/components/sections/WorkSection'));
 const ContactSection = withClientDynamic(() => import('@/components/sections/ContactSection'));
 
-// Assets to preload (only above-the-fold imagery)
-const assetsToPreload = ['/profile.png', '/assets/images/grid.svg', '/assets/images/about-profile.png'];
+// Assets to preload (critical above-the-fold assets)
+const assetsToPreload = [
+  '/profile.png',
+  '/assets/images/grid.svg',
+  '/assets/videos/thinking.webm',
+  '/assets/videos/adapt.webm', 
+  '/assets/videos/code.webm',
+];
 
 export default function Home() {
   const [assetsLoaded, setAssetsLoaded] = useState(false);

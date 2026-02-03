@@ -4,6 +4,10 @@
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { useDeviceDetection } from '@/utils/deviceDetection'
+import gsap from 'gsap'
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const navItems = [
   { href: '#home', label: 'Home' },
@@ -22,7 +26,11 @@ export default function Navbar() {
     e.preventDefault()
     const target = document.querySelector(href)
     if (target) {
-      target.scrollIntoView()
+      gsap.to(window, {
+        scrollTo: { y: target, autoKill: false },
+        duration: 1,
+        ease: 'power2.inOut',
+      })
     }
     setIsMenuOpen(false)
   }

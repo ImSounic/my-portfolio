@@ -93,10 +93,20 @@ export default function LoadingScreen({ onLoaded, assets }: LoadingScreenProps) 
       }
 
       assets.forEach((url) => {
-        const img = new Image()
-        img.onload = handleLoad
-        img.onerror = handleLoad
-        img.src = url
+        if (url.endsWith('.webm') || url.endsWith('.mp4')) {
+          // Preload video
+          const video = document.createElement('video')
+          video.oncanplaythrough = handleLoad
+          video.onerror = handleLoad
+          video.preload = 'auto'
+          video.src = url
+        } else {
+          // Preload image
+          const img = new Image()
+          img.onload = handleLoad
+          img.onerror = handleLoad
+          img.src = url
+        }
       })
     }
 

@@ -9,10 +9,12 @@
   html {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    overflow-y: scroll;
   }
 
   section {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 
@@ -181,25 +183,17 @@ Add this to your globals.css file
   will-change: transform;
 }
 
-/* Firefox-specific fix for viewport height on tablets */
-@-moz-document url-prefix() {
+/* Firefox-specific fixes */
+@supports (-moz-appearance: none) {
   html, body {
     height: 100%;
     overflow-x: hidden;
   }
   
-  section {
-    min-height: 100vh; /* Standard for other browsers */
-    min-height: -moz-available; /* Firefox-specific */
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* Ensure scroll snap works properly in Firefox */
   html {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    overflow-y: scroll;
   }
   
   section {

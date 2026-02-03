@@ -1,7 +1,7 @@
 // Cursor-following glow effect
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface CursorGlowProps {
   color?: string
@@ -16,42 +16,51 @@ export default function CursorGlow({
   opacity = 0.15,
   blur = 100
 }: CursorGlowProps) {
-  const [position, setPosition] = useState({ x: -1000, y: -1000 })
-  const [isVisible, setIsVisible] = useState(false)
+  const glowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const glow = glowRef.current
+    if (!glow) return
+
+    let rafId: number
+
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY })
-      if (!isVisible) setIsVisible(true)
+      // Use requestAnimationFrame for smooth performance
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        if (glow) {
+          glow.style.transform = `translate(${e.clientX - size / 2}px, ${e.clientY - size / 2}px)`
+          glow.style.opacity = String(opacity)
+        }
+      })
     }
 
     const handleMouseLeave = () => {
-      setIsVisible(false)
+      if (glow) {
+        glow.style.opacity = '0'
+      }
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     document.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
+      cancelAnimationFrame(rafId)
       window.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [isVisible])
+  }, [size, opacity])
 
   return (
-    <div
-      className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-      style={{ opacity: isVisible ? 1 : 0 }}
-    >
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div
-        className="absolute rounded-full transition-transform duration-75 ease-out"
+        ref={glowRef}
+        className="absolute top-0 left-0 rounded-full transition-opacity duration-300"
         style={{
           width: size,
           height: size,
-          left: position.x - size / 2,
-          top: position.y - size / 2,
           background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-          opacity,
+          opacity: 0,
           filter: `blur(${blur}px)`,
           willChange: 'transform',
         }}

@@ -154,7 +154,7 @@ nav {
   animation: bubble-rise 1.5s linear forwards;
 }
 
-Add this to your globals.css file
+/* Responsive visibility utilities */
 @media (max-width: 767px) {
   .desktop-only {
     display: none !important;

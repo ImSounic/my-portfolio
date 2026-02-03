@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
-      <CursorGlow color="#38bdf8" size={350} opacity={0.12} blur={80} />
+      {/* CursorGlow positioned after main to not interfere with scroll */}
       <NoiseOverlay opacity={0.025} />
       <main className="fade-in">
         <Hero />
@@ -54,6 +54,7 @@ export default function Home() {
         <WorkSection />
         <ContactSection />
       </main>
+      <CursorGlow color="#38bdf8" size={350} opacity={0.12} blur={80} />
     </FirefoxFixProvider>
   );
 }

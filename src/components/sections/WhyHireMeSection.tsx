@@ -78,7 +78,7 @@ export default function WhyHireMeSection() {
             <div className="w-8 h-8 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center mb-2">
               <span className="text-white/80 text-sm">?</span>
             </div>
-            <div className="w-0.5 h-8 bg-white/20" />
+            <div className="relative w-0.5 h-8 bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
           </div>
         </div>
 
@@ -88,7 +88,7 @@ export default function WhyHireMeSection() {
             <div className="w-10 h-10 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center mb-4">
               <span className="text-white/80 text-lg">?</span>
             </div>
-            <div className="w-0.5 h-[66vh] bg-white/20" />
+            <div className="relative w-0.5 h-[66vh] bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
           </div>
         </div>
 
@@ -98,7 +98,7 @@ export default function WhyHireMeSection() {
             <div className="w-12 h-12 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center mb-4">
               <span className="text-white/80 text-xl">?</span>
             </div>
-            <div className="w-0.5 h-[66vh] bg-white/20" />
+            <div className="relative w-0.5 h-[66vh] bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
           </div>
         </div>
 
@@ -157,12 +157,12 @@ export default function WhyHireMeSection() {
         
         {/* Vertical line — Tablet */}
         <div className="hidden md:block xl:hidden absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-0">
-          <div className="w-0.5 h-full bg-white/20" />
+          <div className="relative w-0.5 h-full bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
         </div>
 
         {/* Vertical line — Desktop */}
         <div className="hidden xl:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
-          <div className="w-0.5 h-full bg-white/20" />
+          <div className="relative w-0.5 h-full bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
         </div>
 
         {/* Mobile: title → video → desc → subtitle */}
@@ -220,12 +220,12 @@ export default function WhyHireMeSection() {
         
         {/* Vertical line — Tablet (half height) */}
         <div className="hidden md:block xl:hidden absolute left-1/2 top-0 bottom-1/2 -translate-x-1/2">
-          <div className="w-0.5 h-[50%] bg-white/20" />
+          <div className="relative w-0.5 h-[50%] bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
         </div>
 
         {/* Vertical line — Desktop (half height) */}
         <div className="hidden xl:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
-          <div className="w-0.5 h-1/2 bg-white/20" />
+          <div className="relative w-0.5 h-1/2 bg-white/20 overflow-hidden"><div className="scroll-line-pulse" /></div>
         </div>
 
         {/* Mobile: title → video → desc → subtitle */}

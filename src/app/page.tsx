@@ -44,14 +44,15 @@ export default function Home() {
     <FirefoxFixProvider>
       <ScrollSnap />
       {/* Liquid Ether Background - subtle, behind grid */}
-      <div className="fixed inset-0 -z-10 pointer-events-none opacity-30">
+      <div className="fixed inset-0 -z-10 pointer-events-none opacity-70">
         <LiquidEther
           colors={['#38bdf8', '#0c0c0c', '#E9F5DB']}
           isBounce={true}
-          mouseForce={12}
+          mouseForce={6}
           resolution={0.4}
           autoDemo={true}
-          autoIntensity={1.5}
+          autoIntensity={1.0}
+          autoSpeed={0.3}
         />
       </div>
       <main className="fade-in">

@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 import ScrollSnap from '@/components/layout/ScrollSnap';
+import NoiseOverlay from '@/components/ui/NoiseOverlay';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -42,6 +43,7 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
+      <NoiseOverlay opacity={0.025} />
       <main className="fade-in">
         <Hero />
         <AboutSection />

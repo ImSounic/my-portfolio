@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 import ScrollSnap from '@/components/layout/ScrollSnap';
-import CursorGlow from '@/components/ui/CursorGlow';
+import LiquidEther from '@/components/ui/reactbits/LiquidEther';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -43,6 +43,16 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
+      {/* Liquid Ether Background */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <LiquidEther
+          colors={['#00aaff', '#3d62f5', '#bcf78d']}
+          isBounce={true}
+          mouseForce={16}
+          resolution={0.5}
+          autoDemo={true}
+        />
+      </div>
       <main className="fade-in">
         <Hero />
         <AboutSection />
@@ -51,7 +61,6 @@ export default function Home() {
         <WorkSection />
         <ContactSection />
       </main>
-      <CursorGlow color="#38bdf8" size={350} opacity={0.12} blur={80} />
     </FirefoxFixProvider>
   );
 }

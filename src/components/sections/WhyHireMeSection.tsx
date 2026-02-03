@@ -5,6 +5,7 @@ import Image from 'next/image'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import hireGridSvg from '@/assets/images/hire-grid.svg'
+import titleLineSvg from '@/assets/icons/title-line.svg'
 import TransparentMediaPlayer from '@/components/ui/TransparentMediaPlayer'
 
 const satoshi = localFont({
@@ -16,6 +17,11 @@ const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-montserrat',
+})
+
+const pixelFont = localFont({
+  src: [{ path: '../../../public/fonts/pixel_font-7.ttf', weight: '400', style: 'normal' }],
+  variable: '--font-pixel',
 })
 
 const sections = [
@@ -49,7 +55,7 @@ const sections = [
 ]
 
 export default function WhyHireMeSection() {
-  const fontClasses = `${satoshi.variable} ${montserrat.variable}`
+  const fontClasses = `${satoshi.variable} ${montserrat.variable} ${pixelFont.variable}`
 
   return (
     <>
@@ -113,7 +119,7 @@ export default function WhyHireMeSection() {
           <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-xs leading-relaxed text-center mb-4">
             {sections[0].description}
           </p>
-          <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-xs italic text-center">
+          <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-xs text-center">
             {sections[0].subtitle}
           </p>
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -132,7 +138,7 @@ export default function WhyHireMeSection() {
               <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[0].description}</p>
             </div>
             <div className="max-w-sm mx-auto">
-              <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-xs italic">{sections[0].subtitle}</p>
+              <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-xs">{sections[0].subtitle}</p>
             </div>
           </div>
         </div>
@@ -140,14 +146,17 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex h-2/3 relative items-center justify-center">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-6">{sections[0].title}</h3>
-            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed">{sections[0].description}</p>
+            <div className="relative">
+              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[0].title}</h3>
+              <Image src={titleLineSvg} alt="" width={400} height={160} className="absolute -bottom-20 -left-4" />
+            </div>
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed mt-6">{sections[0].description}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[0].mp4Src} webmSrc={sections[0].webmSrc} apngSrc={sections[0].apngSrc} altText={sections[0].title} width={500} height={300} />
           </div>
           <div className="absolute 2xl:right-24 xl:right-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-sm italic">{sections[0].subtitle}</p>
+            <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-sm">{sections[0].subtitle}</p>
           </div>
         </div>
       </section>
@@ -176,7 +185,7 @@ export default function WhyHireMeSection() {
           <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-xs leading-relaxed text-center mb-4">
             {sections[1].description}
           </p>
-          <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-xs italic text-center">
+          <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-xs text-center">
             {sections[1].subtitle}
           </p>
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -195,7 +204,7 @@ export default function WhyHireMeSection() {
               <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[1].description}</p>
             </div>
             <div className="max-w-sm mx-auto">
-              <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-xs italic">{sections[1].subtitle}</p>
+              <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-xs">{sections[1].subtitle}</p>
             </div>
           </div>
         </div>
@@ -203,14 +212,17 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column SWAPPED (subtitle LEFT | video CENTER | title+desc RIGHT) */}
         <div className="hidden xl:flex relative items-center justify-center w-full h-full">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-sm italic">{sections[1].subtitle}</p>
+            <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-sm">{sections[1].subtitle}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[1].mp4Src} webmSrc={sections[1].webmSrc} apngSrc={sections[1].apngSrc} altText={sections[1].title} width={500} height={300} />
           </div>
           <div className="absolute 2xl:right-36 xl:right-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-6">{sections[1].title}</h3>
-            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed">{sections[1].description}</p>
+            <div className="relative">
+              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[1].title}</h3>
+              <Image src={titleLineSvg} alt="" width={400} height={160} className="absolute -bottom-20 -left-4" />
+            </div>
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed mt-6">{sections[1].description}</p>
           </div>
         </div>
       </section>
@@ -239,7 +251,7 @@ export default function WhyHireMeSection() {
           <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-xs leading-relaxed text-center mb-4">
             {sections[2].description}
           </p>
-          <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-xs italic text-center">
+          <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-xs text-center">
             {sections[2].subtitle}
           </p>
         </div>
@@ -255,7 +267,7 @@ export default function WhyHireMeSection() {
               <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed">{sections[2].description}</p>
             </div>
             <div className="max-w-sm mx-auto">
-              <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-xs italic">{sections[2].subtitle}</p>
+              <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-xs">{sections[2].subtitle}</p>
             </div>
           </div>
         </div>
@@ -263,14 +275,17 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex relative items-center justify-center w-full h-full">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-6">{sections[2].title}</h3>
-            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed">{sections[2].description}</p>
+            <div className="relative">
+              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[2].title}</h3>
+              <Image src={titleLineSvg} alt="" width={400} height={160} className="absolute -bottom-20 -left-4" />
+            </div>
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed mt-6">{sections[2].description}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[2].mp4Src} webmSrc={sections[2].webmSrc} apngSrc={sections[2].apngSrc} altText={sections[2].title} width={500} height={300} />
           </div>
           <div className="absolute 2xl:right-24 xl:right-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <p className="font-[family-name:var(--font-montserrat)] text-green-400 text-sm italic">{sections[2].subtitle}</p>
+            <p className="font-[family-name:var(--font-pixel)] text-[#3CA2F1] text-sm">{sections[2].subtitle}</p>
           </div>
         </div>
       </section>

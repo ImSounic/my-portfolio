@@ -234,8 +234,8 @@ function TabletCarousel() {
   const isInternship = project.decorationType === 'star'
 
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden md:flex xl:hidden flex-col items-center pt-16 px-6`}>
-      <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white mb-4">PROJECTS</h2>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden md:flex xl:hidden flex-col items-center pt-24 px-6`}>
+      <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white mb-6">PROJECTS</h2>
 
       <div ref={contentRef} className="w-full max-w-xl mx-auto">
         <div className="relative">
@@ -366,8 +366,8 @@ function DesktopCarousel() {
   const isInternship = project.decorationType === 'star'
 
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden xl:flex flex-col items-center pt-20`}>
-      <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white mb-8">PROJECTS</h2>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden xl:flex flex-col items-center pt-28`}>
+      <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white mb-10">PROJECTS</h2>
 
       <div ref={contentRef} className="w-full max-w-7xl mx-auto px-8">
         <div className="relative">

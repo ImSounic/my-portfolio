@@ -7,19 +7,17 @@ export default function useFirefoxFix() {
     
     if (!isFirefox) return;
     
-    const handleScroll = () => {
-      // Force a reflow when scrolling to prevent flickering in Firefox
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => {
-        document.body.style.overflow = '';
-      }, 0);
-    };
+    // Apply Firefox-specific CSS optimizations
+    document.documentElement.style.scrollBehavior = 'auto';
     
-    // Add event listener with passive option for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Force GPU acceleration for smoother scrolling
+    document.body.style.transform = 'translateZ(0)';
+    document.body.style.willChange = 'scroll-position';
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      document.documentElement.style.scrollBehavior = '';
+      document.body.style.transform = '';
+      document.body.style.willChange = '';
     };
   }, []);
 }

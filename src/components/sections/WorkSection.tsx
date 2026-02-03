@@ -26,7 +26,7 @@ const projects = [
     title: 'DEEP LEARNING',
     description: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet. This project showcases my ability to work with complex data and implement advanced machine learning techniques.',
     shortDesc: 'Miscarriage Prediction using Ensemble Deep Learning Models. Models Used in the project: TabTransformer, FT-Transformer, and TabNet.',
-    image: '/projects/ai-project.png',
+    image: '/projects/ai-project.jpg',
     github: 'https://github.com/ImSounic/Miscarriage-Prediction-Using-Ensemble-Deep-Learning-Model.git',
     circleImg: '/project-2.png',
     glassCard: '/assets/images/glass-card.png',
@@ -36,7 +36,7 @@ const projects = [
     title: 'HOUSE OF GAMES',
     description: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms. This Project Highlights My Creativity And Ability To Develop Entertaining Applications.',
     shortDesc: 'Created A Quiz Game Inspired By The British TV Show "House Of Games". Implemented Various Game Rounds And Scoring Mechanisms.',
-    image: '/projects/house-of-games.png',
+    image: '/projects/house-of-games.jpg',
     github: 'https://github.com/ImSounic/House-Of-Games.git',
     circleImg: '/project-4.png',
     glassCard: '/assets/images/glass-card.png',
@@ -46,7 +46,7 @@ const projects = [
     title: 'INTERNSHIP',
     description: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
     shortDesc: 'Built A Chatbot For The Hyderabad Municipal Corporation (India) And Trained Bots Through Web Scraping Using Python. This Experience Enhanced My Backend Development Skills And Gave Me Practical Experience In Deploying AI Solutions.',
-    image: '/projects/internship.png',
+    image: '/projects/internship.jpg',
     company: 'CORETEK LABS',
     duration: 'JUN-SEP 2023',
     decorationType: 'star' as const,
@@ -57,7 +57,7 @@ const projects = [
     title: 'CLEANSLATE',
     description: 'A chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
     shortDesc: 'A smart chore-splitting app for university students sharing living spaces. Features automated task distribution, and real-time notifications to ensure fair household responsibilities. Built to promote harmonious co-living through intelligent chore management.',
-    image: '/projects/cleanslate.png',
+    image: '/projects/cleanslate.jpg',
     comingSoon: true,
     github: '#',
     circleImg: '/project-3.png',
@@ -84,7 +84,7 @@ function MobileWork() {
       <div className="w-full max-w-sm mx-auto">
         <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white text-center mb-4">{project.title}</h3>
         <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
-          <Image src={project.image} alt={project.title} fill className="object-cover" />
+          <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
           {project.github && !project.comingSoon ? (
             <div className="absolute bottom-2 left-2 z-10">
               <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -149,7 +149,7 @@ function TabletProjectViewport({ project, isFirst }: { project: typeof projects[
 
           {/* Project Image */}
           <div className="absolute -bottom-[-132px] -left-12 w-[550px] h-[300px] rounded-2xl overflow-hidden shadow-2xl z-20">
-            <Image src={project.image} alt={project.title} fill className="object-cover" />
+            <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-4 left-4 flex items-center gap-3 z-30">
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
@@ -218,7 +218,7 @@ function DesktopProjectViewport({ project, isFirst }: { project: typeof projects
 
           {/* Project Image */}
           <div className="absolute -bottom-16 -left-[-60px] w-[850px] h-[450px] rounded-2xl overflow-hidden shadow-2xl z-20">
-            <Image src={project.image} alt={project.title} fill className="object-cover" />
+            <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-8 left-8 flex items-center gap-4 z-30">
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">

@@ -25,11 +25,11 @@ const projects = [
   {
     id: 1,
     title: 'BIG DATA',
-    description: 'Distributed PySpark pipeline on HDFS processing Binance crypto data for 1000+ pairs. Built liquidity/volatility metrics and BTC/ETH shock propagation analysis.',
-    shortDesc: 'PySpark pipeline on HDFS analyzing Binance data for 1000+ crypto pairs with shock propagation analysis.',
+    description: 'Distributed PySpark pipeline on HDFS processing Binance crypto data for 1000+ pairs. Built liquidity/volatility metrics and BTC/ETH shock propagation analysis. Studied cross-market spillovers using VAR models and regime-based sensitivity analysis.',
+    shortDesc: 'PySpark pipeline on HDFS analyzing Binance data for 1000+ crypto pairs with shock propagation and spillover analysis.',
     image: '/projects/big-data.png',
     github: 'https://github.com/ImSounic/mbd-project-binance',
-    circleImg: '/project-2.png',
+    circleImg: '/project-bigdata.png',
     glassCard: '/assets/images/glass-card.png',
   },
   {

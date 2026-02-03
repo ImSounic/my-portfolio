@@ -77,12 +77,12 @@ const fontClasses = `${satoshi.variable} ${montserrat.variable}`
 // ============ DOT INDICATORS ============
 function DotIndicators({ total, active, onDotClick }: { total: number; active: number; onDotClick: (index: number) => void }) {
   return (
-    <div className="flex items-center justify-center gap-3 mt-8">
+    <div className="flex items-center justify-center gap-2">
       {Array.from({ length: total }).map((_, i) => (
         <button
           key={i}
           onClick={() => onDotClick(i)}
-          className={`w-3 h-3 rounded-full transition-all duration-300 ${
+          className={`w-2 h-2 rounded-full transition-all duration-300 ${
             i === active 
               ? 'bg-[#E9F5DB] scale-125' 
               : 'bg-white/30 hover:bg-white/50'
@@ -234,8 +234,8 @@ function TabletCarousel() {
   const isInternship = project.decorationType === 'star'
 
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden md:flex xl:hidden flex-col items-center justify-center px-6`}>
-      <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white mb-8">PROJECTS</h2>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden md:flex xl:hidden flex-col items-center pt-16 px-6`}>
+      <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white mb-4">PROJECTS</h2>
 
       <div ref={contentRef} className="w-full max-w-xl mx-auto">
         <div className="relative">
@@ -366,8 +366,8 @@ function DesktopCarousel() {
   const isInternship = project.decorationType === 'star'
 
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden xl:flex flex-col items-center justify-center`}>
-      <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white mb-16">PROJECTS</h2>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/15 relative hidden xl:flex flex-col items-center pt-20`}>
+      <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white mb-8">PROJECTS</h2>
 
       <div ref={contentRef} className="w-full max-w-7xl mx-auto px-8">
         <div className="relative">

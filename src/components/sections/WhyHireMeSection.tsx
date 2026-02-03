@@ -146,11 +146,9 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex h-2/3 relative items-center justify-center">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <div className="relative">
-              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[0].title}</h3>
-              <Image src={titleLineSvg} alt="" width={400} height={160} className="absolute -bottom-20 -left-4" />
-            </div>
-            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed mt-6">{sections[0].description}</p>
+            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[0].title}</h3>
+            <Image src={titleLineSvg} alt="" width={350} height={140} className="mb-2" />
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed">{sections[0].description}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[0].mp4Src} webmSrc={sections[0].webmSrc} apngSrc={sections[0].apngSrc} altText={sections[0].title} width={500} height={300} />
@@ -218,11 +216,9 @@ export default function WhyHireMeSection() {
             <TransparentMediaPlayer mp4Src={sections[1].mp4Src} webmSrc={sections[1].webmSrc} apngSrc={sections[1].apngSrc} altText={sections[1].title} width={500} height={300} />
           </div>
           <div className="absolute 2xl:right-36 xl:right-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <div className="relative">
-              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[1].title}</h3>
-              <Image src={titleLineSvg} alt="" width={400} height={160} className="absolute -bottom-20 -left-4" />
-            </div>
-            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed mt-6">{sections[1].description}</p>
+            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[1].title}</h3>
+            <Image src={titleLineSvg} alt="" width={350} height={140} className="mb-2 transform scale-x-[-1]" />
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed">{sections[1].description}</p>
           </div>
         </div>
       </section>
@@ -275,11 +271,9 @@ export default function WhyHireMeSection() {
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex relative items-center justify-center w-full h-full">
           <div className="absolute 2xl:left-24 xl:left-28 top-1/2 -translate-y-1/2 2xl:max-w-md xl:max-w-sm">
-            <div className="relative">
-              <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[2].title}</h3>
-              <Image src={titleLineSvg} alt="" width={400} height={160} className="absolute -bottom-20 -left-4" />
-            </div>
-            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed mt-6">{sections[2].description}</p>
+            <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white mb-2">{sections[2].title}</h3>
+            <Image src={titleLineSvg} alt="" width={350} height={140} className="mb-2" />
+            <p className="font-[family-name:var(--font-montserrat)] text-gray-300 text-base leading-relaxed">{sections[2].description}</p>
           </div>
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[2].mp4Src} webmSrc={sections[2].webmSrc} apngSrc={sections[2].apngSrc} altText={sections[2].title} width={500} height={300} />

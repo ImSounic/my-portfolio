@@ -1,9 +1,9 @@
-<svg width="400" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Horizontal line at top (right-aligned) -->
-  <line x1="180" y1="2" x2="400" y2="2" stroke="#35EE17" stroke-width="3"/>
+<svg width="450" height="180" viewBox="0 0 450 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horizontal line at top (right-aligned) - extended to cover title width -->
+  <line x1="160" y1="2" x2="450" y2="2" stroke="#35EE17" stroke-width="3"/>
   
   <!-- Diagonal line going down-left -->
-  <line x1="180" y1="2" x2="30" y2="152" stroke="#35EE17" stroke-width="3"/>
+  <line x1="160" y1="2" x2="30" y2="152" stroke="#35EE17" stroke-width="3"/>
   
   <!-- Glowing dot with filter -->
   <defs>

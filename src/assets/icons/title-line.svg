@@ -1,9 +1,9 @@
-<svg width="400" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Horizontal line at top -->
-  <line x1="0" y1="2" x2="220" y2="2" stroke="#35EE17" stroke-width="3"/>
+<svg width="450" height="180" viewBox="0 0 450 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horizontal line at top - extended to cover title width -->
+  <line x1="0" y1="2" x2="290" y2="2" stroke="#35EE17" stroke-width="3"/>
   
   <!-- Diagonal line going down-right -->
-  <line x1="220" y1="2" x2="370" y2="152" stroke="#35EE17" stroke-width="3"/>
+  <line x1="290" y1="2" x2="420" y2="152" stroke="#35EE17" stroke-width="3"/>
   
   <!-- Glowing dot with filter -->
   <defs>
@@ -18,8 +18,8 @@
   </defs>
   
   <!-- Outer ring -->
-  <circle cx="370" cy="152" r="12" stroke="#35EE17" stroke-width="2" fill="none" opacity="0.5"/>
+  <circle cx="420" cy="152" r="12" stroke="#35EE17" stroke-width="2" fill="none" opacity="0.5"/>
   
   <!-- Glowing dot -->
-  <circle cx="370" cy="152" r="8" fill="#35EE17" filter="url(#glow)"/>
+  <circle cx="420" cy="152" r="8" fill="#35EE17" filter="url(#glow)"/>
 </svg>

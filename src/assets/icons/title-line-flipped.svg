@@ -1,0 +1,25 @@
+<svg width="400" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horizontal line at top (right-aligned) -->
+  <line x1="180" y1="2" x2="400" y2="2" stroke="#35EE17" stroke-width="3"/>
+  
+  <!-- Diagonal line going down-left -->
+  <line x1="180" y1="2" x2="30" y2="152" stroke="#35EE17" stroke-width="3"/>
+  
+  <!-- Glowing dot with filter -->
+  <defs>
+    <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer ring -->
+  <circle cx="30" cy="152" r="12" stroke="#35EE17" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Glowing dot -->
+  <circle cx="30" cy="152" r="8" fill="#35EE17" filter="url(#glow2)"/>
+</svg>

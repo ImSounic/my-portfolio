@@ -1,44 +1,25 @@
-<svg width="555" height="221" viewBox="0 0 555 221" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_dddddd_1102_2582)">
-<ellipse cx="519" cy="184.5" rx="8" ry="8.5" fill="#35EE17"/>
-</g>
-<path d="M498.414 182.453C497.694 182.381 497.048 182.905 497.018 183.627C496.86 187.424 497.735 191.203 499.564 194.574C501.603 198.33 504.736 201.412 508.566 203.428C512.397 205.445 516.754 206.306 521.085 205.903C525.417 205.5 529.529 203.851 532.901 201.164C536.274 198.477 538.755 194.873 540.032 190.808C541.308 186.743 541.323 182.399 540.073 178.326C538.824 174.252 536.366 170.633 533.012 167.925C529.986 165.482 526.354 163.88 522.495 163.273C521.797 163.163 521.168 163.679 521.095 164.382C521.021 165.089 521.538 165.718 522.24 165.834C525.578 166.387 528.717 167.787 531.339 169.904C534.292 172.289 536.456 175.476 537.557 179.063C538.657 182.65 538.645 186.475 537.52 190.055C536.396 193.634 534.211 196.808 531.241 199.174C528.272 201.54 524.651 202.992 520.836 203.347C517.022 203.702 513.186 202.944 509.812 201.168C506.439 199.392 503.68 196.679 501.885 193.371C500.301 190.452 499.53 187.186 499.637 183.899C499.66 183.172 499.138 182.525 498.414 182.453Z" fill="#35EE17"/>
-<line x1="513.609" y1="179.22" x2="340.923" y2="1.04393" stroke="#35EE17" stroke-width="3"/>
-<line x1="342" y1="1.5" x2="-1.31134e-07" y2="1.49997" stroke="#35EE17" stroke-width="3"/>
-<defs>
-<filter id="filter0_dddddd_1102_2582" x="483.129" y="148.129" width="71.7424" height="72.7424" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="0.3318"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.207843 0 0 0 0 0.933333 0 0 0 0 0.0901961 0 0 0 1 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1102_2582"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="0.6636"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.207843 0 0 0 0 0.933333 0 0 0 0 0.0901961 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect1_dropShadow_1102_2582" result="effect2_dropShadow_1102_2582"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="2.3226"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.207843 0 0 0 0 0.933333 0 0 0 0 0.0901961 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect2_dropShadow_1102_2582" result="effect3_dropShadow_1102_2582"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="4.6452"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.207843 0 0 0 0 0.933333 0 0 0 0 0.0901961 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect3_dropShadow_1102_2582" result="effect4_dropShadow_1102_2582"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="7.9632"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.207843 0 0 0 0 0.933333 0 0 0 0 0.0901961 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect4_dropShadow_1102_2582" result="effect5_dropShadow_1102_2582"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="13.9356"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.207843 0 0 0 0 0.933333 0 0 0 0 0.0901961 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect5_dropShadow_1102_2582" result="effect6_dropShadow_1102_2582"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect6_dropShadow_1102_2582" result="shape"/>
-</filter>
-</defs>
+<svg width="400" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horizontal line at top -->
+  <line x1="0" y1="2" x2="220" y2="2" stroke="#35EE17" stroke-width="3"/>
+  
+  <!-- Diagonal line going down-right -->
+  <line x1="220" y1="2" x2="370" y2="152" stroke="#35EE17" stroke-width="3"/>
+  
+  <!-- Glowing dot with filter -->
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer ring -->
+  <circle cx="370" cy="152" r="12" stroke="#35EE17" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Glowing dot -->
+  <circle cx="370" cy="152" r="8" fill="#35EE17" filter="url(#glow)"/>
 </svg>

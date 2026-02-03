@@ -146,11 +146,11 @@ export default function WhyHireMeSection() {
 
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex h-2/3 relative items-center justify-center">
-          <div className="absolute 2xl:left-24 xl:left-16 top-1/2 -translate-y-1/2">
+          <div className="absolute 2xl:left-16 xl:left-8 top-1/2 -translate-y-1/2">
             <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white whitespace-nowrap mb-0">{sections[0].title}</h3>
             <div className="relative">
-              <Image src={titleLineSvg} alt="" width={550} height={160} />
-              <p className="absolute top-3 left-0 font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[420px]">{sections[0].description}</p>
+              <Image src={titleLineSvg} alt="" width={450} height={160} />
+              <p className="absolute top-3 left-0 font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[310px]">{sections[0].description}</p>
             </div>
           </div>
           <div className="relative">
@@ -218,12 +218,12 @@ export default function WhyHireMeSection() {
           <div className="relative">
             <TransparentMediaPlayer mp4Src={sections[1].mp4Src} webmSrc={sections[1].webmSrc} apngSrc={sections[1].apngSrc} altText={sections[1].title} width={500} height={300} />
           </div>
-          <div className="absolute 2xl:right-24 xl:right-16 top-1/2 -translate-y-1/2">
+          <div className="absolute 2xl:right-16 xl:right-8 top-1/2 -translate-y-1/2">
             <div className="flex flex-col items-end">
               <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white whitespace-nowrap mb-0">{sections[1].title}</h3>
               <div className="relative">
-                <Image src={titleLineFlippedSvg} alt="" width={550} height={160} />
-                <p className="absolute top-3 right-0 font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[420px] text-right">{sections[1].description}</p>
+                <Image src={titleLineFlippedSvg} alt="" width={450} height={160} />
+                <p className="absolute top-3 right-0 font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[310px] text-right">{sections[1].description}</p>
               </div>
             </div>
           </div>
@@ -277,11 +277,11 @@ export default function WhyHireMeSection() {
 
         {/* Desktop: 3-column (title+desc LEFT | video CENTER | subtitle RIGHT) */}
         <div className="hidden xl:flex relative items-center justify-center w-full h-full">
-          <div className="absolute 2xl:left-24 xl:left-16 top-1/2 -translate-y-1/2">
+          <div className="absolute 2xl:left-16 xl:left-8 top-1/2 -translate-y-1/2">
             <h3 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white whitespace-nowrap mb-0">{sections[2].title}</h3>
             <div className="relative">
-              <Image src={titleLineSvg} alt="" width={550} height={160} />
-              <p className="absolute top-3 left-0 font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[420px]">{sections[2].description}</p>
+              <Image src={titleLineSvg} alt="" width={450} height={160} />
+              <p className="absolute top-3 left-0 font-[family-name:var(--font-montserrat)] text-gray-300 text-sm leading-relaxed max-w-[310px]">{sections[2].description}</p>
             </div>
           </div>
           <div className="relative">

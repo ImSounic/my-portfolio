@@ -13,7 +13,7 @@ const navItems = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#why-hire-me', label: 'Why hire me?' },
-  { href: '#work', label: 'Work' },
+  { href: '#work', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ]
 

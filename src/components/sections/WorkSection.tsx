@@ -79,7 +79,7 @@ function MobileWork() {
   const project = projects[activeProject]
 
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative flex flex-col items-center py-16 px-4 md:hidden`}>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/80 relative flex flex-col items-center py-16 px-4 md:hidden`}>
       <h2 className="font-[family-name:var(--font-satoshi)] text-3xl font-bold text-white text-center mb-6 mt-8">PROJECTS</h2>
       <div className="w-full max-w-sm mx-auto">
         <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white text-center mb-4">{project.title}</h3>
@@ -115,7 +115,7 @@ function TabletProjectViewport({ project, isFirst }: { project: typeof projects[
   const isInternship = project.decorationType === 'star'
   
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative hidden md:flex xl:hidden flex-col items-center justify-center px-6`}>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/80 relative hidden md:flex xl:hidden flex-col items-center justify-center px-6`}>
       {isFirst && (
         <div className="mb-16">
           <h2 className="font-[family-name:var(--font-satoshi)] text-4xl md:text-5xl font-bold text-white">PROJECTS</h2>
@@ -184,7 +184,7 @@ function DesktopProjectViewport({ project, isFirst }: { project: typeof projects
   const isInternship = project.decorationType === 'star'
   
   return (
-    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c] relative hidden xl:flex ${isFirst ? 'flex-col' : ''} items-center justify-center`}>
+    <section className={`${fontClasses} h-screen overflow-hidden bg-[#0c0c0c]/80 relative hidden xl:flex ${isFirst ? 'flex-col' : ''} items-center justify-center`}>
       {isFirst && (
         <div className="mb-24">
           <h2 className="font-[family-name:var(--font-satoshi)] text-6xl md:text-7xl font-bold text-white">PROJECTS</h2>

@@ -43,8 +43,8 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
-      {/* Liquid Ether Background */}
-      <div className="fixed inset-0 -z-10 pointer-events-none opacity-70">
+      {/* Liquid Ether Background - full page */}
+      <div className="fixed inset-0 -z-10 pointer-events-none opacity-80">
         <LiquidEther
           colors={['#e6f88b', '#01e0fe', '#0a1af5']}
           isBounce={true}

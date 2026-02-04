@@ -17,6 +17,10 @@ export default function ScrollSnap() {
     // Only enable on desktop with mouse/trackpad
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
     if (isTouch) return
+    
+    // Disable ScrollSnap for Firefox due to compatibility issues
+    const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+    if (isFirefox) return
 
     const sections = gsap.utils.toArray<HTMLElement>('section')
     if (sections.length === 0) return

@@ -29,11 +29,18 @@ export default function Navbar() {
       // Dispatch event to notify ScrollSnap
       window.dispatchEvent(new CustomEvent('navScroll', { detail: { targetId: href } }))
       
-      gsap.to(window, {
-        scrollTo: { y: target, autoKill: false },
-        duration: 1,
-        ease: 'power2.inOut',
-      })
+      // Check if Firefox - use native scroll as fallback
+      const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+      
+      if (isFirefox) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } else {
+        gsap.to(window, {
+          scrollTo: { y: target, autoKill: false },
+          duration: 1,
+          ease: 'power2.inOut',
+        })
+      }
     }
     setIsMenuOpen(false)
   }

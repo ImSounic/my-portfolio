@@ -14,6 +14,7 @@ import { Montserrat } from 'next/font/google'
 import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
 import { BlurText, ShinyText } from '@/components/ui/reactbits'
 import RippleGrid from '@/components/ui/reactbits/RippleGrid'
+import DecryptedText from '@/components/ui/reactbits/DecryptedText'
 
 const satoshi = localFont({
   src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
@@ -35,6 +36,7 @@ export default function Hero() {
   const [time, setTime] = useState('');
   const [weather, setWeather] = useState('');
   const [mounted, setMounted] = useState(false);
+  const [decryptionComplete, setDecryptionComplete] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Bubble positions for tablet resume button animation
@@ -75,8 +77,10 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    if (!decryptionComplete) return;
+    
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.5 });
+      const tl = gsap.timeline();
       tl.to('.hero-fade', {
         y: 0,
         autoAlpha: 1,
@@ -87,7 +91,7 @@ export default function Hero() {
     }, heroRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [decryptionComplete]);
 
   const timeWeatherDisplay = mounted ? (
     <p className="text-gray-400 text-sm">{time} {weather}</p>
@@ -117,63 +121,42 @@ export default function Hero() {
       </div>
       <div className="relative z-10 flex flex-col items-center text-center w-full md:justify-center">
         {/* Title — Mobile */}
-        <div className="flex flex-row flex-wrap items-center justify-center gap-2 mb-6 hero-fade opacity-0 translate-y-[50px] md:hidden">
-          <BlurText 
-            text="HELLO! I'M" 
+        <div className="flex flex-row flex-wrap items-center justify-center gap-2 mb-6 md:hidden relative">
+          <DecryptedText
+            text="HELLO! I'M SOUNIC"
             className="font-[family-name:var(--font-satoshi)] text-white text-3xl font-bold"
-            delay={100}
-            animateBy="words"
+            speed={50}
+            maxIterations={20}
+            animateOn="view"
+            onAnimationComplete={() => setDecryptionComplete(true)}
           />
-          <span className="font-[family-name:var(--font-satoshi)] text-3xl font-bold relative" style={{ WebkitTextStroke: '1px white', WebkitTextFillColor: 'transparent' }}>
-            <ShinyText 
-              text="SOUNIC" 
-              color="transparent"
-              shineColor="rgba(255,255,255,0.8)"
-              speed={3}
-              className="font-[family-name:var(--font-satoshi)]"
-            />
-            <Image src={starSvg} alt="Star decoration" width={45} height={45} className="absolute -top-3 -right-2 w-12 h-12 animate-star-rotation" style={{ transform: 'translate(50%, -50%)' }} />
-          </span>
+          <Image src={starSvg} alt="Star decoration" width={45} height={45} className="absolute -top-3 right-0 w-12 h-12 animate-star-rotation" style={{ transform: 'translate(50%, -50%)' }} />
         </div>
 
         {/* Title — Tablet */}
-        <div className="hidden md:flex xl:hidden text-5xl md:text-6xl font-bold mb-6 items-center justify-center gap-3 hero-fade opacity-0 translate-y-[50px]">
-          <BlurText 
-            text="HELLO! I'M" 
+        <div className="hidden md:flex xl:hidden text-5xl md:text-6xl font-bold mb-6 items-center justify-center relative">
+          <DecryptedText
+            text="HELLO! I'M SOUNIC"
             className="font-[family-name:var(--font-satoshi)] text-white"
-            delay={100}
-            animateBy="words"
+            speed={50}
+            maxIterations={20}
+            animateOn="view"
+            onAnimationComplete={() => setDecryptionComplete(true)}
           />
-          <span className="font-[family-name:var(--font-satoshi)] relative" style={{ WebkitTextStroke: '2px white', WebkitTextFillColor: 'transparent' }}>
-            <ShinyText 
-              text="SOUNIC" 
-              color="transparent"
-              shineColor="rgba(255,255,255,0.8)"
-              speed={3}
-              className="font-[family-name:var(--font-satoshi)]"
-            />
-            <Image src={starSvg} alt="Star decoration" width={80} height={80} className="absolute -top-4 -right-4 w-16 h-16 animate-star-rotation" style={{ transform: 'translate(50%, -50%)' }} />
-          </span>
+          <Image src={starSvg} alt="Star decoration" width={80} height={80} className="absolute -top-4 -right-4 w-16 h-16 animate-star-rotation" style={{ transform: 'translate(50%, -50%)' }} />
         </div>
 
         {/* Title — Desktop */}
-        <div className="hidden xl:flex text-6xl md:text-7xl lg:text-8xl font-bold mb-8 items-center justify-center gap-4 hero-fade opacity-0 translate-y-[50px]">
-          <BlurText 
-            text="HELLO! I'M" 
+        <div className="hidden xl:flex text-6xl md:text-7xl lg:text-8xl font-bold mb-8 items-center justify-center relative">
+          <DecryptedText
+            text="HELLO! I'M SOUNIC"
             className="font-[family-name:var(--font-satoshi)] text-white"
-            delay={100}
-            animateBy="words"
+            speed={50}
+            maxIterations={20}
+            animateOn="view"
+            onAnimationComplete={() => setDecryptionComplete(true)}
           />
-          <span className="font-[family-name:var(--font-satoshi)] relative" style={{ WebkitTextStroke: '2px white', WebkitTextFillColor: 'transparent' }}>
-            <ShinyText 
-              text="SOUNIC" 
-              color="transparent"
-              shineColor="rgba(255,255,255,0.8)"
-              speed={3}
-              className="font-[family-name:var(--font-satoshi)]"
-            />
-            <Image src={starSvg} alt="Star decoration" width={100} height={100} className="absolute -top-4 -right-4 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 animate-star-rotation" style={{ transform: 'translate(50%, -50%)' }} />
-          </span>
+          <Image src={starSvg} alt="Star decoration" width={100} height={100} className="absolute -top-4 -right-4 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 animate-star-rotation" style={{ transform: 'translate(50%, -50%)' }} />
         </div>
 
         {/* Description */}

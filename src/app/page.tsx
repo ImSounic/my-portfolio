@@ -47,8 +47,9 @@ export default function Home() {
         <RippleGrid
           gridSize={14}
           vignetteStrength={5}
-          gridColor="#29a2ff"
+          gridColor="#3CA2F1"
           gridThickness={45}
+          mouseInteraction={true}
         />
       </div>
       <main className="fade-in relative z-10">

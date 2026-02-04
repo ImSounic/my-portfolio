@@ -125,7 +125,7 @@ export default function Hero() {
             text="HELLO! I'M SOUNIC"
             className="font-[family-name:var(--font-satoshi)] text-white text-3xl font-bold"
             speed={50}
-            maxIterations={20}
+            maxIterations={20} sequential={true} revealDirection="start"
             animateOn="view"
             onAnimationComplete={() => setDecryptionComplete(true)}
           />
@@ -138,7 +138,7 @@ export default function Hero() {
             text="HELLO! I'M SOUNIC"
             className="font-[family-name:var(--font-satoshi)] text-white"
             speed={50}
-            maxIterations={20}
+            maxIterations={20} sequential={true} revealDirection="start"
             animateOn="view"
             onAnimationComplete={() => setDecryptionComplete(true)}
           />
@@ -151,7 +151,7 @@ export default function Hero() {
             text="HELLO! I'M SOUNIC"
             className="font-[family-name:var(--font-satoshi)] text-white"
             speed={50}
-            maxIterations={20}
+            maxIterations={20} sequential={true} revealDirection="start"
             animateOn="view"
             onAnimationComplete={() => setDecryptionComplete(true)}
           />

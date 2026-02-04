@@ -183,7 +183,7 @@ export default function Hero() {
 
         {/* Buttons — Mobile (stacked) */}
         <div className="flex flex-col gap-3 w-full mb-8 hero-fade opacity-0 translate-y-[50px] md:hidden">
-          <button onClick={scrollToContact} className="w-full py-3 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] flex items-center justify-center gap-2">
+          <button onClick={scrollToContact} className="cursor-target w-full py-3 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] flex items-center justify-center gap-2">
             Let&apos;s Talk
             <Image src={handSvg} alt="Hand icon" width={18} height={18} />
           </button>
@@ -195,7 +195,7 @@ export default function Hero() {
 
         {/* Buttons — Tablet (row with bubble animation) */}
         <div className="hidden md:flex xl:hidden gap-4 mb-10 hero-fade opacity-0 translate-y-[50px]">
-          <button onClick={scrollToContact} className="px-8 py-4 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-2">
+          <button onClick={scrollToContact} className="cursor-target px-8 py-4 bg-[#E9F5DB] text-black font-medium text-base rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-2">
             Let&apos;s Talk
             <Image src={handSvg} alt="Hand icon" width={20} height={20} />
           </button>
@@ -207,7 +207,7 @@ export default function Hero() {
 
         {/* Buttons — Desktop (row, larger) */}
         <div className="hidden xl:flex gap-6 mb-12 hero-fade opacity-0 translate-y-[50px]">
-          <button onClick={scrollToContact} className="px-12 py-5 bg-[#E9F5DB] text-black font-medium text-lg rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-3">
+          <button onClick={scrollToContact} className="cursor-target px-12 py-5 bg-[#E9F5DB] text-black font-medium text-lg rounded-[10px] hover:bg-[#E9F5DB]/90 transition-colors flex items-center gap-3">
             Let&apos;s Talk
             <Image src={handSvg} alt="Hand icon" width={24} height={24} />
           </button>

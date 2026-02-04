@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 import ScrollSnap from '@/components/layout/ScrollSnap';
+import TargetCursor from '@/components/ui/reactbits/TargetCursor';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -41,6 +42,12 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
+      <TargetCursor
+        targetSelector=".cursor-target"
+        spinDuration={3}
+        hoverDuration={0.4}
+        parallaxOn={true}
+      />
       <main className="fade-in relative z-10">
         <Hero />
         <AboutSection />

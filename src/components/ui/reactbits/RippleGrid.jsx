@@ -181,23 +181,20 @@ void main() {
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height; // Flip Y coordinate
       targetMouseRef.current = { x, y };
-    };
-
-    const handleMouseEnter = () => {
-      if (!mouseInteraction) return;
-      mouseInfluenceRef.current = 1.0;
-    };
-
-    const handleMouseLeave = () => {
-      if (!mouseInteraction) return;
-      mouseInfluenceRef.current = 0.0;
+      
+      // Check if mouse is within container bounds
+      if (e.clientX >= rect.left && e.clientX <= rect.right && 
+          e.clientY >= rect.top && e.clientY <= rect.bottom) {
+        mouseInfluenceRef.current = 1.0;
+      } else {
+        mouseInfluenceRef.current = 0.0;
+      }
     };
 
     window.addEventListener('resize', resize);
     if (mouseInteraction) {
-      containerRef.current.addEventListener('mousemove', handleMouseMove);
-      containerRef.current.addEventListener('mouseenter', handleMouseEnter);
-      containerRef.current.addEventListener('mouseleave', handleMouseLeave);
+      // Use window-level mouse tracking to work through content above
+      window.addEventListener('mousemove', handleMouseMove);
     }
     resize();
 
@@ -225,10 +222,8 @@ void main() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
-      if (mouseInteraction && container) {
-        container.removeEventListener('mousemove', handleMouseMove);
-        container.removeEventListener('mouseenter', handleMouseEnter);
-        container.removeEventListener('mouseleave', handleMouseLeave);
+      if (mouseInteraction) {
+        window.removeEventListener('mousemove', handleMouseMove);
       }
       renderer.gl.getExtension('WEBGL_lose_context')?.loseContext();
       container?.removeChild(gl.canvas);

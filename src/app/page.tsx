@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 import ScrollSnap from '@/components/layout/ScrollSnap';
-import RippleGrid from '@/components/ui/reactbits/RippleGrid';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -42,17 +41,6 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
-      {/* Ripple Grid Background - full page */}
-      <div className="fixed inset-0 -z-10">
-        <RippleGrid
-          gridSize={14}
-          vignetteStrength={5}
-          gridColor="#3CA2F1"
-          gridThickness={45}
-          mouseInteraction={true}
-          opacity={0.7}
-        />
-      </div>
       <main className="fade-in relative z-10">
         <Hero />
         <AboutSection />

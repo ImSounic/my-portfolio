@@ -13,6 +13,7 @@ import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
 import { BlurText, ShinyText } from '@/components/ui/reactbits'
+import RippleGrid from '@/components/ui/reactbits/RippleGrid'
 
 const satoshi = localFont({
   src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
@@ -103,6 +104,17 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative h-screen overflow-hidden flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-8 md:py-0 xl:px-0`}>
+      {/* Ripple Grid Background */}
+      <div className="absolute inset-0 z-0">
+        <RippleGrid
+          gridSize={14}
+          vignetteStrength={5}
+          gridColor="#3CA2F1"
+          gridThickness={45}
+          mouseInteraction={true}
+          opacity={0.7}
+        />
+      </div>
       <div className="relative z-10 flex flex-col items-center text-center w-full md:justify-center">
         {/* Title — Mobile */}
         <div className="flex flex-row flex-wrap items-center justify-center gap-2 mb-6 hero-fade opacity-0 translate-y-[50px] md:hidden">

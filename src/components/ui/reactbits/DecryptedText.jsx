@@ -30,7 +30,7 @@ export default function DecryptedText({
   parentClassName = '',
   encryptedClassName = '',
   animateOn = 'hover',
-  onAnimationComplete,
+  onAnimationComplete = () => {},
   ...props
 }) {
   const [displayText, setDisplayText] = useState(text);

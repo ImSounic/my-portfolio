@@ -17,6 +17,12 @@ nav {
 @layer base {
   body {
     @apply bg-[#0c0c0c] text-white antialiased;
+    cursor: none;
+  }
+  
+  /* Hide cursor on all interactive elements */
+  a, button, input, textarea, select, [role="button"] {
+    cursor: none !important;
   }
 }
 

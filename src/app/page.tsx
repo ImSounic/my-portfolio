@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import FirefoxFixProvider from '@/components/layout/FirefoxFixProvider';
 import ScrollSnap from '@/components/layout/ScrollSnap';
-import LiquidEther from '@/components/ui/reactbits/LiquidEther';
+import RippleGrid from '@/components/ui/reactbits/RippleGrid';
 
 type SectionComponent = ComponentType;
 const withClientDynamic = (loader: () => Promise<{ default: SectionComponent }>) =>
@@ -23,7 +23,6 @@ const ContactSection = withClientDynamic(() => import('@/components/sections/Con
 // Assets to preload (critical above-the-fold assets)
 const assetsToPreload = [
   '/profile.png',
-  '/assets/images/grid.svg',
   '/assets/videos/thinking.webm',
   '/assets/videos/adapt.webm', 
   '/assets/videos/code.webm',
@@ -43,21 +42,13 @@ export default function Home() {
   return (
     <FirefoxFixProvider>
       <ScrollSnap />
-      {/* Liquid Ether Background - full page */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <LiquidEther
-          colors={['#e6f88b', '#01e0fe', '#0a1af5']}
-          mouseForce={20}
-          cursorSize={90}
-          resolution={0.5}
-          autoSpeed={0.2}
-          autoIntensity={1.1}
-          iterationsPoisson={32}
-          isBounce={true}
-          autoDemo={true}
-          isViscous={true}
-          viscous={30}
-          iterationsViscous={32}
+      {/* Ripple Grid Background - full page */}
+      <div className="fixed inset-0 -z-10">
+        <RippleGrid
+          gridSize={14}
+          vignetteStrength={5}
+          gridColor="#29a2ff"
+          gridThickness={45}
         />
       </div>
       <main className="fade-in relative z-10">

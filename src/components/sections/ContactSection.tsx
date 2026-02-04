@@ -26,7 +26,7 @@ export default function ContactSection() {
   return (
     <section 
       id="contact"
-      className={`${satoshi.variable} h-screen overflow-hidden bg-[#0c0c0c]/30 relative flex flex-col items-center justify-center px-4 py-16 md:px-6 md:py-0 xl:px-0`}
+      className={`${satoshi.variable} h-screen overflow-hidden relative flex flex-col items-center justify-center px-4 py-16 md:px-6 md:py-0 xl:px-0`}
     >
       {/* Background Grid at the bottom */}
       <div className="absolute bottom-0 left-0 w-full h-1/3 md:h-1/2">

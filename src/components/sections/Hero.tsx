@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import gridSvg from '@/assets/images/grid.svg'
 import starSvg from '@/assets/icons/star.svg'
 import locationSvg from '@/assets/icons/location.svg'
 import handSvg from '@/assets/icons/hand.svg'
@@ -103,11 +102,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={heroRef} id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative h-screen overflow-hidden bg-[#0c0c0c]/30 flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-8 md:py-0 xl:px-0`}>
-      <div className="absolute inset-0 w-full h-full">
-        <Image src={gridSvg} alt="Grid background" fill className="object-cover opacity-75" />
-      </div>
-
+    <section ref={heroRef} id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative h-screen overflow-hidden flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-8 md:py-0 xl:px-0`}>
       <div className="relative z-10 flex flex-col items-center text-center w-full md:justify-center">
         {/* Title — Mobile */}
         <div className="flex flex-row flex-wrap items-center justify-center gap-2 mb-6 hero-fade opacity-0 translate-y-[50px] md:hidden">

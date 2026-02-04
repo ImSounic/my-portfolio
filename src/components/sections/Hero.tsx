@@ -36,7 +36,6 @@ export default function Hero() {
   const [time, setTime] = useState('');
   const [weather, setWeather] = useState('');
   const [mounted, setMounted] = useState(false);
-  const [decryptionComplete, setDecryptionComplete] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Bubble positions for tablet resume button animation
@@ -77,10 +76,8 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!decryptionComplete) return;
-    
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({ delay: 0.5 });
       tl.to('.hero-fade', {
         y: 0,
         autoAlpha: 1,
@@ -91,7 +88,7 @@ export default function Hero() {
     }, heroRef);
 
     return () => ctx.revert();
-  }, [decryptionComplete]);
+  }, []);
 
   const timeWeatherDisplay = mounted ? (
     <p className="text-gray-400 text-sm">{time} {weather}</p>
@@ -190,7 +187,6 @@ export default function Hero() {
             sequential={true}
             revealDirection="start"
             animateOn="view"
-            onAnimationComplete={() => setDecryptionComplete(true)}
           />
         </div>
 

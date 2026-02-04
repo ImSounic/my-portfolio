@@ -50,6 +50,7 @@ export default function Home() {
           gridColor="#3CA2F1"
           gridThickness={45}
           mouseInteraction={true}
+          opacity={0.7}
         />
       </div>
       <main className="fade-in relative z-10">

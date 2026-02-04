@@ -37,6 +37,22 @@ export default function ScrollSnap() {
       })
     }
 
+    // Listen for navbar navigation events
+    const handleNavScroll = (e: Event) => {
+      const customEvent = e as CustomEvent<{ targetId: string }>
+      const targetId = customEvent.detail.targetId
+      const targetIndex = sections.findIndex(s => s.id === targetId.replace('#', ''))
+      if (targetIndex !== -1) {
+        currentIndex.current = targetIndex
+        isAnimating.current = true
+        setTimeout(() => {
+          isAnimating.current = false
+        }, 1100) // Slightly longer than scroll duration
+      }
+    }
+    
+    window.addEventListener('navScroll', handleNavScroll)
+
     // Find current section on load
     const findCurrentSection = () => {
       const windowHeight = window.innerHeight
@@ -86,6 +102,7 @@ export default function ScrollSnap() {
     return () => {
       observer.kill()
       window.removeEventListener('keydown', handleKeydown)
+      window.removeEventListener('navScroll', handleNavScroll)
       ScrollTrigger.getAll().forEach(t => t.kill())
     }
   }, [])

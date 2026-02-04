@@ -26,6 +26,9 @@ export default function Navbar() {
     e.preventDefault()
     const target = document.querySelector(href)
     if (target) {
+      // Dispatch event to notify ScrollSnap
+      window.dispatchEvent(new CustomEvent('navScroll', { detail: { targetId: href } }))
+      
       gsap.to(window, {
         scrollTo: { y: target, autoKill: false },
         duration: 1,

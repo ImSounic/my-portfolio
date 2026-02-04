@@ -14,7 +14,6 @@ import { Montserrat } from 'next/font/google'
 import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
 import { BlurText, ShinyText } from '@/components/ui/reactbits'
 import RippleGrid from '@/components/ui/reactbits/RippleGrid'
-import DecryptedText from '@/components/ui/reactbits/DecryptedText'
 
 const satoshi = localFont({
   src: [{ path: '../../../public/fonts/Satoshi-Black.otf', weight: '900', style: 'normal' }],
@@ -178,17 +177,9 @@ export default function Hero() {
         </div>
 
         {/* Description */}
-        <div className="font-[family-name:var(--font-montserrat)] text-base text-gray-300 mb-8 leading-relaxed md:text-xl md:max-w-2xl md:mb-10 xl:text-xl xl:max-w-4xl xl:mb-12">
-          <DecryptedText
-            text="First-year Master's student in Data Science & Technologies, graduating 2027. Seeking software engineering or AI/ML internships starting September 2026."
-            className="font-[family-name:var(--font-montserrat)]"
-            speed={50}
-            maxIterations={20}
-            sequential={true}
-            revealDirection="start"
-            animateOn="view"
-          />
-        </div>
+        <p className="font-[family-name:var(--font-montserrat)] text-base text-gray-300 mb-8 leading-relaxed hero-fade opacity-0 translate-y-[50px] md:text-xl md:max-w-2xl md:mb-10 xl:text-xl xl:max-w-4xl xl:mb-12">
+          First-year Master&apos;s student in Data Science &amp; Technologies, graduating 2027. Seeking software engineering or AI/ML internships starting September 2026.
+        </p>
 
         {/* Buttons — Mobile (stacked) */}
         <div className="flex flex-col gap-3 w-full mb-8 hero-fade opacity-0 translate-y-[50px] md:hidden">

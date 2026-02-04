@@ -47,10 +47,17 @@ export default function Home() {
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <LiquidEther
           colors={['#e6f88b', '#01e0fe', '#0a1af5']}
+          mouseForce={20}
+          cursorSize={90}
+          resolution={0.5}
+          autoSpeed={0.2}
+          autoIntensity={1.1}
+          iterationsPoisson={32}
           isBounce={true}
-          mouseForce={12}
-          autoSpeed={0.3}
-          autoIntensity={1}
+          autoDemo={true}
+          isViscous={true}
+          viscous={30}
+          iterationsViscous={32}
         />
       </div>
       <main className="fade-in relative z-10">

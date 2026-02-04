@@ -182,7 +182,7 @@ export default function Hero() {
           <DecryptedText
             text="First-year Master's student in Data Science & Technologies, graduating 2027. Seeking software engineering or AI/ML internships starting September 2026."
             className="font-[family-name:var(--font-montserrat)]"
-            speed={100}
+            speed={50}
             maxIterations={20}
             sequential={true}
             revealDirection="start"

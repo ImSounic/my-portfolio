@@ -12,7 +12,6 @@ import greenBoxSvg from '@/assets/icons/green-box.svg'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
 import CircleFillOverlay from '@/components/ui/CircleFillOverlay'
-import { BlurText, ShinyText } from '@/components/ui/reactbits'
 import RippleGrid from '@/components/ui/reactbits/RippleGrid'
 import DecryptedText from '@/components/ui/reactbits/DecryptedText'
 

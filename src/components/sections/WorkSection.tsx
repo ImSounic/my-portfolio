@@ -123,9 +123,9 @@ function MobileCarousel() {
       duration: 0.3,
       ease: 'power2.in',
       onComplete: () => {
-        setActiveProject(newIndex)
         gsap.set(contentRef.current, { x: enterX, opacity: 0 })
-        requestAnimationFrame(() => {
+        setActiveProject(newIndex)
+        setTimeout(() => {
           gsap.to(contentRef.current, {
             x: 0,
             opacity: 1,
@@ -133,7 +133,7 @@ function MobileCarousel() {
             ease: 'power2.out',
             onComplete: () => setIsAnimating(false),
           })
-        })
+        }, 50)
       },
     })
   }, [isAnimating])
@@ -163,7 +163,7 @@ function MobileCarousel() {
       <div ref={contentRef} className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white text-center mb-4">{project.title}</h3>
         <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
-          <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
+          <Image src={project.image} alt={project.title} fill className="object-cover" />
           {project.github && !project.comingSoon ? (
             <div className="absolute bottom-2 left-2 z-10">
               <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -212,9 +212,9 @@ function TabletCarousel() {
       duration: 0.4,
       ease: 'power2.in',
       onComplete: () => {
-        setActiveProject(newIndex)
         gsap.set(contentRef.current, { x: enterX, scale: 0.95, opacity: 0 })
-        requestAnimationFrame(() => {
+        setActiveProject(newIndex)
+        setTimeout(() => {
           gsap.to(contentRef.current, {
             x: 0,
             opacity: 1,
@@ -223,7 +223,7 @@ function TabletCarousel() {
             ease: 'power2.out',
             onComplete: () => setIsAnimating(false),
           })
-        })
+        }, 50)
       },
     })
   }, [isAnimating])
@@ -279,7 +279,7 @@ function TabletCarousel() {
 
           {/* Project Image */}
           <div className="absolute -bottom-[-80px] -left-8 w-[450px] h-[250px] rounded-2xl overflow-hidden shadow-2xl z-20">
-            <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
+            <Image src={project.image} alt={project.title} fill className="object-cover" />
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-4 left-4 flex items-center gap-3 z-30">
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
@@ -346,9 +346,9 @@ function DesktopCarousel() {
       duration: 0.5,
       ease: 'power3.in',
       onComplete: () => {
-        setActiveProject(newIndex)
         gsap.set(contentRef.current, { x: enterX, scale: 0.95, opacity: 0 })
-        requestAnimationFrame(() => {
+        setActiveProject(newIndex)
+        setTimeout(() => {
           gsap.to(contentRef.current, {
             x: 0,
             opacity: 1,
@@ -357,7 +357,7 @@ function DesktopCarousel() {
             ease: 'power3.out',
             onComplete: () => setIsAnimating(false),
           })
-        })
+        }, 50)
       },
     })
   }, [isAnimating])
@@ -413,7 +413,7 @@ function DesktopCarousel() {
 
           {/* Project Image */}
           <div className="absolute -bottom-16 -left-[-60px] w-[850px] h-[450px] rounded-2xl overflow-hidden shadow-2xl z-20">
-            <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" />
+            <Image src={project.image} alt={project.title} fill className="object-cover" />
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-8 left-8 flex items-center gap-4 z-30">
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">

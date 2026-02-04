@@ -43,7 +43,7 @@ export default function Home() {
     <FirefoxFixProvider>
       <ScrollSnap />
       <TargetCursor
-        targetSelector=".cursor-target"
+        targetSelector="button, a"
         spinDuration={3}
         hoverDuration={0.4}
         parallaxOn={true}

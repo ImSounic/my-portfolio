@@ -2,7 +2,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
@@ -462,6 +462,14 @@ function DesktopCarousel() {
 
 // ============ MAIN EXPORT ============
 export default function WorkSection() {
+  // Preload all project images on mount
+  useEffect(() => {
+    projects.forEach((project) => {
+      const img = new window.Image()
+      img.src = project.image
+    })
+  }, [])
+
   return (
     <div id="work">
       <MobileCarousel />

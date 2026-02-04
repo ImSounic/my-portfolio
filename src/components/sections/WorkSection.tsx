@@ -124,13 +124,15 @@ function MobileCarousel() {
       ease: 'power2.in',
       onComplete: () => {
         setActiveProject(newIndex)
-        gsap.set(contentRef.current, { x: enterX })
-        gsap.to(contentRef.current, {
-          x: 0,
-          opacity: 1,
-          duration: 0.3,
-          ease: 'power2.out',
-          onComplete: () => setIsAnimating(false),
+        gsap.set(contentRef.current, { x: enterX, opacity: 0 })
+        requestAnimationFrame(() => {
+          gsap.to(contentRef.current, {
+            x: 0,
+            opacity: 1,
+            duration: 0.3,
+            ease: 'power2.out',
+            onComplete: () => setIsAnimating(false),
+          })
         })
       },
     })
@@ -211,14 +213,16 @@ function TabletCarousel() {
       ease: 'power2.in',
       onComplete: () => {
         setActiveProject(newIndex)
-        gsap.set(contentRef.current, { x: enterX, scale: 0.95 })
-        gsap.to(contentRef.current, {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          ease: 'power2.out',
-          onComplete: () => setIsAnimating(false),
+        gsap.set(contentRef.current, { x: enterX, scale: 0.95, opacity: 0 })
+        requestAnimationFrame(() => {
+          gsap.to(contentRef.current, {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+            onComplete: () => setIsAnimating(false),
+          })
         })
       },
     })
@@ -343,14 +347,16 @@ function DesktopCarousel() {
       ease: 'power3.in',
       onComplete: () => {
         setActiveProject(newIndex)
-        gsap.set(contentRef.current, { x: enterX, scale: 0.95 })
-        gsap.to(contentRef.current, {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.5,
-          ease: 'power3.out',
-          onComplete: () => setIsAnimating(false),
+        gsap.set(contentRef.current, { x: enterX, scale: 0.95, opacity: 0 })
+        requestAnimationFrame(() => {
+          gsap.to(contentRef.current, {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: 'power3.out',
+            onComplete: () => setIsAnimating(false),
+          })
         })
       },
     })

@@ -112,7 +112,7 @@ export default function Hero() {
           gridColor="#3CA2F1"
           gridThickness={45}
           mouseInteraction={true}
-          opacity={0.7}
+          opacity={0.6}
         />
       </div>
       <div className="relative z-10 flex flex-col items-center text-center w-full md:justify-center">

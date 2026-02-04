@@ -103,7 +103,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={heroRef} id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative h-screen overflow-hidden bg-[#0c0c0c]/10 flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-8 md:py-0 xl:px-0`}>
+    <section ref={heroRef} id="home" className={`${satoshi.variable} ${montserrat.variable} ${pixelFont.variable} relative h-screen overflow-hidden bg-[#0c0c0c]/30 flex flex-col items-center justify-center px-4 py-16 md:flex-row md:px-8 md:py-0 xl:px-0`}>
       <div className="absolute inset-0 w-full h-full">
         <Image src={gridSvg} alt="Grid background" fill className="object-cover opacity-75" />
       </div>

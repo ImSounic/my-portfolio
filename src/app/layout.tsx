@@ -2,7 +2,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Navbar from '@/components/layout/Navbar'
 import Analytics from '@/components/analytics/Analytics'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -35,7 +34,6 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/pixel_font-7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.className} bg-[#0c0c0c] text-white`}>
-        <Navbar />
         {children}
         <Analytics />
       </body>

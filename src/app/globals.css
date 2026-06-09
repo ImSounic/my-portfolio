@@ -8,8 +8,10 @@ html {
   scroll-behavior: auto;
 }
 
-/* Ensure navbar stays fixed in all browsers */
-nav {
+/* Ensure the Original theme's navbar stays fixed in all browsers.
+   Scoped to .theme-original so it doesn't force OTHER themes' <nav> elements
+   (e.g. the Minimal masthead) out of their normal/flex layout. */
+.theme-original nav {
   position: fixed !important;
   isolation: isolate;
 }
@@ -17,11 +19,17 @@ nav {
 @layer base {
   body {
     @apply bg-[#0c0c0c] text-white antialiased;
-    cursor: none;
   }
-  
-  /* Hide cursor on all interactive elements */
-  a, button, input, textarea, select, [role="button"] {
+
+  /* Custom cursor (TargetCursor) is only used by the Original theme.
+     Scope cursor hiding so other themes keep the native cursor. */
+  .theme-original,
+  .theme-original a,
+  .theme-original button,
+  .theme-original input,
+  .theme-original textarea,
+  .theme-original select,
+  .theme-original [role="button"] {
     cursor: none !important;
   }
 }

@@ -76,6 +76,22 @@ export default function LoadingScreen({ onLoaded, assets }: LoadingScreenProps) 
       })
     }
 
+    // Reveal the site exactly once. This is fully decoupled from the exit
+    // animation: gsap's onComplete is one trigger, but a timer and the
+    // asset-stall fallback also call it, so the content is shown even if
+    // requestAnimationFrame (and thus gsap) is throttled or stalled.
+    let revealed = false
+    const reveal = () => {
+      if (revealed) return
+      revealed = true
+      clearTimeout(fallbackTimer)
+      onLoaded()
+    }
+
+    // Safety net: never let the loader hang forever if an asset stalls
+    // without firing load/error (e.g. a slow CDN or an autoplay-blocked video).
+    const fallbackTimer = setTimeout(reveal, 8000)
+
     // Count-up logic
     if (assets.length === 0) {
       setTimeout(() => finishLoading(), 2500)
@@ -110,9 +126,13 @@ export default function LoadingScreen({ onLoaded, assets }: LoadingScreenProps) 
       })
     }
 
+    let hasStarted = false
     const finishLoading = () => {
+      if (hasStarted) return
+      hasStarted = true
+
       const exitTl = gsap.timeline({
-        onComplete: onLoaded,
+        onComplete: reveal,
       })
 
       exitTl
@@ -123,6 +143,10 @@ export default function LoadingScreen({ onLoaded, assets }: LoadingScreenProps) 
           '-=0.8'
         )
         .to(containerRef.current, { opacity: 0, duration: 0.6 }, '-=0.5')
+
+      // Guarantee the reveal even if gsap's onComplete never fires
+      // (e.g. rAF throttled in a background tab).
+      setTimeout(reveal, 2200)
     }
   }, [assets, onLoaded])
 

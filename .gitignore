@@ -42,3 +42,8 @@ next-env.d.ts
 
 # ShipStudio metadata
 .shipstudio/
+
+# Local skill/agent tooling (not part of the app)
+.agents/
+.claude/skills/
+skills-lock.json

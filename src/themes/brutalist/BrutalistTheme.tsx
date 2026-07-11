@@ -31,6 +31,7 @@ import {
   navSections,
 } from '@/data/portfolio'
 import { aeonik, spaceMono } from '@/themes/fonts'
+import TargetCursor from '@/components/ui/reactbits/TargetCursor'
 import './brutalist.css'
 
 // ─── SWAPPABLE ACCENT PALETTES ──────────────────────────────────
@@ -1990,6 +1991,7 @@ export default function BrutalistTheme() {
     >
       <GrainOverlay />
       <DevtoolsEgg />
+      <TargetCursor targetSelector='button, a, [role="button"]' spinDuration={3} hoverDuration={0.4} parallaxOn={true} />
       <Navbar palette={palette} setPalette={setPalette} />
 
       <main>

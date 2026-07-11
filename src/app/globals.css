@@ -21,8 +21,8 @@ html {
     @apply bg-[#0c0c0c] text-white antialiased;
   }
 
-  /* Custom cursor (TargetCursor) is only used by the Original theme.
-     Scope cursor hiding so other themes keep the native cursor. */
+  /* Custom cursor (TargetCursor) is used by the Original and Neo-Brutalist
+     themes. Scope cursor hiding so other surfaces keep the native cursor. */
   .theme-original,
   .theme-original a,
   .theme-original button,
@@ -30,6 +30,13 @@ html {
   .theme-original textarea,
   .theme-original select,
   .theme-original [role="button"] {
+    cursor: none !important;
+  }
+
+  /* Neo-Brutalist: blanket-hide the native cursor, including the inline
+     grab/grabbing styles on its draggable stickers and notes. */
+  .brutalist,
+  .brutalist * {
     cursor: none !important;
   }
 }

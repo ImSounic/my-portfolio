@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   NEO-BRUTALIST THEME — SWAPPABLE ACCENT PALETTES
+   The substrate stays Swiss paper + carbon ink + hard black shadows. Only the
+   single structural ACCENT system swaps. Three tokens carry every palette:
+
+     --bz-accent       vivid accent. Fills, strokes, on-dark text, hard accent
+                       shadows, focus rings. The loud, brand-defining color.
+     --bz-accent-ink   accent used AS TEXT on LIGHT (paper/white) surfaces.
+                       Contrast-safe (>=4.5:1 small). Equals --bz-accent for the
+                       palettes whose accent is already legible on white; only
+                       the near-white lime needs a darker sibling.
+     --bz-on-accent    text/icons that sit ON an accent FILL. White or ink,
+                       whichever clears AA against that fill.
+
+   Every pairing below is verified for WCAG-AA (body >=4.5:1, large >=3:1).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Default tokens on the theme root so vars always resolve (fallback = cobalt). */
+.brutalist {
+  --bz-accent:     #2b50ff;
+  --bz-accent-ink: #2b50ff;
+  --bz-on-accent:  #ffffff;
+}
+
+/* ── COBALT BLUEPRINT — electric cobalt on paper. Cool, technical, engineered.
+   #2b50ff on white = 5.6:1 (text ok). white on #2b50ff = 5.6:1 (on-fill ok). ── */
+.brutalist.bz-palette-cobalt {
+  --bz-accent:     #2b50ff;
+  --bz-accent-ink: #2b50ff;
+  --bz-on-accent:  #ffffff;
+}
+
+/* ── ACID LIME — chartreuse on paper, loud on the theme's existing ink panels.
+   #c2f000 on ink = 14.6:1, ink on #c2f000 = 14.6:1 (authentic black-on-lime
+   fills). As text on white, #c2f000 fails (1.3:1), so light-surface accent text
+   uses the darker #4f6b00 sibling = 6.0:1. ── */
+.brutalist.bz-palette-lime {
+  --bz-accent:     #c2f000;
+  --bz-accent-ink: #4f6b00;
+  --bz-on-accent:  #0a0a0a;
+}
+
+/* ── RISOGRAPH MAGENTA — hot riso pink. Punk poster energy.
+   #ff2d78 on white = 3.6:1 (fails small), so accent text uses #cc0055 = 5.7:1;
+   ink on #ff2d78 = 5.5:1 so fills carry ink text. ── */
+.brutalist.bz-palette-magenta {
+  --bz-accent:     #ff2d78;
+  --bz-accent-ink: #cc0055;
+  --bz-on-accent:  #0a0a0a;
+}
+
+/* ── SIGNAL RED — Swiss signal red. Urgent, graphic, classic brutalist.
+   #e60023 on white = 4.8:1 (text ok), white on #e60023 = 4.8:1 (on-fill ok). ── */
+.brutalist.bz-palette-red {
+  --bz-accent:     #e60023;
+  --bz-accent-ink: #e60023;
+  --bz-on-accent:  #ffffff;
+}

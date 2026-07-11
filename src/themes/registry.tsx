@@ -42,8 +42,8 @@ export const THEMES: ThemeMeta[] = [
     id: 'brutalist',
     name: 'Neo-Brutalist',
     description: 'Bold colors, hard shadows, big type',
-    swatch: '#ff5d2e',
-    bg: '#ffe600',
+    swatch: '#2b50ff',
+    bg: '#f4f4f0',
     Component: BrutalistTheme,
   },
 ]

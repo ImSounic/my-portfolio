@@ -2,7 +2,8 @@
 
 // ═══════════════════════════════════════════════════════════════
 //  BRUTALIST THEME - "DECLASSIFIED BLUEPRINT"
-//  Swiss Industrial Print × punk zine. Single orange accent.
+//  Swiss Industrial Print × punk zine. Single structural accent,
+//  swappable via the navbar palette switcher (cobalt / lime / magenta / red).
 //  Sounic Akkaraju · AI/ML Engineer · REV 2.0 · UNIT / D-01
 // ═══════════════════════════════════════════════════════════════
 
@@ -29,15 +30,40 @@ import {
   colophon,
   navSections,
 } from '@/data/portfolio'
-import { syne, spaceMono } from '@/themes/fonts'
+import { aeonik, spaceMono } from '@/themes/fonts'
+import './brutalist.css'
 
-// ─── PALETTE - ONE ACCENT (orange) + ink + paper ────────────────
+// ─── SWAPPABLE ACCENT PALETTES ──────────────────────────────────
+// The substrate (paper + ink + black shadows) is fixed; only the accent system
+// swaps, driven by CSS variables defined in brutalist.css. See that file for the
+// per-palette token values and their AA contrast notes.
+const PALETTES = [
+  { id: 'cobalt',  name: 'Cobalt',  swatch: '#2b50ff', on: '#ffffff', desc: 'Electric blueprint' },
+  { id: 'lime',    name: 'Lime',    swatch: '#c2f000', on: '#0a0a0a', desc: 'Acid hardcore'      },
+  { id: 'magenta', name: 'Magenta', swatch: '#ff2d78', on: '#0a0a0a', desc: 'Risograph punk'     },
+  { id: 'red',     name: 'Red',     swatch: '#e60023', on: '#ffffff', desc: 'Swiss signal'       },
+] as const
+type PaletteId = (typeof PALETTES)[number]['id']
+const DEFAULT_PALETTE: PaletteId = 'cobalt'
+const PALETTE_STORAGE_KEY = 'brutalist-palette'
+
+// ─── PALETTE - SUBSTRATE + ACCENT TOKENS ────────────────────────
+// Accent tokens are CSS vars so the live switcher recolors instantly:
+//   ACCENT      vivid accent (fills, strokes, on-dark text, shadows, rings)
+//   ACCENT_TEXT accent used as TEXT on LIGHT surfaces (contrast-safe)
+//   ON_ACCENT   text/icons sitting ON an accent fill (white or ink)
+const ACCENT      = 'var(--bz-accent)'
+const ACCENT_TEXT = 'var(--bz-accent-ink)'
+const ON_ACCENT   = 'var(--bz-on-accent)'
+// Translucent accent (tape strips, hairline rules on dark). Driven by the same
+// var so every palette tints its own tapes/rules instead of leaking orange.
+const accentA = (pct: number) => `color-mix(in srgb, var(--bz-accent) ${pct}%, transparent)`
 const C = {
   paper:  '#f4f4f0',
   paper2: '#eae8e3', // secondary substrate (still Swiss paper family)
   ink:    '#0a0a0a', // carbon ink (avoid pure #000 surfaces, use for ink)
   black:  '#000000', // hairlines / borders only
-  orange: '#ff5d2e', // THE single structural accent
+  orange: ACCENT,    // THE single structural accent (now palette-driven)
   white:  '#ffffff',
 } as const
 
@@ -148,7 +174,7 @@ function DevtoolsEgg() {
   useEffect(() => {
     console.log(
       '%c>>> OH HEY. YOU OPENED DEVTOOLS.',
-      'font-size:18px; font-weight:bold; color:#ff5d2e; font-family:monospace; letter-spacing:0.1em',
+      'font-size:18px; font-weight:bold; color:#2b50ff; font-family:monospace; letter-spacing:0.1em',
     )
     console.log(
       '%cI\'m Sounic. I build models I can actually explain.\nMostly PyTorch, NLP, and too much PySpark.\nHiring for AI/ML internships starting Sep 2026? Let\'s talk.\n>>> imsounic.dev@gmail.com',
@@ -168,8 +194,73 @@ const scrollTo = (id: string) => {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
+// ─── PALETTE SWITCHER ────────────────────────────────────────────
+// Hard-bordered swatch row. `bar` = inline in the desktop navbar (lg+),
+// `menu` = larger row inside the mobile/tablet menu. The active swatch carries
+// a hard offset shadow + a centered contrast dot; aria-pressed exposes state.
+function PaletteSwitcher({
+  palette,
+  setPalette,
+  variant,
+}: {
+  palette: PaletteId
+  setPalette: (id: PaletteId) => void
+  variant: 'bar' | 'menu'
+}) {
+  const reduced = useReducedMotion()
+  const isMenu  = variant === 'menu'
+
+  return (
+    <div
+      className={`flex items-center ${isMenu ? 'gap-2.5' : 'gap-1.5'}`}
+      role="group"
+      aria-label="Accent palette"
+    >
+      {!isMenu && (
+        <span
+          className={`hidden xl:inline text-[9px] font-bold uppercase tracking-[0.18em] text-black/40 ${spaceMono.className}`}
+          aria-hidden="true"
+        >
+          PALETTE
+        </span>
+      )}
+      {PALETTES.map((p) => {
+        const active = p.id === palette
+        return (
+          <button
+            key={p.id}
+            type="button"
+            onClick={() => setPalette(p.id)}
+            aria-pressed={active}
+            aria-label={`${p.name} palette: ${p.desc}`}
+            title={`${p.name} · ${p.desc}`}
+            className={`relative grid place-items-center border-[2px] border-black transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${
+              isMenu ? 'w-11 h-11' : 'w-7 h-7'
+            } ${reduced ? '' : 'hover:-translate-y-px hover:-translate-x-px'}`}
+            style={{ background: p.swatch, boxShadow: active ? '3px 3px 0 #000' : '2px 2px 0 rgba(0,0,0,0.22)' }}
+          >
+            {active && (
+              <span
+                aria-hidden="true"
+                className={isMenu ? 'w-3 h-3' : 'w-2 h-2'}
+                style={{ background: p.on }}
+              />
+            )}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 // ─── NAVBAR ──────────────────────────────────────────────────────
-function Navbar() {
+function Navbar({
+  palette,
+  setPalette,
+}: {
+  palette: PaletteId
+  setPalette: (id: PaletteId) => void
+}) {
   const [open, setOpen] = useState(false)
   const reduced         = useReducedMotion()
 
@@ -178,7 +269,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 ${syne.className}`}
+        className={`fixed top-0 left-0 right-0 z-50 ${aeonik.className}`}
         style={{
           background: C.paper,
           borderBottom: `3px solid ${C.black}`,
@@ -188,31 +279,36 @@ function Navbar() {
         <div className="flex items-center justify-between px-6 h-14">
           <button
             onClick={() => go('home')}
-            className="flex items-center gap-2 font-black text-xl uppercase tracking-tight text-black hover:text-[#ff5d2e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0]"
+            className="flex items-center gap-2 font-black text-xl uppercase tracking-tight text-black hover:text-[color:var(--bz-accent-ink)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0]"
           >
-            SA<span style={{ color: C.orange }}>.</span>
+            SA<span style={{ color: ACCENT_TEXT }}>.</span>
             <span className={`text-[9px] font-bold tracking-[0.18em] text-black/45 ${spaceMono.className}`}>
               D-01
             </span>
           </button>
 
-          {/* Desktop nav - mr-[148px] keeps top-right theme switcher clear */}
-          <div className="hidden md:flex items-center gap-0 mr-[148px]">
-            {navSections.map((s, i) => (
-              <button
-                key={s.id}
-                onClick={() => go(s.id)}
-                className={`font-bold text-xs uppercase tracking-widest px-4 py-2 text-black hover:text-[#ff5d2e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
-              >
-                <span className="text-black/35">{String(i).padStart(2, '0')}</span>{' '}
-                {s.label}
-              </button>
-            ))}
+          {/* Desktop cluster: palette swatches + nav. Collapses to the menu below
+              lg, where the four swatches plus five nav links would overflow. */}
+          <div className="hidden lg:flex items-center gap-4 mr-[148px]">
+            <PaletteSwitcher palette={palette} setPalette={setPalette} variant="bar" />
+            <span className="w-px h-5 bg-black/15" aria-hidden="true" />
+            <div className="flex items-center gap-0">
+              {navSections.map((s, i) => (
+                <button
+                  key={s.id}
+                  onClick={() => go(s.id)}
+                  className={`font-bold text-xs uppercase tracking-widest px-4 py-2 text-black hover:text-[color:var(--bz-accent-ink)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
+                >
+                  <span className="text-black/35">{String(i).padStart(2, '0')}</span>{' '}
+                  {s.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* 44px touch target */}
           <button
-            className="md:hidden border-[2px] border-black w-11 h-11 flex items-center justify-center font-black text-lg hover:bg-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0]"
+            className="lg:hidden border-[2px] border-black w-11 h-11 flex items-center justify-center font-black text-lg hover:bg-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0]"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -235,12 +331,18 @@ function Navbar() {
               <button
                 key={s.id}
                 onClick={() => go(s.id)}
-                className="font-bold text-sm uppercase tracking-widest px-6 py-4 border-b-[1px] border-black/15 text-left hover:text-[#ff5d2e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0]"
+                className="font-bold text-sm uppercase tracking-widest px-6 py-4 border-b-[1px] border-black/15 text-left hover:text-[color:var(--bz-accent-ink)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0]"
               >
                 <span className="text-black/35">{String(i).padStart(2, '0')}</span>{' '}
                 {s.label}
               </button>
             ))}
+            <div className="px-6 py-4 flex items-center justify-between gap-4">
+              <span className={`text-xs font-bold uppercase tracking-widest text-black/45 ${spaceMono.className}`}>
+                Palette
+              </span>
+              <PaletteSwitcher palette={palette} setPalette={setPalette} variant="menu" />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -352,7 +454,7 @@ function HomeSection() {
         {/* Structural index numeral - viewport-bleeding, deliberate */}
         <span
           aria-hidden="true"
-          className={`absolute right-2 top-0 leading-[0.8] pointer-events-none ${syne.className}`}
+          className={`absolute right-2 top-0 leading-[0.8] pointer-events-none ${aeonik.className}`}
           style={{
             fontSize: 'clamp(72px, 26vw, 360px)',
             color: 'transparent',
@@ -380,9 +482,9 @@ function HomeSection() {
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleNameClick() }}
         >
           <h1
-            className={`font-black uppercase leading-[0.82] ${syne.className}`}
+            className={`font-black uppercase leading-[0.82] ${aeonik.className}`}
             style={{
-              fontSize: 'clamp(36px, 11vw, 220px)',
+              fontSize: 'clamp(34px, 9vw, 150px)',
               color: C.ink,
               textShadow: `6px 6px 0 ${C.orange}`,
               letterSpacing: '-0.05em',
@@ -403,7 +505,7 @@ function HomeSection() {
           {nameClicks > 0 && (
             <div
               className={`absolute -top-3 -right-4 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border-[1px] border-black ${spaceMono.className}`}
-              style={{ background: C.orange, color: C.white, rotate: '6deg' }}
+              style={{ background: C.orange, color: ON_ACCENT, rotate: '6deg' }}
             >
               FLUNG ×{nameClicks}
             </div>
@@ -428,15 +530,15 @@ function HomeSection() {
             overlap the bleeding name on mobile/tablet, so it only appears at lg+). */}
         <div className="lg:hidden mt-4 inline-flex items-center gap-2">
           <span
-            className={`border-[2px] border-black px-3 py-1.5 font-black text-xs uppercase tracking-widest ${syne.className}`}
-            style={{ background: C.orange, color: C.white, boxShadow: '3px 3px 0 #000' }}
+            className={`border-[2px] border-black px-3 py-1.5 font-black text-xs uppercase tracking-widest ${aeonik.className}`}
+            style={{ background: C.orange, color: ON_ACCENT, boxShadow: '3px 3px 0 #000' }}
           >
             <span
               className={`flex items-center gap-1.5 text-[10px] mb-0.5 ${spaceMono.className}`}
             >
-              <span aria-hidden style={{ display: 'inline-block', width: 6, height: 6, background: C.white }} />
+              <span aria-hidden style={{ display: 'inline-block', width: 6, height: 6, background: ON_ACCENT }} />
               AVAILABLE
-              <span aria-hidden style={{ display: 'inline-block', width: 6, height: 6, background: C.white }} />
+              <span aria-hidden style={{ display: 'inline-block', width: 6, height: 6, background: ON_ACCENT }} />
             </span>
             <span className="leading-tight text-[10px]">{profile.availability}</span>
           </span>
@@ -455,13 +557,13 @@ function HomeSection() {
       >
         <Tape angle={-3} color="rgba(255,255,255,0.8)" />
         <div
-          className={`border-[2px] border-black px-4 py-3 font-black text-xs uppercase tracking-widest text-center max-w-[180px] ${syne.className}`}
-          style={{ background: C.orange, color: C.white, boxShadow: '5px 5px 0 #000' }}
+          className={`border-[2px] border-black px-4 py-3 font-black text-xs uppercase tracking-widest text-center max-w-[180px] ${aeonik.className}`}
+          style={{ background: C.orange, color: ON_ACCENT, boxShadow: '5px 5px 0 #000' }}
         >
           <div className={`flex items-center justify-center gap-1.5 text-[10px] mb-1 ${spaceMono.className}`}>
-            <span aria-hidden style={{ display: 'inline-block', width: 7, height: 7, background: C.white }} />
+            <span aria-hidden style={{ display: 'inline-block', width: 7, height: 7, background: ON_ACCENT }} />
             AVAILABLE
-            <span aria-hidden style={{ display: 'inline-block', width: 7, height: 7, background: C.white }} />
+            <span aria-hidden style={{ display: 'inline-block', width: 7, height: 7, background: ON_ACCENT }} />
           </div>
           <div className="leading-tight">{profile.availability}</div>
         </div>
@@ -473,7 +575,7 @@ function HomeSection() {
           className={`border-[2px] border-black bg-white p-5 text-base font-bold leading-relaxed ${spaceMono.className}`}
           style={{ color: C.ink, boxShadow: '5px 5px 0 #000' }}
         >
-          <FrameTag color={C.orange}>BRIEF</FrameTag>
+          <FrameTag color={ACCENT_TEXT}>BRIEF</FrameTag>
           <p className="mt-2">{profile.shortBio}</p>
         </div>
       </div>
@@ -498,7 +600,7 @@ function HomeSection() {
             href={href}
             target={href.startsWith('/') ? '_self' : '_blank'}
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 font-black text-xs uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
+            className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 font-black text-xs uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
             style={{ background: bg, color: fg, boxShadow: '4px 4px 0 #000' }}
           >
             {icon} {label}
@@ -507,8 +609,8 @@ function HomeSection() {
 
         <button
           onClick={() => scrollTo('contact')}
-          className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 font-black text-xs uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
-          style={{ background: C.orange, color: C.white, boxShadow: '4px 4px 0 #000' }}
+          className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 font-black text-xs uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
+          style={{ background: C.orange, color: ON_ACCENT, boxShadow: '4px 4px 0 #000' }}
         >
           Contact <span aria-hidden>{'>>'}</span>
         </button>
@@ -534,7 +636,7 @@ function ManifestoSection() {
       {/* Section label - technical frame */}
       <div className="max-w-5xl mx-auto mb-4 flex items-center gap-3 flex-wrap">
         <FrameTag color={C.orange}>SECTION / MANIFESTO</FrameTag>
-        <div className="flex-1 h-px min-w-[16px]" style={{ background: 'rgba(255,93,46,0.4)' }} />
+        <div className="flex-1 h-px min-w-[16px]" style={{ background: accentA(40) }} />
         <span className={`text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 shrink-0 ${spaceMono.className}`}>
           REV 2.0
         </span>
@@ -542,7 +644,7 @@ function ManifestoSection() {
 
       <div className="max-w-5xl mx-auto mb-10">
         <h2
-          className={`font-black uppercase leading-[0.85] ${syne.className}`}
+          className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
           style={{ fontSize: 'clamp(48px, 9vw, 110px)', color: C.orange, letterSpacing: '-0.05em' }}
         >
           MANIFESTO
@@ -552,7 +654,7 @@ function ManifestoSection() {
       {/* Manifesto intro - big pull quote */}
       <div className="max-w-5xl mx-auto mb-16">
         <blockquote
-          className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${syne.className}`}
+          className={`text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${aeonik.className}`}
           style={{ color: C.paper }}
         >
           <span style={{ color: C.orange, fontSize: '4rem', lineHeight: 0.5, verticalAlign: 'middle' }}>&ldquo;</span>
@@ -577,13 +679,13 @@ function ManifestoSection() {
             whileHover={reduced || !canHover ? undefined : { y: -3 }}
           >
             <div
-              className={`h-full p-6 ${syne.className}`}
+              className={`h-full p-6 ${aeonik.className}`}
               style={{ background: i % 2 === 0 ? C.paper : C.white }}
             >
               <div className="flex items-baseline justify-between mb-3">
                 <div
                   className="font-black text-4xl leading-none"
-                  style={{ color: C.orange }}
+                  style={{ color: ACCENT_TEXT }}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </div>
@@ -604,7 +706,7 @@ function ManifestoSection() {
             style={{ background: C.ink }}
             aria-hidden="true"
           >
-            <Crosshair size={20} color="rgba(255,93,46,0.5)" />
+            <Crosshair size={20} color={accentA(50)} />
           </div>
         )}
       </div>
@@ -621,18 +723,18 @@ function SectionHeader({
 }: { index: string; title: string; tag: string; onDark?: boolean }) {
   const ink = onDark ? C.paper : C.ink
   const sub = onDark ? 'rgba(244,244,240,0.4)' : 'rgba(10,10,10,0.4)'
-  const rule = onDark ? 'rgba(255,93,46,0.4)' : C.black
+  const rule = onDark ? accentA(40) : C.black
   return (
     <div className="mb-12">
       <div className="flex items-center gap-3 mb-3 flex-wrap">
-        <FrameTag color={C.orange}>{tag}</FrameTag>
+        <FrameTag color={ACCENT_TEXT}>{tag}</FrameTag>
         <div className="flex-1 h-px min-w-[16px]" style={{ background: rule }} />
         <span className={`text-[10px] font-bold uppercase tracking-[0.18em] shrink-0 ${spaceMono.className}`} style={{ color: sub }}>
           UNIT / {index}
         </span>
       </div>
       <h2
-        className={`font-black uppercase leading-[0.85] ${syne.className}`}
+        className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
         style={{ fontSize: 'clamp(40px, 10vw, 120px)', color: ink, letterSpacing: '-0.05em' }}
       >
         {title}
@@ -669,7 +771,7 @@ function SkillsSection() {
               transition={{ duration: 0.5, delay: (gi % 3) * 0.06, ease: EASE_OUT }}
             >
               <div
-                className={`h-full p-5 ${syne.className}`}
+                className={`h-full p-5 ${aeonik.className}`}
                 style={{ background: C.white }}
               >
                 <div className="flex items-center justify-between mb-3 pb-2 border-b-[1px] border-black">
@@ -704,9 +806,9 @@ function SkillsSection() {
 }
 
 // ─── PROJECT PINBOARD ────────────────────────────────────────────
-// Status uses ink/orange/paper only - secondary blue removed.
+// Status uses ink / accent / paper only - single structural accent.
 const STATUS_MAP: Record<string, { label: string; bg: string; fg: string }> = {
-  live:          { label: 'LIVE',        bg: C.orange, fg: C.white },
+  live:          { label: 'LIVE',        bg: C.orange, fg: ON_ACCENT },
   'in-progress': { label: 'IN PROGRESS', bg: C.ink,    fg: C.white },
   research:      { label: 'RESEARCH',    bg: C.white,  fg: C.ink   },
 }
@@ -786,7 +888,7 @@ function PinCard({
   return (
     <motion.article
       ref={articleRef}
-      className="relative select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3]"
+      className="relative select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3]"
       variants={v}
       initial="initial"
       animate="animate"
@@ -802,11 +904,11 @@ function PinCard({
       {/* Tape pin at top - monochrome / accent only */}
       <Tape
         angle={restRot * 0.6}
-        color={project.featured ? 'rgba(255,93,46,0.55)' : 'rgba(255,255,255,0.7)'}
+        color={project.featured ? accentA(55) : 'rgba(255,255,255,0.7)'}
       />
 
       <div
-        className={`border-[2px] border-black bg-white p-5 flex flex-col gap-3 ${syne.className}`}
+        className={`border-[2px] border-black bg-white p-5 flex flex-col gap-3 ${aeonik.className}`}
         style={{
           boxShadow: `${project.featured ? C.orange : C.black} ${project.featured ? 7 : 6}px ${project.featured ? 7 : 6}px 0`,
         }}
@@ -861,7 +963,7 @@ function PinCard({
         <div className="flex items-center justify-between pt-2 border-t-[1px] border-black/15">
           <span
             className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest ${spaceMono.className}`}
-            style={{ color: C.orange }}
+            style={{ color: ACCENT_TEXT }}
           >
             <span aria-hidden>{'>>>'}</span> EXPAND UNIT
           </span>
@@ -949,7 +1051,7 @@ function ProjectModal({
       aria-label={`${project.title} details`}
     >
       <motion.div
-        className={`relative w-full max-w-2xl max-h-[88vh] overflow-y-auto border-[2px] border-black bg-white ${syne.className}`}
+        className={`relative w-full max-w-2xl max-h-[88vh] overflow-y-auto border-[2px] border-black bg-white ${aeonik.className}`}
         style={{ boxShadow: '12px 12px 0 #000' }}
         initial={reduced ? false : { scale: 0.92, opacity: 0, y: 26 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -980,7 +1082,7 @@ function ProjectModal({
           ref={closeRef}
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-2.5 right-3 z-20 border-[2px] border-black w-9 h-9 flex items-center justify-center font-black text-xl bg-white hover:bg-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="absolute top-2.5 right-3 z-20 border-[2px] border-black w-9 h-9 flex items-center justify-center font-black text-xl bg-white hover:bg-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         >
           ×
         </button>
@@ -1016,11 +1118,11 @@ function ProjectModal({
 
           {project.highlights.length > 0 && (
             <div>
-              <FrameTag color={C.orange}>HIGHLIGHTS</FrameTag>
+              <FrameTag color={ACCENT_TEXT}>HIGHLIGHTS</FrameTag>
               <ul className="flex flex-col gap-2 mt-3">
                 {project.highlights.map((h) => (
                   <li key={h} className={`flex gap-2 text-sm font-bold leading-snug text-black ${spaceMono.className}`}>
-                    <span className="font-black shrink-0" style={{ color: C.orange }} aria-hidden>{'>'}</span>
+                    <span className="font-black shrink-0" style={{ color: ACCENT_TEXT }} aria-hidden>{'>'}</span>
                     <span>{h}</span>
                   </li>
                 ))}
@@ -1047,7 +1149,7 @@ function ProjectModal({
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 text-xs font-black uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
+                  className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 text-xs font-black uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
                   style={{ background: C.ink, color: C.white, boxShadow: '4px 4px 0 #000' }}
                 >
                   <FiGithub size={13} /> View Code
@@ -1058,8 +1160,8 @@ function ProjectModal({
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 text-xs font-black uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
-                  style={{ background: C.orange, color: C.white, boxShadow: '4px 4px 0 #000' }}
+                  className={`inline-flex items-center gap-2 border-[2px] border-black px-4 py-2 text-xs font-black uppercase tracking-widest transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:-translate-x-px active:translate-x-0 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
+                  style={{ background: C.orange, color: ON_ACCENT, boxShadow: '4px 4px 0 #000' }}
                 >
                   <FiExternalLink size={13} /> Live
                 </a>
@@ -1107,7 +1209,7 @@ function FallNoteCard({
   return (
     <motion.article
       ref={articleRef}
-      className="relative select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3]"
+      className="relative select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3]"
       variants={v}
       initial="initial"
       animate="animate"
@@ -1123,11 +1225,11 @@ function FallNoteCard({
       {/* Tape strip = the pin holding the note to the wall */}
       <Tape
         angle={restRot * 0.6}
-        color={project.featured ? 'rgba(255,93,46,0.55)' : 'rgba(255,255,255,0.7)'}
+        color={project.featured ? accentA(55) : 'rgba(255,255,255,0.7)'}
       />
 
       <div
-        className={`border-[3px] border-black bg-white p-5 flex flex-col gap-3 ${syne.className}`}
+        className={`border-[3px] border-black bg-white p-5 flex flex-col gap-3 ${aeonik.className}`}
         style={{ boxShadow: `${project.featured ? C.orange : C.black} 7px 6px 0` }}
       >
         {/* Unit code + status - telemetry header row */}
@@ -1180,7 +1282,7 @@ function FallNoteCard({
         <div className="flex items-center justify-between pt-2 border-t-[1px] border-black/15">
           <span
             className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest ${spaceMono.className}`}
-            style={{ color: C.orange }}
+            style={{ color: ACCENT_TEXT }}
           >
             <span aria-hidden>{'>>>'}</span> EXPAND UNIT
           </span>
@@ -1190,7 +1292,7 @@ function FallNoteCard({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-black hover:text-[#ff5d2e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
+              className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-black hover:text-[color:var(--bz-accent-ink)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
               aria-label={`View source for ${project.title} on GitHub`}
             >
               <FiGithub size={11} aria-hidden="true" /> VIEW SOURCE
@@ -1219,8 +1321,8 @@ function PageNav({ page, onFlip }: { page: number; onFlip: () => void }) {
           type="button"
           onClick={onFlip}
           aria-label={aria}
-          className={`pointer-events-auto flex flex-col items-center gap-2 border-[2px] border-black px-3 py-4 min-w-[44px] min-h-[44px] transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3] ${spaceMono.className}`}
-          style={{ background: C.orange, color: C.white, boxShadow: '4px 4px 0 #000' }}
+          className={`pointer-events-auto flex flex-col items-center gap-2 border-[2px] border-black px-3 py-4 min-w-[44px] min-h-[44px] transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3] ${spaceMono.className}`}
+          style={{ background: C.orange, color: ON_ACCENT, boxShadow: '4px 4px 0 #000' }}
           whileHover={reduced || !canHover ? undefined : { x: -2, y: -2 }}
           whileTap={reduced ? undefined : { x: 0, y: 0 }}
         >
@@ -1281,7 +1383,7 @@ function BoardHeader({ page, total, startIndex }: { page: number; total: number;
               exit={swap.exit}
               transition={swap.transition}
             >
-              <FrameTag color={C.orange}>{`SECTION / ${tagText}`}</FrameTag>
+              <FrameTag color={ACCENT_TEXT}>{`SECTION / ${tagText}`}</FrameTag>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -1301,7 +1403,7 @@ function BoardHeader({ page, total, startIndex }: { page: number; total: number;
           <AnimatePresence mode="wait" initial={false}>
             <motion.h2
               key={`head-${page}`}
-              className={`font-black uppercase leading-[0.85] ${syne.className}`}
+              className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
               style={{ fontSize: 'clamp(48px, 10vw, 120px)', color: C.ink, letterSpacing: '-0.05em' }}
               initial={swap.initial}
               animate={swap.animate}
@@ -1323,7 +1425,7 @@ function BoardHeader({ page, total, startIndex }: { page: number; total: number;
             <motion.span
               key="fresh-drops"
               className={`inline-flex items-center gap-2 border-[2px] border-black px-3 py-1.5 text-[10px] font-black uppercase tracking-widest ${spaceMono.className}`}
-              style={{ background: C.orange, color: C.white, boxShadow: '3px 3px 0 #000', rotate: '-2deg' }}
+              style={{ background: C.orange, color: ON_ACCENT, boxShadow: '3px 3px 0 #000', rotate: '-2deg' }}
               initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 10 }}
               animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
               exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 10 }}
@@ -1431,7 +1533,7 @@ function WorkSection() {
         <div className="mb-12 -mt-6 flex items-center gap-3 flex-wrap">
           <span
             className={`inline-flex items-center gap-2 border-[2px] border-black px-3 py-1.5 text-xs font-black uppercase tracking-widest ${spaceMono.className}`}
-            style={{ background: C.orange, color: C.white, boxShadow: '3px 3px 0 #000' }}
+            style={{ background: C.orange, color: ON_ACCENT, boxShadow: '3px 3px 0 #000' }}
           >
             <span aria-hidden>{'>>>'}</span> CLICK A UNIT TO DECLASSIFY
           </span>
@@ -1536,8 +1638,8 @@ function WorkSection() {
             type="button"
             onClick={flip}
             aria-label={page === 0 ? 'Go to page two of projects' : 'Back to page one of projects'}
-            className={`inline-flex items-center gap-3 border-[2px] border-black px-5 py-3 min-h-[44px] text-xs font-black uppercase tracking-widest transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3] ${spaceMono.className}`}
-            style={{ background: C.orange, color: C.white, boxShadow: '4px 4px 0 #000' }}
+            className={`inline-flex items-center gap-3 border-[2px] border-black px-5 py-3 min-h-[44px] text-xs font-black uppercase tracking-widest transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3] ${spaceMono.className}`}
+            style={{ background: C.orange, color: ON_ACCENT, boxShadow: '4px 4px 0 #000' }}
           >
             {page === 0 ? 'VIEW PAGE 02' : 'BACK TO PAGE 01'}
             <span aria-hidden="true" className="text-base font-black leading-none">{page === 0 ? '↓' : '↑'}</span>
@@ -1585,10 +1687,10 @@ function AboutSection() {
           >
             <Tape angle={2} />
             <div
-              className={`border-[2px] border-black p-7 ${syne.className}`}
+              className={`border-[2px] border-black p-7 ${aeonik.className}`}
               style={{ background: C.paper, boxShadow: '7px 7px 0 #000' }}
             >
-              <FrameTag color={C.orange}>WHO I AM</FrameTag>
+              <FrameTag color={ACCENT_TEXT}>WHO I AM</FrameTag>
               <p className={`mt-3 text-sm font-bold leading-relaxed ${spaceMono.className}`} style={{ color: C.ink }}>
                 {profile.summary}
               </p>
@@ -1603,19 +1705,19 @@ function AboutSection() {
               whileHover={reduced || !canHover ? undefined : { rotate: 0 }}
               transition={SPRING}
             >
-              <Tape angle={-4} color="rgba(255,93,46,0.3)" />
+              <Tape angle={-4} color={accentA(30)} />
               <div
-                className={`border-[2px] border-black p-6 ${syne.className}`}
+                className={`border-[2px] border-black p-6 ${aeonik.className}`}
                 style={{ background: C.white, boxShadow: `6px 6px 0 ${C.orange}` }}
               >
-                <FrameTag color={C.orange}>EDUCATION</FrameTag>
+                <FrameTag color={ACCENT_TEXT}>EDUCATION</FrameTag>
                 <div className="flex flex-col gap-4 mt-4">
                   {education.map((ed, i) => (
                     <div
                       key={ed.degree}
                       className={i < education.length - 1 ? 'pb-4 border-b-[1px] border-black/15' : ''}
                     >
-                      <div className={`font-black text-sm leading-snug text-black ${syne.className}`}>
+                      <div className={`font-black text-sm leading-snug text-black ${aeonik.className}`}>
                         {ed.degree}
                       </div>
                       <div className={`text-xs font-bold text-black/55 mt-0.5 ${spaceMono.className}`}>
@@ -1634,7 +1736,7 @@ function AboutSection() {
 
             {/* Languages */}
             <div
-              className={`border-[2px] border-black p-5 ${syne.className}`}
+              className={`border-[2px] border-black p-5 ${aeonik.className}`}
               style={{ background: C.paper, boxShadow: '5px 5px 0 #000', rotate: '-0.8deg' }}
             >
               <FrameTag color="rgba(10,10,10,0.55)">LANGUAGES</FrameTag>
@@ -1645,7 +1747,7 @@ function AboutSection() {
                     className={`border-[1px] border-black px-3 py-1 ${spaceMono.className}`}
                     style={{
                       background: lang.level === 'Native' ? C.orange : C.white,
-                      color: lang.level === 'Native' ? C.white : C.ink,
+                      color: lang.level === 'Native' ? ON_ACCENT : C.ink,
                     }}
                   >
                     <span className="font-black text-xs uppercase tracking-wide">{lang.name}</span>
@@ -1670,15 +1772,15 @@ function AboutSection() {
               whileHover={reduced || !canHover ? undefined : { rotate: 0, scale: 1.01 }}
               transition={SPRING}
             >
-              <Tape angle={rot * 1.5} color="rgba(255,93,46,0.28)" />
+              <Tape angle={rot * 1.5} color={accentA(28)} />
               <div
-                className={`border-[2px] border-black p-7 h-full ${syne.className}`}
+                className={`border-[2px] border-black p-7 h-full ${aeonik.className}`}
                 style={{ background: C.paper, boxShadow: `7px 7px 0 ${C.orange}` }}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div
                     className="font-black text-lg uppercase leading-tight"
-                    style={{ color: C.orange }}
+                    style={{ color: ACCENT_TEXT }}
                   >
                     {data.title}
                   </div>
@@ -1700,10 +1802,10 @@ function AboutSection() {
           dragConstraints={dragRef}
           dragMomentum={false}
           onClick={() => setStickerCount((n) => n + 1)}
-          className={`mt-10 inline-flex items-center gap-2 border-[2px] border-black px-5 py-3 font-black text-xs uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
+          className={`mt-10 inline-flex items-center gap-2 border-[2px] border-black px-5 py-3 font-black text-xs uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
           style={{
             background: stickerCount > 0 ? C.orange : C.white,
-            color: stickerCount > 0 ? C.white : C.ink,
+            color: stickerCount > 0 ? ON_ACCENT : C.ink,
             boxShadow: '5px 5px 0 #000',
             rotate: 3,
             cursor: reduced ? 'pointer' : 'grab',
@@ -1726,9 +1828,9 @@ function AboutSection() {
 function ContactSection() {
   const reduced = useReducedMotion()
 
-  // Single accent: orange or ink only. No blue.
+  // Single accent or ink only.
   const links = [
-    { icon: FiMail,     label: 'Email',    href: socials.email,    detail: 'imsounic.dev@gmail.com', bg: C.orange, fg: C.white },
+    { icon: FiMail,     label: 'Email',    href: socials.email,    detail: 'imsounic.dev@gmail.com', bg: C.orange, fg: ON_ACCENT },
     { icon: FiLinkedin, label: 'LinkedIn', href: socials.linkedin, detail: '/in/imsounic',           bg: C.ink,    fg: C.white },
     { icon: FiGithub,   label: 'GitHub',   href: socials.github,   detail: 'ImSounic',               bg: C.ink,    fg: C.white },
     { icon: FiFileText, label: 'Resume',   href: socials.resume,   detail: 'Download PDF',           bg: C.paper,  fg: C.ink   },
@@ -1745,15 +1847,15 @@ function ContactSection() {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-3 flex-wrap">
             <FrameTag color={C.orange}>SECTION / TRANSMIT</FrameTag>
-            <div className="flex-1 h-px min-w-[16px]" style={{ background: 'rgba(255,93,46,0.4)' }} />
+            <div className="flex-1 h-px min-w-[16px]" style={{ background: accentA(40) }} />
             <span className={`text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 shrink-0 ${spaceMono.className}`}>
               UNIT / D-05
             </span>
           </div>
           <h2
-            className={`font-black uppercase leading-[0.85] ${syne.className}`}
+            className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
             style={{
-              fontSize: 'clamp(48px, 12vw, 160px)',
+              fontSize: 'clamp(40px, 10vw, 124px)',
               color: 'transparent',
               WebkitTextStroke: `3px ${C.orange}`,
               letterSpacing: '-0.05em',
@@ -1765,7 +1867,7 @@ function ContactSection() {
 
         {/* Loud sub-headline */}
         <p
-          className={`text-2xl sm:text-3xl font-black uppercase text-white mb-12 leading-tight ${syne.className}`}
+          className={`text-2xl sm:text-3xl font-black uppercase text-white mb-12 leading-tight ${aeonik.className}`}
         >
           Got an AI/ML problem?{' '}
           <span style={{ color: C.orange }}>Let&apos;s build.</span>
@@ -1782,7 +1884,7 @@ function ContactSection() {
               href={href}
               target={href.startsWith('mailto') || href.startsWith('/') ? '_self' : '_blank'}
               rel="noopener noreferrer"
-              className={`flex items-center gap-4 p-5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-inset ${syne.className}`}
+              className={`flex items-center gap-4 p-5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-inset ${aeonik.className}`}
               style={{ background: bg, color: fg }}
               whileHover={reduced || !canHover ? undefined : { x: -2, y: -2 }}
               transition={{ duration: 0.14, ease: EASE_OUT }}
@@ -1817,7 +1919,7 @@ function Footer() {
 
   return (
     <footer
-      className={`border-t-[2px] border-[#ff5d2e] px-4 sm:px-6 py-8 sm:py-10 ${syne.className}`}
+      className={`border-t-[2px] border-[color:var(--bz-accent)] px-4 sm:px-6 py-8 sm:py-10 ${aeonik.className}`}
       style={{ background: C.ink }}
     >
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
@@ -1846,7 +1948,7 @@ function Footer() {
               target={href.startsWith('mailto') || href.startsWith('/') ? '_self' : '_blank'}
               rel="noopener noreferrer"
               aria-label={label}
-              className="border-[1px] border-white/25 p-2 text-white/55 hover:border-[#ff5d2e] hover:text-[#ff5d2e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5d2e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+              className="border-[1px] border-white/25 p-2 text-white/55 hover:border-[color:var(--bz-accent)] hover:text-[color:var(--bz-accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
             >
               <Icon size={16} aria-hidden="true" />
             </a>
@@ -1859,14 +1961,36 @@ function Footer() {
 
 // ─── ROOT ─────────────────────────────────────────────────────────
 export default function BrutalistTheme() {
+  // Accent palette is theme-local: persisted under its own key, hydrated after
+  // mount to avoid any SSR/first-paint mismatch.
+  const [palette, setPaletteState] = useState<PaletteId>(DEFAULT_PALETTE)
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(PALETTE_STORAGE_KEY) as PaletteId | null
+      if (stored && PALETTES.some((p) => p.id === stored)) setPaletteState(stored)
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  const setPalette = useCallback((id: PaletteId) => {
+    setPaletteState(id)
+    try {
+      localStorage.setItem(PALETTE_STORAGE_KEY, id)
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
   return (
     <div
-      className={`relative min-h-screen overflow-x-hidden ${syne.variable} ${spaceMono.variable}`}
+      className={`brutalist bz-palette-${palette} relative min-h-screen overflow-x-hidden ${aeonik.variable} ${spaceMono.variable}`}
       style={{ background: C.paper, color: C.ink }}
     >
       <GrainOverlay />
       <DevtoolsEgg />
-      <Navbar />
+      <Navbar palette={palette} setPalette={setPalette} />
 
       <main>
         {/* section id="home" is inside HomeSection */}

@@ -3,8 +3,6 @@ import type { ComponentType } from 'react'
 
 export type ThemeId =
   | 'original'
-  | 'minimal'
-  | 'minimal2'
   | 'brutalist'
 
 export interface ThemeMeta {

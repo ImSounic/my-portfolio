@@ -11,7 +11,6 @@ import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react
 import {
   motion,
   useReducedMotion,
-  useAnimation,
   AnimatePresence,
 } from 'motion/react'
 import Image from 'next/image'
@@ -406,19 +405,7 @@ function Marquee() {
 // ─── HOME / HERO ─────────────────────────────────────────────────
 function HomeSection() {
   const reduced                    = useReducedMotion()
-  const nameControls               = useAnimation()
   const dragConstraintsRef         = useRef<HTMLDivElement>(null)
-  const [nameClicks, setNameClicks] = useState(0)
-
-  const handleNameClick = useCallback(async () => {
-    if (reduced) return
-    setNameClicks((n) => n + 1)
-    await nameControls.start({
-      rotate: [0, -8, 12, -6, 8, -4, 0],
-      scale:  [1, 1.06, 0.97, 1.04, 0.99, 1],
-      transition: { duration: 0.6, ease: EASE_OUT },
-    })
-  }, [reduced, nameControls])
 
   return (
     <section
@@ -467,21 +454,7 @@ function HomeSection() {
           01
         </span>
 
-        <motion.div
-          animate={nameControls}
-          onClick={handleNameClick}
-          drag={!reduced}
-          dragConstraints={dragConstraintsRef}
-          dragMomentum={false}
-          style={{ display: 'inline-block', cursor: 'grab', rotate: 0 }}
-          whileDrag={{ cursor: 'grabbing', scale: 1.02 }}
-          className="relative z-10"
-          title="Drag / click"
-          aria-label="Sounic Akkaraju, click to fling"
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleNameClick() }}
-        >
+        <div className="relative z-10" style={{ display: 'inline-block' }}>
           <h1
             className={`font-black uppercase leading-[0.82] ${aeonik.className}`}
             style={{
@@ -503,15 +476,7 @@ function HomeSection() {
               AKKARAJU
             </span>
           </h1>
-          {nameClicks > 0 && (
-            <div
-              className={`absolute -top-3 -right-4 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border-[1px] border-black ${spaceMono.className}`}
-              style={{ background: C.orange, color: ON_ACCENT, rotate: '6deg' }}
-            >
-              FLUNG ×{nameClicks}
-            </div>
-          )}
-        </motion.div>
+        </div>
 
         {/* Orange structural rule (replaces squiggle) */}
         <div className="mt-3 ml-1 flex items-center gap-3" aria-hidden="true">

@@ -2,7 +2,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useRef, useCallback, useEffect, useId } from 'react'
+import { useState, useRef, useCallback, useId } from 'react'
 import gsap from 'gsap'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
@@ -239,7 +239,18 @@ function MobileCarousel() {
       <div ref={contentRef} className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         <h3 className="font-[family-name:var(--font-satoshi)] text-2xl font-bold text-white text-center mb-4">{project.title}</h3>
         <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
-          <Image src={project.image} alt={project.title} fill className="object-cover" />
+          {/* All slides stay mounted so switching never waits on a fetch */}
+          {projects.map((p, i) => (
+            <Image
+              key={p.id}
+              src={p.image}
+              alt={p.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 450px"
+              className={`object-cover ${i === activeProject ? 'opacity-100' : 'opacity-0'}`}
+              aria-hidden={i !== activeProject}
+            />
+          ))}
           {project.github && !project.comingSoon ? (
             <div className="absolute bottom-2 left-2 z-10">
               <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -359,7 +370,18 @@ function TabletCarousel() {
 
           {/* Project Image */}
           <div className="absolute -bottom-[-80px] -left-8 w-[450px] h-[250px] rounded-2xl overflow-hidden shadow-2xl z-20">
-            <Image src={project.image} alt={project.title} fill className="object-cover" />
+            {/* All slides stay mounted so switching never waits on a fetch */}
+            {projects.map((p, i) => (
+              <Image
+                key={p.id}
+                src={p.image}
+                alt={p.title}
+                fill
+                sizes="450px"
+                className={`object-cover ${i === activeProject ? 'opacity-100' : 'opacity-0'}`}
+                aria-hidden={i !== activeProject}
+              />
+            ))}
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-4 left-4 flex items-center gap-3 z-30">
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
@@ -497,7 +519,18 @@ function DesktopCarousel() {
 
           {/* Project Image */}
           <div className="absolute -bottom-16 -left-[-60px] w-[850px] h-[450px] rounded-2xl overflow-hidden shadow-2xl z-20">
-            <Image src={project.image} alt={project.title} fill className="object-cover" />
+            {/* All slides stay mounted so switching never waits on a fetch */}
+            {projects.map((p, i) => (
+              <Image
+                key={p.id}
+                src={p.image}
+                alt={p.title}
+                fill
+                sizes="850px"
+                className={`object-cover ${i === activeProject ? 'opacity-100' : 'opacity-0'}`}
+                aria-hidden={i !== activeProject}
+              />
+            ))}
             {project.github && !project.comingSoon ? (
               <div className="absolute bottom-8 left-8 flex items-center gap-4 z-30">
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
@@ -546,14 +579,8 @@ function DesktopCarousel() {
 
 // ============ MAIN EXPORT ============
 export default function WorkSection() {
-  // Preload all project images on mount
-  useEffect(() => {
-    projects.forEach((project) => {
-      const img = new window.Image()
-      img.src = project.image
-    })
-  }, [])
-
+  // No manual preloading: every carousel keeps all slides mounted, so
+  // next/image loads (and caches) the optimized variants directly.
   return (
     <div id="work">
       <MobileCarousel />

@@ -2,7 +2,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback, useEffect, useId } from 'react'
 import gsap from 'gsap'
 import localFont from 'next/font/local'
 import { Montserrat } from 'next/font/google'
@@ -73,6 +73,65 @@ const projects = [
     github: '#',
     circleImg: '/project-3.png',
     glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 6,
+    title: 'NLP RESEARCH',
+    description: 'A 2-person research project comparing parameter-efficient fine-tuning against in-context learning across classification, QA, and reasoning tasks on 10 benchmarks. Built a BERT/DistilBERT pipeline reaching 93.7% accuracy on AG News, and ran systematic ICL experiments on Gemma3 models (270M-4B) across k-shot settings.',
+    shortDesc: 'Compared parameter-efficient fine-tuning vs in-context learning across 10 benchmark datasets.',
+    image: '/projects/lora-vs-bert.jpg',
+    ringText: 'IN-CONTEXT · LORA · IN-CONTEXT · LORA',
+    glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 7,
+    title: 'F1 STRATEGY',
+    description: 'A data-driven system for optimizing F1 pit-stop strategies, combining an XGBoost tyre-degradation model, per-circuit Bayesian safety-car probabilities, hierarchical circuit clustering, and a fast Monte Carlo simulator. Trained on FastF1, OpenF1, and Jolpica data across 92 races (2022-2025) with rolling temporal validation.',
+    shortDesc: 'Optimizes Formula 1 pit-stop strategy with ML, Monte Carlo simulation, and Bayesian inference; 71% exact-match accuracy.',
+    image: '/projects/f1-strategy.jpg',
+    github: 'https://github.com/ImSounic/f1-strategy-prediction',
+    ringText: 'XGBOOST · BAYESIAN · XGBOOST · BAYESIAN',
+    glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 8,
+    title: 'SEPSIS FORECAST',
+    description: 'An ML pipeline that flags sepsis risk before onset from ICU vitals and labs (PhysioNet/CinC 2019: 40,336 patients, 1.3M timesteps, 1.84% sepsis-hour prevalence). Engineered clinical severity scores (SOFA, qSOFA, NEWS) and handled extreme class imbalance and 80-95% lab missingness to produce a patient-level risk score.',
+    shortDesc: 'Patient-level early sepsis prediction from ICU time-series on the PhysioNet 2019 dataset (40k patients, 1.3M timesteps).',
+    image: '/projects/sepsis-forecasting.jpg',
+    github: 'https://github.com/ImSounic/sepsis-forecasting',
+    ringText: 'ICU · TIME SERIES · ICU · TIME SERIES',
+    glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 9,
+    title: 'EV FORECASTING',
+    description: "A full forecasting study on Palo Alto's public EV charging network, comparing 19 model variants under time-aware cross-validation and a 2020 COVID stress test. Recommends a three-model deployment with quantile LightGBM and adaptive conformal intervals for city-wide and per-station planning across 47 stations.",
+    shortDesc: 'End-to-end forecasting of daily EV charging demand for Palo Alto: 19 model variants, time-aware CV, and a COVID stress test.',
+    image: '/projects/ev-forecasting.jpg',
+    github: 'https://github.com/ImSounic/ev-forecasting',
+    ringText: 'LIGHTGBM · FORECAST · LIGHTGBM · FORECAST',
+    glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 10,
+    title: 'CIFR-QUANT',
+    description: 'A multi-market algorithmic trading system built on Kronos, an open-source foundation model for financial candlestick data (102M parameters). Fine-tunes Kronos-base into three market-specialized checkpoints (BTC/USDT, EUR/USD, XAU/USD), runs 30-path Monte Carlo probabilistic forecasts, and layers quantile-based risk management on top.',
+    shortDesc: 'Multi-market algorithmic trading system that fine-tunes the Kronos financial foundation model for BTC, EUR, and gold.',
+    image: '/projects/cifr-quant.jpg',
+    github: 'https://github.com/ImSounic/cifr-quant',
+    ringText: 'KRONOS · QUANT · KRONOS · QUANT',
+    glassCard: '/assets/images/glass-card.png',
+  },
+  {
+    id: 11,
+    title: 'MEDSAM-VPT',
+    description: 'Research exploring Visual Prompt Tuning (VPT) for adapting medical-imaging foundation models (SAM family) to downstream segmentation tasks with minimal trainable parameters. Demonstrates parameter-efficient adaptation of large foundation models for medical image segmentation.',
+    shortDesc: 'Visual prompt tuning to adapt medical imaging foundation models efficiently.',
+    image: '/projects/medsam-vpt.jpg',
+    github: 'https://github.com/ImSounic/medsam-vpt',
+    ringText: 'SEGMENTATION · VPT · SEGMENTATION · VPT',
+    glassCard: '/assets/images/glass-card.png',
   }
 ]
 
@@ -83,6 +142,23 @@ const GitHubIcon = ({ size = 28 }: { size?: number }) => (
 )
 
 const fontClasses = `${satoshi.variable} ${montserrat.variable}`
+
+// Spinning tech-tag ring for projects without a pre-rendered circle PNG.
+// Mirrors the look of the project-*.png assets: white uppercase text on a circle.
+function TextRing({ text, size, className = '' }: { text: string; size: number; className?: string }) {
+  const id = useId()
+  const pathId = `ring-path-${id.replace(/[^a-zA-Z0-9-]/g, '')}`
+  return (
+    <svg width={size} height={size} viewBox="0 0 200 200" className={className} aria-hidden="true">
+      <defs>
+        <path id={pathId} d="M 100 100 m -78 0 a 78 78 0 1 1 156 0 a 78 78 0 1 1 -156 0" fill="none" />
+      </defs>
+      <text fill="#ffffff" fontSize="15" fontWeight="600" letterSpacing="3" style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}>
+        <textPath href={`#${pathId}`}>{text}</textPath>
+      </text>
+    </svg>
+  )
+}
 
 // ============ DOT INDICATORS ============
 function DotIndicators({ total, active, onDotClick }: { total: number; active: number; onDotClick: (index: number) => void }) {
@@ -261,11 +337,15 @@ function TabletCarousel() {
           ) : (
             <div className="absolute -bottom-[-158px] -right-12 w-35 h-35 z-0">
               <Image src={circleSvg} alt="Circle decoration" width={100} height={100} />
-              {project.circleImg && (
+              {project.circleImg ? (
                 <div className="absolute top-[-20px] left-[-20px] right-[-20px] bottom-[-20px] flex items-center justify-center">
                   <Image src={project.circleImg} alt="Project text circle" width={200} height={200} className="object-contain animate-spin-slow" />
                 </div>
-              )}
+              ) : project.ringText ? (
+                <div className="absolute top-[-20px] left-[-20px] right-[-20px] bottom-[-20px] flex items-center justify-center">
+                  <TextRing text={project.ringText} size={200} className="animate-spin-slow" />
+                </div>
+              ) : null}
             </div>
           )}
 
@@ -395,11 +475,15 @@ function DesktopCarousel() {
           ) : (
             <div className="absolute -bottom-20 -right-[-80px] w-40 h-40 z-0">
               <Image src={circleSvg} alt="Circle decoration" width={140} height={140} />
-              {project.circleImg && (
+              {project.circleImg ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Image src={project.circleImg} alt="Project text circle" width={280} height={280} className="object-contain animate-spin-slow mr-4 mb-4" />
                 </div>
-              )}
+              ) : project.ringText ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <TextRing text={project.ringText} size={280} className="animate-spin-slow mr-4 mb-4" />
+                </div>
+              ) : null}
             </div>
           )}
 

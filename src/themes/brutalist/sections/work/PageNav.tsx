@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { spaceMono } from '@/themes/fonts'
 import { ON_ACCENT, canHover, C } from '@/themes/brutalist/tokens'
+import { Magnetic } from '@/themes/brutalist/motion/Magnetic'
 
 // ─── SIDE PAGE-FLIP CONTROL ─────────────────────────────────────
 // Vertical button stuck to the right edge of the board. PAGE 01 shows a
@@ -17,6 +18,7 @@ export function PageNav({ page, onFlip }: { page: number; onFlip: () => void }) 
 
   return (
     <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 xl:translate-x-[26px] z-30 hidden md:flex justify-end">
+      <Magnetic strength={0.25} className="pointer-events-auto">
         <motion.button
           type="button"
           onClick={onFlip}
@@ -46,6 +48,7 @@ export function PageNav({ page, onFlip }: { page: number; onFlip: () => void }) 
             {sub}
           </span>
         </motion.button>
+      </Magnetic>
     </div>
   )
 }

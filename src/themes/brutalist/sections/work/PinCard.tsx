@@ -7,6 +7,7 @@ import { aeonik, spaceMono } from '@/themes/fonts'
 import { ACCENT_TEXT, accentA, canHover, C } from '@/themes/brutalist/tokens'
 import { Crosshair } from '@/themes/brutalist/primitives/Crosshair'
 import { Tape } from '@/themes/brutalist/primitives/Tape'
+import { LetterRoll } from '@/themes/brutalist/motion/LetterRoll'
 import { STATUS_MAP, fallVariants } from '@/themes/brutalist/sections/work/board'
 
 export function PinCard({
@@ -47,6 +48,7 @@ export function PinCard({
       whileTap={reduced ? undefined : { scale: 0.97 }}
       onClick={handleOpen}
       role="button"
+      data-lr-host
       tabIndex={0}
       aria-label={`Open details for ${project.title}`}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleOpen() } }}
@@ -115,7 +117,7 @@ export function PinCard({
             className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest ${spaceMono.className}`}
             style={{ color: ACCENT_TEXT }}
           >
-            <span aria-hidden>{'>>>'}</span> EXPAND UNIT
+            <span aria-hidden>{'>>>'}</span> <LetterRoll text="EXPAND UNIT" />
           </span>
           <Crosshair size={12} color={C.ink} />
         </div>

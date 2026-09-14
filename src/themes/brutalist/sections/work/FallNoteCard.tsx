@@ -7,6 +7,7 @@ import { projects } from '@/data/portfolio'
 import { aeonik, spaceMono } from '@/themes/fonts'
 import { ACCENT_TEXT, accentA, canHover, C } from '@/themes/brutalist/tokens'
 import { Tape } from '@/themes/brutalist/primitives/Tape'
+import { LetterRoll } from '@/themes/brutalist/motion/LetterRoll'
 import { STATUS_MAP, fallVariants } from '@/themes/brutalist/sections/work/board'
 
 // ─── FALLING STICKY NOTE (page two) ─────────────────────────────
@@ -53,6 +54,7 @@ export function FallNoteCard({
       whileTap={reduced ? undefined : { scale: 0.97 }}
       onClick={handleOpen}
       role="button"
+      data-lr-host
       tabIndex={0}
       aria-label={`Open details for ${project.title}`}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleOpen() } }}
@@ -119,7 +121,7 @@ export function FallNoteCard({
             className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest ${spaceMono.className}`}
             style={{ color: ACCENT_TEXT }}
           >
-            <span aria-hidden>{'>>>'}</span> EXPAND UNIT
+            <span aria-hidden>{'>>>'}</span> <LetterRoll text="EXPAND UNIT" />
           </span>
           {project.github && (
             <a
@@ -130,7 +132,7 @@ export function FallNoteCard({
               className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-black hover:text-[color:var(--bz-accent-ink)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${spaceMono.className}`}
               aria-label={`View source for ${project.title} on GitHub`}
             >
-              <FiGithub size={11} aria-hidden="true" /> VIEW SOURCE
+              <FiGithub size={11} aria-hidden="true" /> <LetterRoll text="VIEW SOURCE" />
             </a>
           )}
         </div>

@@ -21,6 +21,7 @@ import { Footer } from '@/themes/brutalist/sections/Footer'
 import { PlaybookSection } from '@/themes/brutalist/sections/Playbook'
 import { WorkSection } from '@/themes/brutalist/sections/work/WorkSection'
 import TargetCursor from '@/components/ui/reactbits/TargetCursor'
+import { useLenis } from '@/themes/brutalist/motion/useLenis'
 import './brutalist.css'
 
 // ─── ROOT ─────────────────────────────────────────────────────────
@@ -28,6 +29,7 @@ export default function BrutalistTheme() {
   // Accent palette is theme-local: persisted under its own key, hydrated after
   // mount to avoid any SSR/first-paint mismatch.
   const [palette, setPaletteState] = useState<PaletteId>(DEFAULT_PALETTE)
+  useLenis()
 
   useEffect(() => {
     try {

@@ -340,13 +340,32 @@ export const manifesto =
   "I build models I can actually explain. A 93% AUC means nothing if you can't tell a clinician *why*, so I'd rather ship something interpretable than win a leaderboard. Most of my work lives at the unglamorous end: class imbalance, data that lies, joins that explode to four billion rows. That's the part I like."
 
 // Short, punchy, defensible takes, each backed by something I actually did.
+// title: the two-or-three word handle a section can set in display type.
 export const hotTakes = [
-  "Interpretability isn't a nice-to-have. If you can't explain the prediction, you don't have a product. You have a liability.",
-  "Most 'AI' is a fine-tuned BERT in a trench coat. I measured it: BERT gave 190× the throughput of an LLM with zero cross-task transfer. Ship the boring tool.",
-  "Class imbalance is where models quietly learn to lie. I wrote NearSMOTE because the off-the-shelf fixes were making it worse.",
-  "Big Data is 10% Spark and 90% realizing your join just became four billion rows.",
-  "The best debugging tool I own is a video timeline. Editing taught me pacing, and pacing is just latency you can feel.",
-  "Backtests are where strategies look brilliant. Out of sample is where they go to die, so I trust the walk-forward and nothing else.",
+  {
+    title: 'Interpretability',
+    body: "Interpretability isn't a nice-to-have. If you can't explain the prediction, you don't have a product. You have a liability.",
+  },
+  {
+    title: 'The Boring Tool',
+    body: "Most 'AI' is a fine-tuned BERT in a trench coat. I measured it: BERT gave 190× the throughput of an LLM with zero cross-task transfer. Ship the boring tool.",
+  },
+  {
+    title: 'Class Imbalance',
+    body: "Class imbalance is where models quietly learn to lie. I wrote NearSMOTE because the off-the-shelf fixes were making it worse.",
+  },
+  {
+    title: 'Big Data',
+    body: "Big Data is 10% Spark and 90% realizing your join just became four billion rows.",
+  },
+  {
+    title: 'Pacing',
+    body: "The best debugging tool I own is a video timeline. Editing taught me pacing, and pacing is just latency you can feel.",
+  },
+  {
+    title: 'Out of Sample',
+    body: "Backtests are where strategies look brilliant. Out of sample is where they go to die, so I trust the walk-forward and nothing else.",
+  },
 ]
 
 // What I'm actually doing right now (keep this current-ish; it reads human).

@@ -18,7 +18,7 @@ import { ContactSection } from '@/themes/brutalist/sections/Contact'
 import { HomeSection } from '@/themes/brutalist/sections/Hero'
 import { AboutSection } from '@/themes/brutalist/sections/About'
 import { Footer } from '@/themes/brutalist/sections/Footer'
-import { ManifestoSection } from '@/themes/brutalist/sections/Manifesto'
+import { PlaybookSection } from '@/themes/brutalist/sections/Playbook'
 import { WorkSection } from '@/themes/brutalist/sections/work/WorkSection'
 import TargetCursor from '@/components/ui/reactbits/TargetCursor'
 import './brutalist.css'
@@ -61,8 +61,7 @@ export default function BrutalistTheme() {
         {/* section id="home" is inside HomeSection */}
         <HomeSection />
 
-        {/* ManifestoSection: no id - follows the home section */}
-        <ManifestoSection />
+        <PlaybookSection />
 
         <SkillsSection />
         <WorkSection />

@@ -21,9 +21,8 @@ import { AboutSection } from '@/themes/brutalist/sections/About'
 import { Footer } from '@/themes/brutalist/sections/Footer'
 import { PlaybookSection } from '@/themes/brutalist/sections/Playbook'
 import { WorkSection } from '@/themes/brutalist/sections/work/WorkSection'
-import TargetCursor from '@/components/ui/reactbits/TargetCursor'
 import { useLenis } from '@/themes/brutalist/motion/useLenis'
-import { CursorLabel } from '@/themes/brutalist/motion/CursorLabel'
+import { BlueprintCursor } from '@/themes/brutalist/motion/BlueprintCursor'
 import { ProjectModalProvider } from '@/themes/brutalist/sections/work/ProjectModalProvider'
 import { ProjectFilterProvider } from '@/themes/brutalist/sections/work/ProjectFilterProvider'
 import './brutalist.css'
@@ -83,8 +82,7 @@ export default function BrutalistTheme() {
     >
       <GrainOverlay />
       <DevtoolsEgg />
-      <TargetCursor targetSelector='button, a, [role="button"]' spinDuration={3} hoverDuration={0.4} parallaxOn={true} />
-      <CursorLabel />
+      <BlueprintCursor />
 
       <ProjectModalProvider>
       <ProjectFilterProvider>

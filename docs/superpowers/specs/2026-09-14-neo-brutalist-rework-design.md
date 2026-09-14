@@ -1,7 +1,7 @@
 # Neo-Brutalist theme rework: design
 
 Date: 2026-09-14
-Status: approved
+Status: implemented 2026-09-15 (commits 0455a01 through 2b92191)
 Scope: `src/themes/brutalist/**` only. The Original theme, the global loading screen and `src/data/portfolio.ts` (except the `hotTakes` shape) are out of bounds.
 
 ## Decisions made during brainstorming
@@ -73,7 +73,7 @@ Data change: `hotTakes` becomes `{ title: string; body: string }[]`. Titles: Int
 
 **Skills.** Same content. Category headers split-reveal; chips stagger in and get a hard-shadow press on hover; group counts use `Counter`.
 
-**Work.** Board and modal untouched. Additive only: `SplitReveal` on the board header, `LetterRoll` on EXPAND/VIEW labels, `Magnetic` on the page-flip control.
+**Work.** Board and modal untouched. Additive only: `LetterRoll` on EXPAND/VIEW labels and `Magnetic` on the page-flip control. The board header keeps its existing clip-path swap as its reveal; stacking a `SplitReveal` on it would have fired both on every page flip, so that part of the plan was dropped during implementation.
 
 **About.** Keeps its zine clippings. Adds `Parallax` drift on the clippings and split-reveal on headings.
 

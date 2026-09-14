@@ -128,6 +128,7 @@ export function ProjectModal({
             ref={closeRef}
             onClick={onClose}
             aria-label="Close"
+          data-cursor="CLOSE"
             className="absolute top-2 right-2 z-20 border-[2px] border-black w-9 h-9 flex items-center justify-center font-black text-xl bg-white hover:bg-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
           >
             ×

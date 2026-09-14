@@ -42,6 +42,7 @@ export function PaletteSwitcher({
             type="button"
             onClick={() => setPalette(p.id)}
             aria-pressed={active}
+            data-cursor={p.name.toUpperCase()}
             aria-label={`${p.name} palette: ${p.desc}`}
             title={`${p.name} · ${p.desc}`}
             className={`relative grid place-items-center border-[2px] border-black transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${

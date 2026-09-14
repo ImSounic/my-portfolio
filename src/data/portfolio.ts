@@ -341,21 +341,26 @@ export const manifesto =
 
 // Short, punchy, defensible takes, each backed by something I actually did.
 // title: the two-or-three word handle a section can set in display type.
-export const hotTakes = [
+// projectId: the project that backs the take, when there is one.
+export const hotTakes: { title: string; body: string; projectId?: string }[] = [
   {
     title: 'Interpretability',
+    projectId: 'miscarriage-prediction',
     body: "Interpretability isn't a nice-to-have. If you can't explain the prediction, you don't have a product. You have a liability.",
   },
   {
     title: 'The Boring Tool',
+    projectId: 'lora-vs-bert',
     body: "Most 'AI' is a fine-tuned BERT in a trench coat. I measured it: BERT gave 190× the throughput of an LLM with zero cross-task transfer. Ship the boring tool.",
   },
   {
     title: 'Class Imbalance',
+    projectId: 'miscarriage-prediction',
     body: "Class imbalance is where models quietly learn to lie. I wrote NearSMOTE because the off-the-shelf fixes were making it worse.",
   },
   {
     title: 'Big Data',
+    projectId: 'crypto-microstructure',
     body: "Big Data is 10% Spark and 90% realizing your join just became four billion rows.",
   },
   {
@@ -364,6 +369,7 @@ export const hotTakes = [
   },
   {
     title: 'Out of Sample',
+    projectId: 'cifr-quant',
     body: "Backtests are where strategies look brilliant. Out of sample is where they go to die, so I trust the walk-forward and nothing else.",
   },
 ]

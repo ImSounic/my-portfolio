@@ -7,9 +7,10 @@
 //  Sounic Akkaraju · AI/ML Engineer · REV 2.0 · UNIT / D-01
 // ═══════════════════════════════════════════════════════════════
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { aeonik, spaceMono } from '@/themes/fonts'
-import { PALETTES, DEFAULT_PALETTE, PALETTE_STORAGE_KEY, C, type PaletteId } from '@/themes/brutalist/tokens'
+import { PALETTES, DEFAULT_PALETTE, PALETTE_STORAGE_KEY, EASE_OUT, C, type PaletteId } from '@/themes/brutalist/tokens'
 import { DevtoolsEgg } from '@/themes/brutalist/primitives/DevtoolsEgg'
 import { GrainOverlay } from '@/themes/brutalist/primitives/GrainOverlay'
 import { Navbar } from '@/themes/brutalist/nav/Navbar'
@@ -22,6 +23,8 @@ import { PlaybookSection } from '@/themes/brutalist/sections/Playbook'
 import { WorkSection } from '@/themes/brutalist/sections/work/WorkSection'
 import TargetCursor from '@/components/ui/reactbits/TargetCursor'
 import { useLenis } from '@/themes/brutalist/motion/useLenis'
+import { CursorLabel } from '@/themes/brutalist/motion/CursorLabel'
+import { ProjectModalProvider } from '@/themes/brutalist/sections/work/ProjectModalProvider'
 import './brutalist.css'
 
 // ─── ROOT ─────────────────────────────────────────────────────────
@@ -29,6 +32,10 @@ export default function BrutalistTheme() {
   // Accent palette is theme-local: persisted under its own key, hydrated after
   // mount to avoid any SSR/first-paint mismatch.
   const [palette, setPaletteState] = useState<PaletteId>(DEFAULT_PALETTE)
+  const paletteRef = useRef(palette)
+  const reduced = useReducedMotion()
+  // Curtain in the incoming accent that wipes across while the palette swaps.
+  const [curtain, setCurtain] = useState<{ color: string; key: number } | null>(null)
   useLenis()
 
   useEffect(() => {
@@ -40,14 +47,33 @@ export default function BrutalistTheme() {
     }
   }, [])
 
-  const setPalette = useCallback((id: PaletteId) => {
-    setPaletteState(id)
-    try {
-      localStorage.setItem(PALETTE_STORAGE_KEY, id)
-    } catch {
-      /* ignore */
-    }
-  }, [])
+  useEffect(() => {
+    paletteRef.current = palette
+  }, [palette])
+
+  const setPalette = useCallback(
+    (id: PaletteId) => {
+      const commit = () => {
+        setPaletteState(id)
+        try {
+          localStorage.setItem(PALETTE_STORAGE_KEY, id)
+        } catch {
+          /* ignore */
+        }
+      }
+      const next = PALETTES.find((p) => p.id === id)
+      if (!next || id === paletteRef.current || reduced || document.hidden) {
+        commit()
+        return
+      }
+      // Sweep in (260ms), swap underneath, sweep out. Timers, not animation
+      // callbacks, so the swap always lands even if frames pause.
+      setCurtain({ color: next.swatch, key: Date.now() })
+      window.setTimeout(commit, 260)
+      window.setTimeout(() => setCurtain(null), 560)
+    },
+    [reduced],
+  )
 
   return (
     <div
@@ -57,21 +83,40 @@ export default function BrutalistTheme() {
       <GrainOverlay />
       <DevtoolsEgg />
       <TargetCursor targetSelector='button, a, [role="button"]' spinDuration={3} hoverDuration={0.4} parallaxOn={true} />
-      <Navbar palette={palette} setPalette={setPalette} />
+      <CursorLabel />
 
-      <main>
-        {/* section id="home" is inside HomeSection */}
-        <HomeSection />
+      <ProjectModalProvider>
+        <Navbar palette={palette} setPalette={setPalette} />
 
-        <PlaybookSection />
+        <main>
+          {/* section id="home" is inside HomeSection */}
+          <HomeSection />
 
-        <SkillsSection />
-        <WorkSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
+          <PlaybookSection />
 
-      <Footer />
+          <SkillsSection />
+          <WorkSection />
+          <AboutSection />
+          <ContactSection />
+        </main>
+
+        <Footer />
+      </ProjectModalProvider>
+
+      <AnimatePresence>
+        {curtain && (
+          <motion.div
+            key={curtain.key}
+            aria-hidden="true"
+            className="fixed inset-0 z-[150] pointer-events-none"
+            style={{ background: curtain.color }}
+            initial={{ clipPath: 'inset(0 100% 0 0)' }}
+            animate={{ clipPath: 'inset(0 0% 0 0)' }}
+            exit={{ clipPath: 'inset(0 0 0 100%)' }}
+            transition={{ duration: 0.26, ease: EASE_OUT }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }

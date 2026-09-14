@@ -49,6 +49,7 @@ export function PinCard({
       onClick={handleOpen}
       role="button"
       data-lr-host
+      data-cursor="VIEW"
       tabIndex={0}
       aria-label={`Open details for ${project.title}`}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleOpen() } }}

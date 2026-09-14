@@ -168,6 +168,7 @@ export function AboutSection() {
           }}
           whileDrag={{ cursor: 'grabbing' }}
           title="Drag me around"
+          data-cursor="DRAG"
           aria-label="Interactive sticker, drag or click"
         >
           <span aria-hidden>{'>>>'}</span>

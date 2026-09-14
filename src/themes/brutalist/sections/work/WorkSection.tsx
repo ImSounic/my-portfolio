@@ -5,17 +5,15 @@ import { motion, AnimatePresence } from 'motion/react'
 import { projects } from '@/data/portfolio'
 import { spaceMono } from '@/themes/fonts'
 import { ON_ACCENT, NEW_PROJECT_IDS, REST_ROTS, FALL_IN_ROTS, FALL_OFF_ROTS, C } from '@/themes/brutalist/tokens'
-import { ProjectModal } from '@/themes/brutalist/sections/work/ProjectModal'
+import { useProjectModal } from '@/themes/brutalist/sections/work/ProjectModalProvider'
 import { FallNoteCard } from '@/themes/brutalist/sections/work/FallNoteCard'
 import { BoardHeader } from '@/themes/brutalist/sections/work/BoardHeader'
 import { PinCard } from '@/themes/brutalist/sections/work/PinCard'
 import { PageNav } from '@/themes/brutalist/sections/work/PageNav'
 
 export function WorkSection() {
-  const [openId, setOpenId]       = useState<string | null>(null)
-  const [triggerEl, setTriggerEl] = useState<HTMLElement | null>(null)
+  const { open }                  = useProjectModal()
   const [page, setPage]           = useState(0) // 0 = originals, 1 = newest
-  const openProject = projects.find((p) => p.id === openId) ?? null
 
   // PAGE 01 = the original projects, PAGE 02 = the four newest units.
   const originalProjects = projects.filter((p) => !NEW_PROJECT_IDS.includes(p.id as (typeof NEW_PROJECT_IDS)[number]))
@@ -78,14 +76,7 @@ export function WorkSection() {
     }
   }, [])
 
-  const handleOpen = (id: string, el: HTMLElement) => {
-    setTriggerEl(el)
-    setOpenId(id)
-  }
-
-  const handleClose = () => {
-    setOpenId(null)
-  }
+  const handleOpen = (id: string, el: HTMLElement) => open(id, el)
 
   return (
     // overflow-x-clip (not -hidden): clips horizontal overflow WITHOUT forcing
@@ -218,16 +209,6 @@ export function WorkSection() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {openProject && (
-          <ProjectModal
-            key={openProject.id}
-            project={openProject}
-            onClose={handleClose}
-            triggerEl={triggerEl}
-          />
-        )}
-      </AnimatePresence>
     </section>
   )
 }

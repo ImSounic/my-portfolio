@@ -7,7 +7,7 @@ import { profile, socials } from '@/data/portfolio'
 import { aeonik, spaceMono } from '@/themes/fonts'
 import { ACCENT, ON_ACCENT, C } from '@/themes/brutalist/tokens'
 import { scrollTo } from '@/themes/brutalist/motion/scroll'
-import { SplitReveal } from '@/themes/brutalist/motion/SplitReveal'
+import { Wordmark } from '@/themes/brutalist/motion/Wordmark'
 import { LetterRoll } from '@/themes/brutalist/motion/LetterRoll'
 import { Magnetic } from '@/themes/brutalist/motion/Magnetic'
 import { Crosshair } from '@/themes/brutalist/primitives/Crosshair'
@@ -71,32 +71,28 @@ export function HomeSection() {
           </span>
 
           <h1 className={`relative z-10 font-black uppercase ${aeonik.className}`} style={{ color: ON_ACCENT }}>
-            <SplitReveal
-              as="span"
+            <Wordmark
               text={profile.firstName.toUpperCase()}
-              mode="chars"
-              trigger="mount"
               delay={0.15}
               stagger={0.05}
               duration={0.85}
+              radius={240}
+              lift={28}
+              tilt={8}
               className="block leading-[0.9]"
               style={{ fontSize: 'clamp(64px, 20.5vw, 460px)', letterSpacing: '-0.04em' }}
             />
-            <SplitReveal
-              as="span"
+            <Wordmark
               text="AKKARAJU"
-              mode="chars"
-              trigger="mount"
               delay={0.5}
               stagger={0.035}
               duration={0.7}
+              radius={160}
+              lift={12}
+              tilt={5}
               className="block leading-[1]"
-              style={{
-                fontSize: 'clamp(28px, 7.2vw, 150px)',
-                letterSpacing: '-0.02em',
-                color: 'transparent',
-                WebkitTextStroke: `clamp(1.5px, 0.35vw, 4px) ${ON_ACCENT}`,
-              }}
+              style={{ fontSize: 'clamp(28px, 7.2vw, 150px)', letterSpacing: '-0.02em' }}
+              letterStyle={{ color: 'transparent', WebkitTextStroke: `clamp(1.5px, 0.35vw, 4px) ${ON_ACCENT}` }}
             />
           </h1>
 
@@ -134,6 +130,7 @@ export function HomeSection() {
           style={{ top: '7rem', right: '170px', rotate: 4, cursor: reduced ? 'default' : 'grab' }}
           whileDrag={{ cursor: 'grabbing' }}
           aria-label="Availability marker"
+          data-cursor="DRAG"
         >
           <Tape angle={-3} color="rgba(255,255,255,0.85)" />
           <div

@@ -43,7 +43,7 @@ export function CopyEmail({ email, className, style, children, ...rest }: Props)
   }
 
   return (
-    <button type="button" onClick={copy} className={className} style={style} aria-live="polite" {...rest}>
+    <button type="button" onClick={copy} className={className} style={style} aria-live="polite" data-lr-host {...rest}>
       {children ? children(state) : state === 'copied' ? 'COPIED' : email}
     </button>
   )

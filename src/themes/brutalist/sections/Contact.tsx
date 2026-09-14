@@ -1,93 +1,112 @@
 'use client'
 
-import { motion, useReducedMotion } from 'motion/react'
-import { FiGithub, FiLinkedin, FiMail, FiFileText } from 'react-icons/fi'
-import { socials } from '@/data/portfolio'
+import { FiGithub, FiLinkedin, FiFileText, FiMail } from 'react-icons/fi'
+import { profile, socials } from '@/data/portfolio'
 import { aeonik, spaceMono } from '@/themes/fonts'
-import { ON_ACCENT, accentA, EASE_OUT, canHover, C } from '@/themes/brutalist/tokens'
-import { FrameTag } from '@/themes/brutalist/primitives/FrameTag'
+import { ACCENT, ON_ACCENT, C } from '@/themes/brutalist/tokens'
+import { SplitReveal } from '@/themes/brutalist/motion/SplitReveal'
+import { LetterRoll } from '@/themes/brutalist/motion/LetterRoll'
+import { Magnetic } from '@/themes/brutalist/motion/Magnetic'
+import { CopyEmail } from '@/themes/brutalist/motion/CopyEmail'
+import { Crosshair } from '@/themes/brutalist/primitives/Crosshair'
 
-// ─── CONTACT ─────────────────────────────────────────────────────
+// ─── CONTACT: the accent bookend ─────────────────────────────────
+// Mirrors the hero: full-bleed accent field, giant on-accent heading, the
+// four ways to reach me as a hairline grid. Email copies to the clipboard.
 export function ContactSection() {
-  const reduced = useReducedMotion()
-
-  // Single accent or ink only.
+  const block = `group flex items-center gap-4 p-5 min-h-[72px] text-left w-full transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-on-accent)] focus-visible:ring-inset ${aeonik.className}`
   const links = [
-    { icon: FiMail,     label: 'Email',    href: socials.email,    detail: 'imsounic.dev@gmail.com', bg: C.orange, fg: ON_ACCENT },
-    { icon: FiLinkedin, label: 'LinkedIn', href: socials.linkedin, detail: '/in/imsounic',           bg: C.ink,    fg: C.white },
-    { icon: FiGithub,   label: 'GitHub',   href: socials.github,   detail: 'ImSounic',               bg: C.ink,    fg: C.white },
-    { icon: FiFileText, label: 'Resume',   href: socials.resume,   detail: 'Download PDF',           bg: C.paper,  fg: C.ink   },
+    { icon: FiLinkedin, label: 'LinkedIn', href: socials.linkedin, detail: '/in/imsounic', bg: C.ink,   fg: C.white },
+    { icon: FiGithub,   label: 'GitHub',   href: socials.github,   detail: 'ImSounic',     bg: C.ink,   fg: C.white },
+    { icon: FiFileText, label: 'Resume',   href: socials.resume,   detail: 'Download PDF', bg: C.paper, fg: C.ink   },
   ]
 
   return (
     <section
       id="contact"
-      className="py-12 sm:py-20 px-4 sm:px-6 overflow-x-hidden"
-      style={{ background: C.ink }}
+      className="overflow-x-hidden px-4 sm:px-6 py-20 sm:py-28"
+      style={{ background: ACCENT, color: ON_ACCENT }}
     >
-      <div className="max-w-5xl mx-auto">
-        {/* Big loud heading - outlined macro-type */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3 flex-wrap">
-            <FrameTag color={C.orange}>SECTION / TRANSMIT</FrameTag>
-            <div className="flex-1 h-px min-w-[16px]" style={{ background: accentA(40) }} />
-            <span className={`text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 shrink-0 ${spaceMono.className}`}>
-              UNIT / D-05
-            </span>
-          </div>
-          <h2
-            className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
-            style={{
-              fontSize: 'clamp(40px, 10vw, 124px)',
-              color: 'transparent',
-              WebkitTextStroke: `3px ${C.orange}`,
-              letterSpacing: '-0.05em',
-            }}
-          >
-            CONTACT
-          </h2>
+      <div className="max-w-6xl mx-auto">
+        <div className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] ${spaceMono.className}`} style={{ opacity: 0.75 }}>
+          <Crosshair size={9} color={ON_ACCENT} />
+          {profile.location}
         </div>
 
-        {/* Loud sub-headline */}
+        <SplitReveal
+          as="h2"
+          text="LET'S TALK"
+          mode="words"
+          stagger={0.12}
+          duration={0.85}
+          className={`mt-4 font-black uppercase leading-[0.88] ${aeonik.className}`}
+          style={{ fontSize: 'clamp(56px, 13vw, 240px)', letterSpacing: '-0.04em', color: ON_ACCENT }}
+        />
+
         <p
-          className={`text-2xl sm:text-3xl font-black uppercase text-white mb-12 leading-tight ${aeonik.className}`}
+          className={`mt-8 max-w-[40ch] text-xl sm:text-2xl font-black leading-tight ${aeonik.className}`}
+          style={{ textWrap: 'pretty' }}
         >
-          Got an AI/ML problem?{' '}
-          <span style={{ color: C.orange }}>Let&apos;s build.</span>
+          Got an AI/ML problem? Let&apos;s build.
         </p>
 
-        {/* Contact blocks - modular hairline grid */}
+        {/* Reach me: hairline grid on the field */}
         <div
-          className="grid sm:grid-cols-2 max-w-2xl"
-          style={{ gap: 2, background: C.orange, border: `2px solid ${C.orange}` }}
+          className="mt-12 grid sm:grid-cols-2 max-w-3xl"
+          style={{ gap: 2, background: ON_ACCENT, border: `2px solid ${ON_ACCENT}` }}
         >
+          <Magnetic strength={0.12} className="block">
+            <CopyEmail
+              email={profile.email}
+              className={block}
+              style={{ background: ON_ACCENT, color: ACCENT }}
+              aria-label={`Copy email address ${profile.email}`}
+            >
+              {(state) => (
+                <>
+                  <FiMail size={22} aria-hidden="true" />
+                  <span className="min-w-0">
+                    <span className="block font-black text-sm uppercase tracking-widest">
+                      {state === 'copied' ? 'Copied' : 'Copy email'}
+                    </span>
+                    <span className={`block text-xs font-bold break-all ${spaceMono.className}`}>{profile.email}</span>
+                  </span>
+                </>
+              )}
+            </CopyEmail>
+          </Magnetic>
+
           {links.map(({ icon: Icon, label, href, detail, bg, fg }) => (
-            <motion.a
+            <a
               key={label}
               href={href}
-              target={href.startsWith('mailto') || href.startsWith('/') ? '_self' : '_blank'}
+              target={href.startsWith('/') ? '_self' : '_blank'}
               rel="noopener noreferrer"
-              className={`flex items-center gap-4 p-5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-inset ${aeonik.className}`}
+              data-lr-host
+              className={block}
               style={{ background: bg, color: fg }}
-              whileHover={reduced || !canHover ? undefined : { x: -2, y: -2 }}
-              transition={{ duration: 0.14, ease: EASE_OUT }}
-              aria-label={label}
             >
               <Icon size={22} aria-hidden="true" />
-              <div className="min-w-0">
-                <div className="font-black text-sm uppercase tracking-widest">{label}</div>
-                <div
-                  className={`text-xs font-bold break-all ${spaceMono.className}`}
-                  style={{ color: fg }}
-                >
-                  {detail}
-                </div>
-              </div>
-            </motion.a>
+              <span className="min-w-0">
+                <span className="block font-black text-sm uppercase tracking-widest">
+                  <LetterRoll text={label} />
+                </span>
+                <span className={`block text-xs font-bold break-all ${spaceMono.className}`}>{detail}</span>
+              </span>
+            </a>
           ))}
         </div>
+
+        <p className={`mt-5 text-xs font-bold ${spaceMono.className}`} style={{ opacity: 0.85 }}>
+          Prefer your mail app?{' '}
+          <a
+            href={socials.email}
+            className="underline underline-offset-4 decoration-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-on-accent)]"
+          >
+            Write to {profile.email}
+          </a>
+        </p>
       </div>
     </section>
   )
 }
-

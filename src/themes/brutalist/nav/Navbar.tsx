@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { motion, useReducedMotion, AnimatePresence } from 'motion/react'
 import { navSections } from '@/data/portfolio'
 import { aeonik, spaceMono } from '@/themes/fonts'
-import { ACCENT_TEXT, EASE_OUT, scrollTo, C, type PaletteId } from '@/themes/brutalist/tokens'
+import { ACCENT_TEXT, EASE_OUT, C, type PaletteId } from '@/themes/brutalist/tokens'
+import { scrollTo } from '@/themes/brutalist/motion/scroll'
 import { PaletteSwitcher } from '@/themes/brutalist/primitives/PaletteSwitcher'
 
 // ─── NAVBAR ──────────────────────────────────────────────────────

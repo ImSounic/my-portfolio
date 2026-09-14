@@ -56,3 +56,36 @@
   --bz-accent-ink: #e60023;
   --bz-on-accent:  #ffffff;
 }
+
+/* ── LETTER ROLL (motion/LetterRoll). Two stacked rows per character; hover on
+   the element or on a [data-lr-host] ancestor rolls every column up one row,
+   staggered per character. Pointer devices only; no motion under reduce. ── */
+.brutalist .bz-lr { display: inline-block; position: relative; }
+.brutalist .bz-lr__sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.brutalist .bz-lr__stack { display: inline-flex; }
+.brutalist .bz-lr__ch {
+  display: inline-block; overflow: hidden; height: 1.15em; line-height: 1.15; vertical-align: top;
+}
+.brutalist .bz-lr__col {
+  display: flex; flex-direction: column;
+  transition: transform 380ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition-delay: calc(var(--i, 0) * 16ms);
+}
+.brutalist .bz-lr__col > span { display: block; line-height: 1.15; }
+@media (hover: hover) {
+  .brutalist .bz-lr:hover .bz-lr__col,
+  .brutalist [data-lr-host]:hover .bz-lr__col,
+  .brutalist [data-lr-host]:focus-visible .bz-lr__col { transform: translateY(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brutalist .bz-lr__col { transition: none; }
+}
+
+/* ── LENIS (motion/useLenis) ── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }

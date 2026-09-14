@@ -38,6 +38,8 @@ export const C = {
 // ─── MOTION - custom curves with mass (emil / high-end) ─────────
 export const EASE_OUT = [0.23, 1, 0.32, 1] as const
 export const SPRING   = { type: 'spring', stiffness: 280, damping: 24 } as const
+// Same curve as a CSS string, for transition-based primitives (SplitReveal, LetterRoll).
+export const EASE_OUT_CSS = 'cubic-bezier(0.23, 1, 0.32, 1)'
 
 // ─── DETERMINISTIC ROTATIONS (no Math.random - SSR-safe) ────────
 // Each page is a stack of taped cards. On a page flip the current
@@ -62,8 +64,4 @@ export const canHover =
 
 
 // ─── SCROLL HELPER ───────────────────────────────────────────────
-export const scrollTo = (id: string) => {
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
 

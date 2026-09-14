@@ -3,6 +3,7 @@
 import { aeonik, spaceMono } from '@/themes/fonts'
 import { ACCENT_TEXT, accentA, C } from '@/themes/brutalist/tokens'
 import { FrameTag } from '@/themes/brutalist/primitives/FrameTag'
+import { SplitReveal } from '@/themes/brutalist/motion/SplitReveal'
 
 // ─── SECTION HEADER (shared structural macro-header) ────────────
 export function SectionHeader({
@@ -23,12 +24,13 @@ export function SectionHeader({
           UNIT / {index}
         </span>
       </div>
-      <h2
+      <SplitReveal
+        as="h2"
+        text={title}
+        mode="words"
         className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
-        style={{ fontSize: 'clamp(40px, 10vw, 120px)', color: ink, letterSpacing: '-0.05em' }}
-      >
-        {title}
-      </h2>
+        style={{ fontSize: 'clamp(40px, 10vw, 120px)', color: ink, letterSpacing: '-0.04em' }}
+      />
     </div>
   )
 }

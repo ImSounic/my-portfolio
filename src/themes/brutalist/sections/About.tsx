@@ -8,6 +8,8 @@ import { ACCENT_TEXT, ON_ACCENT, accentA, SPRING, canHover, C } from '@/themes/b
 import { FrameTag } from '@/themes/brutalist/primitives/FrameTag'
 import { SectionHeader } from '@/themes/brutalist/primitives/SectionHeader'
 import { Tape } from '@/themes/brutalist/primitives/Tape'
+import { Parallax } from '@/themes/brutalist/motion/Parallax'
+import { SplitReveal } from '@/themes/brutalist/motion/SplitReveal'
 
 // ─── ABOUT / ZINE CLIPPINGS ──────────────────────────────────────
 export function AboutSection() {
@@ -19,7 +21,7 @@ export function AboutSection() {
     <section
       id="about"
       className="py-12 sm:py-20 px-4 sm:px-6 overflow-x-hidden"
-      style={{ background: C.white }}
+      style={{ background: C.paper }}
       ref={dragRef}
     >
       <div className="max-w-5xl mx-auto">
@@ -27,6 +29,7 @@ export function AboutSection() {
 
         <div className="grid md:grid-cols-2 gap-10">
           {/* Summary clipping */}
+          <Parallax distance={28}>
           <motion.div
             className="relative"
             style={{ rotate: -1.2 }}
@@ -36,7 +39,7 @@ export function AboutSection() {
             <Tape angle={2} />
             <div
               className={`border-[2px] border-black p-7 ${aeonik.className}`}
-              style={{ background: C.paper, boxShadow: '7px 7px 0 #000' }}
+              style={{ background: C.white, boxShadow: '7px 7px 0 #000' }}
             >
               <FrameTag color={ACCENT_TEXT}>WHO I AM</FrameTag>
               <p className={`mt-3 text-sm font-bold leading-relaxed ${spaceMono.className}`} style={{ color: C.ink }}>
@@ -44,9 +47,11 @@ export function AboutSection() {
               </p>
             </div>
           </motion.div>
+          </Parallax>
 
           <div className="flex flex-col gap-8">
-            {/* Education clipping - orange accent (was blue) */}
+            {/* Education clipping */}
+            <Parallax distance={16}>
             <motion.div
               className="relative"
               style={{ rotate: 1.4 }}
@@ -81,11 +86,12 @@ export function AboutSection() {
                 </div>
               </div>
             </motion.div>
+            </Parallax>
 
             {/* Languages */}
             <div
               className={`border-[2px] border-black p-5 ${aeonik.className}`}
-              style={{ background: C.paper, boxShadow: '5px 5px 0 #000', rotate: '-0.8deg' }}
+              style={{ background: C.white, boxShadow: '5px 5px 0 #000', rotate: '-0.8deg' }}
             >
               <FrameTag color="rgba(10,10,10,0.55)">LANGUAGES</FrameTag>
               <div className="flex flex-wrap gap-2 mt-3">
@@ -112,10 +118,10 @@ export function AboutSection() {
           {[
             { data: creative, rot: -2.2, code: 'C-01' },
             { data: gaming,   rot:  1.9, code: 'C-02' },
-          ].map(({ data, rot, code }) => (
+          ].map(({ data, rot, code }, i) => (
+            <Parallax key={data.title} distance={i === 0 ? 22 : 36}>
             <motion.div
-              key={data.title}
-              className="relative"
+              className="relative h-full"
               style={{ rotate: rot }}
               whileHover={reduced || !canHover ? undefined : { rotate: 0, scale: 1.01 }}
               transition={SPRING}
@@ -123,15 +129,16 @@ export function AboutSection() {
               <Tape angle={rot * 1.5} color={accentA(28)} />
               <div
                 className={`border-[2px] border-black p-7 h-full ${aeonik.className}`}
-                style={{ background: C.paper, boxShadow: `7px 7px 0 ${C.orange}` }}
+                style={{ background: C.white, boxShadow: `7px 7px 0 ${C.orange}` }}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <div
+                  <SplitReveal
+                    as="div"
+                    text={data.title}
+                    mode="words"
                     className="font-black text-lg uppercase leading-tight"
                     style={{ color: ACCENT_TEXT }}
-                  >
-                    {data.title}
-                  </div>
+                  />
                   <span className={`text-[9px] font-bold tracking-[0.16em] text-black/35 shrink-0 ml-3 ${spaceMono.className}`}>
                     {code}
                   </span>
@@ -141,6 +148,7 @@ export function AboutSection() {
                 </p>
               </div>
             </motion.div>
+            </Parallax>
           ))}
         </div>
 

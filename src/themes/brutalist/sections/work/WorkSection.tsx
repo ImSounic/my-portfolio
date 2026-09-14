@@ -6,6 +6,7 @@ import { projects } from '@/data/portfolio'
 import { spaceMono } from '@/themes/fonts'
 import { ON_ACCENT, NEW_PROJECT_IDS, REST_ROTS, FALL_IN_ROTS, FALL_OFF_ROTS, C } from '@/themes/brutalist/tokens'
 import { useProjectModal } from '@/themes/brutalist/sections/work/ProjectModalProvider'
+import { projectMatchesSkill, useProjectFilter } from '@/themes/brutalist/sections/work/ProjectFilterProvider'
 import { FallNoteCard } from '@/themes/brutalist/sections/work/FallNoteCard'
 import { BoardHeader } from '@/themes/brutalist/sections/work/BoardHeader'
 import { PinCard } from '@/themes/brutalist/sections/work/PinCard'
@@ -13,6 +14,7 @@ import { PageNav } from '@/themes/brutalist/sections/work/PageNav'
 
 export function WorkSection() {
   const { open }                  = useProjectModal()
+  const { filter, setFilter }     = useProjectFilter()
   const [page, setPage]           = useState(0) // 0 = originals, 1 = newest
 
   // PAGE 01 = the original projects, PAGE 02 = the four newest units.
@@ -21,7 +23,9 @@ export function WorkSection() {
   const startIndex       = originalProjects.length
   const total            = projects.length
 
-  const pageProjects = page === 0 ? originalProjects : newProjects
+  // A skill filter replaces paging with one page of every matching project.
+  const filtered     = filter ? projects.filter((p) => projectMatchesSkill(p, filter)) : null
+  const pageProjects = filtered ?? (page === 0 ? originalProjects : newProjects)
   const flip = () => setPage((p) => (p === 0 ? 1 : 0))
 
   // Responsive column count (matches grid-cols-1 sm:grid-cols-2 xl:grid-cols-3),
@@ -89,7 +93,7 @@ export function WorkSection() {
     >
       <div className="max-w-6xl mx-auto relative">
         {/* Animated header - swaps PROJECTS <-> PAGE TWO with FRESH DROPS */}
-        <BoardHeader page={page} total={total} startIndex={startIndex} />
+        <BoardHeader page={page} total={total} startIndex={startIndex} filter={filter} count={filtered?.length ?? 0} onClear={() => setFilter(null)} />
 
         {/* Static instruction marker - no emoji */}
         <div className="mb-12 -mt-6 flex items-center gap-3 flex-wrap">
@@ -100,7 +104,7 @@ export function WorkSection() {
             <span aria-hidden>{'>>>'}</span> CLICK A UNIT TO DECLASSIFY
           </span>
           <span className={`text-[10px] font-bold uppercase tracking-[0.16em] text-black/45 ${spaceMono.className}`}>
-            {total} UNITS ON FILE
+            {filtered ? `${filtered.length} OF ${total} UNITS MATCH` : `${total} UNITS ON FILE`}
           </span>
         </div>
 
@@ -151,18 +155,18 @@ export function WorkSection() {
           className="relative md:pr-24"
           style={{ minHeight: lockedH ? `${lockedH}px` : undefined }}
           aria-live="polite"
-          aria-label={`Projects, page ${page + 1} of 2`}
+          aria-label={filtered ? `Projects using ${filter}, ${filtered.length} of ${total}` : `Projects, page ${page + 1} of 2`}
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={`page-${page}`}
+              key={filtered ? `filter-${filter}` : `page-${page}`}
               className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
               initial="initial"
               animate="animate"
               exit="exit"
             >
               {pageProjects.map((project, i) =>
-                page === 0 ? (
+                filtered || page === 0 ? (
                   <PinCard
                     key={project.id}
                     project={project}
@@ -191,10 +195,11 @@ export function WorkSection() {
           </AnimatePresence>
 
           {/* Side page-flip control: vertically centered on the cards, in the right gutter. */}
-          <PageNav page={page} onFlip={flip} />
+          {!filtered && <PageNav page={page} onFlip={flip} />}
         </div>
 
         {/* Mobile page-flip control (the side button is desktop-only). */}
+        {!filtered && (
         <div className="md:hidden mt-10 flex justify-center">
           <button
             type="button"
@@ -207,6 +212,7 @@ export function WorkSection() {
             <span aria-hidden="true" className="text-base font-black leading-none">{page === 0 ? '↓' : '↑'}</span>
           </button>
         </div>
+        )}
       </div>
 
     </section>

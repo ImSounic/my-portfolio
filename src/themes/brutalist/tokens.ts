@@ -40,6 +40,8 @@ export const EASE_OUT = [0.23, 1, 0.32, 1] as const
 export const SPRING   = { type: 'spring', stiffness: 280, damping: 24 } as const
 // Same curve as a CSS string, for transition-based primitives (SplitReveal, LetterRoll).
 export const EASE_OUT_CSS = 'cubic-bezier(0.23, 1, 0.32, 1)'
+// Decisive ease-out-expo for stamps and redaction wipes.
+export const EASE_EXPO_CSS = 'cubic-bezier(0.16, 1, 0.3, 1)'
 
 // ─── DETERMINISTIC ROTATIONS (no Math.random - SSR-safe) ────────
 // Each page is a stack of taped cards. On a page flip the current

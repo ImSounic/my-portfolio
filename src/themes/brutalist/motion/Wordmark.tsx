@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type CSSProperties } from 'react'
 import { useReducedMotion } from 'motion/react'
-import { canHover, EASE_OUT_CSS } from '@/themes/brutalist/tokens'
+import { canHover, EASE_EXPO_CSS, EASE_OUT_CSS } from '@/themes/brutalist/tokens'
 
 type Props = {
   text: string
@@ -19,8 +19,8 @@ type Props = {
   letterStyle?: CSSProperties
 }
 
-// One span per character. On mount each letter rises out of a mask; once the
-// intro finishes the masks are released so the proximity lift is never clipped.
+// One span per character. On mount each letter stamps in (oversized, rotated,
+// blurred, then snapping to place); afterwards the letters carry no transform.
 // Proximity is computed on pointermove over the enclosing section, writing
 // transforms directly (no React re-render per frame).
 export function Wordmark({
@@ -40,29 +40,23 @@ export function Wordmark({
   const reduced = useReducedMotion()
   const chars = Array.from(text)
 
-  // Intro
+  // Intro: each letter slams in oversized, rotated and blurred, staggered.
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const masks = [...el.querySelectorAll<HTMLElement>('[data-wm-mask]')]
     const inners = [...el.querySelectorAll<HTMLElement>('[data-wm-intro]')]
-    const release = () => {
+    const settle = () => {
       inners.forEach((i) => {
-        i.style.transform = 'none'
-        i.style.transition = 'none'
-        i.style.willChange = 'auto'
-      })
-      masks.forEach((m) => {
-        m.style.overflow = 'visible'
+        Object.assign(i.style, { opacity: '1', transform: 'none', filter: 'none', transition: 'none', willChange: 'auto' })
       })
     }
     if (reduced || document.hidden) {
-      release()
+      settle()
       return
     }
     let cancelled = false
-    const total = (delay + chars.length * stagger + duration) * 1000 + 80
-    const safety = window.setTimeout(release, total + 1500)
+    const total = (delay + chars.length * stagger + duration) * 1000 + 120
+    const safety = window.setTimeout(settle, total + 1500)
     ;(async () => {
       try {
         await document.fonts?.ready
@@ -73,9 +67,9 @@ export function Wordmark({
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
           inners.forEach((i) => {
-            i.style.transform = 'translateY(0)'
+            Object.assign(i.style, { opacity: '1', transform: 'none', filter: 'none' })
           })
-          window.setTimeout(release, total)
+          window.setTimeout(settle, total)
         }),
       )
     })()
@@ -120,21 +114,23 @@ export function Wordmark({
   return (
     <span ref={ref} className={className} style={style} aria-label={text} role="img">
       {chars.map((ch, i) => (
-        <span key={i} data-wm-mask aria-hidden="true" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
+        <span key={i} aria-hidden="true" style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
           <span
             data-wm-intro
             style={{
               display: 'inline-block',
-              transform: 'translateY(110%)',
-              transition: `transform ${duration}s ${EASE_OUT_CSS} ${delay + i * stagger}s`,
-              willChange: 'transform',
+              opacity: 0,
+              transform: `scale(1.4) rotate(${i % 2 === 0 ? -6 : 5}deg)`,
+              filter: 'blur(8px)',
+              transition: `transform ${duration}s ${EASE_EXPO_CSS} ${delay + i * stagger}s, opacity 0.35s ${EASE_OUT_CSS} ${delay + i * stagger}s, filter 0.45s ${EASE_OUT_CSS} ${delay + i * stagger}s`,
+              willChange: 'transform, opacity, filter',
             }}
           >
             <span
               data-wm-letter
               style={{ display: 'inline-block', transition: 'transform 260ms cubic-bezier(0.23, 1, 0.32, 1)', ...letterStyle }}
             >
-              {ch === ' ' ? ' ' : ch}
+              {ch === ' ' ? '\u00A0' : ch}
             </span>
           </span>
         </span>

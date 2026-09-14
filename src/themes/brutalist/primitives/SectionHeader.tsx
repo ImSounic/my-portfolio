@@ -27,7 +27,8 @@ export function SectionHeader({
       <SplitReveal
         as="h2"
         text={title}
-        mode="words"
+        effect="stamp"
+        ghostColor={onDark ? 'var(--bz-accent)' : 'var(--bz-accent)'}
         className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
         style={{ fontSize: 'clamp(40px, 10vw, 120px)', color: ink, letterSpacing: '-0.04em' }}
       />

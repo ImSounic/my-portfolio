@@ -9,13 +9,28 @@ import { Crosshair } from '@/themes/brutalist/primitives/Crosshair'
 // ─── ANIMATED BOARD HEADER (swaps with the page) ────────────────
 // PAGE 01: Syne "PROJECTS" + "PINBOARD" telemetry tag.
 // PAGE 02: heading clips to "PAGE TWO" + the orange "FRESH DROPS" box.
-export function BoardHeader({ page, total, startIndex }: { page: number; total: number; startIndex: number }) {
+export function BoardHeader({
+  page,
+  total,
+  startIndex,
+  filter = null,
+  count = 0,
+  onClear,
+}: {
+  page: number
+  total: number
+  startIndex: number
+  filter?: string | null
+  count?: number
+  onClear?: () => void
+}) {
   const reduced = useReducedMotion()
-  const heading = page === 0 ? 'PROJECTS' : 'PAGE TWO'
-  const tagText = page === 0 ? 'PINBOARD' : 'FIELD LOG / VOL. II'
-  // Index reads 01 / 06 on page one, 07 / 10 on page two.
-  const idxFrom = page === 0 ? 1 : startIndex + 1
-  const idxTo   = page === 0 ? startIndex : total
+  const view    = filter ? `filter-${filter}` : `page-${page}`
+  const heading = filter ? 'FILTERED' : page === 0 ? 'PROJECTS' : 'PAGE TWO'
+  const tagText = filter ? `FILTER / ${filter.toUpperCase()}` : page === 0 ? 'PINBOARD' : 'FIELD LOG / VOL. II'
+  // Index reads 01 / 06 on page one, 07 / 10 on page two, matches / total when filtered.
+  const idxFrom = filter ? count : page === 0 ? 1 : startIndex + 1
+  const idxTo   = filter ? total : page === 0 ? startIndex : total
 
   const swap = reduced
     ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.15 } }
@@ -33,7 +48,7 @@ export function BoardHeader({ page, total, startIndex }: { page: number; total: 
         <div className="overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={`tag-${page}`}
+              key={`tag-${view}`}
               initial={swap.initial}
               animate={swap.animate}
               exit={swap.exit}
@@ -58,7 +73,7 @@ export function BoardHeader({ page, total, startIndex }: { page: number; total: 
         <div className="overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
             <motion.h2
-              key={`head-${page}`}
+              key={`head-${view}`}
               className={`font-black uppercase leading-[0.85] ${aeonik.className}`}
               style={{ fontSize: 'clamp(48px, 10vw, 120px)', color: C.ink, letterSpacing: '-0.05em' }}
               initial={swap.initial}
@@ -75,9 +90,26 @@ export function BoardHeader({ page, total, startIndex }: { page: number; total: 
       {/* FRESH DROPS row: ALWAYS reserved at a fixed height so the header is the
           same height on both pages (the box only renders on page two). This is
           what keeps the section from getting taller on the flip. */}
-      <div className="mt-4 h-8">
+      <div className="mt-4 min-h-8">
         <AnimatePresence mode="wait" initial={false}>
-          {page === 1 && (
+          {filter && (
+            <motion.button
+              key="clear-filter"
+              type="button"
+              onClick={onClear}
+              aria-label={`Clear the ${filter} filter`}
+              data-cursor="CLEAR"
+              className={`inline-flex items-center gap-2 border-[2px] border-black px-3 min-h-[44px] text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#eae8e3] ${spaceMono.className}`}
+              style={{ background: C.white, color: C.ink, boxShadow: '3px 3px 0 #000' }}
+              initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 10 }}
+              animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+              exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 10 }}
+              transition={{ duration: 0.28, ease: EASE_OUT }}
+            >
+              <span aria-hidden>{'>>>'}</span> CLEAR FILTER <span aria-hidden>{'\u00d7'}</span>
+            </motion.button>
+          )}
+          {!filter && page === 1 && (
             <motion.span
               key="fresh-drops"
               className={`inline-flex items-center gap-2 border-[2px] border-black px-3 py-1.5 text-[10px] font-black uppercase tracking-widest ${spaceMono.className}`}

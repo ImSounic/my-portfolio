@@ -36,9 +36,10 @@ export function ContactSection() {
         <SplitReveal
           as="h2"
           text="LET'S TALK"
-          mode="words"
+          effect="stamp"
+          ghostColor={C.ink}
           stagger={0.12}
-          duration={0.85}
+          duration={0.7}
           className={`mt-4 font-black uppercase leading-[0.88] ${aeonik.className}`}
           style={{ fontSize: 'clamp(56px, 13vw, 240px)', letterSpacing: '-0.04em', color: ON_ACCENT }}
         />

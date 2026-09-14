@@ -25,6 +25,7 @@ import TargetCursor from '@/components/ui/reactbits/TargetCursor'
 import { useLenis } from '@/themes/brutalist/motion/useLenis'
 import { CursorLabel } from '@/themes/brutalist/motion/CursorLabel'
 import { ProjectModalProvider } from '@/themes/brutalist/sections/work/ProjectModalProvider'
+import { ProjectFilterProvider } from '@/themes/brutalist/sections/work/ProjectFilterProvider'
 import './brutalist.css'
 
 // ─── ROOT ─────────────────────────────────────────────────────────
@@ -86,6 +87,7 @@ export default function BrutalistTheme() {
       <CursorLabel />
 
       <ProjectModalProvider>
+      <ProjectFilterProvider>
         <Navbar palette={palette} setPalette={setPalette} />
 
         <main>
@@ -101,6 +103,7 @@ export default function BrutalistTheme() {
         </main>
 
         <Footer />
+      </ProjectFilterProvider>
       </ProjectModalProvider>
 
       <AnimatePresence>

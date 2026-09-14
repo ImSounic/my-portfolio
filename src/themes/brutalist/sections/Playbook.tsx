@@ -58,7 +58,9 @@ export function PlaybookSection() {
         <SplitReveal
           as="h2"
           text={statement}
-          mode="lines"
+          effect="stamp"
+          stagger={0.07}
+          duration={0.55}
           className={`font-black uppercase leading-[0.92] ${aeonik.className}`}
           style={{ fontSize: 'clamp(36px, 7.2vw, 108px)', letterSpacing: '-0.04em', maxWidth: '14ch', textWrap: 'balance' }}
         />
@@ -76,7 +78,7 @@ export function PlaybookSection() {
           <SplitReveal
             as="h3"
             text="PLAYBOOK"
-            mode="words"
+            effect="stamp"
             className={`font-black uppercase leading-none ${aeonik.className}`}
             style={{ fontSize: 'clamp(28px, 5vw, 64px)', letterSpacing: '-0.04em' }}
           />
@@ -131,6 +133,7 @@ export function PlaybookSection() {
                       as="h4"
                       text={take.title.toUpperCase()}
                       mode="words"
+                      effect="redact"
                       stagger={0.08}
                       className={`font-black uppercase leading-[0.95] ${aeonik.className}`}
                       style={{ fontSize: 'clamp(24px, 3.2vw, 44px)', letterSpacing: '-0.03em' }}

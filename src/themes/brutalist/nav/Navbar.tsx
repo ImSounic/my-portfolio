@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, useReducedMotion, AnimatePresence } from 'motion/react'
+import { motion, useReducedMotion, useScroll, AnimatePresence } from 'motion/react'
 import { navSections } from '@/data/portfolio'
 import { aeonik, spaceMono } from '@/themes/fonts'
-import { ACCENT_TEXT, EASE_OUT, C, type PaletteId } from '@/themes/brutalist/tokens'
+import { ACCENT, ACCENT_TEXT, EASE_OUT, C, type PaletteId } from '@/themes/brutalist/tokens'
+import { LetterRoll } from '@/themes/brutalist/motion/LetterRoll'
 import { scrollTo } from '@/themes/brutalist/motion/scroll'
 import { PaletteSwitcher } from '@/themes/brutalist/primitives/PaletteSwitcher'
 
@@ -18,6 +19,7 @@ export function Navbar({
 }) {
   const [open, setOpen] = useState(false)
   const reduced         = useReducedMotion()
+  const { scrollYProgress } = useScroll()
 
   const go = (id: string) => { setOpen(false); setTimeout(() => scrollTo(id), 10) }
 
@@ -31,6 +33,11 @@ export function Navbar({
           boxShadow: '0 4px 0 rgba(0,0,0,0.06)',
         }}
       >
+        <motion.div
+          aria-hidden="true"
+          className="absolute left-0 right-0 bottom-[-3px] h-[3px] origin-left pointer-events-none"
+          style={{ background: ACCENT, scaleX: scrollYProgress }}
+        />
         <div className="flex items-center justify-between px-6 h-14">
           <button
             onClick={() => go('home')}
@@ -52,10 +59,11 @@ export function Navbar({
                 <button
                   key={s.id}
                   onClick={() => go(s.id)}
+                  data-lr-host
                   className={`font-bold text-xs uppercase tracking-widest px-4 py-2 text-black hover:text-[color:var(--bz-accent-ink)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--bz-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f4f0] ${spaceMono.className}`}
                 >
                   <span className="text-black/35">{String(i).padStart(2, '0')}</span>{' '}
-                  {s.label}
+                  <LetterRoll text={s.label} />
                 </button>
               ))}
             </div>

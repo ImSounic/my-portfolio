@@ -7,8 +7,8 @@ import { EASE_OUT_CSS } from '@/themes/brutalist/tokens'
 type Props = {
   text: string
   as?: ElementType
-  /** lines: each line rises from a mask. words: each word does. */
-  mode?: 'lines' | 'words'
+  /** lines: each line rises from a mask. words: each word does. chars: each character does. */
+  mode?: 'lines' | 'words' | 'chars'
   /** view: when scrolled into view (once). mount: right after mount (hero). */
   trigger?: 'view' | 'mount'
   delay?: number
@@ -52,11 +52,14 @@ export function SplitReveal({
 
     const prime = () => {
       try {
-        split = new SplitType(el, { types: mode === 'lines' ? 'lines,words' : 'words', tagName: 'span' })
+        split = new SplitType(el, {
+          types: mode === 'lines' ? 'lines,words' : mode === 'words' ? 'words' : 'chars',
+          tagName: 'span',
+        })
       } catch {
         return false
       }
-      const targets = (mode === 'lines' ? split.lines : split.words) ?? []
+      const targets = (mode === 'lines' ? split.lines : mode === 'words' ? split.words : split.chars) ?? []
       if (targets.length === 0) {
         split.revert()
         split = null
@@ -123,7 +126,7 @@ export function SplitReveal({
   }, [text, mode, trigger, delay, stagger, duration, amount])
 
   return (
-    <Tag ref={ref} className={className} style={style}>
+    <Tag ref={ref} className={className} style={style} aria-label={mode === 'chars' ? text : undefined}>
       {text}
     </Tag>
   )

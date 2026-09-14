@@ -131,21 +131,13 @@ export function SplitReveal({
 
     const primeStamp = (list: HTMLElement[], live: boolean) => {
       list.forEach((target, i) => {
+        // The ghost is a ::before drawn from data-ghost (see brutalist.css), so
+        // it never duplicates text for copy, find-in-page or crawlers.
         const wrapper = wrap(target, 'inline-block')
-        const ghost = document.createElement('span')
-        ghost.setAttribute('aria-hidden', 'true')
-        ghost.textContent = target.textContent
-        Object.assign(ghost.style, {
-          position: 'absolute',
-          left: '0',
-          top: '0',
-          color: ghostColor,
-          whiteSpace: 'pre',
-          pointerEvents: 'none',
-          zIndex: '0',
-          transform: `translate(${ghostOffset}, ${ghostOffset})`,
-        })
-        wrapper.insertBefore(ghost, target)
+        wrapper.classList.add('bz-stamp')
+        wrapper.dataset.ghost = target.textContent ?? ''
+        wrapper.style.setProperty('--bz-ghost-color', ghostColor)
+        wrapper.style.setProperty('--bz-ghost-rest', `translate(${ghostOffset}, ${ghostOffset})`)
         target.style.position = 'relative'
         target.style.zIndex = '1'
         target.style.display = 'inline-block'
@@ -158,19 +150,19 @@ export function SplitReveal({
           filter: 'blur(6px)',
           transition: `transform ${duration}s ${EASE_EXPO_CSS} ${d}s, opacity 0.3s ${EASE_OUT_CSS} ${d}s, filter 0.4s ${EASE_OUT_CSS} ${d}s`,
         })
-        Object.assign(ghost.style, {
-          opacity: '0',
-          transform: `translate(0.45em, 0.45em) scale(1.35) rotate(${rot}deg)`,
-          transition: `transform ${duration + 0.08}s ${EASE_EXPO_CSS} ${d + 0.04}s, opacity 0.3s ${EASE_OUT_CSS} ${d + 0.04}s`,
-        })
+        wrapper.style.setProperty('--bz-ghost-o', '0')
+        wrapper.style.setProperty('--bz-ghost-t', `translate(0.45em, 0.45em) scale(1.35) rotate(${rot}deg)`)
+        wrapper.style.setProperty('--bz-ghost-dur', `${duration + 0.08}s`)
+        wrapper.style.setProperty('--bz-ghost-delay', `${d + 0.04}s`)
         reveals.push(() => {
           Object.assign(target.style, { opacity: '1', transform: 'none', filter: 'none' })
-          Object.assign(ghost.style, { opacity: '1', transform: `translate(${ghostOffset}, ${ghostOffset})` })
+          wrapper.style.setProperty('--bz-ghost-o', '1')
+          wrapper.style.setProperty('--bz-ghost-t', `translate(${ghostOffset}, ${ghostOffset})`)
         })
         cleanups.push(() => {
           target.style.transition = ''
           target.style.filter = ''
-          ghost.style.transition = ''
+          wrapper.style.removeProperty('--bz-ghost-dur')
         })
       })
     }

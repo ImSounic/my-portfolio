@@ -89,3 +89,30 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* ── STAMP GHOST (motion/SplitReveal effect="stamp"). The misregistered print
+   copy behind a stamped word is a ::before drawn from data-ghost, so the DOM
+   holds the text once. Custom properties carry the staged and resting states. ── */
+.brutalist .bz-stamp {
+  --bz-ghost-o: 1;
+  --bz-ghost-t: var(--bz-ghost-rest, translate(0.06em, 0.06em));
+}
+.brutalist .bz-stamp::before {
+  content: attr(data-ghost);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--bz-ghost-color, var(--bz-accent));
+  white-space: pre;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: var(--bz-ghost-o);
+  transform: var(--bz-ghost-t);
+  transition:
+    transform var(--bz-ghost-dur, 0s) cubic-bezier(0.16, 1, 0.3, 1) var(--bz-ghost-delay, 0s),
+    opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1) var(--bz-ghost-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .brutalist .bz-stamp::before { transition: none; }
+}

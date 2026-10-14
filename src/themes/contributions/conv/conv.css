@@ -1,0 +1,271 @@
+/* The contact printer figure. Everything is scoped under .cv: the kit's drawing
+   styles (iso-*), the figure's own parts (cv-*) and the controls below it. */
+
+.cv {
+  --cv-amber: #ff9a3c;
+  --cv-silver: #e4dad0;
+  --cv-soft: #b5a79a;
+  --cv-ground: #140806;
+  --cv-rule: #5a463c;
+  --anatomy-paper: #2a130d;
+  --anatomy-face: #3d241d;
+  --anatomy-top: #56342a;
+  --anatomy-shade-0: #33201a;
+  --anatomy-shade-1: #3b251e;
+  --anatomy-shade-2: #442a22;
+  --anatomy-shade-3: #4d3027;
+  --anatomy-lit-top: #56342a;
+  --anatomy-lit-shade: #442a22;
+  --anatomy-hi: #e4dad0;
+  --anatomy-mid: #b3a69c;
+  --anatomy-lo: #8a776e;
+  --anatomy-faint: #6e5850;
+  --anatomy-lit: #ff9a3c;
+  --anatomy-halo: #050201;
+  --anatomy-halo-opacity: 0.95;
+  --anatomy-dot: #e4dad0;
+  --anatomy-weight: 0.6px;
+
+  container-type: inline-size;
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  margin: 0;
+  font-family: var(--font-clash), system-ui, sans-serif;
+  color: var(--cv-silver);
+  background: transparent;
+}
+
+.cv *,
+.cv *::before,
+.cv *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- the drawing (kit styles, scoped) ---------- */
+.cv-stage {
+  position: relative;
+  width: 100%;
+}
+.cv .iso-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.cv .iso-svg path,
+.cv .iso-svg circle {
+  vector-effect: non-scaling-stroke;
+}
+.cv .iso-fill {
+  fill: var(--anatomy-paper);
+  stroke: none;
+}
+.cv .iso-solid[data-lit] > .iso-fill {
+  fill: var(--anatomy-face);
+}
+.cv .iso-shade,
+.cv .iso-top {
+  stroke: none;
+}
+.cv .iso-shade[data-shade="0"] {
+  fill: var(--anatomy-shade-0);
+}
+.cv .iso-shade[data-shade="1"] {
+  fill: var(--anatomy-shade-1);
+}
+.cv .iso-shade[data-shade="2"] {
+  fill: var(--anatomy-shade-2);
+}
+.cv .iso-shade[data-shade="3"] {
+  fill: var(--anatomy-shade-3);
+}
+.cv .iso-top {
+  fill: var(--anatomy-top);
+}
+.cv .iso-solid[data-lit] > .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.cv .iso-solid[data-lit] > .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.cv .iso-solid[data-lit] > .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.cv .iso-halo {
+  fill: var(--anatomy-halo);
+  stroke: none;
+  filter: blur(9px);
+  opacity: var(--anatomy-halo-opacity);
+  transform: translateY(3px);
+}
+.cv .iso-line {
+  fill: none;
+  stroke: var(--anatomy-lo);
+  stroke-width: var(--anatomy-weight);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cv .iso-line[data-tone="hi"] {
+  stroke: var(--anatomy-hi);
+}
+.cv .iso-line[data-tone="mid"] {
+  stroke: var(--anatomy-mid);
+}
+.cv .iso-line[data-tone="lo"] {
+  stroke: var(--anatomy-lo);
+}
+.cv .iso-line[data-tone="faint"] {
+  stroke: var(--anatomy-faint);
+}
+.cv .iso-line[data-tone="lit"] {
+  stroke: var(--anatomy-lit);
+}
+.cv .iso-dots circle {
+  fill: var(--anatomy-dot);
+  stroke: none;
+  opacity: 0.32;
+}
+.cv .iso-dots[data-tone="hi"] circle {
+  opacity: 0.85;
+}
+.cv .iso-dots[data-tone="mid"] circle {
+  opacity: 0.45;
+}
+.cv .iso-dots[data-tone="lo"] circle {
+  opacity: 0.22;
+}
+.cv .iso-dots[data-tone="faint"] circle {
+  opacity: 0.12;
+}
+
+/* ---------- the figure's own parts ---------- */
+.cv .cv-glass {
+  fill: #1a0c09;
+  stroke: none;
+}
+.cv .cv-paper {
+  fill: #5a4840;
+  stroke: none;
+}
+.cv .cv-cells rect,
+.cv .cv-plate rect {
+  stroke: none;
+}
+.cv .cv-plate rect {
+  fill-opacity: 0.82;
+}
+.cv .cv-lit {
+  stroke-width: 1.5px;
+}
+.cv .cv-hit {
+  fill: transparent;
+  stroke: none;
+  cursor: pointer;
+  pointer-events: all;
+}
+.cv .cv-pool-g {
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ---------- text and controls, below the drawing ---------- */
+.cv-hint {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--cv-soft);
+}
+.cv-controls {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 10px 0 0;
+}
+.cv-kernels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cv-kernels button {
+  min-height: 44px;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--cv-soft);
+  background: transparent;
+  border: 1px solid var(--cv-rule);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+.cv-kernels button:hover {
+  color: var(--cv-silver);
+  border-color: var(--cv-soft);
+}
+.cv-kernels button[aria-pressed="true"] {
+  color: var(--cv-ground);
+  background: var(--cv-amber);
+  border-color: var(--cv-amber);
+}
+.cv-kernels button:focus-visible,
+.cv-range:focus-visible {
+  outline: 2px solid var(--cv-amber);
+  outline-offset: 3px;
+}
+.cv-label {
+  font-size: 15px;
+  color: var(--cv-soft);
+  white-space: nowrap;
+}
+.cv-range {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--cv-silver);
+  background: transparent;
+  cursor: pointer;
+}
+.cv-readout {
+  margin: 10px 0 0;
+  min-height: 1.45em;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--cv-silver);
+  font-variant-numeric: tabular-nums;
+}
+.cv-line {
+  margin: 2px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--cv-silver);
+}
+.cv-caption {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--cv-soft);
+}
+
+@container (max-width: 620px) {
+  .cv-controls {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .cv-label {
+    margin-top: 4px;
+  }
+  .cv-readout {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-kernels button {
+    transition: none;
+  }
+}

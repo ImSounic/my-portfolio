@@ -200,9 +200,14 @@ html {
   will-change: transform;
 }
 
-/* Firefox-specific fixes */
+/* Firefox-specific fixes, for the Original theme only. Applied to every theme
+   this turned <body> into the scroller (window scroll stayed at 0), which
+   freezes GSAP ScrollTrigger pins in Firefox: the Darkroom hero stayed pinned
+   over the page. Scoped with :has() so the Original theme keeps its exact
+   behaviour and other themes scroll the window normally. */
 @supports (-moz-appearance: none) {
-  html, body {
+  html:has(.theme-original),
+  html:has(.theme-original) body {
     height: 100%;
     overflow-x: hidden;
   }

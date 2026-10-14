@@ -23,9 +23,15 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeId>(DEFAULT_THEME)
 
-  // Hydrate from localStorage after mount (avoids SSR mismatch)
+  // Hydrate after mount (avoids SSR mismatch). A `?theme=<id>` link wins over
+  // the stored choice for that visit, so a theme can be shared or tested.
   useEffect(() => {
     try {
+      const linked = new URLSearchParams(window.location.search).get('theme')
+      if (isValidTheme(linked)) {
+        setThemeState(linked)
+        return
+      }
       const stored = localStorage.getItem(STORAGE_KEY)
       if (isValidTheme(stored)) {
         setThemeState(stored)

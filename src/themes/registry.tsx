@@ -10,6 +10,7 @@ const load = (loader: () => Promise<{ default: ComponentType }>) =>
 
 const OriginalTheme = load(() => import('./original/OriginalTheme'))
 const BrutalistTheme = load(() => import('./brutalist/BrutalistTheme'))
+const ContributionsTheme = load(() => import('./contributions/ContributionsTheme'))
 
 export const THEMES: ThemeMeta[] = [
   {
@@ -27,6 +28,14 @@ export const THEMES: ThemeMeta[] = [
     swatch: '#2b50ff',
     bg: '#f4f4f0',
     Component: BrutalistTheme,
+  },
+  {
+    id: 'contributions',
+    name: 'Contributions',
+    description: 'My real GitHub graph spells my name, then becomes a network',
+    swatch: '#39d353',
+    bg: '#0d1117',
+    Component: ContributionsTheme,
   },
 ]
 

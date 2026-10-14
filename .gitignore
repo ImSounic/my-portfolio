@@ -47,3 +47,7 @@ next-env.d.ts
 .agents/
 .claude/skills/
 skills-lock.json
+
+# taste-skill working files
+.taste-skill/
+.impeccable/

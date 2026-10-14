@@ -34,3 +34,15 @@ export const aeonik = localFont({
   variable: '--font-aeonik',
   display: 'swap',
 })
+
+// ── Clash Grotesk — the Contributions theme's one face (display and text). ───
+// Indian Type Foundry via Fontshare, ITF Free Font License (commercial use ok).
+export const clash = localFont({
+  src: [
+    { path: '../../public/fonts/ClashGrotesk-Regular.woff2',  weight: '400', style: 'normal' },
+    { path: '../../public/fonts/ClashGrotesk-Medium.woff2',   weight: '500', style: 'normal' },
+    { path: '../../public/fonts/ClashGrotesk-Semibold.woff2', weight: '600', style: 'normal' },
+  ],
+  variable: '--font-clash',
+  display: 'swap',
+})

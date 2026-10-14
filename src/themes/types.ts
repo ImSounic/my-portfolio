@@ -4,6 +4,7 @@ import type { ComponentType } from 'react'
 export type ThemeId =
   | 'original'
   | 'brutalist'
+  | 'contributions'
 
 export interface ThemeMeta {
   id: ThemeId

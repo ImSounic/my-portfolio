@@ -13,35 +13,33 @@ const STORAGE_KEY = 'portfolio-theme'
 interface ThemeContextValue {
   theme: ThemeId
   setTheme: (id: ThemeId) => void
+  /** false until the URL has been read on the client; until then `theme` is DEFAULT_THEME. */
+  hydrated: boolean
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
   theme: DEFAULT_THEME,
   setTheme: () => {},
+  hydrated: false,
 })
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeId>(DEFAULT_THEME)
+  const [hydrated, setHydrated] = useState(false)
 
-  // Hydrate after mount (avoids SSR mismatch). A `?theme=<id>` link wins over
-  // the stored choice for that visit, so a theme can be shared or tested.
+  // Hydrate after mount (avoids SSR mismatch). There is no theme switcher on
+  // the page any more, so a choice stored by the old switcher is cleared and
+  // everyone gets DEFAULT_THEME; a `?theme=<id>` link still shows another
+  // theme for that visit (the other themes' code is kept).
   useEffect(() => {
     try {
+      localStorage.removeItem(STORAGE_KEY)
       const linked = new URLSearchParams(window.location.search).get('theme')
-      if (isValidTheme(linked)) {
-        setThemeState(linked)
-        return
-      }
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (isValidTheme(stored)) {
-        setThemeState(stored)
-      } else if (stored) {
-        // Stale/removed theme (e.g. an old 'minimal') — reset to default.
-        localStorage.setItem(STORAGE_KEY, DEFAULT_THEME)
-      }
+      if (isValidTheme(linked)) setThemeState(linked)
     } catch {
       /* ignore */
     }
+    setHydrated(true)
   }, [])
 
   const setTheme = (id: ThemeId) => {
@@ -54,7 +52,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, hydrated }}>{children}</ThemeContext.Provider>
   )
 }
 

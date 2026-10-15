@@ -39,7 +39,7 @@ export const THEMES: ThemeMeta[] = [
   },
 ]
 
-export const DEFAULT_THEME: ThemeId = 'original'
+export const DEFAULT_THEME: ThemeId = 'contributions'
 
 export const getTheme = (id: ThemeId): ThemeMeta =>
   THEMES.find((t) => t.id === id) ?? THEMES[0]

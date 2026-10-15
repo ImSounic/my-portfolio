@@ -49,6 +49,17 @@ const NARROW_PX = 640;
 const LABEL_ROOM_PX = 34; // kept free above the network for the layer labels
 const MAX_ELEVATION = 1.35; // rad: never look straight down
 
+// The entrance: the squares rain down into the graph, the grey background in
+// a wave across the weeks, then the green SOUNIC letters one after another,
+// each fading up from the ground as it lands.
+const DROP_HEIGHT = 9; // world units above its place a square falls from
+const DROP_DUR = 0.8; // s, one square's fall
+const DROP_SPREAD = 0.6; // s, background wave across the weeks
+const DROP_LETTERS_AT = 0.55; // s, the letters start
+const DROP_LETTER_SPREAD = 0.7; // s, across SOUNIC
+/** Seconds after which the entrance is over. */
+export const DROP_END = DROP_LETTERS_AT + DROP_LETTER_SPREAD + 0.12 + DROP_DUR;
+
 /** Pulse clock used for still frames. */
 export const STILL_TIME = 1.3;
 
@@ -77,6 +88,8 @@ export interface FrameState {
   motion: boolean;
   /** Camera offsets from the stage pose in radians (parallax + look around); weighted by lookWeight(t) here. */
   look?: { yaw: number; pitch: number };
+  /** Seconds into the entrance; negative: not started (squares held above, unseen); >= DROP_END or omitted: done. */
+  drop?: number;
 }
 
 /** A projected point in CSS pixels; `front` is false behind the camera. */
@@ -145,6 +158,14 @@ export class ContribScene {
   private readonly colCnn: Float32Array;
   private readonly cGlow = linear(PALETTE.glow);
   private readonly cEdge = linear(PALETTE.edge);
+  private readonly cGround = linear(PALETTE.ground);
+
+  // Entrance: per-square start time, and this frame's fall and fade.
+  private readonly dropDelay: Float32Array;
+  private readonly dropFall: Float32Array;
+  private readonly dropFade: Float32Array;
+  private dropAt = Infinity;
+  private dropShown = false; // the last write included the entrance
 
   // Current interpolated state.
   private readonly cur: Float32Array;
@@ -214,6 +235,19 @@ export class ContribScene {
     this.curDepth = new Float32Array(n);
     this.curCol = new Float32Array(n * 3);
     this.glow = new Float32Array(n);
+    this.dropDelay = new Float32Array(n);
+    this.dropFall = new Float32Array(n);
+    this.dropFade = new Float32Array(n);
+    // Deterministic jitter so the rain is not a ruler-straight wave.
+    const jitter = (k: number) => {
+      const x = Math.sin(k * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    };
+    T.cells.forEach((c, k) => {
+      this.dropDelay[k] = c.letter
+        ? DROP_LETTERS_AT + T.wordNorm[k] * DROP_LETTER_SPREAD + jitter(k) * 0.12
+        : T.colNorm[k] * DROP_SPREAD + (c.row / 6) * 0.1 + jitter(k) * 0.16;
+    });
 
     this.colGraph = new Float32Array(n * 3);
     this.colUp = new Float32Array(n * 3);
@@ -345,13 +379,14 @@ export class ContribScene {
     this.light(net);
     const glowMoving = this.updateGlow(t, net, motion ? 1 - Math.exp(-dt * GLOW_RATE) : 1);
     const breathing = motion && net > 1e-3;
+    const dropping = this.updateDrop(state.drop);
     this.writeCells(t, net, time, motion, breathing);
     this.writeEdges(t);
     const pulsing = this.writePulses(t, time, motion);
     this.glowChanged = false;
 
     this.renderer.render(this.scene, this.camera);
-    return glowMoving || pulsing || breathing;
+    return glowMoving || pulsing || breathing || dropping;
   }
 
   dispose() {
@@ -607,8 +642,12 @@ export class ContribScene {
   // Matrices: rewritten when t, glow or breathing changed them. Colours: only
   // the range of cells whose colour actually changed is re-uploaded.
   private writeCells(t: number, net: number, time: number, motion: boolean, breathing: boolean) {
-    const tChanged = t !== this.cellsT || motion !== this.cellsMotion;
+    // While the entrance runs (and once more after it, to land exactly), every frame rewrites.
+    const dropping = this.dropAt < DROP_END;
+    const dropLanding = !dropping && this.dropShown;
+    const tChanged = t !== this.cellsT || motion !== this.cellsMotion || dropping || dropLanding;
     const glowChanged = this.glowChanged;
+    this.dropShown = dropping;
     if (!tChanged && !glowChanged && !breathing) return;
     this.cellsT = t;
     this.cellsMotion = motion;
@@ -623,15 +662,35 @@ export class ContribScene {
       m[o + 5] = s;
       m[o + 10] = s * curDepth[k];
       m[o + 12] = cur[k * 3];
-      m[o + 13] = cur[k * 3 + 1];
+      m[o + 13] = cur[k * 3 + 1] + (dropping ? this.dropFall[k] : 0);
       m[o + 14] = cur[k * 3 + 2];
       m[o + 15] = 1;
     }
     this.cellsMesh.instanceMatrix.needsUpdate = true;
-    if (tChanged || glowChanged) this.writeColors(net);
+    if (tChanged || glowChanged) this.writeColors(net, dropping);
   }
 
-  private writeColors(net: number) {
+  // This frame's fall and fade per square; returns true while the entrance runs.
+  private updateDrop(at: number | undefined): boolean {
+    this.dropAt = at === undefined ? Infinity : at;
+    if (this.dropAt >= DROP_END) return false;
+    if (this.dropAt < 0) {
+      // not started: every square waits above its place, unseen; nothing moves
+      this.dropFall.fill(DROP_HEIGHT);
+      this.dropFade.fill(0);
+      return false;
+    }
+    const { dropDelay, dropFall, dropFade, n } = this;
+    for (let k = 0; k < n; k++) {
+      const p = clamp((this.dropAt - dropDelay[k]) / DROP_DUR, 0, 1);
+      const e = 1 - Math.pow(1 - p, 3); // lands softly, no bounce
+      dropFall[k] = DROP_HEIGHT * (1 - e);
+      dropFade[k] = smooth01(p / 0.7);
+    }
+    return true;
+  }
+
+  private writeColors(net: number, dropping = false) {
     const col = this.cellColor;
     const { curCol, colUp, glow, cGlow, n } = this;
     let lo = n;
@@ -650,6 +709,13 @@ export class ContribScene {
       r += (cGlow.r - r) * lit;
       gr += (cGlow.g - gr) * lit;
       b += (cGlow.b - b) * lit;
+      if (dropping) {
+        // fading up from the ground as it falls
+        const f = this.dropFade[k];
+        r = this.cGround.r + (r - this.cGround.r) * f;
+        gr = this.cGround.g + (gr - this.cGround.g) * f;
+        b = this.cGround.b + (b - this.cGround.b) * f;
+      }
       // Compare as stored (float32), or every value would look changed.
       if (Math.fround(r) !== col[o] || Math.fround(gr) !== col[o + 1] || Math.fround(b) !== col[o + 2]) {
         col[o] = r;

@@ -6,15 +6,15 @@ import { Nav } from '@/themes/contributions/sections/Nav'
 import { gsap, ScrollTrigger, WIDE, MOTION_OK } from '@/themes/contributions/parts'
 import { ContribCanvas } from '@/themes/contributions/contrib/ContribCanvas'
 import { stageOf, type ContribStage } from '@/themes/contributions/contrib/contribStages'
-import { GREENS, TOTAL } from '@/themes/contributions/contrib/grid'
+import { TOTAL } from '@/themes/contributions/contrib/grid'
 import { CONTRIB_INTRO } from '@/components/ContribLoader'
 
-const HEADLINE = 'Models I can actually explain'
+const HEADLINE = 'AI/ML Engineer'
 
 const STAGES: ContribStage[] = ['Graph', 'MLP', 'CNN']
-// What each stage is, in a name and two short lines (shown on the right as it morphs).
-const CAPTIONS: Record<ContribStage, { name: string; line: string }> = {
-  Graph: { name: 'My contribution graph', line: 'One square per day of my last year on GitHub. Scroll, and the green ones become a network.' },
+// What each network is, in a name and two short lines (shown as it morphs).
+// The graph stage has no caption or button: it speaks for itself.
+const CAPTIONS: Partial<Record<ContribStage, { name: string; line: string }>> = {
   MLP: { name: 'Multilayer perceptron', line: 'Every neuron feeds every neuron in the next layer. It learns patterns in tables of numbers.' },
   CNN: { name: 'Convolutional neural network', line: 'Small filters slide across an image and stack feature maps, from edges up to shapes.' },
 }
@@ -97,13 +97,6 @@ export function ContribHero() {
         <p className="dk-graphbar__total">
           <span className="dk-num">{TOTAL.toLocaleString('en-US')}</span> contributions in the last year
         </p>
-        <div className="dk-graphbar__legend" aria-hidden="true">
-          <span>Less</span>
-          {GREENS.map((g) => (
-            <i key={g} style={{ background: g }} />
-          ))}
-          <span>More</span>
-        </div>
       </div>
 
       <div className="dk-hero__foot">
@@ -119,7 +112,7 @@ export function ContribHero() {
             ))}
           </p>
           <p className="dk-hero__sent">
-            AI/ML engineer and MSc student at the University of Twente, looking for an ML or software internship.
+            Studying MSc Computer Science at University of Twente
           </p>
           <div className="dk-hero__actions">
             <a className="dk-btn" href={socials.email}>Email me</a>
@@ -128,17 +121,25 @@ export function ContribHero() {
             <a className="dk-link" href={socials.resume} target="_blank" rel="noopener noreferrer">Résumé</a>
           </div>
         </div>
-        <div className="dk-timer dk-timer--contrib">
+        <div className={`dk-timer dk-timer--contrib${stage === 'Graph' ? '' : ' is-net'}`}>
+          {/* The caption box keeps its height on the graph stage, so nothing shifts when a network appears. */}
           <div key={stage} className="dk-caption">
-            <p className="dk-caption__name">{CAPTIONS[stage].name}</p>
-            <p className="dk-caption__line">{CAPTIONS[stage].line}</p>
+            {CAPTIONS[stage] && (
+              <>
+                <p className="dk-caption__name">{CAPTIONS[stage].name}</p>
+                <p className="dk-caption__line">{CAPTIONS[stage].line}</p>
+              </>
+            )}
           </div>
-          <div className="dk-timer__steps" role="group" aria-label="Show the graph as">
-            {STAGES.map((s, i) => (
-              <button key={s} type="button" aria-pressed={stage === s} onClick={() => goTo(i)}>
-                {s}
-              </button>
-            ))}
+          {/* Only while a network is showing: hidden (and out of the tab order) over the name, they rise in with the model. */}
+          <div className="dk-timer__steps" role="group" aria-label="Show the network as">
+            {STAGES.map((s, i) =>
+              i === 0 ? null : (
+                <button key={s} type="button" aria-pressed={stage === s} onClick={() => goTo(i)}>
+                  {s}
+                </button>
+              ),
+            )}
           </div>
         </div>
       </div>

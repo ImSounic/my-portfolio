@@ -1,21 +1,39 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { PRINTS } from '@/themes/contributions/data'
 import { gsap, ScrollTrigger, WIDE, MOTION_OK } from '@/themes/contributions/parts'
+import { ProjectCard } from '@/themes/contributions/sections/ProjectCard'
 
 const TILT = [-2.5, 1.8, -1.2, 2.6, -2, 1.4, -2.2, 2, -1.6, 2.4]
 const SAG = 120 // how far the wire sags at its middle, in px (matches the SVG path)
 // ─── WORK: ten prints on a drying line ───────────────────────────────
 // Desktop with motion: the section pins and vertical scroll pulls the line
 // sideways. Phone or reduced motion: the line scrolls natively, with snap.
-export function Work({ onOpen }: { onOpen: (index: number) => void }) {
+// Clicking a print opens its details in a small card beside it.
+export function Work() {
   const section = useRef<HTMLElement>(null)
   const line = useRef<HTMLDivElement>(null)
   const track = useRef<HTMLDivElement>(null)
   const bar = useRef<HTMLSpanElement>(null)
   const count = useRef<HTMLSpanElement>(null)
   const [pinned, setPinned] = useState(false)
+  const [open, setOpen] = useState<number | null>(null)
+  const [host, setHost] = useState<HTMLElement | null>(null)
+  const prints = useRef<(HTMLButtonElement | null)[]>([])
+
+  // The card renders into the theme root: fixed to the viewport, clear of the moving track.
+  useEffect(() => {
+    setHost(section.current?.closest<HTMLElement>('.dk') ?? null)
+  }, [])
+
+  const close = (refocus: boolean) => {
+    setOpen((cur) => {
+      if (refocus && cur !== null) prints.current[cur]?.focus({ preventScroll: true })
+      return null
+    })
+  }
   useEffect(() => {
     const show = (p: number) => {
       const i = Math.min(PRINTS.length, Math.max(1, Math.round(p * (PRINTS.length - 1)) + 1))
@@ -70,7 +88,7 @@ export function Work({ onOpen }: { onOpen: (index: number) => void }) {
     <section ref={section} id="work" className="dk-work" data-static={!pinned} aria-labelledby="work-title">
       <div className="dk-work__head">
         <h2 id="work-title" className="dk-work__title">Work</h2>
-        <p>Ten projects on the line. {pinned ? 'Scroll pulls it' : 'Swipe it'}; tap one to open it up.</p>
+        <p>Ten projects on the line. {pinned ? 'Scroll pulls it' : 'Swipe it'}; open one for the details.</p>
       </div>
 
       <div ref={line} className="dk-line" tabIndex={pinned ? -1 : 0} aria-label="Projects on the drying line">
@@ -84,11 +102,16 @@ export function Work({ onOpen }: { onOpen: (index: number) => void }) {
             return (
               <button
                 key={p.id}
+                ref={(el) => {
+                  prints.current[i] = el
+                }}
                 type="button"
                 className="dk-print"
                 style={{ ['--tilt' as string]: `${TILT[i % TILT.length]}deg`, marginTop: 42 + drop }}
-                onClick={() => onOpen(i)}
-                aria-label={`${p.title}, ${p.tags.filter(Boolean).join(' and ')}, ${p.year}. Open in the tray`}
+                onClick={() => setOpen((cur) => (cur === i ? null : i))}
+                aria-expanded={open === i}
+                aria-controls={open === i ? 'dk-pcard' : undefined}
+                aria-label={`${p.title}, ${p.tags.filter(Boolean).join(' and ')}, ${p.year}. Show details`}
               >
                 <span className="dk-print__peg" aria-hidden="true" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -103,6 +126,9 @@ export function Work({ onOpen }: { onOpen: (index: number) => void }) {
           })}
         </div>
       </div>
+
+      {open !== null && host && prints.current[open] &&
+        createPortal(<ProjectCard print={PRINTS[open]} anchor={prints.current[open]!} onClose={close} />, host)}
 
       <div className="dk-work__foot" aria-hidden="true">
         <div className="dk-work__bar"><span ref={bar} /></div>

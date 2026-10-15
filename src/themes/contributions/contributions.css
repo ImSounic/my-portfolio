@@ -345,6 +345,27 @@
 .dk-timer--contrib { text-align: left; width: min(400px, 100%); }
 .dk-timer--contrib .dk-timer__steps { justify-content: flex-start; margin-top: 14px; }
 .dk-caption { min-height: 5.2em; }
+/* The MLP / CNN buttons belong to the networks: hidden while the graph spells
+   the name (visibility keeps their space, so the pinned hero never shifts, and
+   takes them out of the tab order), rising in one after the other as a
+   network forms. */
+.dk-timer--contrib .dk-timer__steps button {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity 450ms var(--ease), transform 650ms var(--ease), visibility 0s linear 650ms, background-color 200ms, color 200ms;
+}
+.dk-timer--contrib.is-net .dk-timer__steps button {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 500ms var(--ease) 180ms, transform 700ms var(--ease) 180ms, visibility 0s, background-color 200ms, color 200ms;
+}
+.dk-timer--contrib.is-net .dk-timer__steps button + button { transition-delay: 260ms, 260ms, 0s, 0s, 0s; }
+@media (prefers-reduced-motion: reduce) {
+  .dk-timer--contrib .dk-timer__steps button,
+  .dk-timer--contrib.is-net .dk-timer__steps button { transform: none; transition: opacity 200ms linear, visibility 0s; }
+}
 .dk-caption__name { font-size: var(--t-lead); line-height: 1.2; color: var(--amber); }
 .dk-caption__line { margin-top: 6px; color: var(--soft); font-size: var(--t-small); max-width: 46ch; }
 @media (prefers-reduced-motion: no-preference) {
@@ -354,13 +375,13 @@
 @media (prefers-reduced-motion: reduce) {
   .dk-caption__name, .dk-caption__line { animation: dk-fade 300ms ease both; }
 }
-/* ── Hero entrance, played as the loader leaves (it zooms into its graph; the
-   hero's graph lands from a little closer). Motion only; the hero is whole
-   without it. ─────────────────────────────────────────────────────────── */
+/* ── Hero entrance, played as the loader leaves: the graph's squares rain
+   down into place (in the 3D scene) while the words rise. Motion only; the
+   hero is whole without it. ─────────────────────────────────────────────────────────── */
 .dk-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.2em; margin-bottom: -0.2em; } /* room for descenders inside the mask */
 .dk-word > span { display: inline-block; }
 @media (prefers-reduced-motion: no-preference) {
-  .dk-hero--intro .dk-hero__graph { animation: dk-land 1300ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  /* the graph's own squares rain in (contrib/scene.ts, the drop) */
   .dk-hero--intro .dk-nav { animation: dk-drop 800ms var(--ease) 420ms both; }
   .dk-hero--intro .dk-graphbar { animation: dk-rise 800ms var(--ease) 520ms both; }
   .dk-hero--intro .dk-word > span { animation: dk-word 1000ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(560ms + var(--w) * 75ms); }
@@ -372,7 +393,6 @@
   .dk-hero--intro .dk-hero__actions > :nth-child(4) { animation-delay: 1210ms; }
   .dk-hero--intro .dk-timer--contrib { animation: dk-rise 900ms var(--ease) 820ms both; }
 }
-@keyframes dk-land { from { opacity: 0; transform: scale(1.1); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes dk-drop { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
 @keyframes dk-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @keyframes dk-word { from { transform: translateY(105%); } to { transform: none; } }

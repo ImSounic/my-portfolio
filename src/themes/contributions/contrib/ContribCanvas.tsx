@@ -22,6 +22,7 @@ import { LabelOverlay } from "./labelOverlay";
 import { buildLayerLabels } from "./layers";
 import { LookController } from "./look";
 import { ContribScene, STILL_TIME, type FrameState, type Projected } from "./scene";
+import { CONTRIB_INTRO } from "@/components/ContribLoader";
 
 const STILLNESS = "(prefers-reduced-motion: reduce)";
 const MAX_DPR = 1.75;
@@ -30,6 +31,8 @@ const TAP_MS = 1100; // how long a touch keeps its area lit
 const WATCHDOG_MS = 200; // while asleep: how often to check for progress written without a scroll event
 const AXIS_PX = 8; // a touch decides between rotate (horizontal) and scroll after this much travel
 const FOCUS_RING = "#39d353";
+const DROP_LEAD_MS = 140; // the loader's zoom is under way before the squares fall
+const DROP_FALLBACK_MS = 9000; // no loader handover: fall anyway
 const MODEL_LABEL = "3D model of the network. Use the arrow keys to look around";
 
 const LABELS = buildLayerLabels();
@@ -110,7 +113,7 @@ export function ContribCanvas({ progress, className }: ContribCanvasProps): Reac
     const look = new LookController();
     const project = (x: number, y: number, z: number, out: Projected) => view.project(x, y, z, out);
     // One frame-state object, mutated per frame (no allocation in the loop).
-    const frameState: FrameState = { t: 0, time: 0, dt: 0, motion: true, look };
+    const frameState: FrameState = { t: 0, time: 0, dt: 0, motion: true, look, drop: -1 };
 
     const media = window.matchMedia(STILLNESS);
     let reduced = media.matches;
@@ -243,6 +246,9 @@ export function ContribCanvas({ progress, className }: ContribCanvasProps): Reac
       frameState.time = reduced ? STILL_TIME : clock;
       frameState.dt = dt;
       frameState.motion = !reduced;
+      // -1 holds the squares unseen until the handover; from then on the clock is
+      // >= 0, so the scene reports motion and the loop stays awake through the lead-in.
+      frameState.drop = reduced ? Infinity : dropStart === null ? -1 : Math.max(0, (now - dropStart) / 1000);
       busy = view.render(frameState);
       labels.update(shown, width, height, view.viewVersion, project, !reduced);
       dirty = false;
@@ -317,6 +323,18 @@ export function ContribCanvas({ progress, className }: ContribCanvasProps): Reac
       dirty = true;
       wake();
     };
+
+    // The entrance starts when the loader hands over (or at once if it already has).
+    let dropStart: number | null = null;
+    const startDrop = () => {
+      if (dropStart !== null) return;
+      dropStart = performance.now() + DROP_LEAD_MS;
+      dirty = true;
+      wake();
+    };
+    const dropFallback = window.setTimeout(startDrop, DROP_FALLBACK_MS);
+    if (window.__contribIntro) startDrop();
+    else window.addEventListener(CONTRIB_INTRO, startDrop);
 
     const resize = () => {
       width = box.clientWidth;
@@ -490,6 +508,8 @@ export function ContribCanvas({ progress, className }: ContribCanvasProps): Reac
     return () => {
       alive = false;
       halt();
+      window.clearTimeout(dropFallback);
+      window.removeEventListener(CONTRIB_INTRO, startDrop);
       ro.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);

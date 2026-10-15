@@ -22,7 +22,7 @@ export const profile = {
 
 export const socials = {
   github: 'https://github.com/ImSounic',
-  linkedin: 'https://www.linkedin.com/in/imsounic/',
+  linkedin: 'https://www.linkedin.com/in/imsounic-dev/',
   email: 'mailto:imsounic.dev@gmail.com',
   resume: '/Resume.pdf',
 } as const

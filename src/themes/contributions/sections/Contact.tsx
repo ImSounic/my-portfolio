@@ -1,6 +1,6 @@
 'use client'
 
-import { colophon, profile, socials } from '@/data/portfolio'
+import { profile, socials } from '@/data/portfolio'
 import { CREDITS } from '@/themes/contributions/data'
 
 // ─── CONTACT: open a pull request ─────────────────────────────────────────
@@ -24,9 +24,8 @@ export function Contact() {
         <a className="dk-link" href={socials.resume} target="_blank" rel="noopener noreferrer">Résumé</a>
       </div>
       <div className="dk-contact__small">
-        <p>{colophon}</p>
         <p>
-          Project pictures are stock photographs of each project’s world, toned amber; two are open-licence:{' '}
+          Project pictures are stock photographs of each project’s world; two are open-licence:{' '}
           {CREDITS.join('; ')}, via Wikimedia Commons.
         </p>
         <p>© {new Date().getFullYear()} {profile.name}</p>

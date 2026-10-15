@@ -2,11 +2,11 @@
 
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { profile, socials } from '@/data/portfolio'
+import { PAPER } from '@/themes/contributions/data'
 import { Nav } from '@/themes/contributions/sections/Nav'
 import { gsap, ScrollTrigger, WIDE, MOTION_OK } from '@/themes/contributions/parts'
 import { ContribCanvas } from '@/themes/contributions/contrib/ContribCanvas'
 import { stageOf, type ContribStage } from '@/themes/contributions/contrib/contribStages'
-import { TOTAL } from '@/themes/contributions/contrib/grid'
 import { CONTRIB_INTRO } from '@/components/ContribLoader'
 
 const HEADLINE = 'AI/ML Engineer'
@@ -93,11 +93,6 @@ export function ContribHero() {
         <ContribCanvas progress={progress} />
       </div>
 
-      <div className="dk-graphbar">
-        <p className="dk-graphbar__total">
-          <span className="dk-num">{TOTAL.toLocaleString('en-US')}</span> contributions in the last year
-        </p>
-      </div>
 
       <div className="dk-hero__foot">
         <div className="dk-hero__copy">
@@ -114,6 +109,10 @@ export function ContribHero() {
           <p className="dk-hero__sent">
             Studying MSc Computer Science at University of Twente
           </p>
+          <a className="dk-hero__paper" href={PAPER.url} target="_blank" rel="noopener noreferrer">
+            <span className="dk-hero__venue">{PAPER.venue}</span>
+            Co-first author of <em>{PAPER.title}</em>
+          </a>
           <div className="dk-hero__actions">
             <a className="dk-btn" href={socials.email}>Email me</a>
             <a className="dk-link" href={socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>

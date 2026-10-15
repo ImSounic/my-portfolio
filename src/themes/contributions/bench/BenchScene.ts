@@ -7,7 +7,8 @@
 
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
-import { ACT_END, ACT_VIEWS, CELL_COUNT, actCellCount, sample, viewBoxOf, type CellOut } from './acts'
+import { ACT_END, ACT_VIEWS, CELL_COUNT, actCellCount, sample, setBenchMode, viewBoxOf, type CellOut } from './acts'
+import { PALETTES, currentMode, type Mode } from '../mode'
 
 const FOV = 28
 const FILL = 0.86 // share of the frame the act's box may use
@@ -92,6 +93,7 @@ export class BenchScene {
     this.mesh.frustumCulled = false
     this.sun.position.set(-4, 10, 8)
     this.scene.add(this.mesh, this.ambient, this.hemi, this.sun)
+    this.setMode(currentMode())
     // Start on act 0 already settled at its first frame (no blend from nothing).
     this.fill(0, 0)
     this.snapCount = actCellCount(0)
@@ -104,6 +106,13 @@ export class BenchScene {
     this.renderer.setPixelRatio(dpr)
     this.renderer.setSize(width, height, false)
     this.camLast[0] = Number.NaN
+  }
+
+  /** Light or dark: the next render rewrites every cell in the mode's colours. */
+  setMode(mode: Mode) {
+    setBenchMode(mode)
+    this.hemi.groundColor.set(PALETTES[mode].ground)
+    this.written = false
   }
 
   /** Starts act `act` from the top (also replays the current one). `instant` skips the blend and the act's own motion. */

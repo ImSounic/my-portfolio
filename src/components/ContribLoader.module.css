@@ -9,6 +9,11 @@
   --fg: #e6edf3;
   --soft: #b1bac4;
   --green: #39d353;
+  --flash: #aff5b4;
+  --l1: #0e4429;
+  --l2: #006d32;
+  --l3: #26a641;
+  --l4: #39d353;
   --cell: clamp(4px, calc((100vw - 48px) / 53 - 2px), 12px);
   --gap: clamp(2px, calc(var(--cell) * 0.26), 3px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -63,10 +68,10 @@
 }
 
 /* ...then the days with contributions take their green as the playhead passes. */
-.cell[data-l='1'] { --fill: #0e4429; }
-.cell[data-l='2'] { --fill: #006d32; }
-.cell[data-l='3'] { --fill: #26a641; }
-.cell[data-l='4'] { --fill: #39d353; }
+.cell[data-l='1'] { --fill: var(--l1); }
+.cell[data-l='2'] { --fill: var(--l2); }
+.cell[data-l='3'] { --fill: var(--l3); }
+.cell[data-l='4'] { --fill: var(--l4); }
 .cell[data-l='1'],
 .cell[data-l='2'],
 .cell[data-l='3'],
@@ -138,7 +143,24 @@
 }
 .landed {
   color: var(--green);
-  text-shadow: 0 0 14px rgba(57, 211, 83, 0.45);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--green) 45%, transparent);
+}
+
+/* Light mode (the <html> attribute is set before first paint): GitHub's light graph. */
+:global(html[data-contrib-mode='light']) .root {
+  --ground: #ffffff;
+  --empty: #ebedf0;
+  --fg: #1f2328;
+  --soft: #59636e;
+  --green: #1a7f37;
+  --flash: #2da44e;
+  --l1: #9be9a8;
+  --l2: #40c463;
+  --l3: #30a14e;
+  --l4: #216e39;
+}
+:global(html[data-contrib-mode='light']) .playhead {
+  mix-blend-mode: multiply;
 }
 
 .legend {
@@ -171,7 +193,7 @@
 }
 @keyframes fill {
   0% { background: var(--empty); }
-  45% { background: #aff5b4; }
+  45% { background: var(--flash); }
   100% { background: var(--fill); }
 }
 @keyframes sweep {

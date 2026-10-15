@@ -16,7 +16,7 @@ import styles from './ContribLoader.module.css'
 const LEVELS = snapshot.levels as number[][] // 7 rows (days) x weeks
 const WEEKS = snapshot.weeks
 const TOTAL = snapshot.total
-const LEGEND = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
+const LEGEND = ['var(--empty)', 'var(--l1)', 'var(--l2)', 'var(--l3)', 'var(--l4)'] // follow light / dark
 
 // From first paint, as the CSS timeline.
 const DRAWN_MS = 3500 // drawn (~2.8 s), shimmered (~3.4 s), held a beat

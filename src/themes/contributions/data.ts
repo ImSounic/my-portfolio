@@ -75,9 +75,17 @@ export const EXPOSURES = [
 
 export const CHEMISTRY = skills.map((g) => ({ name: g.category.replace(' / ', ' and ').replace(' & ', ' and '), items: g.items }))
 
+// The MICCAI 2026 workshop paper (from LinkedIn and arXiv 2608.21300).
+export const PAPER = {
+  venue: 'MICCAI 2026',
+  title: 'When Adaptation Hurts',
+  url: 'https://arxiv.org/abs/2608.21300',
+}
+
 const job = experience[0]
 export const LETTER = [
   'I’m doing an MSc in Computer Science, Data Science and Technologies, at the University of Twente, and I finish in 2027. Before that came a BSc in Computer Science and Artificial Intelligence at Leeds and Aberystwyth, with firsts in Scientific Python, Software Engineering and Persistent Data.',
+  'In 2026 a master’s group project grew into a paper. I co-first-authored When Adaptation Hurts, which tests six ways of adapting the MedSAM segmentation model and traces its failures on far out-of-domain scans to drift in the mask decoder. Encoder-only LoRA held up best with 4.1M trainable parameters against 93.7M, and I presented the work at the MICCAI 2026 SAFER Workshop in Strasbourg.',
   `In ${job.period.slice(-4)} I interned at ${job.company} in ${job.location}, building an AI chatbot on Django REST and training it on data I scraped from the company’s own site.`,
   'I cut video before I cut code. Editing in After Effects and Premiere taught me pacing, and a clumsy loading state is just a bad edit.',
   'I read patch notes for fun, speak Telugu at home, Hindi and English fluently, and Dutch at the “ik wil een koffie” stage.',

@@ -7,19 +7,11 @@
 
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import { GREENS, LETTER_GREEN, backgroundColorOf } from "./grid";
+import { GREENS, backgroundColorOf } from "./grid";
+import { PALETTES, currentMode, type Mode, type ScenePalette } from "../mode";
 import { buildLayerLabels } from "./layers";
 import { CELL, CnnKind, PITCH, Role, buildTargets, type Targets } from "./targets";
 
-const PALETTE = {
-  ground: "#0d1117", // the page behind the transparent canvas
-  hoverTop: "#7ee787", // a letter cell under the pointer: one notch past the top level
-  edge: "#26a641",
-  pulse: "#39d353",
-  glow: "#aff5b4",
-  feature: "#26a641",
-  dense: LETTER_GREEN,
-} as const;
 
 const EDGE_OPACITY = 0.22;
 const EDGE_GLOW_GAIN = 4;
@@ -141,7 +133,7 @@ export class ContribScene {
   private readonly cellColor: Float32Array;
 
   private readonly pulseGeometry = new THREE.SphereGeometry(0.07, 10, 8);
-  private readonly pulseMaterial = new THREE.MeshBasicMaterial({ color: PALETTE.pulse });
+  private readonly pulseMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
   private readonly pulses: THREE.InstancedMesh;
   private readonly pulseMatrix = new Float32Array(PULSE_COUNT * 16);
 
@@ -156,9 +148,10 @@ export class ContribScene {
   private readonly colUp: Float32Array;
   private readonly colMlp: Float32Array;
   private readonly colCnn: Float32Array;
-  private readonly cGlow = linear(PALETTE.glow);
-  private readonly cEdge = linear(PALETTE.edge);
-  private readonly cGround = linear(PALETTE.ground);
+  // Palette colours (linear), repainted on a mode change.
+  private readonly cGlow = new THREE.Color();
+  private readonly cEdge = new THREE.Color();
+  private readonly cGround = new THREE.Color();
 
   // Entrance: per-square start time, and this frame's fall and fade.
   private readonly dropDelay: Float32Array;
@@ -253,25 +246,7 @@ export class ContribScene {
     this.colUp = new Float32Array(n * 3);
     this.colMlp = new Float32Array(n * 3);
     this.colCnn = new Float32Array(n * 3);
-    const letter = linear(LETTER_GREEN);
-    const hoverTop = linear(PALETTE.hoverTop);
-    const feature = linear(PALETTE.feature);
-    const dense = linear(PALETTE.dense);
-    T.cells.forEach((c, i) => {
-      const shown = c.letter ? 4 : GREENS.indexOf(backgroundColorOf(c.shown));
-      const base = c.letter ? letter : linear(GREENS[Math.max(0, shown)]);
-      base.toArray(this.colGraph, i * 3);
-      (shown >= 4 ? hoverTop : linear(GREENS[Math.min(4, shown + 1)])).toArray(this.colUp, i * 3);
-      (c.letter ? letter : mixSrgb(GREENS[Math.max(0, shown)], PALETTE.ground, SINK_FADE)).toArray(this.colMlp, i * 3);
-      const kind = T.cnnKind[i];
-      const cnnColor =
-        kind === CnnKind.Input
-          ? mixSrgb(GREENS[clamp(c.level, 0, 4)], LETTER_GREEN, INPUT_BRIGHTEN)
-          : kind === CnnKind.Dense
-            ? dense
-            : feature;
-      cnnColor.toArray(this.colCnn, i * 3);
-    });
+    this.paint(PALETTES[currentMode()]);
 
     this.cellsMesh = new THREE.InstancedMesh(this.cellGeometry, this.cellMaterial, n);
     this.cellsMesh.instanceMatrix = new THREE.InstancedBufferAttribute(this.cellMatrix, 16).setUsage(THREE.DynamicDrawUsage);
@@ -327,6 +302,45 @@ export class ContribScene {
     this.fitA = new Float32Array(most);
     this.fitB = new Float32Array(most);
     this.fitC = new Float32Array(most);
+  }
+
+  /** Light or dark: recolours every cell, edge and pulse; the next render draws it. */
+  setMode(mode: Mode) {
+    this.paint(PALETTES[mode]);
+    this.stateT = Number.NaN;
+    this.cellsT = Number.NaN;
+    this.glowChanged = true;
+    for (const L of this.layers) L.colT = Number.NaN;
+  }
+
+  // Per-cell colours for each stage, in the palette's greens. The level of a
+  // cell comes from the data (grid.ts holds the dark greens it is drawn in).
+  private paint(p: ScenePalette) {
+    const T = this.T;
+    const top = p.greens[4]; // the letters, and the dense layer
+    const letter = linear(top);
+    const hoverTop = linear(p.hoverTop);
+    const feature = linear(p.feature);
+    T.cells.forEach((c, i) => {
+      const shown = c.letter ? 4 : GREENS.indexOf(backgroundColorOf(c.shown));
+      const base = c.letter ? letter : linear(p.greens[Math.max(0, shown)]);
+      base.toArray(this.colGraph, i * 3);
+      (shown >= 4 ? hoverTop : linear(p.greens[Math.min(4, shown + 1)])).toArray(this.colUp, i * 3);
+      (c.letter ? letter : mixSrgb(p.greens[Math.max(0, shown)], p.ground, SINK_FADE)).toArray(this.colMlp, i * 3);
+      const kind = T.cnnKind[i];
+      const cnnColor =
+        kind === CnnKind.Input
+          ? mixSrgb(p.greens[clamp(c.level, 0, 4)], top, INPUT_BRIGHTEN)
+          : kind === CnnKind.Dense
+            ? letter
+            : feature;
+      cnnColor.toArray(this.colCnn, i * 3);
+    });
+    this.cGlow.set(p.glow);
+    this.cEdge.set(p.edge);
+    this.cGround.set(p.ground);
+    this.hemi.groundColor.set(p.ground);
+    this.pulseMaterial.color.set(p.pulse);
   }
 
   /** Size in CSS pixels. */

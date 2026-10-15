@@ -15,7 +15,11 @@
   --soft: #b1bac4;
   --amber: #39d353;
   --paper: #e6edf3;
+  --ink: #0d1117; /* text on paper (the prints, the letter) */
   --peg: #30363d;
+  --amber-hover: #56d364;
+  --lift: rgba(1, 4, 9, 0.9); /* shadow under lifted paper */
+  color-scheme: dark;
 
   --pad: clamp(20px, 4.4vw, 64px);
   --gap: clamp(96px, 10vw, 160px);
@@ -40,6 +44,46 @@
   overflow-x: clip;
 }
 :where(.dk) :where(*, *::before, *::after) { box-sizing: border-box; }
+
+/* ── Light mode: GitHub's light palette (set on <html> before first paint).
+   Contrast: fg #1f2328 on #fff = 16.1; soft #59636e on #fff = 6.1, on
+   #f6f8fa = 5.8; green #1a7f37 on #fff = 5.1; #fff on green = 5.1. ── */
+html[data-contrib-mode='light'] .dk {
+  --ground: #ffffff;
+  --tray: #f6f8fa;
+  --silver: #1f2328;
+  --soft: #59636e;
+  --amber: #1a7f37;
+  --amber-hover: #2c974b;
+  --paper: #f6f8fa;
+  --ink: #1f2328;
+  --peg: #d0d7de;
+  --lift: rgba(31, 35, 40, 0.28);
+  color-scheme: light;
+}
+html[data-contrib-mode='light']:has(.dk) body { background: #ffffff; }
+/* paper on a white page needs an edge */
+html[data-contrib-mode='light'] .dk :is(.dk-print, .dk-about__print, .dk-about__back) { box-shadow: 0 0 0 1px var(--peg), 0 14px 30px -20px var(--lift); }
+html[data-contrib-mode='light'] .dk .dk-print[aria-expanded='true'] { box-shadow: 0 0 0 2px var(--amber), 0 18px 40px -18px var(--lift); }
+html[data-contrib-mode='light'] .dk .dk-pcard__in { box-shadow: 0 24px 60px -24px var(--lift), 0 0 0 1px rgba(26, 127, 55, 0.08); }
+
+/* ── Light / dark toggle in the nav: a sun (to light) or a moon (to dark) ── */
+.dk-mode {
+  position: relative; width: 44px; height: 44px; display: inline-grid; place-items: center;
+  border-radius: 12px; color: var(--silver); transition: background-color 180ms ease, color 180ms ease;
+}
+.dk-mode:hover { background: color-mix(in srgb, var(--silver) 9%, transparent); color: var(--amber); }
+.dk-mode svg { grid-area: 1 / 1; transition: transform 500ms var(--ease), opacity 300ms var(--ease); }
+.dk-mode__moon { opacity: 0; transform: rotate(-70deg) scale(0.6); }
+html[data-contrib-mode='light'] .dk-mode__sun { opacity: 0; transform: rotate(70deg) scale(0.6); }
+html[data-contrib-mode='light'] .dk-mode__moon { opacity: 1; transform: none; }
+/* the reveal: the new mode grows as a circle from the toggle (view transitions) */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: dk-mode-reveal 620ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+@keyframes dk-mode-reveal { from { clip-path: circle(0 at var(--mode-x, 100%) var(--mode-y, 0)); } to { clip-path: circle(var(--mode-r, 150vmax) at var(--mode-x, 100%) var(--mode-y, 0)); } }
+@media (prefers-reduced-motion: reduce) {
+  .dk-mode svg { transition: none; }
+}
 :where(.dk) :where(h1, h2, h3, p, ul, ol, figure) { margin: 0; }
 :where(.dk) :where(h1, h2, h3) { font-weight: 500; text-wrap: balance; }
 :where(.dk) :where(p) { text-wrap: pretty; }
@@ -80,10 +124,10 @@
   text-decoration: none;
   transition: transform 140ms var(--ease), background-color 180ms ease;
 }
-.dk-btn:hover { background: #56d364; }
+.dk-btn:hover { background: var(--amber-hover); }
 .dk-btn:active { transform: scale(0.97); }
 .dk-btn--ink { background: var(--ground); color: var(--amber); }
-.dk-btn--ink:hover { background: #161b22; }
+.dk-btn--ink:hover { background: var(--tray); }
 .dk-btn--ink:focus-visible { outline-color: var(--ground); }
 
 /* ── Test strip divider: six exposure steps ───────────────────────────── */
@@ -100,8 +144,9 @@
 .dk-nav {
   position: absolute; inset: 0 0 auto 0; z-index: 3;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px calc(var(--pad) + 130px) 0 var(--pad);
+  padding: 18px var(--pad) 0;
 }
+.dk-nav__end { display: flex; align-items: center; gap: 8px 28px; }
 .dk-nav__name { font-weight: 600; font-size: var(--t-body); }
 .dk-nav__links { display: flex; gap: 8px 32px; }
 .dk-nav__links a { font-weight: 500; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
@@ -119,6 +164,11 @@
 .dk-hero { position: relative; overflow: hidden; }
 .dk-hero__line { font-size: clamp(2.125rem, 1.4rem + 2.6vw, 4rem); line-height: 1; letter-spacing: -0.02em; }
 .dk-hero__sent { margin-top: 20px; color: var(--soft); max-width: 40ch; }
+/* The paper, one line under the subtext: a green venue tag, then the credit. */
+.dk-hero__paper { margin-top: 14px; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-height: 44px; font-size: var(--t-small); color: var(--silver); text-decoration: none; }
+.dk-hero__paper em { font-style: normal; font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--amber) 60%, transparent); text-underline-offset: 3px; transition: text-decoration-color 180ms ease; }
+.dk-hero__paper:hover em { text-decoration-color: var(--amber); }
+.dk-hero__venue { padding: 3px 9px; border-radius: 999px; font-weight: 600; color: var(--ground); background: var(--amber); }
 .dk-hero__actions { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; }
 .dk-timer__steps { display: flex; gap: 6px; }
 .dk-timer__steps button {
@@ -189,7 +239,7 @@
 .dk-line__wire { position: absolute; left: 0; top: 18px; width: 100%; height: 140px; overflow: visible; pointer-events: none; color: var(--silver); }
 .dk-print {
   position: relative; flex: none; width: clamp(260px, 22vw, 320px); margin-top: 52px; align-self: flex-start;
-  background: var(--paper); color: var(--ground); padding: 14px 14px 18px; text-align: left;
+  background: var(--paper); color: var(--ink); padding: 14px 14px 18px; text-align: left;
   transform: rotate(var(--tilt, 0deg)); transform-origin: 50% -40px;
   transition: transform 420ms var(--ease);
 }
@@ -208,7 +258,7 @@
 .dk-print__lang { display: inline-flex; align-items: center; gap: 8px; font-size: 1rem; font-weight: 500; }
 .dk-print__lang i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
 .dk-print__tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.dk-print__tags span { font-size: 0.875rem; font-weight: 500; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--ground) 10%, transparent); }
+.dk-print__tags span { font-size: 0.875rem; font-weight: 500; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 10%, transparent); }
 .dk-cardmode { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; flex-basis: 100%; font-size: var(--t-small); color: var(--soft); }
 .dk-cardmode span { margin-right: 6px; }
 .dk-cardmode button { min-height: 36px; padding: 0 12px; font-weight: 500; color: var(--silver); background: color-mix(in srgb, var(--amber) 10%, transparent); }
@@ -227,7 +277,7 @@
 @keyframes dk-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* The print whose details are open stands straight, lifted, ringed in green. */
-.dk-print[aria-expanded='true'] { transform: rotate(0deg) translateY(-6px); box-shadow: 0 0 0 2px var(--amber), 0 18px 40px -18px rgba(1, 4, 9, 0.9); }
+.dk-print[aria-expanded='true'] { transform: rotate(0deg) translateY(-6px); box-shadow: 0 0 0 2px var(--amber), 0 18px 40px -18px var(--lift); }
 
 /* ── Project card: a project's details beside its print ──────────────────── */
 .dk-pcard { position: fixed; left: 0; top: 0; z-index: 40; width: min(380px, calc(100vw - 32px)); max-height: calc(100svh - 32px); }
@@ -293,10 +343,10 @@
 
 /* ── About me: the print and the back of the print ───────────────────── */
 .dk-about { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
-.dk-about__print { background: var(--paper); color: var(--ground); padding: 14px 14px 18px; transform: rotate(-2deg); }
+.dk-about__print { background: var(--paper); color: var(--ink); padding: 14px 14px 18px; transform: rotate(-2deg); }
 .dk-about__print img { width: 100%; aspect-ratio: 312 / 330; object-fit: cover; }
 .dk-about__print p { margin-top: 14px; font-weight: 500; font-size: var(--t-small); }
-.dk-about__back { background: var(--paper); color: var(--ground); padding: clamp(24px, 3.4vw, 44px); display: flex; flex-direction: column; gap: 1.1em; }
+.dk-about__back { background: var(--paper); color: var(--ink); padding: clamp(24px, 3.4vw, 44px); display: flex; flex-direction: column; gap: 1.1em; }
 .dk-about__back p { max-width: 66ch; }
 
 /* ── Contact: pull the print ──────────────────────────────────────────── */
@@ -309,7 +359,6 @@
 
 /* ── Phone composition ────────────────────────────────────────────────── */
 @media (max-width: 860px) {
-  .dk-nav { padding-right: calc(var(--pad) + 60px); }
   .dk-nav__links { display: none; }
   .dk-nav__menu { display: inline-flex; align-items: center; }
   .dk-expo__title { font-size: clamp(1.875rem, 8.6vw, 2.25rem); max-width: none; }
@@ -404,9 +453,9 @@
 @media (prefers-reduced-motion: no-preference) {
   /* the graph's own squares rain in (contrib/scene.ts, the drop) */
   .dk-hero--intro .dk-nav { animation: dk-drop 800ms var(--ease) 420ms both; }
-  .dk-hero--intro .dk-graphbar { animation: dk-rise 800ms var(--ease) 520ms both; }
   .dk-hero--intro .dk-word > span { animation: dk-word 1000ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(560ms + var(--w) * 75ms); }
   .dk-hero--intro .dk-hero__sent { animation: dk-rise 900ms var(--ease) 900ms both; }
+  .dk-hero--intro .dk-hero__paper { animation: dk-rise 900ms var(--ease) 980ms both; }
   .dk-hero--intro .dk-hero__actions > * { animation: dk-rise 800ms var(--ease) both; }
   .dk-hero--intro .dk-hero__actions > :nth-child(1) { animation-delay: 1020ms; }
   .dk-hero--intro .dk-hero__actions > :nth-child(2) { animation-delay: 1090ms; }

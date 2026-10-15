@@ -8,7 +8,8 @@
 import type { LayerLabel } from "./layers";
 import type { Projected } from "./scene";
 
-const COLORS = { name: "#e6edf3", count: "#b1bac4", mark: "#39d353" } as const;
+// Theme tokens, so the labels follow light and dark without a repaint.
+const COLORS = { name: "var(--silver)", count: "var(--soft)", mark: "var(--amber)", halo: "var(--ground)" } as const;
 const NARROW_PX = 480;
 const MAX_NARROW = 5;
 const LEADER_PX = 9; // leader length between the dot and the text
@@ -103,7 +104,7 @@ export class LabelOverlay {
         text.style.cssText =
           `position:absolute;left:0;bottom:${DOT_PX / 2 + LEADER_PX + 3}px;white-space:nowrap;` +
           `font-family:var(--font-clash),system-ui,sans-serif;font-weight:500;line-height:1.2;letter-spacing:0.01em;` +
-          `color:${COLORS.name};text-shadow:0 0 6px #0d1117,0 0 2px #0d1117;`;
+          `color:${COLORS.name};text-shadow:0 0 6px ${COLORS.halo},0 0 2px ${COLORS.halo};`;
         const name = document.createElement("span");
         const count = document.createElement("span");
         count.style.cssText = `color:${COLORS.count};font-weight:400;`;

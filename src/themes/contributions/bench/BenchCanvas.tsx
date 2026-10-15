@@ -11,6 +11,7 @@ import * as React from 'react'
 import { LookController } from '../contrib/look'
 import { ACT_LABELS, finalReadout, readoutOf } from './acts'
 import { BenchScene, type BenchFrame, type Projected } from './BenchScene'
+import { MODE_EVENT, type Mode } from '../mode'
 
 const STILLNESS = '(prefers-reduced-motion: reduce)'
 const MAX_DPR = 1.75
@@ -219,6 +220,14 @@ export function BenchCanvas({ act, run, readoutRef, label, className }: BenchCan
       if (running() && width > 0 && height > 0) draw(0, performance.now())
       wake()
     }
+    // Light / dark: recolour and repaint now, so a view transition captures the new frame.
+    const onMode = (e: Event) => {
+      view.setMode((e as CustomEvent<Mode>).detail)
+      dirty = true
+      if (running() && width > 0 && height > 0) draw(0, performance.now())
+      wake()
+    }
+    window.addEventListener(MODE_EVENT, onMode)
     const ro = new ResizeObserver(resize)
     ro.observe(box)
     resize()
@@ -364,6 +373,7 @@ export function BenchCanvas({ act, run, readoutRef, label, className }: BenchCan
     return () => {
       sceneRef.current = null
       halt()
+      window.removeEventListener(MODE_EVENT, onMode)
       ro.disconnect()
       io.disconnect()
       document.removeEventListener('visibilitychange', onVisibility)
@@ -407,7 +417,7 @@ export function BenchCanvas({ act, run, readoutRef, label, className }: BenchCan
         aria-label={failed ? undefined : `${label}. Use the arrow keys to look around`}
         onFocus={(e) => setRing(e.currentTarget.matches(':focus-visible'))}
         onBlur={() => setRing(false)}
-        style={{ position: 'absolute', inset: 0, outline: ring ? '2px solid #39d353' : 'none', outlineOffset: -2, borderRadius: 'inherit' }}
+        style={{ position: 'absolute', inset: 0, outline: ring ? '2px solid var(--amber)' : 'none', outlineOffset: -2, borderRadius: 'inherit' }}
       />
       <div className="dk-bench__labels" aria-hidden="true">
         {labels.map((l, k) => (

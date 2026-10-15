@@ -23,6 +23,7 @@ import { buildLayerLabels } from "./layers";
 import { LookController } from "./look";
 import { ContribScene, STILL_TIME, type FrameState, type Projected } from "./scene";
 import { CONTRIB_INTRO } from "@/components/ContribLoader";
+import { MODE_EVENT, type Mode } from "../mode";
 
 const STILLNESS = "(prefers-reduced-motion: reduce)";
 const MAX_DPR = 1.75;
@@ -30,7 +31,7 @@ const FOLLOW_RATE = 5; // 1/s: exponential follow toward progress (time constant
 const TAP_MS = 1100; // how long a touch keeps its area lit
 const WATCHDOG_MS = 200; // while asleep: how often to check for progress written without a scroll event
 const AXIS_PX = 8; // a touch decides between rotate (horizontal) and scroll after this much travel
-const FOCUS_RING = "#39d353";
+const FOCUS_RING = "var(--amber)";
 const DROP_LEAD_MS = 140; // the loader's zoom is under way before the squares fall
 const DROP_FALLBACK_MS = 9000; // no loader handover: fall anyway
 const MODEL_LABEL = "3D model of the network. Use the arrow keys to look around";
@@ -348,6 +349,14 @@ export function ContribCanvas({ progress, className }: ContribCanvasProps): Reac
       if (running() && width > 0 && height > 0) draw(0, performance.now());
       wake();
     };
+    // Light / dark: recolour and repaint now, so a view transition captures the new frame.
+    const onMode = (e: Event) => {
+      view.setMode((e as CustomEvent<Mode>).detail);
+      dirty = true;
+      if (running() && width > 0 && height > 0) draw(0, performance.now());
+      wake();
+    };
+    window.addEventListener(MODE_EVENT, onMode);
     const ro = new ResizeObserver(resize);
     ro.observe(box);
     resize();
@@ -510,6 +519,7 @@ export function ContribCanvas({ progress, className }: ContribCanvasProps): Reac
       halt();
       window.clearTimeout(dropFallback);
       window.removeEventListener(CONTRIB_INTRO, startDrop);
+      window.removeEventListener(MODE_EVENT, onMode);
       ro.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);

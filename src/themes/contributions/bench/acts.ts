@@ -10,7 +10,7 @@
 // and 30 Monte Carlo paths per forecast. The walks themselves are a seeded
 // sketch, not market data.
 
-import { GREENS } from '../contrib/grid'
+import { PALETTES, type Mode, type ScenePalette } from '../mode'
 
 export const COLS = 32
 export const ROWS = 17
@@ -29,14 +29,20 @@ const rgb = (hex: string): [number, number, number] => {
   const n = parseInt(hex.slice(1), 16)
   return [lin(((n >> 16) & 255) / 255), lin(((n >> 8) & 255) / 255), lin((n & 255) / 255)]
 }
-const C = {
-  empty: rgb(GREENS[0]),
-  checked: rgb('#21262d'),
-  idle: rgb('#3d444d'),
-  ground: rgb('#0d1117'),
-  glow: rgb('#aff5b4'),
-  bright: rgb(GREENS[4]),
-  levels: GREENS.map(rgb),
+const coloursOf = (p: ScenePalette) => ({
+  empty: rgb(p.greens[0]),
+  checked: rgb(p.checked),
+  idle: rgb(p.idle),
+  ground: rgb(p.ground),
+  glow: rgb(p.glow),
+  bright: rgb(p.greens[4]),
+  levels: p.greens.map(rgb),
+})
+const C = coloursOf(PALETTES.dark)
+
+/** Light or dark: every cell sampled from now on takes the mode's colours. */
+export function setBenchMode(mode: Mode) {
+  Object.assign(C, coloursOf(PALETTES[mode]))
 }
 
 // ─── small maths ────────────────────────────────────────────────────────

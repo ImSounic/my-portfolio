@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Analytics from '@/components/analytics/Analytics'
+import { MODE_SCRIPT } from '@/themes/contributions/mode'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,8 +18,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Contributions theme: apply a saved light-mode choice before first paint (no flash). */}
+        <script dangerouslySetInnerHTML={{ __html: MODE_SCRIPT }} />
+
         {/* Favicon */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />

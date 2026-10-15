@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { profile } from '@/data/portfolio'
 import { NAV, scrollToId } from '@/themes/contributions/data'
+import { ModeToggle } from '@/themes/contributions/sections/ModeToggle'
 
 // ─── NAV: name, section links, and the phone menu (closes with Escape) ──
 export function Nav({ links = NAV }: { links?: typeof NAV }) {
@@ -19,16 +20,19 @@ export function Nav({ links = NAV }: { links?: typeof NAV }) {
     <>
       <nav className="dk-nav" aria-label="Sections">
         <span className="dk-nav__name">{profile.name}</span>
-        <div className="dk-nav__links">
-          {links.map((n) => (
-            <a key={n.id} href={`#${n.id}`} onClick={(e) => { e.preventDefault(); scrollToId(n.id) }}>
-              {n.label}
-            </a>
-          ))}
+        <div className="dk-nav__end">
+          <div className="dk-nav__links">
+            {links.map((n) => (
+              <a key={n.id} href={`#${n.id}`} onClick={(e) => { e.preventDefault(); scrollToId(n.id) }}>
+                {n.label}
+              </a>
+            ))}
+          </div>
+          <ModeToggle />
+          <button type="button" className="dk-nav__menu" aria-expanded={menu} aria-controls="dk-menu" onClick={() => setMenu(true)}>
+            Menu
+          </button>
         </div>
-        <button type="button" className="dk-nav__menu" aria-expanded={menu} aria-controls="dk-menu" onClick={() => setMenu(true)}>
-          Menu
-        </button>
       </nav>
       {menu && (
         <div id="dk-menu" className="dk-menu" role="dialog" aria-modal="true" aria-label="Menu">

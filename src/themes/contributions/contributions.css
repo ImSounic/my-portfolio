@@ -137,17 +137,47 @@
 /* ── Exposures (after the hero) ───────────────────────────────────────── */
 .dk-expo__title { font-size: var(--t-head); line-height: 1; letter-spacing: -0.02em; max-width: 16ch; }
 .dk-expo__lede { margin-top: 24px; max-width: 46ch; color: var(--soft); }
-.dk-expo__steps { margin: clamp(40px, 5vw, 72px) calc(-1 * var(--pad)) 0; display: grid; grid-template-columns: repeat(4, 1fr); }
-.dk-expo__step { position: relative; min-height: 380px; padding: 36px 32px 32px; display: flex; flex-direction: column; }
-.dk-expo__step:nth-child(1) { background: #0e4429; }
-.dk-expo__step:nth-child(2) { background: #006d32; }
-.dk-expo__step:nth-child(3) { background: #26a641; color: var(--ground); }
-.dk-expo__step:nth-child(4) { background: var(--amber); }
-.dk-expo__step:nth-child(4) { color: var(--ground); }
-.dk-expo__big { font-size: clamp(2.75rem, 1.8rem + 2.4vw, 4rem); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.dk-expo__body { margin-top: 28px; max-width: 26ch; }
-.dk-expo__from { margin-top: auto; padding-top: 28px; font-size: var(--t-small); font-weight: 500; color: var(--soft); }
-.dk-expo__step:nth-child(4) .dk-expo__from { color: var(--ground); }
+
+/* ── The data bench: a 3D figure beside the four problems ─────────────── */
+.dk-bench { margin-top: clamp(40px, 5vw, 72px); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(28px, 3.4vw, 56px); align-items: stretch; }
+.dk-bench__fig { grid-column: 2; grid-row: 1; position: relative; min-height: clamp(440px, 64vh, 660px); border: 1px solid var(--peg); border-radius: 16px; background: var(--ground); overflow: hidden; }
+.dk-bench__canvas { touch-action: pan-y; }
+.dk-bench__cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding: 16px 20px; font-size: var(--t-small); pointer-events: none; }
+.dk-bench__hint { color: var(--soft); }
+.dk-bench__hint--touch { display: none; }
+@media (hover: none) { .dk-bench__hint--pointer { display: none; } .dk-bench__hint--touch { display: inline; } }
+.dk-bench__readout { color: var(--silver); text-align: right; font-weight: 500; }
+.dk-bench__fig { container-type: inline-size; }
+.dk-bench__labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.dk-bench__label { position: absolute; left: 0; top: 0; font-size: var(--t-small); font-weight: 500; color: var(--silver); white-space: nowrap; text-shadow: 0 1px 2px var(--ground), 0 0 8px var(--ground); animation: dk-bench-label 500ms var(--ease) 450ms both; }
+.dk-bench__label--above { translate: -50% calc(-100% - 6px); }
+.dk-bench__label--left { translate: calc(-100% - 8px) -50%; color: var(--soft); }
+.dk-bench__label-short { display: none; }
+@container (max-width: 520px) { .dk-bench__label-full { display: none; } .dk-bench__label-short { display: inline; } }
+@keyframes dk-bench-label { from { opacity: 0; } to { opacity: 1; } }
+
+.dk-bench__acts { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; }
+.dk-bench__acts li { flex: 1; display: flex; }
+.dk-bench__act { position: relative; flex: 1; display: flex; flex-direction: column; gap: 10px; width: 100%; padding: 22px 0 24px; text-align: left; color: var(--soft); border-top: 1px solid var(--peg); transition: color 300ms var(--ease); }
+.dk-bench__acts li:last-child .dk-bench__act { border-bottom: 1px solid var(--peg); }
+.dk-bench__act:hover { color: var(--silver); }
+.dk-bench__act[aria-pressed='true'] { color: var(--silver); }
+.dk-bench__top { display: flex; align-items: center; gap: 14px; }
+.dk-bench__mark { flex: none; width: 14px; height: 14px; border-radius: 4px; background: var(--peg); transition: background-color 300ms var(--ease), transform 400ms var(--ease); }
+.dk-bench__act[aria-pressed='true'] .dk-bench__mark { background: var(--amber); transform: scale(1.15); }
+.dk-bench__big { font-size: clamp(2rem, 1.3rem + 1.7vw, 3rem); line-height: 1; letter-spacing: -0.02em; }
+.dk-bench__act[aria-pressed='true'] .dk-bench__big { color: var(--amber); }
+.dk-bench__body { max-width: 36ch; }
+.dk-bench__from { font-size: var(--t-small); font-weight: 500; }
+.dk-bench__track { position: absolute; left: 0; right: 0; top: -1px; height: 2px; overflow: hidden; }
+.dk-bench__bar { display: block; height: 100%; background: var(--amber); transform: scaleX(0); transform-origin: left; animation: dk-bench-run var(--act-s, 8s) linear forwards; }
+.dk-bench.is-held .dk-bench__bar { animation-play-state: paused; }
+@keyframes dk-bench-run { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .dk-bench__bar { animation: none; transform: scaleX(1); }
+  .dk-bench__label { animation: none; }
+  .dk-bench__act, .dk-bench__mark { transition: none; }
+}
 
 /* ── Work: prints on a drying line ───────────────────────────────────── */
 .dk-work { position: relative; height: 100svh; min-height: 680px; padding: clamp(40px, 6vh, 64px) 0 0; overflow: hidden; display: flex; flex-direction: column; }
@@ -258,8 +288,13 @@
   .dk-nav__links { display: none; }
   .dk-nav__menu { display: inline-flex; align-items: center; }
   .dk-expo__title { font-size: clamp(1.875rem, 8.6vw, 2.25rem); max-width: none; }
-  .dk-expo__steps { grid-template-columns: 1fr; }
-  .dk-expo__step { min-height: 0; padding: 26px var(--pad); }
+  .dk-bench { grid-template-columns: 1fr; gap: 24px; }
+  .dk-bench__fig { grid-column: 1; min-height: clamp(300px, 88vw, 440px); border-radius: 12px; }
+  .dk-bench__acts { grid-column: 1; grid-row: 2; }
+  .dk-bench__act { padding: 18px 0 20px; }
+  /* hint at the top, readout at the bottom, so neither wraps into the other */
+  .dk-bench__cap { top: 0; flex-direction: column; align-items: flex-start; padding: 12px 14px; }
+  .dk-bench__readout { align-self: flex-end; }
   .dk-work { height: auto; min-height: 0; overflow: visible; }
   .dk-line { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 12px; }
   .dk-line::-webkit-scrollbar { display: none; }
@@ -286,11 +321,6 @@
   .dk-print, .dk-btn, .dk-link { transition: none; }
   .dk-fade { animation: none; }
 }
-
-/* Captions of the darker exposure steps carry full text colour (soft fails there). */
-.dk-expo__step:nth-child(1) .dk-expo__from,
-.dk-expo__step:nth-child(2) .dk-expo__from { color: var(--silver); }
-.dk-expo__step:nth-child(3) .dk-expo__from { color: var(--ground); }
 
 /* The contact printer in GitHub's greys, with the one lit part in green. */
 .dk .cv {

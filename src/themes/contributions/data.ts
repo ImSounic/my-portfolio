@@ -2,7 +2,7 @@
 // View data for the Contributions theme, derived from src/data/portfolio.ts.
 // Pictures in public/contrib/ (from the project images; two replaced with
 // credited open-licence pictures).
-import { projects, hotTakes, skills, experience, type Project } from '@/data/portfolio'
+import { projects, skills, experience, type Project } from '@/data/portfolio'
 
 export type Print = {
   id: string
@@ -14,7 +14,11 @@ export type Print = {
   image: string
   alt: string
   github?: string
+  link?: string
   tags: [string, string] // the top two tools, shown on the project card
+  allTags: string[]
+  period: string // e.g. "Feb 2026 to Mar 2026"
+  highlights: string[]
 }
 
 // One true number and a short write-up per project (from its description).
@@ -53,7 +57,11 @@ export const PRINTS: Print[] = [...projects]
       image: `/contrib/${f?.key ?? 'f1'}.jpg`,
       alt: f?.alt ?? '',
       github: p.github,
+      link: p.link,
       tags: [p.tags[0] ?? '', p.tags[1] ?? ''] as [string, string],
+      allTags: p.tags,
+      period: p.period.replace(/\s*-\s*/, ' to '),
+      highlights: p.highlights,
     }
   })
 
@@ -64,13 +72,6 @@ export const EXPOSURES = [
   { key: 'races', name: 'Leakage', big: '92 races', body: 'of F1 data, validated in race order so the model never trained on a race still to come. Zero leakage.', from: 'F1 Race Strategy Optimizer' },
   { key: 'paths', name: 'Futures', big: '30 paths', body: 'of Monte Carlo futures behind every forecast from a fine-tuned Kronos model. Risk is set from their quantiles, not from one guess.', from: 'CIFR-Quant' },
 ]
-
-const titleOf = (id?: string) => projects.find((p) => p.id === id)?.title
-export const NOTES = hotTakes.map((t) => ({
-  title: t.title.charAt(0) + t.title.slice(1).toLowerCase(),
-  body: t.body,
-  from: titleOf(t.projectId) ?? 'Video editing',
-}))
 
 export const CHEMISTRY = skills.map((g) => ({ name: g.category.replace(' / ', ' and ').replace(' & ', ' and '), items: g.items }))
 
@@ -84,7 +85,6 @@ export const LETTER = [
 
 export const NAV = [
   { id: 'work', label: 'Work' },
-  { id: 'notes', label: 'Notes' },
   { id: 'chemistry', label: 'Stack' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },

@@ -224,35 +224,60 @@
 .dk-work[data-static='true'] .dk-line__track { height: auto; }
 .dk-work[data-static='true'] .dk-print { scroll-snap-align: center; }
 
-/* ── The tray: one print at a time, every 15 seconds ─────────────────── */
-.dk-tray-wrap { padding: clamp(40px, 5vw, 72px) var(--pad) var(--gap); }
-.dk-tray { position: relative; background: var(--tray); padding: clamp(20px, 3vw, 40px); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 60px); }
-.dk-tray__pic { position: relative; aspect-ratio: 700 / 440; overflow: hidden; }
-.dk-tray__pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.dk-tray__text { display: flex; flex-direction: column; min-width: 0; }
-.dk-tray__big { font-size: var(--t-big); line-height: 0.95; letter-spacing: -0.03em; color: var(--amber); font-variant-numeric: tabular-nums; }
-.dk-tray__title { margin-top: 18px; font-size: clamp(1.5rem, 1.2rem + 1vw, 2.25rem); line-height: 1.15; }
-.dk-tray__body { margin-top: 16px; color: var(--soft); max-width: 48ch; }
-.dk-tray__code { margin-top: 20px; color: var(--amber); }
-.dk-tray__controls { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
-.dk-tray__segs { flex: 1 1 320px; display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; }
-.dk-tray__seg { position: relative; height: 4px; background: color-mix(in srgb, var(--silver) 18%, transparent); overflow: hidden; }
-.dk-tray__seg[data-done='true'] { background: color-mix(in srgb, var(--silver) 60%, transparent); }
-.dk-tray__seg > span { position: absolute; inset: 0; background: var(--amber); transform-origin: left; transform: scaleX(0); }
-.dk-tray__count { font-size: var(--t-small); font-weight: 500; font-variant-numeric: tabular-nums; }
-.dk-tray__nav { display: flex; gap: 8px; }
-.dk-tray__nav button { min-height: 44px; padding: 0 16px; font-weight: 500; transition: color 180ms ease; }
-.dk-tray__nav button:hover { color: var(--amber); }
-.dk-tray__nav button:last-child { color: var(--amber); }
-.dk-fade { animation: dk-fade 600ms var(--ease) both; }
 @keyframes dk-fade { from { opacity: 0; } to { opacity: 1; } }
 
-/* ── Notes on the wall ────────────────────────────────────────────────── */
-.dk-notes li { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr) minmax(0, 0.6fr); gap: 16px 40px; padding: 28px 0; align-items: baseline; }
-.dk-notes li + li { border-top: 1px solid color-mix(in srgb, var(--silver) 14%, transparent); }
-.dk-notes__title { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 1.875rem); line-height: 1.2; }
-.dk-notes li:first-child .dk-notes__title { color: var(--amber); }
-.dk-notes__from { font-size: var(--t-small); color: var(--soft); text-align: right; }
+/* The print whose details are open stands straight, lifted, ringed in green. */
+.dk-print[aria-expanded='true'] { transform: rotate(0deg) translateY(-6px); box-shadow: 0 0 0 2px var(--amber), 0 18px 40px -18px rgba(1, 4, 9, 0.9); }
+
+/* ── Project card: a project's details beside its print ──────────────────── */
+.dk-pcard { position: fixed; left: 0; top: 0; z-index: 40; width: min(380px, calc(100vw - 32px)); max-height: calc(100svh - 32px); }
+.dk-pcard__in {
+  position: relative; max-height: inherit; overflow: auto; overscroll-behavior: contain;
+  padding: 24px 24px 22px; border-radius: 14px;
+  background: var(--tray); border: 1px solid var(--peg); color: var(--silver);
+  box-shadow: 0 24px 60px -20px rgba(1, 4, 9, 0.95), 0 0 0 1px rgba(57, 211, 83, 0.06);
+  transform-origin: left 40px;
+  animation: dk-pcard-in 340ms var(--ease) both;
+}
+.dk-pcard[data-side='left'] .dk-pcard__in { transform-origin: right 40px; --from-x: 10px; }
+.dk-pcard[data-side='right'] .dk-pcard__in { --from-x: -10px; }
+.dk-pcard__pointer { position: absolute; top: 40px; width: 12px; height: 12px; margin-top: -6px; background: var(--tray); border: 1px solid var(--peg); transform: rotate(45deg); z-index: 1; }
+.dk-pcard[data-side='right'] .dk-pcard__pointer { left: -6px; border-top-color: transparent; border-right-color: transparent; }
+.dk-pcard[data-side='left'] .dk-pcard__pointer { right: -6px; border-bottom-color: transparent; border-left-color: transparent; }
+.dk-pcard[data-side='sheet'] { top: auto; bottom: 12px; left: 12px; right: 12px; width: auto; max-height: 72svh; }
+.dk-pcard[data-side='sheet'] .dk-pcard__in { --from-y: 24px; transform-origin: center bottom; }
+.dk-pcard[data-side='sheet'] .dk-pcard__pointer { display: none; }
+.dk-pcard__close {
+  position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; display: grid; place-items: center;
+  border-radius: 10px; color: var(--soft); transition: color 160ms ease, background-color 160ms ease;
+}
+.dk-pcard__close:hover { color: var(--silver); background: color-mix(in srgb, var(--silver) 8%, transparent); }
+.dk-pcard__kind { padding-right: 44px; font-size: var(--t-small); color: var(--soft); }
+.dk-pcard__title { margin-top: 6px; padding-right: 36px; font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.01em; }
+/* focus lands on the title only so readers start there; it is not a control, so no ring */
+.dk-pcard__title:focus, .dk-pcard__title:focus-visible { outline: none; }
+.dk-pcard__lead { margin-top: 14px; }
+.dk-pcard__big { display: block; font-size: 2.25rem; line-height: 1; letter-spacing: -0.02em; color: var(--amber); }
+.dk-pcard__lead p { margin-top: 10px; color: var(--soft); font-size: 0.9375rem; }
+.dk-pcard__list { margin-top: 16px; display: grid; gap: 8px; font-size: 0.9375rem; }
+.dk-pcard__list li { position: relative; padding-left: 20px; }
+.dk-pcard__list li::before { content: ''; position: absolute; left: 0; top: 0.5em; width: 9px; height: 9px; border-radius: 2px; background: var(--amber); }
+.dk-pcard__tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+.dk-pcard__tags span { font-size: 0.8125rem; font-weight: 500; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--amber) 12%, transparent); color: var(--silver); }
+.dk-pcard__links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.dk-pcard__links .dk-link { color: var(--amber); }
+/* the content follows the card in, a beat apart */
+.dk-pcard__in > * { animation: dk-pcard-item 420ms var(--ease) both; }
+.dk-pcard__in > :nth-child(3) { animation-delay: 40ms; }
+.dk-pcard__in > :nth-child(4) { animation-delay: 80ms; }
+.dk-pcard__in > :nth-child(5) { animation-delay: 120ms; }
+.dk-pcard__in > :nth-child(6) { animation-delay: 160ms; }
+.dk-pcard__in > :nth-child(7) { animation-delay: 200ms; }
+@keyframes dk-pcard-in { from { opacity: 0; transform: translate(var(--from-x, 0), var(--from-y, 0)) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes dk-pcard-item { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .dk-pcard__in, .dk-pcard__in > * { animation: dk-fade 160ms linear both; }
+}
 
 /* ── A convolution, by hand ───────────────────────────────────────────── */
 .dk-conv { display: grid; grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
@@ -300,9 +325,6 @@
   .dk-line::-webkit-scrollbar { display: none; }
   .dk-line__track { height: auto; padding-bottom: 8px; }
   .dk-print { width: 74vw; max-width: 300px; scroll-snap-align: center; }
-  .dk-tray { grid-template-columns: 1fr; }
-  .dk-notes li { grid-template-columns: 1fr; gap: 10px; }
-  .dk-notes__from { text-align: left; }
   .dk-conv { grid-template-columns: 1fr; }
   .dk-chem li { grid-template-columns: 1fr; }
   .dk-about { grid-template-columns: 1fr; }
@@ -319,7 +341,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .dk-print, .dk-btn, .dk-link { transition: none; }
-  .dk-fade { animation: none; }
 }
 
 /* The contact printer in GitHub's greys, with the one lit part in green. */

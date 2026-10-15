@@ -3,12 +3,6 @@
    hero (which opens on the same graph). Pure CSS motion: it starts on first
    paint, before any script. GitHub dark tokens, as the theme. */
 
-@property --n {
-  syntax: '<integer>';
-  inherits: false;
-  initial-value: 0;
-}
-
 .root {
   --ground: #0d1117;
   --empty: #161b22;
@@ -61,8 +55,8 @@
   height: var(--cell);
   border-radius: calc(var(--cell) * 0.24);
   background: var(--empty);
-  animation: appear 380ms var(--ease) both;
-  animation-delay: calc(140ms + var(--c) * 11ms + var(--r) * 18ms);
+  animation: appear 420ms var(--ease) both;
+  animation-delay: calc(140ms + var(--c) * 18ms + var(--r) * 24ms);
 }
 .cell[data-l='-1'] {
   visibility: hidden;
@@ -78,11 +72,13 @@
 .cell[data-l='3'],
 .cell[data-l='4'] {
   animation:
-    appear 380ms var(--ease) both,
-    fill 420ms var(--ease) both;
+    appear 420ms var(--ease) both,
+    fill 520ms var(--ease) both,
+    glint 560ms ease-in-out both;
   animation-delay:
-    calc(140ms + var(--c) * 11ms + var(--r) * 18ms),
-    calc(420ms + var(--c) * 14ms + var(--r) * 12ms);
+    calc(140ms + var(--c) * 18ms + var(--r) * 24ms),
+    calc(600ms + var(--c) * 30ms + var(--r) * 16ms),
+    calc(2850ms + var(--c) * 9ms + var(--r) * 14ms);
 }
 
 /* A bright week-wide bar sweeps across with the fill. */
@@ -97,7 +93,7 @@
   opacity: 0;
   mix-blend-mode: screen;
   filter: blur(calc(var(--cell) * 0.5));
-  animation: sweep 760ms linear 420ms both; /* in step with the fill: 14 ms a week */
+  animation: sweep 1560ms linear 600ms both; /* in step with the fill: 30 ms a week */
 }
 
 .meta {
@@ -110,18 +106,39 @@
   animation: rise 700ms var(--ease) 260ms both;
 }
 
-/* The count is a registered integer animated in CSS; it does not inherit, so
-   the counter is set on the element itself and only printed by ::before. */
+/* The count: an odometer. Each digit is a wheel (0..9 then 0 again) that the
+   script rolls; the ones wheel spins fastest, and a higher wheel turns only
+   while the one below it rolls over from 9. */
 .count {
-  --n: 0;
-  counter-reset: n var(--n);
-  font-variant-numeric: tabular-nums;
-  animation: count 900ms cubic-bezier(0.45, 0, 0.55, 1) 420ms both;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
 }
-.count::before {
-  content: counter(n);
+.odometer {
+  display: inline-flex;
   color: var(--fg);
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  transition: color 400ms var(--ease), text-shadow 600ms var(--ease);
+}
+.wheel {
+  display: inline-block;
+  height: 1.2em;
+  line-height: 1.2em;
+  overflow: hidden;
+  transition: opacity 300ms var(--ease);
+}
+.strip {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+.strip span {
+  height: 1.2em;
+}
+.landed {
+  color: var(--green);
+  text-shadow: 0 0 14px rgba(57, 211, 83, 0.45);
 }
 
 .legend {
@@ -163,9 +180,9 @@
   88% { opacity: 0.55; }
   100% { opacity: 0; transform: translateX(calc((var(--cols) - 1) * (var(--cell) + var(--gap)))); }
 }
-@keyframes count {
-  from { --n: 0; }
-  to { --n: var(--total); }
+@keyframes glint {
+  0%, 100% { filter: none; }
+  45% { filter: brightness(1.7) saturate(1.2); }
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(10px); }
@@ -190,6 +207,7 @@
     background: var(--fill);
   }
   .playhead { display: none; }
-  .count { animation: none; --n: var(--total); }
+  .strip { transform: translateY(calc(var(--final) * -1.2em)) !important; }
+  .wheel { opacity: 1 !important; }
   .leaving { animation: fade 200ms linear both; }
 }

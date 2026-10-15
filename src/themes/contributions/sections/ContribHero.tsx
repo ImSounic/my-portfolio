@@ -1,12 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { profile, socials } from '@/data/portfolio'
 import { Nav } from '@/themes/contributions/sections/Nav'
 import { gsap, ScrollTrigger, WIDE, MOTION_OK } from '@/themes/contributions/parts'
 import { ContribCanvas } from '@/themes/contributions/contrib/ContribCanvas'
 import { stageOf, type ContribStage } from '@/themes/contributions/contrib/contribStages'
 import { GREENS, TOTAL } from '@/themes/contributions/contrib/grid'
+import { CONTRIB_INTRO } from '@/components/ContribLoader'
+
+const HEADLINE = 'Models I can actually explain'
 
 const STAGES: ContribStage[] = ['Graph', 'MLP', 'CNN']
 // What each stage is, in a name and two short lines (shown on the right as it morphs).
@@ -25,6 +28,18 @@ export function ContribHero() {
   const progress = useRef(0)
   const trigger = useRef<ScrollTrigger | null>(null)
   const [stage, setStage] = useState<ContribStage>('Graph')
+
+  // The entrance: plays as the loader leaves (its zoom into the graph lands
+  // here). The hero is fully visible without it; the class only adds motion,
+  // and only when motion is welcome (see .dk-hero--intro in the CSS).
+  useEffect(() => {
+    const el = hero.current
+    if (!el) return
+    const play = () => el.classList.add('dk-hero--intro')
+    if (window.__contribIntro) return play()
+    window.addEventListener(CONTRIB_INTRO, play, { once: true })
+    return () => window.removeEventListener(CONTRIB_INTRO, play)
+  }, [])
 
   useEffect(() => {
     const el = hero.current
@@ -93,7 +108,16 @@ export function ContribHero() {
 
       <div className="dk-hero__foot">
         <div className="dk-hero__copy">
-          <p className="dk-hero__line">Models I can actually explain</p>
+          <p className="dk-hero__line">
+            {HEADLINE.split(' ').map((w, i) => (
+              <Fragment key={i}>
+                {i > 0 && ' '}
+                <span className="dk-word">
+                  <span style={{ ['--w' as string]: i }}>{w}</span>
+                </span>
+              </Fragment>
+            ))}
+          </p>
           <p className="dk-hero__sent">
             AI/ML engineer and MSc student at the University of Twente, looking for an ML or software internship.
           </p>

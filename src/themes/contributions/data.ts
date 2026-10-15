@@ -59,10 +59,10 @@ export const PRINTS: Print[] = [...projects]
 
 // The test strip after the hero: four exposures, darkest to brightest.
 export const EXPOSURES = [
-  { big: '1.84%', body: 'of ICU hours were sepsis. A model can score 98% by never saying yes.', from: 'Sepsis Early-Warning' },
-  { big: '80 to 95%', body: 'of lab values missing. Data that lies by leaving things out.', from: 'Sepsis Early-Warning' },
-  { big: '4 billion', body: 'rows after one careless join on 32 GB of trades.', from: 'Crypto Market Microstructure' },
-  { big: 'Why?', body: 'is what a clinician asks of a 93.1% AUC. SHAP is how I answer.', from: 'Miscarriage Prediction' },
+  { key: 'rare', name: 'Rare', big: '1.84%', body: 'of ICU hours were sepsis. A model that always says no scores 98.2% and catches nobody.', from: 'Sepsis Early-Warning' },
+  { key: 'missing', name: 'Missing', big: '80 to 95%', body: 'of lab values missing. Data that lies by leaving things out.', from: 'Sepsis Early-Warning' },
+  { key: 'races', name: 'Leakage', big: '92 races', body: 'of F1 data, validated in race order so the model never trained on a race still to come. Zero leakage.', from: 'F1 Race Strategy Optimizer' },
+  { key: 'paths', name: 'Futures', big: '30 paths', body: 'of Monte Carlo futures behind every forecast from a fine-tuned Kronos model. Risk is set from their quantiles, not from one guess.', from: 'CIFR-Quant' },
 ]
 
 const titleOf = (id?: string) => projects.find((p) => p.id === id)?.title
